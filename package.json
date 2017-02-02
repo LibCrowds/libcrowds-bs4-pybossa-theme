@@ -1,14 +1,14 @@
 {
-  "name": "libcrowds-pybossa-theme",
+  "name": "libcrowds-bs4-pybossa-theme",
   "description": "The LibCrowds PYBOSSA theme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LibCrowds/libcrowds-pybossa-theme.git"
+    "url": "git+https://github.com/LibCrowds/libcrowds-bs4-pybossa-theme.git"
   },
   "author": "Alexander Mendes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LibCrowds/libcrowds-pybossa-theme/issues"
+    "url": "https://github.com/LibCrowds/libcrowds-bs4-pybossa-theme/issues"
   },
   "dependencies": {
     "jquery": "^3.1.1",

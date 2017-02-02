@@ -1,32 +1,32 @@
-<footer id="main-footer" class="footer {% if footer_inverse %}bg-inverse{% else %}bg-faded{% endif %}">
+<footer id="main-footer" class="{{ footer_class }}">
     <div class="container">
         <div class="row text-center">
             <div class="col-sm-4 py-3">
-                <a href="http://labs.bl.uk/" target="_blank" class="{% if footer_inverse %}hidden-xs-up{% else %}hidden-md-down{% endif %}">
+                <a href="http://labs.bl.uk/" target="_blank" class="{% if 'footer-slim' in footer_class %}hidden-xs-up{% else %}hidden-md-down{% endif %}">
                     <img class="img-fluid" src="{{url_for('static', filename='img/bl-logo.png')}}" alt="BL Labs logo">
                 </a>
             </div>
             <div class="col-sm-4 py-2 d-flex justify-content-center align-items-center">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
-                        <a href="http://twitter.com/{{contact_twitter}}" target="_blank" class="{% if footer_inverse %}text-white{% else %}text-muted{% endif %}">
+                        <a href="http://twitter.com/{{contact_twitter}}" target="_blank" class="{% if 'bg-inverse' in footer_class %}text-white{% else %}text-muted{% endif %}">
                             <span class="fa fa-twitter px-1"></span>
                         </a>
                     </li>
                      <li class="list-inline-item">
-                        <a href="mailto:{{contact_email}}" class="{% if footer_inverse %}text-white{% else %}text-muted{% endif %}">
+                        <a href="mailto:{{contact_email}}" class="{% if 'bg-inverse' in footer_class %}text-white{% else %}text-muted{% endif %}">
                             <span class="fa fa-envelope px-1"></span>
                         </a>
                     </li>
                      <li class="list-inline-item">
-                        <a href="https://github.com/{{brand}}" target="_blank" class="{% if footer_inverse %}text-white{% else %}text-muted{% endif %}">
+                        <a href="https://github.com/{{brand}}" target="_blank" class="{% if 'bg-inverse' in footer_class %}text-white{% else %}text-muted{% endif %}">
                             <span class="fa fa-github px-1"></span>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="col-sm-4 py-3">
-                <a href="http://pybossa.com/" target="_blank" class="{% if footer_inverse %}hidden-xs-up{% else %}hidden-md-down{% endif %}">
+                <a href="http://pybossa.com/" target="_blank" class="{% if 'footer-slim' in footer_class %}hidden-xs-up{% else %}hidden-md-down{% endif %}">
                     <img class="img-fluid" src="{{url_for('static', filename='img/pybossa.png')}}"  alt="PYBOSSA logo">
                 </a>
             </div>

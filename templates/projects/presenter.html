@@ -1,9 +1,7 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dark.html" %}
 {% set active_page = "projects" %}
 {% set active_project = project.short_name %}
 {% set jstop = True %}
-{% set navbar_class = project.info['navbar_class'] | default("bg-inverse navbar-inverse navbar-toggleable-xs p-0") %}
-{% set footer_inverse = True %}
 
 {% block content %}
 

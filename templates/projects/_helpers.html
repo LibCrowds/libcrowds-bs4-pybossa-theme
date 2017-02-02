@@ -30,26 +30,6 @@
 </div>
 {% endmacro %}
 
-{% macro render_project_summary(project, n_tasks, overall_progress, last_activity, current_user, upload_method) -%}
-<div class="row">
-    <div class="col-sm-6">
-        {{ render_project_thumbnail(project, upload_method, id="project.id", class='img-polaroid') }}
-    </div>
-    <div class="col-sm-6 padding-top-xs">
-      <ul style="list-style-type: none; font-size: 16px;">
-        {% if current_user.id == project.owner_id %}
-        <li><strong><i class="fa fa-cog"></i> ID</strong>: {{ project.id }}</li>
-        {% endif %}
-        <li><strong><i class="fa fa-info-circle"></i> Description</strong>: {{ project['description'] }}</li>
-        <li><strong><i class="fa fa-magic"></i> Created</strong>: {{project.created[8:10]}}-{{project.created[5:7]}}-{{project.created[0:4]}}</li>
-        <li><strong><i class="fa fa-clock-o"></i> Last Activity</strong>: {{project.last_activity[8:10]}}-{{project.last_activity[5:7]}}-{{project.last_activity[0:4]}}</li>
-        <li><strong><i class="fa fa-check-square-o remove-colour"></i> Overall progress</strong>: {{ overall_progress | round | int }}% completed</li>
-        <li><strong><i class="fa fa-tasks"></i> <a href="{{url_for('project.tasks',short_name=project.short_name)}}">Tasks</strong></a> ({{ n_tasks }})</li>
-      </ul>
-    </div>
-</div>
-{% endmacro %}
-
 {% macro render_project_admin_featured(project, upload_method) %}
 <tr>
     <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>

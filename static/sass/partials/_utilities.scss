@@ -16,6 +16,6 @@
 }
 
 // Backgrounds
-.bg-black {
-    @include bg-variant('.bg-black', $black);
-}
+@include bg-variant('.bg-white', $white);
+
+@include bg-variant('.bg-black', $black);

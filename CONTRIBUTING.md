@@ -1,11 +1,11 @@
-# Contributing to libcrowds-pybossa-theme
+# Contributing to libcrowds-bs4-pybossa-theme
 
-Following is a brief set of guidelines for contributing to libcrowds-pybossa-theme.
+Following is a brief set of guidelines for contributing to libcrowds-bs4-pybossa-theme.
 
 
 ## Enhancements
 
-Enhancement suggestions are tracked as [issues](https://github.com/LibCrowds/libcrowds-pybossa-theme/issues),
+Enhancement suggestions are tracked as [issues](https://github.com/LibCrowds/libcrowds-bs4-pybossa-theme/issues),
 can be created by anyone with a free GitHub account and should include the following:
 
 * A clear and descriptive title.
@@ -14,7 +14,7 @@ can be created by anyone with a free GitHub account and should include the follo
 
 ## Bugs
 
-Bugs are also tracked as [issues](https://github.com/LibCrowds/libcrowds-pybossa-theme/issues), 
+Bugs are also tracked as [issues](https://github.com/LibCrowds/libcrowds-bs4-pybossa-theme/issues), 
 can be created by anyone with a free GitHub account and should include the following:
 
 * A clear and descriptive title.

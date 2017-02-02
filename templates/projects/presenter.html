@@ -1,0 +1,58 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "projects" %}
+{% set active_project = project.short_name %}
+{% set jstop = True %}
+{% set navbar_class = project.info['navbar_class'] | default("bg-inverse navbar-inverse navbar-toggleable-xs p-0") %}
+{% set footer_inverse = True %}
+
+{% block content %}
+
+<!-- TODO: Replace this? 
+<script type="text/javascript" src="{{url_for('static', filename='vendor/specialedit/specialedit.js')}}"></script>
+
+-->
+
+{% assets filters="jsmin", output="js/gen/presenter.min.js",
+    "../node_modules/jquery/dist/jquery.js",
+    "../node_modules/tether/dist/js/tether.js",
+    "../node_modules/bootstrap/dist/js/bootstrap.js",
+    "../node_modules/select2/dist/js/select2.js",
+    "../node_modules/openseadragon/build/openseadragon/openseadragon.js",
+    "../node_modules/openseadragonselection/dist/openseadragonselection.js",
+    "js/flash-messages.js",
+    "js/scripts.js",
+    "js/errors.js",
+    "js/pybossa/pybossa.js"
+    %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
+
+<!-- TODO: Check if this is really necessary 
+<script>
+    Modernizr.load({
+            test: window.JSON,
+            nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
+            });
+</script>
+    
+    -->
+
+
+{% if invite_new_volunteers %}
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2 text-center">
+            <p class="lead">
+                Great, you've contributed to all the tasks for this project.
+                But this project still needs more volunteers, so please spread the word!
+            </p>
+            <a href="{{ url_for('home.home') }}"><span class="fa fa-home fa-3x"></span></a>
+        </div>
+    </div>
+</div>
+{% else %}
+{{ project.info.task_presenter|safe }}
+{% endif %}
+
+{% endblock %}

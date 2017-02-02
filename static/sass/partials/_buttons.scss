@@ -1,0 +1,81 @@
+.btn-outline-white {
+  @include button-outline-variant($white);
+}
+
+.btn-outline-white:hover,
+.btn-outline-white:focus,
+.btn-outline-white:active {
+    background-color: transparent;
+}
+
+.btn-circle {
+    z-index: 1;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    color: $white;
+    border: 1px solid $white;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-circle a {
+    display: inline-block;
+}
+
+.btn-circle a div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: normal;
+}
+
+.btn-social,
+.btn-social:active,
+.btn-social:hover,
+.btn-social:focus {
+    border-radius: 0;
+    color: $white;
+}
+
+.btn-twitter {
+    background: $twitter;
+}
+
+.btn-twitter:active,
+.btn-twitter:hover,
+.btn-twitter:focus {
+    background: darken($twitter, 5%);
+}
+
+.btn-facebook {
+    background: $facebook;
+}
+
+.btn-facebook:active,
+.btn-facebook:hover,
+.btn-facebook:focus {
+    background: darken($facebook, 5%);
+}
+
+.btn-googleplus {
+    background: $googleplus;
+}
+
+.btn-googleplus:active,
+.btn-googleplus:hover,
+.btn-googleplus:focus {
+    background: darken($googleplus, 5%);
+}
+
+.btn-linkedin {
+    background: $linkedin;
+}
+
+.btn-linkedin:active,
+.btn-linkedin:hover,
+.btn-linkedin:focus {
+    background: darken($linkedin, 5%);
+}

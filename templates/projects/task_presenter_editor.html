@@ -1,0 +1,37 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "projects" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+
+{% assets output="css/gen/editor.min.css", "../node_modules/codemirror/lib/codemirror.css"%}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+{% endassets %}
+
+<section>
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="post" action="{{ url_for('project.task_presenter_editor', short_name=project.short_name) }}">
+                {{ form.hidden_tag() }}
+                <div class="btn-group codemirror-buttons py-1 pl-4 bg-faded">
+                    <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-sm btn-secondary" role="button">Cancel</a>
+                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                </div>
+                {{ render_field(form.editor, form_group_cls="mb-0 pt-4")}}
+            </form>
+        </div>
+    </div>
+</section>
+
+{% assets filters="jsmin", output="js/gen/task_presenter_editor.min.js",
+    "../node_modules/codemirror/lib/codemirror.js",
+    "../node_modules/codemirror/mode/xml/xml.js",
+    "../node_modules/codemirror/mode/javascript/javascript.js",
+    "../node_modules/codemirror/mode/css/css.js",
+    "../node_modules/codemirror/mode/htmlmixed/htmlmixed.js",
+    "js/editor.js"
+    %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
+{% endblock %}

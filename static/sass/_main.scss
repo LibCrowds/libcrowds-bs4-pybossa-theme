@@ -1,0 +1,101 @@
+@font-face {
+    font-family: Assistant;
+    src: url('/static/fonts/Assistant/Assistant-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Assistant;
+    src: url('/static/fonts/Assistant/Assistant-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Assistant;
+    src: url('/static/fonts/Assistant/Assistant-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('/static/fonts/Roboto/Roboto-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('/static/fonts/Roboto/Roboto-Thin.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('/static/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('/static/fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+$headings-font-family:             'Assistant', sans-serif;
+$base-font-family:                 'Roboto', sans-serif;
+$font-family-serif:                Times, serif;
+
+$headings-font-weight:             400;
+
+$white:                            #FFFFFF;
+$gray:                             #404446;
+
+$brand-primary:                    #D00000;
+$brand-success:                    #398439;
+$brand-info:                       #4190C2;
+$brand-warning:                    #E38D13;
+$brand-danger:                     #D00000;
+$brand-inverse:                    #28282E;
+
+$body-color:                       $gray;
+
+$twitter:                          #00ACEE;
+$facebook:                         #3B5998;
+$googleplus:                       #D34836;
+$linkedin:                         #0E76A8;
+
+$link-color:                       $brand-danger;
+$link-hover-color:                 darken($link-color, 5%);
+$link-hover-decoration:            none;
+
+$navbar-inverse-color:             $white;
+$navbar-inverse-toggler-border:    none;
+$navbar-light-height:              75px;
+
+$spacer:                           1.5rem;
+
+$fa-font-path:                     '../../fonts/font-awesome';
+
+@import
+    "../../node_modules/bootstrap/scss/bootstrap",
+    "../../node_modules/font-awesome/scss/font-awesome",
+    "../../node_modules/select2/src/scss/core",
+    "partials/base",
+    "partials/typography",
+    "partials/transitions",
+    "partials/transforms",
+    "partials/jumbotron",
+    "partials/buttons",
+    "partials/navbar",
+    "partials/toggle",
+    "partials/editor",
+    "partials/dashboard",
+    "partials/utilities",
+    "partials/borders"
+;

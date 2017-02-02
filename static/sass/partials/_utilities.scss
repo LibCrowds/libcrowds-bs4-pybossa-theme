@@ -1,0 +1,21 @@
+// Brightness
+@each $size, $length in $sizes {
+    .brightness-#{$size} { filter: brightness(#{$length}) }
+}
+
+// Opacity
+@each $size, $length in $sizes {
+    .opacity-#{$size} * { opacity: $size / 100 }
+}
+
+// Viewport height and width
+@each $prop, $abbrev in (width: w, height: h) {
+  @each $size, $length in $sizes {
+    .v#{$abbrev}-#{$size} { #{$prop}: #{$size}v#{$abbrev} !important; }
+  }
+}
+
+// Backgrounds
+.bg-black {
+    @include bg-variant('.bg-black', $black);
+}

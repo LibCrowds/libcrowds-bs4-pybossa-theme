@@ -1,0 +1,22 @@
+.jumbotron-fullscreen {
+    @extend .jumbotron-fluid;
+    height: 200px;
+}
+
+#crowd-jumbotron {
+    background: url(/static/img/jumbotrons/crowd.png) no-repeat center center fixed;
+}
+
+#drawer-jumbotron {
+    background: url(/static/img/jumbotrons/drawer.png) no-repeat center center fixed;
+}
+
+#code-jumbotron {
+    background: url(/static/img/jumbotrons/code.png) no-repeat center fixed;
+}
+
+@include media-breakpoint-up(md) {
+    .jumbotron-fullscreen {
+        height: 100vh;
+    }
+}

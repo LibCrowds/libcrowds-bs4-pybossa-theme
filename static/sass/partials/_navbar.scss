@@ -1,0 +1,46 @@
+.navbar-light {
+    height: $navbar-light-height;
+    background: $white;
+    border-bottom: 1px solid $gray-lighter;
+}
+
+.navbar .nav-item .nav-link:hover,
+.navbar .nav-item .nav-link:focus,
+.navbar .nav-item .nav-link:active,
+.navbar .nav-item.active .nav-link,
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus,
+.navbar .dropdown-item:active {
+    color: $brand-primary;
+    background-color: transparent;
+}
+
+.navbar .nav-item {
+    position: relative;
+}
+
+.navbar .nav-item .nav-link:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $brand-primary;
+    content: '';
+    opacity: 0;
+}
+
+.navbar .nav-item.active .nav-link:after,
+.navbar .nav-item .nav-link:hover:after,
+.navbar .nav-item .nav-link:focus:after,
+.navbar .nav-item .nav-link:active:after {
+    opacity: 1;
+}
+
+.navbar-inverse .dropdown-menu {
+    background-color: rgba($black, 0.5);
+}
+
+.navbar-inverse .dropdown-item {
+    color: $white;
+}

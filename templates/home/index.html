@@ -1,0 +1,204 @@
+{% extends "_layouts/splash.html" %}
+{% import "projects/_helpers.html" as helper %}
+{% import "account/_helpers.html" as account_helper %}
+
+{% block content %}
+<div id="crowd-jumbotron" class="jumbotron jumbotron-fullscreen jumbotron-invert-navbar jumbotron-fade mb-0 d-flex align-items-center">
+    <div class="container text-white text-center">
+        <h1 class="mt-4 pb-2">Crowdsourcing projects<br>from the British Library</h1>
+        <div data-anchor="#featured-projects" class="btn btn-circle btn-anchor hidden-sm-down mx-auto mt-3">
+            <a>
+                <div class="my-3"><span class="fa fa-angle-double-down fa-4x"></span></div>
+                <div class="my-4">Get Started</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<section class="my-5 text-center">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1">
+                <h2 class="font-family-serif display-4 mb-0">
+                    Have a direct impact on enabling future research conducted at the Library.
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+                <hr class="my-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1">
+                <p class="lead">
+                    {{brand}}, in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>, is a platform for
+                    hosting experimental crowdsourcing projects aimed at improving access to the diverse collections held at the
+                    British Library.
+                </p>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-sm-8 offset-sm-2">
+                <a href="{{ url_for('home.about')}}" class="btn btn-outline-info text-center" role="button">Find Out More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="featured-projects" class="bg-faded text-gray-dark text-center text-lg-left">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-5 offset-lg-1 pt-3">
+                <h3 class="text-uppercase font-weight-bold display-4">Featured Projects</h3>
+                <hr class="bw-3 mr-lg-5">
+                <p class="font-weight-extra-light text-uppercase mr-lg-5">
+                    We've published {{ (categories_projects | length) - 1 }} different types of project so far, check out some of our favourites below.
+                </p>
+            </div>
+            <div class="col-lg-5 offset-lg-1 pt-3 hidden-md-down">
+                <div data-anchor="#featured-projects" class="btn btn-circle btn-anchor hidden-sm-down mx-auto mt-3">
+                    <a>
+                        <div class="my-3"><span class="fa fa-angle-double-down fa-4x"></span></div>
+                        <div class="my-4">Get Started</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row py-5">
+            <div class="col-lg-12">
+                {% if categories_projects['featured'] %}
+                {{ helper.render_project_deck(categories_projects['featured']) }}
+                {% else %}
+                <p class="text-center">
+                    No projects are currently being featured, but we still need you help!
+                </p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="text-center">
+            <a class="btn btn-outline-primary mt-3 bt-white" href="{{url_for('project.index')}}" role="button">Browse Projects</a>
+        </div>
+    </div>
+</section>
+
+<!-- See https://github.com/LibCrowds/libcrowds-data -->
+{% if "libcrowds_data" in plugins %}
+<section id="data" class="bg-black">
+    <div id="code-jumbotron" class="jumbotron jumbotron-fluid jumbotron-invert-navbar text-center mb-0">
+        <div class="container text-white py-4">
+            <div class="row py-2">
+                <div class="col-sm-12">
+                    <h2 class="display-2 font-weight-extra-light">Open Data</h2>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-sm-6 offset-sm-3">
+                    <p class="lead font-weight-extra-light">
+                        All data generated through our crowdsourcing projects is freely available and can be used by anyone
+                        without restrictions. Datasets can be downloaded in JSON, CSV or XML formats, visit our data page to
+                        find out more.
+                    </p>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-sm-12">
+                    <a href="{{ url_for('data.index') }}" class="btn btn-outline-white" role="button">Get the data</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+{% if top_users %}
+<section id="top-users" class="bg-faded text-gray-dark text-center">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-5 offset-lg-1 pt-3">
+                <h3 class="text-uppercase font-weight-bold display-4">Most Active Volunteers</h3>
+                <div>
+                    <hr class="bw-3 w-50">
+                    <p class="text-uppercase lead">
+                        To date, our top {{ top_users |length }} volunteers have completed an amazing {{ "{:,}".format(top_users | sum(attribute='score')) }} tasks!
+                    </p>
+                    <a class="btn btn-secondary mt-3" href="{{url_for('project.index')}}" role="button">Get Involved</a>
+                </div>
+            </div>
+            <div class="col-lg-5 offset-lg-1 hidden-md-down">
+                <img src="{{ url_for('static', filename='img/wreath.png') }}" alt="Wreath" class="img-fluid">
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-lg-12 text-center py-2">
+                <ul class="list-unstyled">
+                {% for user in top_users %}
+                <li class="text-center d-inline-block mx-1">
+                    <a href="{{url_for('account.profile', name=user.name)}}" data-content="
+                        <strong>Joined:</strong> {{user.created[8:10]}}-{{user.created[5:7]}}-{{user.created[0:4]}}
+                        <br><strong>Contributions:</strong> {{user.score}}" data-toggle="popover" data-title="<strong>{{user.name}}</strong>">
+                        <div class="my-1">
+                            {% set width = 90 %}
+                            {% if loop.first %}
+                            {% set width = 110 %}
+                            {% elif loop.index == 2 %}
+                            {% set width = 100 %}
+                            {% endif %}
+                            {{ account_helper.render_user_avatar(user, class="img-thumbnail rounded-circle", width=width) }}
+                        </div>
+                    </a>
+                    <p class="badge badge-info">{{user.score}}</p>
+                </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-5 offset-lg-7 text-center">
+                <a href="{{ url_for('leaderboard.index') }}" class="text-gray-dark"><span class="fa fa-eye mr-2"></span>View the leaderboard</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Get Connected</h2>
+                            <a class="twitter-timeline"  href="https://twitter.com/LibCrowds" data-widget-id="624585108583002112">Tweets by @LibCrowds</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          
+                <span class="fa fa-twitter fa-4x text-info"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Get Connected</h2>
+                            <a class="twitter-timeline"  href="https://twitter.com/LibCrowds" data-widget-id="624585108583002112">Tweets by @LibCrowds</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          
+                <span class="fa fa-twitter fa-4x text-info"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center my-5">
+                {{ helper.render_social_media_buttons("www.libcrowds.com", "Come and have a go at the British Library's crowdsourcing platform!") }}
+            </div>
+        </div>
+    </div>
+</section>
+{{ helper.broken_image() }}
+{% endblock %}

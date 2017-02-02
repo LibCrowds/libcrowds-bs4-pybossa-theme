@@ -1,0 +1,36 @@
+body {
+    font-family: $base-font-family;
+    font-weight: 400;
+}
+
+.navbar-brand {
+    font-family: $headings-font-family;
+    font-size: 2em;
+    font-weight: 300;
+}
+
+.navbar .nav-link,
+.navbar .dropdown-item {
+    font-size: 0.85em;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+}
+
+.btn-circle {
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.sidebar {
+    font-size: 0.85em;
+    text-transform: uppercase;
+}
+
+.font-family-serif {
+    font-family: $font-family-serif;
+}
+
+.font-weight-extra-light {
+    font-weight: 200;
+}

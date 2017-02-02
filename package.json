@@ -1,0 +1,35 @@
+{
+  "name": "libcrowds-pybossa-theme",
+  "description": "The LibCrowds PYBOSSA theme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LibCrowds/libcrowds-pybossa-theme.git"
+  },
+  "author": "Alexander Mendes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LibCrowds/libcrowds-pybossa-theme/issues"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "tether": "^1.4.0",
+    "bootstrap": "^4.0.0-alpha.6",
+    "select2": "^4.0.3",
+    "font-awesome": "^4.7.0",
+    "openseadragon": "^2.2.1",
+    "openseadragonselection": "picturae/openseadragonselection",
+    "codemirror": "^5.23.0"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.1",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10"
+  },
+  "scripts": {
+    "cp:font-awesome": "cp -R node_modules/font-awesome/fonts ./static/fonts/font-awesome/",
+    "cp:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./static/img/openseadragon/",
+    "cp:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./static/img/openseadragonselection/",
+    "postinstall": "npm run cp:font-awesome && npm run cp:openseadragon && npm run cp:openseadragonselection",
+    "build": "webpack --config webpack.config.js"
+  }
+}

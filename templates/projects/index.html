@@ -1,0 +1,54 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
+{% set description = "Participate in crowdsourcing projects and help improve access to collections of the British Library." %}
+
+{% block content %}
+<span class="set-body-bg" data-bg="pattern-white-wall"></span>
+<section class="pattern-classy-fabric">
+    <div class="container padding-top-lg">
+        <div class="col-xs-10 col-xs-offset-1">
+            <ul class="nav nav-pills">
+                {% for c in categories %}
+                    {% if c.short_name == 'staff' %}
+                        {% if current_user.admin %}
+                        <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}>
+                            <a href="{{url_for('project.project_cat_index', category=c.short_name)}}">{{ c.name }}</a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                        <li {% if active_cat.short_name==c.short_name%}class="active"{% endif %}>
+                            <a href="{{url_for('project.project_cat_index', category=c.short_name)}}">{{ c.name }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if current_user.is_authenticated() and current_user.admin %}
+                        <li {% if active_cat.short_name=="draft"%}class="active"{% endif %}><a href="{{url_for('project.draft')}}"> Draft</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="container padding-bottom-md">
+    <div class="col-xs-12 padding-top-xs">
+
+        {% if projects %}
+            <div class="polaroids projects margin-top-sm">
+                {% for project in projects %}
+                    {{ helper.show_project(project, active_cat.short_name, current_user, upload_method) }}
+                {% endfor %}
+            </div>
+            {% if pagination.pages > 1 %}
+                {{ helper.render_pagination(pagination) }}
+            {% endif %}
+        {% else %}
+            <div class="container container-padded">
+                <h2 class="text-center inset-text-grey">Sorry, there are no published projects for this category yet.</h2>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{{ helper.broken_image() }}
+{% endblock %}

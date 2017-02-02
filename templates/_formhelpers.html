@@ -1,0 +1,72 @@
+{% macro render_field(field, addon, prepend, tooltip, label_text, form_group_cls, show_label='false') %}
+<div class="form-group {{ form_group_cls }} {% if field.errors %}has-error{% endif %}">
+    {{ render_label(field, tooltip, label_text, show_label) }}
+    {% if addon %}
+    <div class="input-group">
+        {% if prepend %}
+        <span class="add-on">{{addon|safe}}</span>
+        {{field(**kwargs)}}
+        {% else %}
+        {{field(**kwargs)}}
+        <span class="add-on">{{addon|safe}}</span>
+        {% endif %}
+    </div>
+    {% else %}
+        {{field(**kwargs)}}
+        {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+        <span class="help-block"><small>{{ error }}</small></span>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endmacro %}
+
+{% macro render_label(field, tooltip, text, show_label) %}
+{% if tooltip and text %}
+        {% if show_label == 'false' %}
+            {{ field.label(class="sr-only", style='width:148px', text=text) }}
+        {% else %}
+            {{ field.label(class="control-label", style='width:148px', text=text) }}
+        {% endif %}
+    <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
+        &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="fa fa-question-circle"></i></div>
+    {% elif tooltip and not text %}
+        {% if show_label == 'false' %}
+            {{ field.label(class="sr-only", style='width:148px') }}
+        {% else %}
+            {{ field.label(class="control-label", style='width:148px') }}
+        {% endif %}
+    <div style="float:left; padding-top:5px;margin-bottom:5px;font-size:18px;">
+        &nbsp;<i rel="tooltip" data-title="{{tooltip|safe}}" class="fa fa-question-circle"></i></div>
+    {% elif not tooltip and text %}
+        {% if show_label == 'false' %}
+            {{ field.label(class="sr-only", text=text) }}
+        {% else %}
+            {{ field.label(class="control-label", text=text) }}
+        {% endif %}
+    {% else %}
+        {% if show_label == 'false' %}
+            {{ field.label(class="sr-only") }}
+        {% else %}
+            {{ field.label(class="control-label") }}
+        {% endif %}
+{% endif %}
+{% endmacro %}
+
+{% macro render_toggle(field, label) %}
+<div class="row padding-top-xs vcenter padding-bottom-sm">
+    <div class="onoffswitch-group">
+        <div class="onoffswitch">
+            {{field(class="onoffswitch-checkbox")}}
+            <label class="onoffswitch-label" for="{{field.name}}">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+    </div>
+    <div class="padding-left-sm onoffswitch-group">
+        <strong>{{ label }}</strong>
+    </div>
+</div>
+{% endmacro %}

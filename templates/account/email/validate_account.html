@@ -1,0 +1,31 @@
+{% extends "account/email/base.html" %}
+
+{% block subject %}
+Validate your account
+{% endblock %}
+
+{% block subtitle %}
+Hello {{ user['fullname'] }},
+{% endblock %}
+
+{% block body %}
+<p>
+Thank you for creating a {{ config.BRAND }} account.
+</p>
+<p>
+To complete your registration, please verify that you are the owner of this
+e-mail address by visiting the URL below:
+</p>
+<p>
+<a href="{{confirm_url}}">{{ confirm_url }}</a>
+</p>
+<p>
+If you did not request this conformation, please ignore this email.
+</p>
+<p>
+Regards,
+</p>
+<p>
+{{ config.BRAND }} Team
+</p>
+{% endblock %}

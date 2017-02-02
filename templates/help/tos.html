@@ -1,0 +1,6 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "help" %}
+
+{% block content %}
+{% include ['custom/_tos.html', 'help/_tos.html'] ignore missing %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = "all" %}
+{% import "projects/_helpers.html" as helper %}
+
+{% block content %}
+{{ helper.render_project_sidebar(project, 'blog', current_user, pro_features, staff_or_admin) }}
+{% if project %}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+            {{ helper.render_project_title(project, "Blog") }}
+            <hr>
+            {% if blogposts %}
+            <hr>
+                <ul>
+                    {% for blogpost in blogposts %}
+                      <li>
+                          <div>
+                              <a href="{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}">{{ blogpost.title }}</a>
+                          </div>
+                      </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h1>Sorry! No posts so far.</h1>
+            {% endif %}
+            <hr>
+        </div>
+    </div>
+</div>
+{% else %}
+    {{ helper.render_non_existant_project() }}
+{% endif %}
+{{ helper.broken_image() }}
+{{ helper.knob() }}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "projects"  %}
+{% set active_link = "results" %}
+{% import "projects/_helpers.html" as helper %}
+{% set active_project = project.short_name %}
+
+{% block content %}
+{{ helper.render_project_sidebar(project, active_link, current_user, pro_features, staff_or_admin) }}
+<div class="container container-main">
+    {% if project.info.results and n_results > 0 %}
+    {{ project.info.results | safe}}
+    {% else %}
+    <div class="col-sm-9 col-sm-offset-3">
+        <h2>No results</h2>
+        <p class="lead">Sorry, we haven't published any results for this project yet.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "community"  %}
+{% import "privacy/locked.html" as privacy %}
+{% import "account/_helpers.html" as helper %}
+{% from "projects/_helpers.html" import broken_image %}
+
+{% block content %}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated() and not current_user.admin)) %}
+                    {{ privacy.render_lock_page() }}
+                {% else %}
+                <h1>Community <small>{{total}} registered users</small><a class="pull-right btn btn-danger" href="{{url_for('leaderboard.index')}}">Leaderboard</a></h1>
+                    {% if accounts %}
+                    <ul class="users text-center">
+                    {% for account in accounts %}
+                        <li class="text-center">
+                        <a href="{{url_for('account.profile', name=account.name)}}" data-content="
+                            <strong>Joined:</strong> {{account.created[8:10]}}-{{account.created[5:7]}}-{{account.created[0:4]}}
+                            <br>
+                            <strong>Contributions:</strong> {{account.score}}
+                            " class="avatar-popover" data-original-title="<strong>{{account.name}}</strong>
+                             ">
+                            <div class="shadow img-circle shadow-circle">
+                                {{ helper.render_user_avatar(account, upload_method, class="img-circle") }}
+                            </div>
+                        </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            <div class="row text-center">
+                <div class="col-sm-12">
+                {% if pagination.pages > 1 %}
+                    {{ helper.render_pagination(pagination) }}
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+$("a[rel=popover]").popover({
+        html: true,
+        animate: true,
+        trigger: 'hover',
+        placement: 'bottom'
+                });
+</script>
+{{ broken_image() }}
+{% endblock %}

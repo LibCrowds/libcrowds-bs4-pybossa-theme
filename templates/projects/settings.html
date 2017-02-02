@@ -1,0 +1,24 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
+
+{% block content %}
+{{ helper.render_project_sidebar(project, 'settings', current_user, pro_features, staff_or_admin) }}
+{% if project %}
+<div class="container container-main">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 xs-center">
+            <h1><strong>{{ project.name }}</strong>: Settings</h1>
+            <div class="btn-group">
+                <a class="btn" href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="fa fa-edit"></i> Edit the project details</a>
+                <a class="btn" href="{{ url_for('project.task_settings', short_name = project.short_name) }}"><i class="fa fa-wrench"></i> Task Settings</a>
+                <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="dfa fa-trash"></i> Delete the project</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    {{ helper.render_non_existant_project() }}
+{% endif %}
+{{ helper.broken_image() }}
+{% endblock %}

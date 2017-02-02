@@ -1,0 +1,95 @@
+{% macro render_user_profile(user, upload_method, private=True) %}
+<div class="center-block img-overlay-container">
+    <div class="shadow shadow-circle">
+        {{ render_user_avatar(user, upload_method, width="200")}}
+    </div>
+</div>
+<h1 class="inset-text-grey">{{user.fullname}}</h1>
+
+<div class="white-panel inset-shadow-white text-left">
+    <ul class="no-style">
+        <li class="padding-bottom-xs">
+            <i class="fa fa-user fa-fw"></i> {{ user.name }}
+        </li>
+        <li class="padding-bottom-xs">
+            <i class="fa fa-trophy fa-fw"></i> {% if user.rank %}Rank {{ user.rank }}{% else %}Unranked{% endif %}
+        </li>
+        <li class="padding-bottom-xs">
+            <i class="fa fa-tasks fa-fw"></i> {% if user.score %}{{user.score}}{% else %}0{% endif %} contributions
+        </li>
+        <li class="padding-bottom-xs">
+            <i class="fa fa-clock-o fa-fw"></i> Joined {{ user.created[8:10] }}-{{ user.created[5:7] }}-{{ user.created[0:4] }}
+        </li>
+        {% if private %}
+        <li class="padding-bottom-xs">
+            <i class="fa fa-envelope fa-fw"></i> {{ user.email_addr }}
+        </li>
+        <li class="padding-bottom-xs">
+            <i class="fa fa-key fa-fw"></i> {{ user.api_key }}
+        </li>
+        {% endif %}
+    </ul>
+
+    {% if private %}
+    <div class="text-center">
+        <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-default btn-sm btn-padded">
+            <i class="fa fa-pencil-square-o"></i> Edit
+        </a>
+
+        {% if (user.valid_email == False) %}
+            {% if (user.confirmation_email_sent == False) %}
+            <a href="{{ url_for('account.confirm_email')}}" class="btn btn-danger">Validate email</a>
+            {% else %}
+            <br>
+            <p class="label label-danger">Email sent for validation</p>
+            {% endif %}
+        {% endif %}
+
+    </div>
+    {% endif %}
+</div>
+{% endmacro %}
+
+{% macro render_user_avatar(user, upload_method, class, style, width='90') %}
+{% if user.info.avatar %}
+    {% if upload_method == 'rackspace'%}
+    <img class="{{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 200, 200);"  alt="{{ user.name }}'s avatar">
+    {% else %}
+    <img class="{{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar)) }}" onerror="imgError(this, 200, 200);" alt="{{ user.name }}'s avatar">
+    {% endif %}
+{% else %}
+    <img class="{{ class }}" style="{{ style }}" width="{{ width }}" src="http://placekitten.com/200/200?image=1" alt="{{ user.name }}'s avatar">
+{% endif %}
+{% endmacro %}
+
+{% macro render_pagination(pagination) %}
+<div class="pagination pagination-centered">
+    <ul>
+        {% if pagination.has_prev %}
+        <li>
+            <a href="{{ url_for_other_page(pagination.page - 1)}}">&laquo; Prev | </a>
+        </li>
+        {% endif %}
+
+        {% for page in pagination.iter_pages() %}
+            {% if page %}
+                {% if page != pagination.page %}
+                <li>
+                    <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+                </li>
+                {% else %}
+                <li class="active">
+                    <a href="#">{{ page }}</a>
+                </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if pagination.has_next %}
+        <li>
+            <a href="{{ url_for_other_page(pagination.page + 1)}}"> | Next &raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+{% endmacro %}

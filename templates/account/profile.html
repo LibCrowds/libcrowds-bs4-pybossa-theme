@@ -1,0 +1,33 @@
+{% extends "_layouts/default.html" %}
+{% set block_robots = True %}
+{% set active_page = "profile" %}
+{% import "account/_helpers.html" as helper %}
+{% import "projects/_helpers.html" as project_helper %}
+
+{% block content %}
+<span class="set-body-bg" data-bg="pattern-white-wall"></span>
+<div class="container container-main">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 text-center">
+            {{ helper.render_user_profile(current_user, upload_method) }}
+        </div>
+
+        <div class="col-xs-12 col-sm-8">
+            <div class="white-panel inset-shadow-white">
+                {% if projects_contrib %}
+                    {{project_helper.render_projects_list(projects_contrib, "Contributions", upload_method)}}
+                {% else %}
+                <div class="text-center">
+                    <h2>No contributions</h2>
+                    <p>You'd better get started <i class="fa fa-smile-o"></i></p>
+                    <div class="text-center padding-bottom-sm padding-top-sm">
+                        <a class="btn btn-danger" href="{{url_for('project.index')}}">View all projects</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{{ project_helper.broken_image() }}
+{% endblock %}

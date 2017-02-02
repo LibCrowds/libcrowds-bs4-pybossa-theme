@@ -1,0 +1,30 @@
+{% extends "_layouts/default.html" %}
+{% set active_page = "projects" %}
+{% import "projects/_helpers.html" as helper %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+{{ helper.render_project_sidebar(project, 'blog', current_user, pro_features, staff_or_admin) }}
+<div class="container-padded">
+    <div class="container container-padded">
+        <div class="row">
+            <div class="col-sm-9 col-sm-offset-3 col-xs-12">
+            <h2>Write a new blog post for {{ project.name }}</h2>
+                <form class="form-horizontal" method="post" action="{{ url_for('project.new_blogpost', short_name=project.short_name) }}">
+                    {{ form.hidden_tag() }}
+                    <fieldset>
+                        {{ render_field(form.title, class_="span9", placeholder="The title of your post" }}
+                        {{ render_field(form.body, class_="span9", placeholder="Write your post here. You can use Markdown!") }}
+                        <div class="form-actions">
+                            <input type="submit" value={{_('Create')}} class="btn btn-primary" />
+                            <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn">Cancel</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ helper.broken_image() }}
+{{ helper.knob() }}
+{% endblock %}

@@ -1,7 +1,0 @@
-{   
-    "name": "libcrowds-pybossa-theme",
-    "author": "Alexander Mendes",
-    "website": "https://github.com/LibCrowds/libcrowds-libcrowds-pybossa-theme",
-    "license": "BSD",
-    "description": "A Pybossa theme for the LibCrowds crowdsourcing platform.",
-}

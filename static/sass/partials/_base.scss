@@ -9,10 +9,6 @@ main {
     position: relative;
 }
 
-body .navbar-light:not(.navbar-scroll) + main {
-    margin-top: $navbar-light-height;
-}
-
 footer {
     border-top: 1px solid $gray-lighter;
     z-index: 100;

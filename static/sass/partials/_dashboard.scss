@@ -58,6 +58,8 @@
     position: relative;
     z-index: 2;
     float: right;
-    width: calc(100% - 260px);
     min-height: 100%;
+    width: calc(100% - 260px);
+    display: flex;
+    flex-direction: column;
 }

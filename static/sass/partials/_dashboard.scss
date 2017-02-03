@@ -1,65 +1,19 @@
-.sidebar,
-.main {
-    overflow: auto;
-    max-height: 100%;
+.dashboard {
     height: 100%;
-    display: flex;
     flex-direction: column;
-}
-
-.sidebar {
-    display: block;
-    z-index: 1;
-    width: 260px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(rgba($brand-info, 0.8), rgba($brand-info, 0.8)), url('/static/img/sidebar.png');
-    background-size: cover;
-    background-position: center center;
-}
-
-.sidebar ul {
-    padding: 1rem 1rem 1.25rem 1rem;
-}
-
-.sidebar .list-group-item {
-    border: none;
-    background-color: initial;
-    margin: calc(#{$list-group-item-padding-x} - #{$list-group-item-padding-y}) 0;
-    padding: 0rem;
-}
-
-.sidebar .list-group-item a {
-    padding: $list-group-item-padding-y;
-    width: 100%;
-}
-
-.sidebar .list-group-item:hover,
-.sidebar .list-group-item:focus,
-.sidebar .list-group-item:active,
-.sidebar .list-group-item.active {
-    border-radius: $border-radius-lg;
-    background-color: rgba($white, 0.23);
-}
-
-.sidebar-brand-wrapper {
-    @extend .navbar-light;
-    background: transparent;
-    padding: $navbar-padding-y $navbar-padding-x;
-}
-
-.sidebar-brand {
-    @extend .navbar-brand;
-}
-
-.dashboard-main {
-    position: relative;
-    z-index: 2;
-    float: right;
-    min-height: 100%;
-    width: calc(100% - 260px);
     display: flex;
-    flex-direction: column;
+}
+
+.dashboard main {
+    overflow-y: auto;
+}
+
+@include media-breakpoint-up(lg) {
+    .dashboard {
+        position: relative;
+        z-index: 2;
+        max-height: 100%;
+        float: right;
+        width: calc(100% - 260px);
+    }
 }

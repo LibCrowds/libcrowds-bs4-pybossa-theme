@@ -1,12 +1,14 @@
 <footer id="main-footer" class="{{ footer_class }}">
     <div class="container">
         <div class="row text-center">
+            {% if 'footer-slim' not in footer_class %}
             <div class="col-sm-4 py-3">
-                <a href="http://labs.bl.uk/" target="_blank" class="{% if 'footer-slim' in footer_class %}hidden-xs-up{% else %}hidden-md-down{% endif %}">
+                <a href="http://labs.bl.uk/" target="_blank" class="hidden-md-down">
                     <img class="img-fluid" src="{{ url_for('static', filename='img/bl-logo.png' )}}" alt="BL Labs logo">
                 </a>
             </div>
-            <div class="col-sm-4 py-2 d-flex justify-content-center align-items-center">
+            {% endif %}
+            <div class="{% if 'footer-slim' in footer_class %}col-sm-12{% else %}col-sm-4{% endif %} py-2 d-flex justify-content-center align-items-center">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
                         <a href="http://twitter.com/{{ contact_twitter }}" target="_blank" class="{% if 'bg-inverse' in footer_class %}text-white{% else %}text-muted{% endif %}">
@@ -25,11 +27,13 @@
                     </li>
                 </ul>
             </div>
+            {% if 'footer-slim' not in footer_class %}
             <div class="col-sm-4 py-3">
-                <a href="http://pybossa.com/" target="_blank" class="{% if 'footer-slim' in footer_class %}hidden-xs-up{% else %}hidden-md-down{% endif %}">
+                <a href="http://pybossa.com/" target="_blank" class="hidden-md-down">
                     <img class="img-fluid" src="{{ url_for('static', filename='img/pybossa.png' )}}" alt="PYBOSSA logo">
                 </a>
             </div>
+            {% endif %}
         </div>
     </div>
 </footer>

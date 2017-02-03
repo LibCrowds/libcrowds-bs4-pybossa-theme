@@ -37,3 +37,11 @@ a {
 .jumbotron-fade * {
     transition: opacity 1s;
 }
+
+.card-collapse .card-footer {
+    transition: height 250ms;
+}
+
+.black-ul-link {
+    transition: border-bottom 500ms;
+}

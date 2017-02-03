@@ -1,0 +1,20 @@
+.card-collapse {
+    overflow-y: hidden;
+    border-radius: 2.25rem;
+}
+
+.card-collapse .card-footer {
+    height: calc(#{$card-spacer-y} * 2 + #{$font-size-base});
+    position: absolute;
+    bottom: 0;
+}
+
+.card-collapse .card-footer .card-title {
+    white-space: nowrap;
+}
+
+.card-collapse:active .card-footer,
+.card-collapse:focus .card-footer,
+.card-collapse:hover .card-footer {
+    height: 100%;
+}

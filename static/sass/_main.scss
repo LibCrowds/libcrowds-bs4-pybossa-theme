@@ -70,6 +70,10 @@ $facebook:                         #3B5998;
 $googleplus:                       #D34836;
 $linkedin:                         #0E76A8;
 
+$btn-secondary-color:              $brand-inverse;
+$btn-secondary-bg:                 $white;
+$btn-secondary-border:             $brand-inverse;
+
 $link-color:                       $brand-danger;
 $link-hover-color:                 darken($link-color, 5%);
 $link-hover-decoration:            none;
@@ -77,6 +81,8 @@ $link-hover-decoration:            none;
 $navbar-inverse-color:             $white;
 $navbar-inverse-toggler-border:    none;
 $navbar-light-height:              75px;
+
+$card-spacer-y:                    1.5rem;
 
 $spacer:                           1.5rem;
 
@@ -97,5 +103,8 @@ $fa-font-path:                     '../../fonts/font-awesome';
     "partials/editor",
     "partials/dashboard",
     "partials/utilities",
-    "partials/borders"
+    "partials/borders",
+    "partials/cards",
+    "partials/links",
+    "partials/ribbon"
 ;

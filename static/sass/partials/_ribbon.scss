@@ -1,0 +1,24 @@
+.ribbon {
+    text-align: center;
+    display:block;
+    width: 12rem;
+    height: 12rem;
+    background: $gray-lighter;
+}
+
+.ribbon:after {
+    content: "";
+    display: block;
+    position: relative;
+    width: 0;
+    height: 0;
+    border-width: 2rem 6rem 4rem 6rem;
+    border-style: solid;
+    border-color: $gray-lighter $gray-lighter transparent $gray-lighter;
+}
+
+.ribbon .fa {
+    font-size: 7rem;
+    margin-top: 4rem;
+    color: darken($body-bg, 3%);
+}

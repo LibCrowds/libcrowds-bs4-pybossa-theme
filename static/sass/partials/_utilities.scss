@@ -19,3 +19,5 @@
 @include bg-variant('.bg-white', $white);
 
 @include bg-variant('.bg-black', $black);
+
+@include bg-variant('.bg-dark-overlay', rgba($black, 0.85));

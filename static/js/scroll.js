@@ -20,7 +20,7 @@ function styleJumbotrons() {
 /** Handle styling of the navbar. */
 function styleNavigation() {
     let bounds = [];
-    $('.jumbotron-invert-navbar').each(function() {
+    $('.invert-navbar').each(function() {
         bounds.push([$(this).offset().top, $(this).offset().top + $(this).height()]);
     });
     
@@ -28,11 +28,9 @@ function styleNavigation() {
         if (document.body.scrollTop >= b[0] - 50 && document.body.scrollTop <= b[1] + 25) {
             $('.navbar').addClass('navbar-inverse');
             $('.navbar').removeClass('navbar-light');
-            $('.navbar').removeClass('bg-white');
             return;
         }
     }
     $('.navbar').removeClass('navbar-inverse');
     $('.navbar').addClass('navbar-light');
-    $('.navbar').addClass('bg-white');
 }

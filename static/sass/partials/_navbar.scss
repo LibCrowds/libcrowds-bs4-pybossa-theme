@@ -3,35 +3,21 @@
     border-bottom: 1px solid $gray-lighter;
 }
 
-.navbar-dashboard .navbar-toggler {
-    position: relative;
-    float: right;
-}
-
-.navbar .nav-item .nav-link:hover,
-.navbar .nav-item .nav-link:focus,
-.navbar .nav-item .nav-link:active,
-.navbar .nav-item.active .nav-link,
-.navbar .dropdown-item:hover,
-.navbar .dropdown-item:focus,
-.navbar .dropdown-item:active {
-    color: $brand-primary;
-    background-color: transparent;
+.navbar .dropdown-item,
+.navbar .nav-item .nav-link,
+.navbar .nav-item.active .nav-link {
+    @include hover-focus {
+        color: $brand-primary;
+        background-color: transparent;
+    }
 }
 
 .navbar .nav-item {
     position: relative;
 }
 
-.navbar .nav-item .nav-link:after {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background-color: $brand-primary;
-    content: '';
-    opacity: 0;
+.navbar-collapse .nav-link:after {
+    border: none;
 }
 
 .navbar .nav-item.active .nav-link:after,
@@ -41,10 +27,69 @@
     opacity: 1;
 }
 
-.navbar-inverse .dropdown-menu {
-    background-color: rgba($black, 0.5);
+
+@include media-breakpoint-up(lg) {
+    .navbar-inverse .dropdown-menu {
+        background-color: rgba($black, 0.5);
+    }
+    .navbar-inverse .dropdown-item {
+        color: $white;
+    }
+    .navbar-collapse:not(.show) .nav-link:after {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        content: '';
+        background-color: $brand-primary;
+        opacity: 0;
+        margin-left: 0;
+    }
 }
 
-.navbar-inverse .dropdown-item {
-    color: $white;
+@include media-breakpoint-down(md) {
+    .navbar-invertable {
+        background: $white;
+        border-bottom: 1px solid $gray-lighter;
+    }
+    .navbar-invertable {
+        .navbar-brand,
+        .navbar-toggler {
+            color: $navbar-light-active-color;
+        
+            @include hover-focus {
+              color: $navbar-light-active-color;
+            }
+    }
+      
+        .navbar-nav {
+          .nav-link {
+            color: $navbar-light-color;
+      
+            &.disabled {
+              color: $navbar-light-disabled-color;
+            }
+          }
+      
+          .open > .nav-link,
+          .active > .nav-link,
+          .nav-link.open,
+          .nav-link.active {
+            color: $navbar-light-active-color;
+          }
+        }
+      
+        .navbar-toggler {
+          border-color: $navbar-light-toggler-border;
+        }
+      
+        .navbar-toggler-icon {
+          background-image: $navbar-light-toggler-bg;
+        }
+      
+        .navbar-text {
+          color: $navbar-light-color;
+        }
+      }
 }

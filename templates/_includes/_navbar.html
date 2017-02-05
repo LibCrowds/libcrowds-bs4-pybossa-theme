@@ -4,7 +4,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     {% if not 'navbar-dashboard' in navbar_class %}
-    <a class="navbar-brand py-0 mx-4" href="{{ url_for('home.home') }}">{{ brand }}</a>
+    <a class="navbar-brand py-0 mx-3" href="{{ url_for('home.home') }}">{{ brand }}</a>
     {% endif %}
     
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -45,7 +45,7 @@
             {% endif %}
         </ul>
         
-        <ul class="navbar-nav pt-2 mx-4">
+        <ul class="navbar-nav pt-2 mx-3">
             {% if current_user.is_authenticated() %}
             <li class="nav-item dropdown">
                 <a id="main-navbar-dropdown-link" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">

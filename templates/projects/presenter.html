@@ -1,5 +1,6 @@
 {% extends "_layouts/dark.html" %}
 {% set active_page = "projects" %}
+{% set active_link = "presentereditor" %}
 {% set active_project = project.short_name %}
 {% set jstop = True %}
 
@@ -20,7 +21,7 @@
     "js/flash-messages.js",
     "js/scripts.js",
     "js/errors.js",
-    "js/pybossa/pybossa.js"
+    "js/pybossa.js/pybossa.js"
     %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}

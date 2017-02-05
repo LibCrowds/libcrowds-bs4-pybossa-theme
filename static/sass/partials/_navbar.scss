@@ -3,13 +3,13 @@
     border-bottom: 1px solid $gray-lighter;
 }
 
-.navbar .dropdown-item,
-.navbar .nav-item .nav-link,
+.navbar .dropdown-item:focus,
+.navbar .dropdown-item:hover,
+.navbar .nav-item .nav-link:focus,
+.navbar .nav-item .nav-link:hover,
 .navbar .nav-item.active .nav-link {
-    @include hover-focus {
-        color: $brand-primary;
-        background-color: transparent;
-    }
+    color: $brand-primary;
+    background-color: transparent;
 }
 
 .navbar .nav-item {

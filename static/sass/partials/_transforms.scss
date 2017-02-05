@@ -19,7 +19,7 @@
         }
     }
     
-    .active .nav-link:after {
+    &.active .nav-link:after {
         transform: none;
     }
 }

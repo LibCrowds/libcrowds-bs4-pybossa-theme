@@ -7,6 +7,11 @@
         overflow-y: auto;
     }
     
+    .navbar-toggler {
+        position: relative;
+        align-self: flex-end;
+    }
+    
     @include media-breakpoint-up(lg) {
         position: relative;
         z-index: 2;

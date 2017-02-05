@@ -1,5 +1,5 @@
 <nav class="{{ navbar_class }}">
-    <button class="navbar-toggler navbar-toggler-right mt-1 mx-4" type="button" data-toggle="collapse" data-target="#main-navbar"
+    <button class="navbar-toggler navbar-toggler-right mt-1 mx-3" type="button" data-toggle="collapse" data-target="#main-navbar"
             aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,8 +7,8 @@
     <a class="navbar-brand py-0 mx-3" href="{{ url_for('home.home') }}">{{ brand }}</a>
     {% endif %}
     
-    <div class="collapse navbar-collapse" id="main-navbar">
-        <ul class="navbar-nav mr-auto pt-2">
+    <div class="collapse navbar-collapse align-items-center" id="main-navbar">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item mx-3 {% if active_page == 'about' %}active{% endif %}">
                 <a class="nav-link" href="{{ url_for('home.about')}}">About</a>
             </li>
@@ -45,7 +45,7 @@
             {% endif %}
         </ul>
         
-        <ul class="navbar-nav pt-2 mx-3">
+        <ul class="navbar-nav mx-3">
             {% if current_user.is_authenticated() %}
             <li class="nav-item dropdown">
                 <a id="main-navbar-dropdown-link" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">

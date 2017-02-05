@@ -1,10 +1,14 @@
 <ul class="nav list-group">
     {% if staff_or_admin %}
         <li class="list-group-item {% if active_link=='dashboard' %}active{% endif %}">
-            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="text-white">Dashboard</a></li>
+            <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="text-white">Dashboard</a>
+        </li>
         </li>
         <li class="list-group-item {% if active_link=='update' %}active{% endif %}">
             <a href="{{url_for('project.update', short_name=project.short_name)}}" class="text-white">Edit Details</a>
+        </li>
+        <li class="list-group-item {% if active_link=='presentereditor' %}active{% endif %}">
+            <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}" class="text-white">Edit Task Presenter</a>
         </li>
         <li class="list-group-item">
             <a href="{{url_for('project.presenter', short_name=project.short_name)}}" class="text-white">Contribute</a>

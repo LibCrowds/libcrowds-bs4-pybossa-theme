@@ -57,21 +57,18 @@
 {% endmacro %}
 
 {% macro render_project_deck(projects) %}
-<div class="card-deck">
-    {% for p in projects %}
-    <div class="col-sm-6 my-2">
-        <div class="card card-inverse text-center">
-            {{ render_project_thumbnail(p, class='card-img') }}
-            <div class="card-img-overlay">
-                <h4 class="card-title">{{ p.description }}</h4>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+<div class="card-columns project-cards">
+    {% for project in projects %}
+        <div class="card text-center">
+            <a href="{{ url_for('project.details', short_name=project.short_name) }}">
+            {{ render_project_thumbnail(project, class='card-img img-fluid') }}
+            <div class="card-footer text-white bg-dark-overlay d-flex align-content-between flex-wrap justify-content-center">
+                <h6 class="card-title">{{ project.name | truncate(40, true) }}</h6>
+                <p class="card-text text-white">{{ project.description }}</p>
+                <p class="card-text align-self-end"><small class="text-white">{{ project.overall_progress | round | int }}% complete</small></p>
             </div>
-            <div class="card-footer text-white bg-inverse">
-  {{ p.name }}
-  </div>
+            </a>
         </div>
-    </div>
     {% endfor %}
 </div>
 {% endmacro %}
@@ -168,14 +165,14 @@ function imgError(image, h, w) {
 {% macro render_project_thumbnail(project, class, upload_method) %}
     {% if project.info.container %}
         {% if upload_method == 'rackspace'%}
-        <img class="{{ class }}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container) }}" onerror="imgError(this, 600, 400);" alt="{{ project.name }} thumbnail">
+        <img class="{{ class }}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container) }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
         {% else %}
-        <img class="{{ class }}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" onerror="imgError(this, 600, 400);" alt="{{ project.name }} thumbnail">
+        <img class="{{ class }}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
         {% endif %}
     {% elif project.info.thumbnail %}
-        <img class="{{ class }}" src="{{ project.info.thumbnail }}" onerror="imgError(this, 600, 400);" alt="{{ project.name }} thumbnail">
+        <img class="{{ class }}" src="{{ project.info.thumbnail }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
     {% else %}
-        <img class="{{ class }}" src="http://placekitten.com/600/400?image=1" alt="{{ project.name }} thumbnail">
+        <img class="{{ class }}" src="http://placekitten.com/400/400?image=1" alt="{{ project.name }} thumbnail">
     {% endif %}
 {% endmacro %}
 

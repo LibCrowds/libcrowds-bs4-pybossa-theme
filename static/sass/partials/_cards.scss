@@ -1,20 +1,42 @@
-.card-collapse {
-    overflow-y: hidden;
-    border-radius: 2.25rem;
-}
-
-.card-collapse .card-footer {
-    height: calc(#{$card-spacer-y} * 2 + #{$font-size-base});
-    position: absolute;
-    bottom: 0;
-}
-
-.card-collapse .card-footer .card-title {
-    white-space: nowrap;
-}
-
-.card-collapse:active .card-footer,
-.card-collapse:focus .card-footer,
-.card-collapse:hover .card-footer {
-    height: 100%;
+.project-cards {
+    .card {
+        display: flex;
+        overflow-y: hidden;
+        border-radius: 2.25rem;
+        margin-bottom: 1rem;
+        
+        @include hover-focus {
+            .card-footer {
+                height: 100%;
+            }
+        }
+    }
+    
+    .card-img {
+        width: 100%;
+    }
+    
+    .card-footer {
+        height: calc(#{$card-spacer-y} * 2 + #{$font-size-base});
+        position: absolute;
+        bottom: 0;
+        
+        .card-title {
+            
+        }
+    }
+    
+    .card-footer .card-title {
+        white-space: nowrap;
+    }
+    
+    @include media-breakpoint-between(xs, md) {
+        margin-left: 15%;
+        margin-right: 15%;
+        column-count: 1;
+    }
+    
+    @include media-breakpoint-up(lg) {
+        column-count: 3;
+    }
 }

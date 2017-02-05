@@ -20,14 +20,6 @@
         height: calc(#{$card-spacer-y} * 2 + #{$font-size-base});
         position: absolute;
         bottom: 0;
-        
-        .card-title {
-            
-        }
-    }
-    
-    .card-footer .card-title {
-        white-space: nowrap;
     }
     
     @include media-breakpoint-between(xs, md) {

@@ -2,14 +2,12 @@
     height: 100%;
     flex-direction: column;
     display: flex;
-}
-
-.dashboard main {
-    overflow-y: auto;
-}
-
-@include media-breakpoint-up(lg) {
-    .dashboard {
+    
+    main {
+        overflow-y: auto;
+    }
+    
+    @include media-breakpoint-up(lg) {
         position: relative;
         z-index: 2;
         max-height: 100%;

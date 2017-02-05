@@ -10,32 +10,8 @@ a {
     transition: color 500ms, background-color 500ms;
 }
 
-.navbar {
-    transition: background-color 200ms, height 500ms;
-}
-
-.navbar-brand {
-    transition: color 200ms;
-}
-
-.navbar .nav-link {
-    transition: color 200ms;
-}
-
-.navbar .nav-link:after {
-    transition: opacity 200ms, transform 200ms;
-}
-
 .sidebar .list-group-item {
     transition: background-color 200ms;
-}
-
-.jumbotron-fade {
-    transition: brightness 1.5s, 500ms;
-}
-
-.jumbotron-fade * {
-    transition: opacity 1s;
 }
 
 .project-cards .card-footer {
@@ -44,4 +20,28 @@ a {
 
 .black-ul-link {
     transition: border-bottom 500ms;
+}
+
+.navbar {
+    transition: background-color 200ms, height 500ms;
+    
+    .navbar-brand {
+        transition: color 200ms;
+    }
+    
+    .nav-link {
+        transition: color 200ms;
+        
+        &:after {
+            transition: opacity 200ms, transform 200ms;
+        }
+    }
+}
+
+.jumbotron-fade {
+    transition: brightness 1.5s, 500ms;
+    
+    * {
+        transition: opacity 1s;
+    }
 }

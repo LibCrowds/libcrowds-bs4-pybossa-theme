@@ -2,6 +2,10 @@
     @extend .jumbotron-fluid;
     height: 300px;
     padding-bottom: 0;
+    
+    @include media-breakpoint-up(md) {
+        height: 100vh;
+    }
 }
 
 #crowd-jumbotron {
@@ -14,10 +18,4 @@
 
 #code-jumbotron {
     background: url(/static/img/jumbotrons/code.png) no-repeat center fixed;
-}
-
-@include media-breakpoint-up(md) {
-    .jumbotron-fullscreen {
-        height: 100vh;
-    }
 }

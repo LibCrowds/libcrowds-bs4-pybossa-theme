@@ -1,10 +1,8 @@
 .black-ul-link  {
     border-bottom: 3px solid rgba($black, 0);
     display: inline-block;
-}
-
-.black-ul-link:hover,
-.black-ul-link:focus,
-.black-ul-link:active {
-    border-bottom: 3px solid rgba($black, 1);
+    
+    @include hover-focus {
+        border-bottom: 3px solid rgba($black, 1);
+    }
 }

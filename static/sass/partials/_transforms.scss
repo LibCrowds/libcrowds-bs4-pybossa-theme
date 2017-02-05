@@ -1,20 +1,25 @@
 .btn-circle a {
     transform: translateY(-90px);
+    
+    @include hover-focus {
+        transform: none;   
+    }
 }
 
-.btn-circle a:hover,
-.btn-circle a:focus,
-.btn-circle a:active {
-    transform: none;
-}
-
-.navbar .nav-item .nav-link:after {
-    transform: translateY(10px)
-}
-
-.navbar .nav-item.active .nav-link:after,
-.navbar .nav-item .nav-link:hover:after,
-.navbar .nav-item .nav-link:focus:after,
-.navbar .nav-item .nav-link:active:after {
-    transform: none;
+.navbar .nav-item {
+    .nav-link {
+        &:after {
+            transform: translateY(10px);
+        }
+        
+        @include hover-focus {
+            &:after {
+                transform: none;
+            }
+        }
+    }
+    
+    .active .nav-link:after {
+        transform: none;
+    }
 }

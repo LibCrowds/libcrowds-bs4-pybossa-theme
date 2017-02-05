@@ -13,30 +13,31 @@
     background-size: cover;
     background-position: center center;
     display: none;
-}
-
-.sidebar ul {
-    padding: 1rem 1rem 1.25rem 1rem;
-}
-
-.sidebar .list-group-item {
-    border: none;
-    background-color: initial;
-    margin: calc(#{$list-group-item-padding-x} - #{$list-group-item-padding-y}) 0;
-    padding: 0rem;
-}
-
-.sidebar .list-group-item a {
-    padding: $list-group-item-padding-y;
-    width: 100%;
-}
-
-.sidebar .list-group-item:hover,
-.sidebar .list-group-item:focus,
-.sidebar .list-group-item:active,
-.sidebar .list-group-item.active {
-    border-radius: $border-radius-lg;
-    background-color: rgba($white, 0.23);
+    
+    ul {
+        padding: 1rem 1rem 1.25rem 1rem;
+    }
+    
+    .list-group-item {
+        border: none;
+        background-color: initial;
+        margin: calc(#{$list-group-item-padding-x} - #{$list-group-item-padding-y}) 0;
+        padding: 0rem;
+        
+        a {
+            padding: $list-group-item-padding-y;
+            width: 100%;
+        }
+        
+        @include hover-focus {
+            border-radius: $border-radius-lg;
+            background-color: rgba($white, 0.23);
+        }
+    }
+    
+    @include media-breakpoint-up(lg) {
+        display: flex;
+    }
 }
 
 .sidebar-brand-wrapper {
@@ -47,10 +48,4 @@
 
 .sidebar-brand {
     @extend .navbar-brand;
-}
-
-@include media-breakpoint-up(lg) {
-    .sidebar {
-        display: flex;
-    }
 }

@@ -22,19 +22,22 @@
 
 .navbar .nav-item.active .nav-link:after,
 .navbar .nav-item .nav-link:hover:after,
-.navbar .nav-item .nav-link:focus:after,
-.navbar .nav-item .nav-link:active:after {
+.navbar .nav-item .nav-link:focus:after {
     opacity: 1;
 }
 
 
 @include media-breakpoint-up(lg) {
-    .navbar-inverse .dropdown-menu {
-        background-color: rgba($black, 0.5);
+    .navbar-inverse {
+        .dropdown-menu {
+            background-color: rgba($black, 0.5);
+        }
+        
+        .dropdown-item {
+            color: $white;
+        }
     }
-    .navbar-inverse .dropdown-item {
-        color: $white;
-    }
+    
     .navbar-collapse:not(.show) .nav-link:after {
         position: absolute;
         left: 0;

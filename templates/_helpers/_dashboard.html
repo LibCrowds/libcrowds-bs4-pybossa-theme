@@ -1,0 +1,21 @@
+{% macro render_stat(font, stat, description, addon) %}
+<div class="card mt-3">
+    <div class="card-block">
+        <span class="fa {{ font }} fa-3x pull-right text-muted"></span>
+        <div class="card-text display-5 font-weight-bold">{{ stat }}</div>
+        <div class="card-text">{{ description }}</div>
+        <div class="card-text"><small>{{ addon }}</small></div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_button(font, title, url) %}
+<div class="card mt-3">
+    <a href="{{ url }}">
+        <div class="card-block d-flex justify-content-between">
+            <div class="card-title text-muted mb-0 align-self-center">{{ title }}</div>
+            <span class="fa {{ font }} fa-3x text-muted align-self-center"></span>
+        </div>
+    </a>
+</div>
+{% endmacro %}

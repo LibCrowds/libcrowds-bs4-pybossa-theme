@@ -27,7 +27,6 @@
   "scripts": {
     "cp:font-awesome": "cp -R node_modules/font-awesome/fonts ./static/fonts/font-awesome/",
     "cp:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./static/img/openseadragon/",
-    "cp:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./static/img/openseadragonselection/",
     "postinstall": "npm run cp:font-awesome && npm run cp:openseadragon && npm run cp:openseadragonselection",
     "build": "webpack --config webpack.config.js"
   }

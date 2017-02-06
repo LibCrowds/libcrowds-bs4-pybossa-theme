@@ -1,16 +1,15 @@
-{% extends "projects/project.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% set active_project  = "all" %}
-{% set active_project = project.short_name %}
 
 {% block update %}
-<div class="row" style="padding-top:20px">
-    <hr>
-        <div class="col-sm-12 btn-group" style="text-align:center">
-            <a class="btn"   href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="fa fa-edit"></i> Edit the project details</a>
-            <a class="btn"   href="{{ url_for('project.task_presenter_editor', short_name = project.short_name) }}"><i class="fa fa-edit"></i> Edit the task presenter</a>
-            <a class="btn"   href="{{ url_for('project.import_task', short_name = project.short_name) }}"><i class="da da-tasks"></i> Import tasks</a>
-            <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="fa fa-trash"></i> Delete the project</a>
+<section>
+    <div class="container mb-5">
+        <div class="card-deck">
+            {{ dashboard_helpers.render_button('fa-file-o', 'Edit Details', url_for('project.update', short_name=project.short_name)) }}
+            {{ dashboard_helpers.render_button('fa-pencil-square-o', 'Edit Task Presenter', url_for('project.task_presenter_editor', short_name=project.short_name)) }}
+            {{ dashboard_helpers.render_button('fa-upload', 'Edit Details', url_for('project.import_task', short_name=project.short_name)) }}
+            {{ dashboard_helpers.render_button('fa-trash', 'Edit Details', url_for('project.delete', short_name=project.short_name)) }}
         </div>
-</div>
+    </div>
+</section>
 {% endblock %}

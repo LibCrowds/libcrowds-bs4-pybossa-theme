@@ -27,6 +27,7 @@
         a {
             padding: $list-group-item-padding-y;
             width: 100%;
+            color: $white;
         }
         
         @include hover-focus {

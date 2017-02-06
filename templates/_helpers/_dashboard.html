@@ -12,9 +12,9 @@
 {% macro render_button(font, title, url) %}
 <div class="card mt-3">
     <a href="{{ url }}">
-        <div class="card-block d-flex justify-content-between">
-            <div class="card-title text-muted mb-0 align-self-center">{{ title }}</div>
-            <span class="fa {{ font }} fa-3x text-muted align-self-center"></span>
+        <div class="card-block text-center text-lg-left">
+            <span class="fa {{ font }} fa-2x text-muted pull-right hidden-md-down"></span>
+            <div class="card-title text-muted mb-0">{{ title }}</div>
         </div>
     </a>
 </div>

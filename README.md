@@ -11,7 +11,7 @@ Install [Node.js](https://nodejs.org/en/), then:
 # Navigate to your themes folder
 cd /home/pybossa/pybossa/themes
 # Clone the repo
-git clone https://github.com/LibCrowds/libcrowds-bs4-pybossa-theme
+git clone --recursive https://github.com/LibCrowds/libcrowds-bs4-pybossa-theme
 # Navigate to the libcrowds-bs4-pybossa-theme folder
 cd libcrowds-bs4-pybossa-theme
 # Install dependencies

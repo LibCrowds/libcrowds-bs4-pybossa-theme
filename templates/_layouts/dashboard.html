@@ -3,7 +3,7 @@
 {% block layout %}
 
 {% set staff_or_admin = staff_or_admin %}
-{% set active_page = active_page | default('index') %}
+{% set active_link = active_link %}
 {% set navbar_class = "navbar navbar-fixed navbar-toggleable-xs navbar-light navbar-dashboard" %}
 {% set footer_class = "footer footer-slim bg-white" %}
 
@@ -13,17 +13,21 @@
         <div class="sidebar-brand-wrapper text-center">
             <a class="sidebar-brand py-0 text-white" href="{{ url_for('home.home') }}">{{ brand }}</a>
         </div>
-        {% if sidebar == 'project' %}
+        {% if active_page == 'projects' %}
         {% include "_includes/_project_sidebar.html" %}
-        {% elif sidebar == 'account '%}
-        {% include "_includes/_account_account.html" %}
+        {% elif active_page == 'account '%}
+        {% include "_includes/_account_sidebar.html" %}
+        {% elif active_page == 'admin '%}
+        {% include "_includes/_admin_sidebar.html" %}
         {% endif %}
     </div>
     <div class="dashboard">
         {% include "_includes/_navbar.html" %}
         <main class="bg-faded">
-            {% block content %}
-            {% endblock %}
+            <div class="container p-4">
+                {% block content %}
+                {% endblock %}
+            </div>
         </main>
         {% include "_includes/_footer.html" %}
     </div>

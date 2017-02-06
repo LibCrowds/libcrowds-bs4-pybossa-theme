@@ -105,14 +105,12 @@ function imgError(image, h, w) {
 </script>
 {% endmacro %}
 
-{% macro render_project_title(project, subtitle=None) %}
-<h1>
+{% macro render_title(title, subtitle=None) %}
+<h1 class="mb-0">{{ title | safe }}</h1>
 {% if subtitle %}
-<strong>{{ project.name }}</strong>: {{subtitle}}
-{% else %}
-<strong>{{ project.name }}</strong>
+<strong>{{ subtitle }}</strong>
 {% endif %}
-</h1>
+<hr>
 {% endmacro %}
 
 {% macro render_overall_progress(project, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}

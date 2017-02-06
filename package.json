@@ -17,7 +17,6 @@
     "select2": "^4.0.3",
     "font-awesome": "^4.7.0",
     "openseadragon": "^2.2.1",
-    "openseadragonselection": "picturae/openseadragonselection",
     "codemirror": "^5.23.0"
   },
   "devDependencies": {

@@ -1,19 +1,19 @@
 <ul class="nav list-group">
     {% if staff_or_admin %}
-        <li class="list-group-item {% if active_link=='dashboard' %}active{% endif %}">
+        <li class="list-group-item {% if active_link =='dashboard' %}active{% endif %}">
             <a href="{{url_for('project.tasks', short_name=project.short_name)}}">Dashboard</a>
         </li>
         </li>
-        <li class="list-group-item {% if active_link=='update' %}active{% endif %}">
+        <li class="list-group-item {% if active_link =='update' %}active{% endif %}">
             <a href="{{url_for('project.update', short_name=project.short_name)}}">Edit Details</a>
         </li>
         <li class="list-group-item">
             <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}">Edit Task Presenter</a>
         </li>
-        <li class="list-group-item {% if active_link=='results' %}active{% endif %}">
+        <li class="list-group-item {% if active_link =='results' %}active{% endif %}">
             <a href="{{url_for('project.results', short_name=project.short_name)}}">Results</a>
         </li>
-         <li class="list-group-item {% if active_link=='stats' %}active{% endif %}">
+         <li class="list-group-item {% if active_link =='stats' %}active{% endif %}">
             <a href="{{url_for('project.show_stats', short_name=project.short_name)}}">Statistics</a>
         </li>
         {% if config.get('LIBCROWDS_ANALYST_URL') %}

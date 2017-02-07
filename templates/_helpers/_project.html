@@ -105,11 +105,16 @@ function imgError(image, h, w) {
 </script>
 {% endmacro %}
 
-{% macro render_title(title, subtitle=None) %}
-<h1 class="mb-0">{{ title | safe }}</h1>
-{% if subtitle %}
-<strong>{{ subtitle }}</strong>
-{% endif %}
+{% macro render_title(project, title, subtitle=None, link=None, link_text=None) %}
+<div class="d-flex flex-row justify-content-between align-items-center">
+    <h1 class="mb-1"><strong>Project: </strong>{{ project.name }} · {{ title }}</h1>
+    {% if subtitle %}
+    <p class="lead">{{ subtitle }}</p>
+    {% endif %}
+    {% if link and link_text %}
+    <a href="{{ link }}" class="btn btn-primary">{{ link_text }}</a>
+    {% endif %}
+</div>
 <hr>
 {% endmacro %}
 

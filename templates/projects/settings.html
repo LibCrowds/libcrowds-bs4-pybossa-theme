@@ -1,24 +1,15 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "projects/_helpers.html" as helper %}
+{% import "_helpers/_project.html" as project_helpers %}
 
 {% block content %}
-{{ helper.render_project_sidebar(project, 'settings', current_user, pro_features, staff_or_admin) }}
-{% if project %}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 xs-center">
-            <h1><strong>{{ project.name }}</strong>: Settings</h1>
-            <div class="btn-group">
-                <a class="btn" href="{{ url_for('project.update', short_name = project.short_name) }}"><i class="fa fa-edit"></i> Edit the project details</a>
-                <a class="btn" href="{{ url_for('project.task_settings', short_name = project.short_name) }}"><i class="fa fa-wrench"></i> Task Settings</a>
-                <a class="btn" href="{{ url_for('project.delete', short_name = project.short_name) }}"><i class="dfa fa-trash"></i> Delete the project</a>
-            </div>
-        </div>
+
+{{ project_helpers.render_title(project, 'Settings') }}
+<div class="container">
+    <p class="lead">All settings are available via the project dashboard page.</p>
+    <div class="text-right">
+        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-primary" role="button">View Dashboard</a>
     </div>
 </div>
-{% else %}
-    {{ helper.render_non_existant_project() }}
-{% endif %}
-{{ helper.broken_image() }}
+
 {% endblock %}

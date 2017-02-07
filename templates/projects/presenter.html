@@ -1,7 +1,5 @@
-{% extends "_layouts/dark.html" %}
+{% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
-{% set active_link = "presentereditor" %}
-{% set active_project = project.short_name %}
 {% set jstop = True %}
 
 {% block content %}
@@ -26,28 +24,13 @@
 {% endassets %}
 
 
-<!-- TODO: Check if this is really necessary 
-<script>
-    Modernizr.load({
-            test: window.JSON,
-            nope: '{{url_for('static', filename='js/vendor/json2.min.js')}}'
-            });
-</script>
-    
-    -->
-
-
-{% if invite_new_volunteers %}
-<div class="container mt-5 pt-5">
-    <div class="row">
-        <div class="col-sm-8 offset-sm-2 text-center">
-            <p class="lead">
-                Great, you've contributed to all the tasks for this project.
-                But this project still needs more volunteers, so please spread the word!
-            </p>
-            <a href="{{ url_for('home.home') }}"><span class="fa fa-home fa-3x"></span></a>
-        </div>
-    </div>
+{% if not invite_new_volunteers %}
+<div class="d-flex flex-row align-items-center">
+    <p class="lead">
+        Great, you've contributed to all the tasks for this project.
+        But this project still needs more volunteers, so please spread the word!
+    </p>
+    <a href="{{ url_for('home.home') }}"><span class="fa fa-home fa-3x"></span></a>
 </div>
 {% else %}
 {{ project.info.task_presenter|safe }}

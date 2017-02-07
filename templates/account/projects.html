@@ -1,17 +1,13 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
-{% import "projects/_helpers.html" as helper %}
+{% import "_helpers/_project.html" as project_helpers %}
 
 {% block content %}
 
 <div class="container mb-5 pt-4">
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
-            <div class="d-flex flex-row justify-content-between align-items-center">
-                <h1>Open Project</h1>
-                <a href="{{url_for('project.new')}}" class="btn btn-primary">Create a Project</a>
-            </div>
-            <hr class="mb-0">
+            {{ project_helpers.render_title('Open Project', link=url_for('project.new'), link_text='Create a Project') }}
         </div>
     </div>
     <div class="row">
@@ -19,11 +15,11 @@
             {% if projects_published or projects_draft %}
                 {% if projects_published %}
                 <h2 class="mt-4">Published</h2>
-                {{ helper.render_projects_list(projects_published, current_user) }}
+                {{ project_helpers.render_projects_list(projects_published, current_user) }}
                 {% endif %}
                 {% if projects_draft %}
                 <h2 class="mt-4">Draft</h2>
-                {{ helper.render_projects_list(projects_draft, current_user) }}
+                {{ project_helpers.render_projects_list(projects_draft, current_user) }}
                 {% endif %}
             {% else %}
             <p class="lead">You have not created any projects yet, <a href="{{ url_for('project.new') }}" >create one now!</a></>

@@ -1,6 +1,3 @@
-<a href="{{url_for(target, short_name=project.short_name, type='gdocs')}}" rel="nofollow">
-    <div class="well well-link">
-        <i class="fa fa-google fa-4x"></i>
-        <h3 class="margin-bottom-xs">Google Docs Spreadsheet</h3>
-    </div>
-</a>
+{% import "_helpers/_card.html" as card_helpers %}
+
+{{ card_helpers.render_button('fa-google', 'Google Docs Spreadsheet', url_for(target, short_name=project.short_name, type='gdocs')) }}

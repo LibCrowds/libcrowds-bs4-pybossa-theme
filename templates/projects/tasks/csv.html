@@ -1,6 +1,3 @@
-<a href="{{url_for(target, short_name=project.short_name, type='csv')}}" rel="nofollow">
-    <div class="well well-link">
-        <i class="fa fa-file-excel-o fa-4x"></i>
-        <h3 class="margin-bottom-xs">CSV</h3>
-    </div>
-</a>
+{% import "_helpers/_card.html" as card_helpers %}
+
+{{ card_helpers.render_button('fa-file-excel-o', 'CSV', url_for(target, short_name=project.short_name, type='csv')) }}

@@ -1,0 +1,17 @@
+{% macro render_head(headings) %}
+<thead>
+    <tr>
+        {% for h in headings %}
+        <th class="border-top-0 border-bottom-0 text-muted pb-1">{{ h }}</th>
+        {% endfor %}
+    </tr>
+</thead>
+{% endmacro %}
+
+{% macro render_row(values) %}
+<tr>
+    {% for v in values %}
+    <td>{{ v | safe }}</td>
+    {% endfor %}
+</tr>
+{% endmacro %}

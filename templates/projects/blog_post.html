@@ -1,21 +1,36 @@
 {% extends "_layouts/default.html" %}
-{% set active_page = "blog" %}
-{% from "projects/_helpers.html" import broken_image %}
-{% import "blog/_helpers.html" as helper %}
-{% set description = blogpost.body %}
-{% set title = blogpost.title %}
+{% set active_page = "projects" %}
+{% import "_helpers/_project.html" as project_helpers %}
 
 {% block content %}
-<div class="container container-main">
-    <div class="row">
-        {{helper.render_blog_post(current_user, blogpost, form)}}
-        {{helper.render_blog_menu(current_user, dates)}}
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-7 col-sm-offset-1">
-            <a href="{{url_for('blog.index')}}" class="btn btn-danger">Back</a>
+<div class="container mb-5 pt-4">
+    <article>
+        <header>
+            <h2>{{ blogpost.title }}</h2>
+            <p>
+                <em>Author: {{ blogpost.owner.name }}</em>
+            </p>
+            <p>
+                <em>Written: {{ blogpost.created[0:10] }}</em>
+            </p>
+            <p>
+                <a href="{{ url_for('project.show_blogposts', short_name=project.short_name )}}">Back</a>
+            </p>
+        </header>
+        <body>
+            <p>{{ blogpost.body | e | markdown }}</p>
+        </body>
+    </article>
+    
+    {% if current_user.is_authenticated() and current_user.id == project.owner_id or current_user.admin %}
+    <form method="post" action="{{ url_for('project.delete_blogpost', short_name=project.short_name, id=blogpost.id) }}" onsubmit="return confirm('Do you really want to delete the blog post?');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="text-right">
+            <input type="submit" value=Delete class="btn btn-secondary" />
+            <a href="{{ url_for('project.update_blogpost', short_name=project.short_name, id=blogpost.id) }}" class="btn btn-primary">Edit</a>
         </div>
-    </div>
+    </form>
+    {% endif %}
 </div>
-{{ broken_image() }}
+
 {% endblock %}

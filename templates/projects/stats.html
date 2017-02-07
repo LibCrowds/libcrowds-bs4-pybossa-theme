@@ -3,6 +3,7 @@
 {% set active_link = "stats" %}
 {% import "projects/_helpers.html" as helper %}
 {% import "privacy/locked.html" as privacy %}
+{% set active_link = "dashboard" %}
 
 {% block content %}
 <link rel="stylesheet" href="{{url_for('static', filename='vendor/leaflet/leaflet.css')}}" />
@@ -15,7 +16,6 @@
 <script>
     var projectStats = {{projectStats|safe}};
 </script>
-{{ helper.render_project_sidebar(project, active_link, current_user, pro_features, staff_or_admin) }}
 <span class="set-body-bg" data-bg="pattern-brushed"></span>
 <div class="container container-main">
     <div class="row">

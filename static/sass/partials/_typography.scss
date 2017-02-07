@@ -64,3 +64,15 @@ body {
 .CodeMirror {
     font-size: 0.75rem;
 }
+
+.table {
+    thead th {
+        font-size: 0.75em;
+        text-transform: uppercase;
+        font-weight: 400;
+    }
+    
+    tbody td {
+        font-size: 0.85em;
+    }
+}

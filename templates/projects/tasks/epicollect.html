@@ -1,6 +1,3 @@
-<a href="{{url_for(target, short_name=project.short_name, type='epicollect')}}" rel="nofollow">
-    <div class="well well-link">
-        <i class="fa fa-plus-square-o fa-4x"></i>
-        <h3 class="margin-bottom-xs">EpiCollect Plus</h3>
-    </div>
-</a>
+{% import "_helpers/_card.html" as card_helpers %}
+
+{{ card_helpers.render_button('fa-plus-square-o', 'EpiCollect Plus', url_for(target, short_name=project.short_name, type='epicollect')) }}

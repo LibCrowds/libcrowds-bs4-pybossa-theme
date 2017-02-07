@@ -21,3 +21,6 @@
 @include bg-variant('.bg-black', $black);
 
 @include bg-variant('.bg-dark-overlay', rgba($black, 0.85));
+
+// Colors
+@include text-emphasis-variant('.text-body', $body-color);

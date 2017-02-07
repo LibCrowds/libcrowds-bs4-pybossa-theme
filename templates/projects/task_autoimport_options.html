@@ -1,30 +1,18 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "projects/_helpers.html" as helper %}
+{% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 
 {% block content %}
-{% from "_formhelpers.html" import render_field %}
-{{ helper.render_project_sidebar(project, 'autoimport', current_user, pro_features, staff_or_admin) }}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ helper.render_project_title(project, subtitle="Auto-import tasks")}}
-            <div class="row">
-                <div class="col-sm-12">
-                    <p class="lead">Use one of the following available
-                    <strong>importers</strong> to setup as the autoimporter</p>
-                </div>
-            </div>
-            {% for row in available_importers|batch(2) %}
-            <div class="row">
-                {% for importer in row %}
-                <div class="col-sm-6">
-                    {% include importer %}
-                </div>
-                {% endfor %}
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+
+{{ project_helpers.render_title(project, 'Auto-import Tasks', 'Use one of the following importers to auto-import tasks') }}
+
+{% for row in available_importers | batch(3) %}
+<div class="card-deck">
+    {% for importer in row %}
+        {% include importer %}
+    {% endfor %}
 </div>
+{% endfor %}
+            
 {% endblock %}

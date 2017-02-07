@@ -13,7 +13,6 @@
     }
     
     @include media-breakpoint-up(lg) {
-        position: relative;
         z-index: 2;
         max-height: 100%;
         float: right;

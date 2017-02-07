@@ -32,3 +32,9 @@
         column-count: 3;
     }
 }
+
+.card-button {
+    @include hover-focus {
+        border-color: rgba($link-hover-color, 0.5);
+    }
+}

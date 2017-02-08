@@ -11,14 +11,14 @@
     width: 8rem;
     height: 8rem;
     border-radius: 50%;
-    color: $white;
     border: 1px solid $white;
     display: block;
-    cursor: pointer;
     position: relative;
     overflow: hidden;
     
     a {
+        width: 100%;
+        color: $white;
         display: inline-block;
         
         div {
@@ -35,7 +35,7 @@
     border-radius: 0;
     color: $white;
     
-    .btn-twitter {
+    &.btn-twitter {
         background: $twitter;
         
         @include hover-focus {
@@ -43,7 +43,7 @@
         }
     }
     
-    .btn-facebook {
+    &.btn-facebook {
         background: $facebook;
         
         @include hover-focus {
@@ -51,7 +51,7 @@
         }
     }
     
-    .btn-googleplus {
+    &.btn-googleplus {
         background: $googleplus;
         
         @include hover-focus {
@@ -59,12 +59,15 @@
         }
     }
     
-    .btn-linkedin {
+    &.btn-linkedin {
         background: $linkedin;
         
         @include hover-focus {
             background: darken($linkedin, 5%);
         }
     }
-
+    
+    @include hover-focus {
+        color: $white;
+    }
 }

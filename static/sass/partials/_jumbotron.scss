@@ -2,6 +2,10 @@
     @extend .jumbotron-fluid;
     height: 300px;
     padding-bottom: 0;
+    background-color: $black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     
     @include media-breakpoint-up(md) {
         height: 100vh;
@@ -9,7 +13,7 @@
 }
 
 #crowd-jumbotron {
-    background: url(/static/img/jumbotrons/crowd.png) no-repeat center center fixed;
+    background-image: url(/static/img/jumbotrons/crowd.png);
 }
 
 #drawer-jumbotron {

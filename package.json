@@ -17,7 +17,8 @@
     "select2": "^4.0.3",
     "font-awesome": "^4.7.0",
     "openseadragon": "^2.2.1",
-    "codemirror": "^5.23.0"
+    "codemirror": "^5.23.0",
+    "jquery-circle-progress": "^1.2.1"
   },
   "devDependencies": {
     "webpack": "^2.2.1",

@@ -2,9 +2,9 @@
 {% set active_page = "profile" %}
 {% set active_link = "admin" %}
 {% import "account/_helpers.html" as helper %}
-{% import "projects/_helpers.html" as project_helper %}
+{% import "_helpers/_project.html" as project_helper %}
 {% from "account/_helpers.html" import render_account_local_nav %}
-{% from "projects/_helpers.html" import render_project_admin_featured, broken_image %}
+{% from "_helpers/_project.html" import render_project_admin_featured, broken_image %}
 
 {% block content %}
 <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">

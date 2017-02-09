@@ -2,7 +2,7 @@
 {% set active_page = "admin" %}
 {% set active_link = "featured" %}
 {% from "admin/_helpers.html" import render_admin_local_nav %}
-{% import "projects/_helpers.html" as helper %}
+{% import "_helpers/_project.html" as project_helpers %}
 
 {% block content %}
 {{ render_admin_local_nav(current_user, active_link) }}

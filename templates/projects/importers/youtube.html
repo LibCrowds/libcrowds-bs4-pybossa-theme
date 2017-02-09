@@ -1,7 +1,7 @@
 {% extends "projects/base.html" %}
 {% set active_page = "projects" %}
 {% set active_project = project.short_name %}
-{% import "projects/_helpers.html" as helper %}
+{% import "_helpers/_project.html" as project_helpers %}
 {% set active_link = 'tasks' %}
 {% set section = _('Import tasks') %}
 
@@ -33,7 +33,7 @@
 <script>
     $("#submit").off('click').on('click', function(){
             var msg = "{{_('Importing data...')}}";
-            pybossaNotify(msg, true, "loading");
+            notify(msg, true, "loading");
             });
 </script>
 {% endblock %}

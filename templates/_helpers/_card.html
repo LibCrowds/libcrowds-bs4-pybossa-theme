@@ -1,7 +1,7 @@
 {% macro render_title(title, description) %}
 <div class="card-block">
     <h4 class="card-title mb-1">{{ title }}</h4>
-    <p class="card-text text-muted"><small>{{ description }}</small></p>
+    <p class="card-text text-muted">{{ description | safe }}</p>
 </div>
 {% endmacro %}
 

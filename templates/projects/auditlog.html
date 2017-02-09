@@ -7,11 +7,11 @@
 {% block content %}
 
 {{ project_helpers.render_title(project, 'Audit Logs') }}
-<div class="card">
+<div class="card my-4">
     {{ card_helpers.render_title('Audit logs', 'All actions registered for the project') }}
     {% if logs %}
     <div class="table-responsive">
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped mb-0">
             {{ table_helpers.render_head(['When', 'Who', 'Source', 'Action', 'Attribute']) }}
             <tbody>
                 {% for log in logs | sort(reverse=True, attribute='created') %}

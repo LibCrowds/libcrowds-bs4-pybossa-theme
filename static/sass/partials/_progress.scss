@@ -1,0 +1,10 @@
+.progress-circle {
+    position: relative;
+    
+    p {
+        position: absolute;
+        top: calc(50% - #{$progress-circle-font-size});
+        width: 100%;
+        text-align: center;
+    }
+}

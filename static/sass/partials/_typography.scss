@@ -54,11 +54,11 @@ body {
 }
 
 @include media-breakpoint-up(lg) {
-  .navbar .nav-link,
-  .navbar .dropdown-item,
-  .sidebar .list-group-item {
-      font-size: 0.85em;
-  }
+    .navbar .nav-link,
+    .navbar .dropdown-item,
+    .sidebar .list-group-item {
+        font-size: 0.85em;
+    }
 }
 
 .CodeMirror {
@@ -75,4 +75,9 @@ body {
     tbody td {
         font-size: 0.85em;
     }
+}
+
+.progress-circle p {
+    font-size: $progress-circle-font-size;
+    line-height: 1.8;
 }

@@ -93,6 +93,8 @@ $card-spacer-y:                    1.5rem;
 
 $spacer:                           1.5rem;
 
+$progress-circle-font-size:        2.5rem;
+
 $fa-font-path:                     '../../fonts/font-awesome';
 
 @import
@@ -114,5 +116,6 @@ $fa-font-path:                     '../../fonts/font-awesome';
     "partials/borders",
     "partials/cards",
     "partials/links",
-    "partials/ribbon"
+    "partials/ribbon",
+    "partials/progress"
 ;

@@ -2,9 +2,9 @@
     <div class="container">
         <div class="row text-center">
             {% if 'footer-slim' not in footer_class %}
-            <div class="col-sm-4 py-3">
+            <div class="col-sm-4">
                 <a href="http://labs.bl.uk/" target="_blank" class="hidden-md-down">
-                    <img class="img-fluid" src="{{ url_for('static', filename='img/bl-logo.png' )}}" alt="BL Labs logo">
+                    <img class="img-fluid py-3" src="{{ url_for('static', filename='img/bl-logo.png' )}}" alt="BL Labs logo">
                 </a>
             </div>
             {% endif %}
@@ -28,9 +28,9 @@
                 </ul>
             </div>
             {% if 'footer-slim' not in footer_class %}
-            <div class="col-sm-4 py-3">
+            <div class="col-sm-4">
                 <a href="http://pybossa.com/" target="_blank" class="hidden-md-down">
-                    <img class="img-fluid" src="{{ url_for('static', filename='img/pybossa.png' )}}" alt="PYBOSSA logo">
+                    <img class="img-fluid py-3" src="{{ url_for('static', filename='img/pybossa.png' )}}" alt="PYBOSSA logo">
                 </a>
             </div>
             {% endif %}

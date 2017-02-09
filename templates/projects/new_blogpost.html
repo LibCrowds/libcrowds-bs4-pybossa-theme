@@ -2,7 +2,7 @@
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% set active_link = "dashboard" %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
 <div class="container-padded">
@@ -13,8 +13,8 @@
                 <form class="form-horizontal" method="post" action="{{ url_for('project.new_blogpost', short_name=project.short_name) }}">
                     {{ form.hidden_tag() }}
                     <fieldset>
-                        {{ render_field(form.title, class_="span9", placeholder="The title of your post" }}
-                        {{ render_field(form.body, class_="span9", placeholder="Write your post here. You can use Markdown!") }}
+                        {{ form_helpers.render_field(form.title, class_="span9", placeholder="The title of your post" }}
+                        {{ form_helpers.render_field(form.body, class_="span9", placeholder="Write your post here. You can use Markdown!") }}
                         <div class="form-actions">
                             <input type="submit" value={{_('Create')}} class="btn btn-primary" />
                             <a href="{{url_for('project.settings', short_name=project.short_name)}}" class="btn">Cancel</a>

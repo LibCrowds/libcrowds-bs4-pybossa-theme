@@ -1,7 +1,7 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 {% set active_link = "dashboard" %}
 
 {% block content %}
@@ -14,7 +14,7 @@
             <form id="task_redundancy" class="form-horizontal" method="post" action="{{ url_for('project.task_n_answers', short_name=project.short_name) }}">
                 {{ form.hidden_tag() }}
                 <fieldset>
-                    {{ render_field(form.n_answers, class_="input-block-level form-control", placeholder="The number of contributions required per task", type="number", autofocus="autofocus", required="required", pattern=".{1,100}", title="Must be a number between 1 and 100") }}
+                    {{ form_helpers.render_field(form.n_answers, class_="input-block-level form-control", placeholder="The number of contributions required per task", type="number", autofocus="autofocus", required="required", pattern=".{1,100}", title="Must be a number between 1 and 100") }}
                     <div class="pull-right" role="group">
                         <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
                         <input type="submit" value="Set redundancy" class="btn btn-danger">

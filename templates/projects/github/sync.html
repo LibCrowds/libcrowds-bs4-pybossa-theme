@@ -1,7 +1,7 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "create" %}
 {% set active_link  = "newproject" %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
 <div class="container container-main">
@@ -12,7 +12,7 @@
             <form role="form" method="post" action="{{ url_for('github.sync', short_name=project.short_name) }}" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <fieldset>
-                    {{ render_field(form.github_url, class_="form-control", placeholder="Enter the URL of a GitHub repository.", required="required", autofocus="autofocus") }}
+                    {{ form_helpers.render_field(form.github_url, class_="form-control", placeholder="Enter the URL of a GitHub repository.", required="required", autofocus="autofocus") }}
                     <div class="text-right" role="group">
                         <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
                         <button type="submit" value="Continue" class="btn btn-danger">Continue</button>

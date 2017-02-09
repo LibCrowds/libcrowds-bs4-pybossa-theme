@@ -1,6 +1,6 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
 
@@ -17,7 +17,7 @@
                     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-sm btn-secondary" role="button">Cancel</a>
                     <button type="submit" class="btn btn-sm btn-primary">Update</button>
                 </div>
-                {{ render_field(form.editor, form_group_cls="mb-0 pt-4")}}
+                {{ form_helpers.render_field(form.editor, form_group_cls="mb-0 pt-4")}}
             </form>
         </div>
     </div>

@@ -5,7 +5,7 @@
 {% set active_link = 'tasks' %}
 {% set section = _('Import tasks') %}
 
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 
 {% block projectcontent %}
 <style type="text/css">
@@ -24,7 +24,7 @@
 <form class="form-group" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
     <fieldset>
         {{ form.hidden_tag() }}
-        {{ render_field(form.playlist_url, placeholder=_("URL of a Youtube Playlist")) }}
+        {{ form_helpers.render_field(form.playlist_url, placeholder=_("URL of a Youtube Playlist")) }}
     </fieldset>
     <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-primary" />
 </form>

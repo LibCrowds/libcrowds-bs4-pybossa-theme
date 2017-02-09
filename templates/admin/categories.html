@@ -13,12 +13,12 @@
             <div class="row">
                 <div id="add" class="col-sm-12">
                     <h2>Add Category</h2>
-                    {% from "_formhelpers.html" import render_field %}
+                    {% import "_helpers/_form.html" as form_helpers %}
                     <form role="form" method="POST" action="{{url_for('admin.categories')}}">
                         {{form.hidden_tag()}}
                         <fieldset>
-                        {{ render_field(form.name, placeholder="Category name", class="form-control", required="required") }}
-                        {{ render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
+                        {{ form_helpers.render_field(form.name, placeholder="Category name", class="form-control", required="required") }}
+                        {{ form_helpers.render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
                         <div class="pull-right" role="group">
                             <button type="submit" class="btn btn-danger">Add</button>
                         </div>

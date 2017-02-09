@@ -1,7 +1,7 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 {% set active_link = "dashboard" %}
 
 {% block content %}
@@ -22,7 +22,7 @@
             <form id="task_scheduler" class="form-horizontal" method="post" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
                 {{ form.hidden_tag() }}
                 <fieldset>
-                    {{ render_field(form.sched, class_="form-control", placeholder="Task scheduler for your project")}}
+                    {{ form_helpers.render_field(form.sched, class_="form-control", placeholder="Task scheduler for your project")}}
                     <div class="pull-right" role="group">
                         <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
                         <input type="submit" value="Set" class="btn btn-danger" />

@@ -1,7 +1,7 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "create" %}
 {% set active_link  = "newproject" %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
 {% if staff_or_admin %}
@@ -13,9 +13,9 @@
             <form role="form" method="post" action="{{ url_for('project.new') }}" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <fieldset>
-                    {{ render_field(form.name, placeholder="The name of the project.", show_label=True, class="form-control", required="required", autofocus="autofocus") }}
-                    {{ render_field(form.short_name, placeholder="A shortcut for accessing the project via the web.", show_label=True, class="form-control", required="required") }}
-                    {{ render_field(form.long_description, class="form-control", rows="13", label_text="Long description", show_label=True, placeholder="Long description (use Markdown)!", required="required") }}
+                    {{ form_helpers.render_field(form.name, placeholder="The name of the project.", show_label=True, class="form-control", required="required", autofocus="autofocus") }}
+                    {{ form_helpers.render_field(form.short_name, placeholder="A shortcut for accessing the project via the web.", show_label=True, class="form-control", required="required") }}
+                    {{ form_helpers.render_field(form.long_description, class="form-control", rows="13", label_text="Long description", show_label=True, placeholder="Long description (use Markdown)!", required="required") }}
                     <div class="pull-right" role="group">
                         <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">Cancel</a>
                         <input type="submit" value="Create" class="btn btn-success" />

@@ -1,7 +1,7 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 {% set active_link = "dashboard" %}
 
 {% block content %}
@@ -18,8 +18,8 @@
             <form id="task_priority" class="form-horizontal" method="post" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
                 {{ form.hidden_tag() }}
                 <fieldset>
-                    {{ render_field(form.task_ids, class_="form-control", placeholder="Comma separated task IDs (e.g. 3, 532, 100)", required="required", autofocus="autofocus")}}
-                    {{ render_field(form.priority_0, class_="form-control", placeholder="Priority between 0.0 and 1.0", required="required", type="number", step="any")}}
+                    {{ form_helpers.render_field(form.task_ids, class_="form-control", placeholder="Comma separated task IDs (e.g. 3, 532, 100)", required="required", autofocus="autofocus")}}
+                    {{ form_helpers.render_field(form.priority_0, class_="form-control", placeholder="Priority between 0.0 and 1.0", required="required", type="number", step="any")}}
                     <div class="pull-right" role="group">
                         <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
                         <input type="submit" value="Set Priority" class="btn btn-danger" />

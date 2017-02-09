@@ -4,7 +4,7 @@
 {% set active_link = "dashboard" %}
 
 {% block content %}
-{% from "_formhelpers.html" import render_field %}
+{% import "_helpers/_form.html" as form_helpers %}
 
 
 <div class="container container-main">
@@ -18,7 +18,7 @@
             <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
                 <fieldset>
                     {{ form.hidden_tag() }}
-                    {{ render_field(form.csv_url, class_="input-block-level form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}
+                    {{ form_helpers.render_field(form.csv_url, class_="input-block-level form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}
                     <div class="pull-right" role="group">
                         <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
                         <input id="import" type="submit" value="Import" class="btn btn-danger" />

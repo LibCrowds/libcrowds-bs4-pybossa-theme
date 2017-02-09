@@ -1,5 +1,5 @@
-function pybossaLogError(err, showReportDialog=true){
-    pybossaNotify('Error: ' + err.message, 'error');
+function logError(err, showReportDialog=true){
+    notify('Error: ' + err.message, 'error');
     if (typeof Raven !== 'undefined' && Raven.isSetup()) {
         event_id = Raven.captureException(err);
         if (showReportDialog) {

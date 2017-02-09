@@ -8,6 +8,7 @@ function notify(msg, type) {
         text: msg,
         type: type || 'info',
         hide : false,
+        width: '400px',
         buttons: {
             closer: true,
             sticker: false

@@ -67,7 +67,6 @@ body {
 
 .card {
     font-size: $font-size-sm;
-    font-weight: 300;
     
     .card-label {
         font-size: $font-size-xs;
@@ -75,7 +74,8 @@ body {
         font-weight: 400;
     }
     
-    .btn {
+    .btn,
+    .form-control {
         font-size: $font-size-sm;
         font-weight: 300;
     }

@@ -1,4 +1,4 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/presenter.html" %}
 {% set active_page = "projects" %}
 {% set jstop = True %}
 
@@ -23,9 +23,8 @@
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 
-
-{% if not invite_new_volunteers %}
-<div class="d-flex flex-row align-items-center">
+{% if invite_new_volunteers %}
+<div class="text-center mt-5">
     <p class="lead">
         Great, you've contributed to all the tasks for this project.
         But this project still needs more volunteers, so please spread the word!

@@ -1,7 +1,7 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
 {% set active_link = "update" %}
-{% import "projects/_helpers.html" as helper %}
+{% import "_helpers/_project.html" as project_helpers %}
 {% import "_formhelpers.html" as form_helper %}
 {% set active_link = "dashboard" %}
 
@@ -51,7 +51,7 @@
                 </fieldset>
             </form>
 
-            {{ helper.render_loading("Loading, please wait...") }}
+            {{ project_helpers.render_loading("Loading, please wait...") }}
 
             <!-- Update form for project data-->
             <form class="visible-form" method="post" action="{{ url_for('project.update', short_name = project.short_name) }}" enctype="multipart/form-data">
@@ -97,5 +97,4 @@ $(function() {
     });
 });
 </script>
-{{ helper.broken_image() }}
 {% endblock %}

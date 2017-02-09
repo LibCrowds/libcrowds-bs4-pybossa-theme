@@ -1,11 +1,11 @@
 {% extends "_layouts/splash.html" %}
-{% import "projects/_helpers.html" as helper %}
+{% import "_helpers/_project.html" as project_helpers %}
 {% import "account/_helpers.html" as account_helper %}
 
 {% block content %}
 <div id="crowd-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0 d-flex align-items-center">
     <div class="container text-white text-center">
-        <h1 class="mt-4 pb-2">Crowdsourcing projects<br>from the British Library</h1>
+        <h1 class="pb-2">Crowdsourcing projects<br>from the British Library</h1>
         <div data-anchor="#featured-projects" class="btn btn-circle btn-anchor hidden-sm-down mx-auto mt-3">
             <a>
                 <div class="my-3"><span class="fa fa-angle-double-down fa-4x"></span></div>
@@ -58,7 +58,7 @@
         <div class="row mt-4">
             <div class="col-lg-12">
                 {% if categories_projects['featured'] %}
-                {{ helper.render_project_deck(categories_projects['featured']) }}
+                {{ project_helpers.render_project_deck(categories_projects['featured']) }}
                 {% else %}
                 <p class="text-center">
                     No projects are currently being featured, but we still need you help!
@@ -160,5 +160,5 @@
 </section>
 {% endif %}
 
-{{ helper.broken_image() }}
+{{ project_helpers.broken_image() }}
 {% endblock %}

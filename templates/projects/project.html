@@ -1,107 +1,118 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/splash.html" %}
 {% set active_page = "projects" %}
-{% set navbar_class = "navbar-toggleable-md navbar-inverse" %}
-{% import "projects/_helpers.html" as helper %}
+{% import "_helpers/_project.html" as project_helpers %}
 {% set description = project.description %}
 
 {% block content %}
-{% if project %}
 
-{% if project.info['splash'] %}
-<div class="jumbotron jumbotron-fluid text-center" style="background-image: url('{{ project.info['splash'] }}');">
-{% else %}
-<div class="my-3">
-{% endif %}
-
-    <div class="vcenter hcenter position-relative" style="height:100%;">
-        <div class="container text-center padding-top-sm">
-            <h1>{{ helper.render_project_title(project) }}</h1>
-            <h2>{{ overall_progress | round | int }}% complete</h2>
-
-            {% if current_user.is_authenticated and (current_user.id == project.owner_id or current_user.admin) %}
-                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-default">Dashboard</a>
-            {% endif %}
-
-            <!-- Contribute button -->
-            {% if project.info['splash'] %}
-            <div class="col-xs-12">
-                <a href="{{ url_for('project.presenter', short_name=project.short_name)}}"
-                   data-progress="{{ overall_progress | round | int }}"
-                   class="btn btn-circle btn-circle-large btn-circle-progress {% if overall_progress < 100 %}glowing-link{% endif %}">
-                    <div class="arc arc-q1"></div>
-                    <div class="arc arc-q2"></div>
-                    <div class="arc arc-q3"></div>
-                    <div class="arc arc-q4"></div>
-                    <p>Contribute<br>Now</p>
-                </a>
+<div class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0 d-flex align-items-center justify-content-center"
+     style="background-image: url('{{ project.info['splash'] }}');">
+    <div class="container text-white text-center">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h2 class="font-weight-bold">{{ project.description }}</h3>
+                <div class="btn btn-circle mx-auto hidden-md-down mt-4">
+                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}">
+                        <div class="my-3"><span class="fa fa-play fa-4x ml-2"></span></div>
+                        <div class="my-4">Get Started</div>
+                    </a>
+                </div>
+                <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-outline-white hidden-lg-up mt-2">Get Started</a>
             </div>
-            {% endif %}
         </div>
     </div>
 </div>
 
-{% if overall_progress < 100 %}
-<section class="pattern-white-wall box-shadow-white-top">
-    <p class="attribution">{{ project.info['splash_attribution']|safe }}</p>
-
-    <div class="container container-padded">
-        <div class="col-xs-10 col-xs-offset-1">
-            {% if project.info.get('tutorial_video') %}
-            <div class="row text-center container-padded">
-                {{ project.info['tutorial_video']|safe }}
-            </div>
-            {% endif %}
-            {% if project.long_description %}
-                {{ project.long_description | e | markdown }}
-            {% endif %}
+<section>
+    <div class="container mb-5">
+        <div class="row text-center">
+            <p class="ml-auto"><small>{{ project.info['splash_attribution'] | safe }}</small></p>
         </div>
-    </div>
-</section>
-{% endif %}
-
-
-<section class="inset-shadow-top">
-    <div class="container container-padded">
+        <div class="row text-center mt-5">
+            <div class="col-sm-10 offset-sm-1">
+                <h2 class="font-family-serif display-4 mb-0">
+                    {{ project.name }}
+                </h2>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-xs-12 text-center">
-                {% if overall_progress < 100 %}
-                <h2>Get involved</h2>
-                <p>Your contributions will have a direct impact on enabling future reasearch at the British Library.<p>
-                <div class="row text-center padding-top-xs">
-                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> Contribute now</a>
+            <div class="col-sm-8 offset-sm-2">
+                <hr class="my-4">
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-10 offset-sm-1 text-center d-flex justify-content-around align-items-center">
+                <div class="hidden-md-down mb-5">
+                    <span class="fa fa-star-o fa-3x pb-1"></span>
+                    <p class="mb-0">Contributions</p>
+                    <hr class="bw-2 my-1 w-75">
+                    <p class="lead mb-2">{{ n_task_runs }}</p>
                 </div>
-                {% else %}
-                <h2>Many thanks to all those that helped us complete this project!</h2>
-                <p>Click below to find an active project<p>
-                <div class="row text-center padding-top-xs">
-                    <a href="{{ url_for('project.index')}}" class="btn btn-danger">View all projects</a>
+                <div class="hidden-md-down mb-5">
+                    <span class="fa fa-tasks fa-3x pb-1"></span>
+                    <p class="mb-0">Completed Tasks</p>
+                    <hr class="bw-2 my-1 w-75">
+                    <p class="lead mb-2">{{ n_completed_tasks }}</p>
                 </div>
-                {% endif %}
+                <div>
+                    <div data-progress="{{ overall_progress | round | int }}" class="progress-circle mb-2">
+                        <p>{{ overall_progress | round | int }}%</p>
+                    </div>
+                    <a href="{{ url_for('project.show_stats', short_name=project.short_name) }}" class="btn btn-secondary mt-4" role="button">View Statistics</a>
+                </div>
+                <div class="hidden-md-down mb-5">
+                    <span class="fa fa-clock-o fa-3x pb-1"></span>
+                    <p class="mb-0">Last Activity</p>
+                    <hr class="bw-2 my-1 w-75">
+                    <p class="lead mb-2">{{ last_activity | pretty_date }}</p>
+                </div>
+                <div class="hidden-md-down mb-5">
+                    <span class="fa fa-users fa-3x pb-1"></span>
+                    <p class="mb-0">Volunteers</p>
+                    <hr class="bw-2 my-1 w-75">
+                    <p class="lead mb-2">{{ n_volunteers }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                <hr class="padding-bottom-sm">
-                {{ helper.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "Come and give us a hand with {{ project.name }}!") }}
+<section class="bg-faded">
+    <div class="container">
+        <div class="row pt-5 text-center">
+            <div class="col-sm-10 offset-sm-1">
+                <h3 class="text-uppercase font-weight-bold display-4">About the project</h3>
+                <hr class="bw-3 mx-5 mt-4">
+            </div>
+        </div>
+        {% if project.info.get('tutorial_video') %}
+        <div class="row mt-3 text-center">
+            <div class="col-sm-10 offset-sm-1">
+                {{ project.info['tutorial_video'] | safe }}
+            </div>
+        </div>
+        {% endif %}
+        <div class="row pt-3 pb-5">
+            <div class="col-sm-10 offset-sm-1">
+                {{ project.long_description | e | markdown }}
+            </div>
+        </div>
+    </div>
+</section>
 
-                {% if 'pybossa_discourse' in plugins %}
-                <div class="col-xs-12 col-md-6 col-md-offset-3 padding-top-md">
-                    {{ discourse.comments() }}
-                </div>
-                {% endif %}
+
+<section>
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <h3 class="text-uppercase display-4">Get Involved</h3>
+                <p class="lead">Your contributions will have a direct impact on enabling future reasearch at the British Library.<p>
+                <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" class="btn btn-outline-primary btn-lg my-3" role="button">Contribute Now</a>
+                <hr class="bw-3 w-50 pb-3">
+                {{ project_helpers.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "{{ project.description }}") }}
             </div>
         </div>
 </section>
 
-{% if 'pybossa_discourse' in plugins and project.published %}
-    <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
-        <hr class="padding-bottom-xs">
-        {{ discourse.comments() }}
-    </div>
-{% endif %}
-
-<script src="{{url_for('static', filename='js/btn-progress.js')}}" type="text/javascript"></script>
-<link href="{{url_for('static', filename='css/btn-progress.css')}}" rel="stylesheet" type="text/css" />
-{% else %}
-    {{ helper.render_non_existant_project() }}
-{% endif %}
-
-{{ helper.broken_image() }}
+{{ project_helpers.broken_image() }}
 {% endblock %}

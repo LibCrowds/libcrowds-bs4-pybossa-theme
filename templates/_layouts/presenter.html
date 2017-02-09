@@ -1,0 +1,19 @@
+{% extends "_layouts/base.html" %}
+
+{% block layout %}
+
+{% set staff_or_admin = staff_or_admin %}
+{% set active_page = active_page %}
+{% set navbar_class = "navbar fixed-top navbar-toggleable-md navbar-light" %}
+{% set footer_class = "footer footer-slim bg-white" %}
+
+{% include "_includes/_navbar.html" %}
+<div class="vw-100 vh-100">
+    <main class="mt-5">
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% include "_includes/_footer.html" %}
+</div>
+
+{% endblock %}

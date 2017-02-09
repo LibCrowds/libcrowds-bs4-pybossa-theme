@@ -53,6 +53,7 @@
 
 @include media-breakpoint-down(md) {
     .navbar-invertable {
+        position: relative;
         background: $white;
         border-bottom: 1px solid $gray-lighter;
     }

@@ -1,5 +1,3 @@
-let forms;
-
 /**
  * Make a slug from a long name.
  */
@@ -19,5 +17,3 @@ if (location.pathname.split('/')[1] === 'account') {
         $('#name').val(makeSlug($(this).val()));
     });
 }
-
-export default forms;

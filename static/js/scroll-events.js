@@ -1,5 +1,3 @@
-let scrollEvents;
-
 /**
  * Handle scroll and resize events.
  */
@@ -42,5 +40,3 @@ function styleNavigation() {
     $('.navbar').removeClass('navbar-inverse');
     $('.navbar').addClass('navbar-light');
 }
-
-export default scrollEvents;

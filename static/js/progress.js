@@ -1,5 +1,3 @@
-let progress;
-
 /**
  * Initialise progress circles.
  */
@@ -11,5 +9,3 @@ $('.progress-circle').each(function() {
         size: 150
     });
 });
-
-export default progress;

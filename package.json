@@ -23,11 +23,6 @@
     "rethinkdb": "^2.3.3"
   },
   "devDependencies": {
-    "webpack": "^2.2.0",
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
-    "imports-loader": "^0.7.0",
-    "babel-preset-es2015": "^6.22.0",
     "jshint": "^2.9.4"
   },
   "jshintConfig": {
@@ -37,8 +32,7 @@
   "scripts": {
     "copy:font-awesome": "cp -R node_modules/font-awesome/fonts ./static/fonts/font-awesome/",
     "copy:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./static/img/openseadragon/",
-    "copy": "npm run copy:font-awesome && npm run copy:openseadragon",
-    "build": "webpack --config webpack.config.js && npm run copy",
+    "postinstall": "npm run copy:font-awesome && npm run copy:openseadragon",
     "lint": "jshint ./static/js/*.js"
   }
 }

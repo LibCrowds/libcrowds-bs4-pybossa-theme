@@ -1,5 +1,3 @@
-let pybossaAnalyst;
-
 /**
  * Load a count of unverified results from pybossa-analyst.
  */
@@ -12,5 +10,3 @@ $('.n-unverified-results').each(function() {
          $('.n-unverified-results').html(results.length === 0 ? '99+' : results.length);
     });
 });
-
-export default pybossaAnalyst;

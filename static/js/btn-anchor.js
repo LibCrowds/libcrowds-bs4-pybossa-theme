@@ -1,5 +1,3 @@
-let btnAnchor;
-
 /**
  * On click scroll to the element with the ID given in data-anchor.
  */
@@ -10,5 +8,3 @@ $('.btn-anchor').on('click', function(evt) {
     }, 1000);
     evt.preventDefault();
 });
-
-export default btnAnchor;

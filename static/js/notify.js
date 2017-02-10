@@ -1,7 +1,7 @@
 /*
  * Display a notification.
  */
-const notify = function notify(msg, type) {
+function notify(msg, type) {
 
     const opts = {
         title: type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Info',
@@ -34,5 +34,3 @@ const notify = function notify(msg, type) {
 
     return new PNotify(opts);
 };
-
-export default notify;

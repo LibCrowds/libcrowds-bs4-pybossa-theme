@@ -33,6 +33,6 @@
     "copy:font-awesome": "cp -R node_modules/font-awesome/fonts ./static/fonts/font-awesome/",
     "copy:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./static/img/openseadragon/",
     "postinstall": "npm run copy:font-awesome && npm run copy:openseadragon",
-    "lint": "jshint ./static/js/*.js"
+    "lint": "jshint ./static/js/*.js --exclude ./static/js/pybossa.js/"
   }
 }

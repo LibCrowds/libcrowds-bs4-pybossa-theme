@@ -33,4 +33,4 @@ function notify(msg, type) {
     }
 
     return new PNotify(opts);
-};
+}

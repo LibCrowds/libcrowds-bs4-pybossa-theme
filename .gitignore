@@ -7,3 +7,4 @@ static/img/openseadragon/*
 static/img/openseadragonselection/*
 node_modules/*
 .scss-lint.yml
+*.log

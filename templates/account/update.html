@@ -114,4 +114,11 @@
     </div>
 <script src="{{url_for('static', filename='js/image_crop.js')}}" type="text/javascript"></script>
 {{ project_helper.broken_image() }}
+
+<script>
+    /** Click the avatar button when edit-profile-image clicked. */
+    $('.edit-profile-image').on("click", function() {
+        $('#avatar').click();
+    });
+</script>
 {% endblock %}

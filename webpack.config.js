@@ -1,27 +1,34 @@
 var webpack = require('webpack');
 
 module.exports = {
-    entry: "./static/js/main.js",
+    entry: {
+        main: "./static/js/main.js",
+        editor: "./static/js/editor.js"
+    },
     output: {
-        path: "./assets/js/gen",
-        filename: "bundle.min.js"
+        path: "./static/js/gen",
+        filename: "[name].min.js"
     },
     module: {
         loaders: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015']
-                }
+                loader: 'babel-loader'
+            },
+            {
+                test: /pnotify\.js/,
+                loader: 'imports-loader?global=>window,this=>window'
             }
         ]
     },
     plugins: [
         new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
+            jQuery: 'jquery',
+            $: 'jquery',
+            jquery: 'jquery',
+            "window.jQuery": "jquery",
+            PNotify: 'pnotify'
         })
     ]
 };

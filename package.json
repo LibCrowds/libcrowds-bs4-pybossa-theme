@@ -17,6 +17,7 @@
     "select2": "^4.0.3",
     "font-awesome": "^4.7.0",
     "openseadragon": "^2.2.1",
+    "openseadragonselection": "picturae/openseadragonselection",
     "codemirror": "^5.23.0",
     "jquery-circle-progress": "^1.2.1",
     "pnotify": "^3.0.0",
@@ -32,7 +33,8 @@
   "scripts": {
     "copy:font-awesome": "cp -R node_modules/font-awesome/fonts ./static/fonts/font-awesome/",
     "copy:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./static/img/openseadragon/",
-    "postinstall": "npm run copy:font-awesome && npm run copy:openseadragon",
+    "copy:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./static/img/openseadragonselection/",
+    "postinstall": "npm run copy:font-awesome && npm run copy:openseadragon && npm run copy:openseadragonselection",
     "lint": "jshint ./static/js/*.js --exclude ./static/js/pybossa.js/"
   }
 }

@@ -7,8 +7,9 @@ function notify(msg, type) {
         title: type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Info',
         text: msg,
         type: type || 'info',
-        hide : false,
+        hide : true,
         width: '400px',
+        delay: 2500,
         buttons: {
             closer: true,
             sticker: false
@@ -17,18 +18,18 @@ function notify(msg, type) {
 
     switch (type) {
         case "error":
+        case "danger":
+            opts.icon = 'fa fa-exclamation-circle';
+            opts.hide = false;
+            break;
         case "warning":
             opts.icon = 'fa fa-exclamation-circle';
             break;
         case "success":
             opts.icon = 'fa fa-thumbs-up';
-            opts.delay = 2500;
-            opts.hide = true;
             break;
         default:
             opts.icon = 'fa fa-info-circle';
-            opts.delay = 2500;
-            opts.hide = true;
             break;
     }
 

@@ -1,13 +1,13 @@
 <footer id="main-footer" class="{{ footer_class }}">
     <div class="container">
         <div class="row text-center">
-            {% if 'footer-slim' not in footer_class %}
+            {%- if 'footer-slim' not in footer_class %}
             <div class="col-sm-4">
                 <a href="http://labs.bl.uk/" target="_blank" class="hidden-md-down">
                     <img class="img-fluid py-3" src="{{ url_for('static', filename='img/bl-logo.png' )}}" alt="BL Labs logo">
                 </a>
             </div>
-            {% endif %}
+            {%- endif %}
             <div class="{% if 'footer-slim' in footer_class %}col-sm-12{% else %}col-sm-4{% endif %} py-2 d-flex justify-content-center align-items-center">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
@@ -27,13 +27,13 @@
                     </li>
                 </ul>
             </div>
-            {% if 'footer-slim' not in footer_class %}
+            {%- if 'footer-slim' not in footer_class %}
             <div class="col-sm-4">
                 <a href="http://pybossa.com/" target="_blank" class="hidden-md-down">
                     <img class="img-fluid py-3" src="{{ url_for('static', filename='img/pybossa.png' )}}" alt="PYBOSSA logo">
                 </a>
             </div>
-            {% endif %}
+            {%- endif %}
         </div>
     </div>
 </footer>

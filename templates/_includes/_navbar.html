@@ -3,10 +3,10 @@
             aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    {% if not 'navbar-dashboard' in navbar_class %}
+    {%- if not 'navbar-dashboard' in navbar_class %}
     <a class="navbar-brand py-0 mx-3" href="{{ url_for('home.home') }}">{{ brand }}</a>
-    {% endif %}
-    
+    {% endif -%}
+
     <div class="collapse navbar-collapse align-items-center" id="main-navbar">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item mx-3 {% if active_page == 'about' %}active{% endif %}">
@@ -15,71 +15,70 @@
             <li class="nav-item mx-3 {% if active_page == 'projects' %}active{% endif %}">
                 <a class="nav-link pt-2" href="{{ url_for('project.index') }}">Projects</a>
             </li>
-    
+
             <!-- See https://github.com/LibCrowds/libcrowds-statistics -->
             <li class="nav-item mx-3 {% if active_page == 'statistics' %}active{% endif %}">
-                {% if "libcrowds_statistics" in plugins %}
+                {%- if "libcrowds_statistics" in plugins %}
                 <a class="nav-link pt-2" href="{{ url_for('statistics.index')}}">Statistics</a>
-                {% else %}
+                {%- else %}
                 <a class="nav-link pt-2" href="{{ url_for('stats.index')}}">Statistics</a>
-                {% endif %}
+                {%- endif %}
             </li>
-    
+
             <!-- See https://github.com/alexandermendes/pybossa-discourse -->
             <li class="nav-item mx-3 {% if active_page == 'community' %}active{% endif %}">
-                {% if 'pybossa_discourse' in plugins %}
+                {%- if 'pybossa_discourse' in plugins %}
                     {% set n = discourse.notifications() %}
                     <a class="nav-link pt-2" href="{{ url_for('discourse.index')}}">Community
                         {% if n %}<span id="notifications" class="badge badge-info">{{ n }}</span>{% endif %}
                     </a>
-                {% else %}
+                {%- else %}
                 <a class="nav-link pt-2" href="{{ url_for('account.index')}}">Community</a>
-                {% endif %}
+                {%- endif %}
             </li>
-    
+
             <!-- See https://github.com/LibCrowds/libcrowds-data -->
-            {% if "libcrowds_data" in plugins %}
+            {%- if "libcrowds_data" in plugins -%}
             <li class="nav-item mx-3 {% if active_page == 'data' %}active{% endif %}">
                 <a class="nav-link pt-2" href="{{ url_for('data.index')}}">Data</a>
             </li>
-            {% endif %}
+            {%- endif %}
         </ul>
-        
         <ul class="navbar-nav mx-3">
-            {% if current_user.is_authenticated() %}
+            {%- if current_user.is_authenticated() %}
             <li class="nav-item dropdown">
-                <a id="main-navbar-dropdown-link" class="nav-link pt-2 dropdown-toggle" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                    {{ current_user.name | truncate(10, true) }} <span class="mr-1 fa fa-caret-down"></span>
+                <a id="main-navbar-dropdown-link" class="nav-link pt-2 dropdown-toggle" href="#" data-toggle="dropdown" class="dropdown-toggle"
+                   aria-haspopup="true" aria-expanded="false">{{ current_user.name | truncate(10, true) }} <span class="mr-1 fa fa-caret-down"></span>
                 </a>
-                
                 <div class="dropdown-menu" aria-labelledby="main-navbar-dropdown-link">
                     <a class="dropdown-item" href="{{ url_for('account.profile', name=current_user.name) }}"><i class="fa fa-user"></i> Profile</a>
                     <a class="dropdown-item" href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="fa fa-cog"></i> Settings</a>
-            
-                    {% if staff_or_admin %}
+
+                    {%- if staff_or_admin %}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ url_for('project.new') }}"><span class="fa fa-plus"></span> New Project</a>
-                    <a class="dropdown-item" href="{{ url_for('account.projects', name=current_user.name) }}"><span class="fa fa-folder-open"></span> Open Project</a>
-                    {% endif %}
-                    {% if current_user.admin %}
+                    <a class="dropdown-item" href="{{ url_for('account.projects', name=current_user.name) }}">
+                        <span class="fa fa-folder-open"></span> Open Project
+                    </a>
+                    {%- endif %}
+                    {%- if current_user.admin -%}
                     <a class="dropdown-item" href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a>
-                    {% endif %}
+                    {%- endif %}
                     <div class="dropdown-divider"></div>
-            
+
                     <!-- See https://github.com/alexandermendes/pybossa-discourse -->
-                    {% if 'pybossa_discourse' in plugins %}
+                    {%- if 'pybossa_discourse' in plugins %}
                     <a class="dropdown-item" href="{{ url_for('discourse.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
                     {% else %}
                     <a class="dropdown-item" href="{{ url_for('account.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
-                    {% endif %}
+                    {%- endif %}
                 </div>
             </li>
-    
-            {% else %}
+            {%- else %}
             <li class="nav-item">
                 <a class="nav-link pt-2" href="{{ url_for('account.signin') }}">Sign in</a>
             </li>
-            {% endif %}
+            {%- endif %}
         </ul>
     </div>
 </nav>

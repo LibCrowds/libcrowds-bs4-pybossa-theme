@@ -2,7 +2,7 @@
 {% set active_page = "projects" %}
 {% set active_link = "update" %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% import "_formhelpers.html" as form_helper %}
+{% import "_helpers/_form.html" as form_helpers %}
 {% set active_link = "dashboard" %}
 
 {% block content %}
@@ -63,9 +63,9 @@
                 {{ form_helpers.render_field(form.description, class="form-control", placeholder="Short description", show_label=True, required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
                 {{ form_helpers.render_field(form.long_description, rows="13", placeholder="Explain the project (use Markdown)!", class="form-control", required="required", show_label=True) }}
                 {{ form_helpers.render_field(form.category_id, class="form-control", show_label=True) }}
-                {{ form_helper.render_toggle(form.allow_anonymous_contributors, label="Allow anonymous contributors") }}
+                {{ form_helpers.render_toggle(form.allow_anonymous_contributors, label="Allow anonymous contributors") }}
 
-                {{ form_helper.render_toggle(form.protect, label="Password project") }}
+                {{ form_helpers.render_toggle(form.protect, label="Password project") }}
                 <div id='password'>{{ form_helpers.render_field(form.password, class="form-control", show_label=True) }}</div>
                 {{ form_helpers.render_field(form.webhook, class="form-control", show_label=True) }}
 

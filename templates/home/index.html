@@ -126,7 +126,7 @@
                 {% for user in top_users %}
                 <li class="text-center d-inline-block mx-1">
                     <a href="{{ url_for('account.profile', name=user.name) }}" data-content="<strong>Joined:</strong> {{ user.created[8:10] }}-{{ user.created[5:7] }}-{{ user.created[0:4] }}"
-                        class="text-white" data-toggle="popover" data-html="true" data-container="#code-jumbotron" data-placement="top" data-trigger="hover" data-title="<strong>{{ user.name }}</strong>">
+                        data-toggle="popover" data-html="true" data-placement="top" data-trigger="hover" data-title="<strong>{{ user.name }}</strong>">
                         <div class="my-1">
                             {% set width = 90 %}
                             {% if loop.first %}

@@ -38,6 +38,13 @@
     
     @include media-breakpoint-up(lg) {
         display: flex;
+        
+        & + .dashboard {
+            z-index: 2;
+            max-height: 100%;
+            float: right;
+            width: calc(100% - 260px);
+        }
     }
 }
 

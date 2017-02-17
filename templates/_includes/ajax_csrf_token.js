@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    var csrf_token = "{{ csrf_token() }}";
+    const csrf_token = "{{ csrf_token() }}";
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
             if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {

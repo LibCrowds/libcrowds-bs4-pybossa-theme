@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
         {% endassets %}
 
-        {% include "_includes/_ga.html" ignore missing %}
+        {% include "_includes/_ga.js" ignore missing %}
         {% include "_includes/_cookies_warning.html" %}
     </head>
 
@@ -36,7 +36,6 @@
         {% block layout %}
         {% endblock %}
 
-        {%- include "_includes/_sentry.html" %}
         {% if not jstop %}
         {% assets filters="jsmin", output="js/gen/default.min.js",
                   "../node_modules/jquery/dist/jquery.js",
@@ -59,7 +58,8 @@
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
         {% endif %}
-        {% include "_includes/_flash_messages.html" %}
-        {% include "_includes/ajax_csrf_token.html" %}
+        {%- include "_includes/_sentry.js" %}
+        {% include "_includes/_flash_messages.js" %}
+        {% include "_includes/ajax_csrf_token.js" %}
     </body>
 </html>

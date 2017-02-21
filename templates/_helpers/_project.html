@@ -75,28 +75,6 @@
 {% endfor %}
 {% endmacro %}
 
-{% macro knob(val) %}
-<script src="{{url_for('static', filename='js/vendor/jquery.knob.js')}}"></script>
-<script>
-    $(function() {
-        $(".dial").knob({
-            'min': 0,
-            'max': 100,
-            'skin': 'tron',
-            'fgColor': '#8bbf36',
-            'inputColor': '#8bbf36',
-            'readOnly': true,
-            'thickness': .2,
-            'width': 40,
-            'height': 40,
-            'displayInput': false,
-        });
-        $(".dial").css('font-size', '26px');
-        $(".dial").css('font-weight', 'bold');
-    });
-</script>
-{% endmacro %}
-
 {% macro render_title(project, title, subtitle=None, link=None, link_text=None) %}
 <div class="d-flex flex-row justify-content-between align-items-center">
     <div>
@@ -173,13 +151,4 @@
     {% else %}
         <img class="{{ class }}" style="{{ style }}" src="http://placekitten.com/400/400?image=1" alt="{{ project.name }} thumbnail">
     {% endif %}
-{% endmacro %}
-
-{% macro render_non_existant_project() %}
-<div class="container container-main">
-    <h1>Sorry, this project does not exist!</h1>
-    <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
-        <i class="fa fa-home"></i> Go Home
-    </a>
-</div>
 {% endmacro %}

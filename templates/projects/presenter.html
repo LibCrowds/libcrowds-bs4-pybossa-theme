@@ -4,12 +4,13 @@
 
 {% block content %}
 
-<!-- TODO: Replace this? 
+<!-- TODO: Replace this?
 <script type="text/javascript" src="{{url_for('static', filename='vendor/specialedit/specialedit.js')}}"></script>
 
 -->
 
 {% assets filters="jsmin", output="js/gen/presenter.min.js",
+    "../node_modules/pace-progress/pace.js",
     "../node_modules/jquery/dist/jquery.js",
     "../node_modules/tether/dist/js/tether.js",
     "../node_modules/bootstrap/dist/js/bootstrap.js",

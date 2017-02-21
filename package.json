@@ -22,7 +22,8 @@
     "jquery-circle-progress": "^1.2.1",
     "pnotify": "^3.0.0",
     "rethinkdb": "^2.3.3",
-    "cropper": "^2.3.4"
+    "cropper": "^2.3.4",
+    "pace-progress": "^1.0.2"
   },
   "devDependencies": {
     "jshint": "^2.9.4"

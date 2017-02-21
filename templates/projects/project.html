@@ -1,6 +1,7 @@
 {% extends "_layouts/splash.html" %}
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_social.html" as social_helpers %}
 {% set description = project.description %}
 
 {% block content %}
@@ -109,7 +110,7 @@
                 <p class="lead">Your contributions will have a direct impact on enabling future reasearch at the British Library.<p>
                 <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" class="btn btn-outline-primary btn-lg my-3" role="button">Contribute Now</a>
                 <hr class="bw-3 w-50 pb-3">
-                {{ project_helpers.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "{{ project.description }}") }}
+                {{ social_helpers.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "{{ project.description }}") }}
             </div>
         </div>
 </section>

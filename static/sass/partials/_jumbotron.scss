@@ -5,7 +5,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    
+    background-position: center;
+
     @include media-breakpoint-up(md) {
         height: 100vh;
     }

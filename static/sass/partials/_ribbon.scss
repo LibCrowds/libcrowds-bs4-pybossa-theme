@@ -4,13 +4,15 @@
     width: 12rem;
     height: 12rem;
     background: $gray-lighter;
-    
+    position: absolute;
+    top: -1px;
+
     .fa {
         font-size: 7rem;
         margin-top: 4rem;
         color: darken($body-bg, 3%);
     }
-    
+
     &:after {
         content: "";
         display: block;

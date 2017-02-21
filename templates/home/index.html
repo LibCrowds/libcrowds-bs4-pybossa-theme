@@ -1,5 +1,6 @@
 {% extends "_layouts/splash.html" %}
 {% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_social.html" as social_helpers %}
 {% import "account/_helpers.html" as account_helper %}
 
 {% block content %}
@@ -16,7 +17,7 @@
 </div>
 
 <section class="my-5 text-center">
-    <div class="container py-4">
+    <div class="container py-3">
         <div class="row">
             <div class="col-sm-10 offset-sm-1">
                 <h2 class="font-family-serif display-4 mb-0">
@@ -31,7 +32,7 @@
         </div>
         <div class="row">
             <div class="col-sm-10 offset-sm-1">
-                <p class="lead">
+                <p class="lead my-2">
                     {{brand}}, in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>, is a platform for
                     hosting experimental crowdsourcing projects aimed at improving access to the diverse collections held at the
                     British Library.
@@ -72,14 +73,14 @@
     </div>
 </section>
 
-<section id="featured-projects" class="bg-faded text-gray-dark text-center text-lg-left">
+<section id="featured-projects" class="pattern-white-wall text-gray-dark text-center text-lg-left">
     <div class="container">
         <div class="row">
             <div class="col-lg-5 offset-lg-1 pt-5">
                 <h3 class="text-uppercase font-weight-bold display-4">Featured Projects</h3>
                 <hr class="bw-3 mr-lg-5">
                 <p class="text-uppercase mr-lg-5">
-                    We've published {{ (categories_projects | length) - 1 }} different types of project so far, check out some of our favourites below.
+                    We've published {{ (categories_projects | length) - 1 }} different types of project so far, here are some of our current favourites.
                 </p>
             </div>
             <div class="col-lg-3 offset-lg-3 hidden-md-down">
@@ -98,7 +99,7 @@
             </div>
         </div>
         <div class="text-center">
-            <a class="btn btn-primary my-5 bt-white" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
+            <a class="btn btn-primary btn-lg my-5" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
         </div>
     </div>
 </section>
@@ -181,12 +182,9 @@
                     <div class="black-ul-link">View the leaderboard</div>
                 </a>
             </div>
-            <div class="col-sm-12 col-lg-5 offset-lg-1 pull-lg-6 mt-4">
-                <a href="#" data-anchor="#featured-projects" class="fa-border text-muted btn-anchor">
-                    <span class="fa fa-arrow-circle-up"></span>
-                </a>
-            </div>
         </div>
+        <hr class="mb-5">
+        {{ social_helpers.render_social_media_buttons("www.libcrowds.com", "Have a direct impact on enabling future research conducted at the Library.") }}
     </div>
 </section>
 {% endif %}

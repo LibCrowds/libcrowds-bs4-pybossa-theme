@@ -57,7 +57,6 @@
 {% endmacro %}
 
 {% macro render_project_deck(projects) %}
-{% for project_deck in projects | slice(4) %}
 <div class="project-cards">
     {% for project in projects %}
     <div class="card text-center">
@@ -72,7 +71,6 @@
     </div>
     {% endfor %}
 </div>
-{% endfor %}
 {% endmacro %}
 
 {% macro render_title(project, title, subtitle=None, link=None, link_text=None) %}

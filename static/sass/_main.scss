@@ -60,13 +60,14 @@ $white:                            #FFFFFF;
 $gray:                             #404446;
 $gray-light:                       #888888;
 $black:                            #000000;
+$amethyst:                         #8E44AD;
 
 $brand-primary:                    #D00000;
 $brand-success:                    #398439;
 $brand-info:                       #4190C2;
 $brand-warning:                    #E38D13;
 $brand-danger:                     #D00000;
-$brand-inverse:                    #28282E;
+$brand-inverse:                    #141B24;
 
 $body-color:                       $gray;
 
@@ -113,6 +114,7 @@ $fa-font-path:                     '../../fonts/font-awesome';
     "../../node_modules/pnotify/dist/pnotify",
     "../../node_modules/pnotify/dist/pnotify.buttons",
     "../../node_modules/pnotify/dist/pnotify.brighttheme",
+    "../../node_modules/cropper/src/scss/cropper",
     "partials/base",
     "partials/typography",
     "partials/transitions",
@@ -128,5 +130,6 @@ $fa-font-path:                     '../../fonts/font-awesome';
     "partials/cards",
     "partials/links",
     "partials/ribbon",
-    "partials/progress"
+    "partials/progress",
+    "partials/overlays"
 ;

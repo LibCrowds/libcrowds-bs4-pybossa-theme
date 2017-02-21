@@ -1,44 +1,37 @@
 {% extends "_layouts/default.html" %}
-{% set active_page = "create" %}
-{% set active_link  = "newproject" %}
+{% set active_page = "projects" %}
+{% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
-{% if staff_or_admin %}
-<div class="container container-main">
+
+<div class="container mb-5 pt-4">
     <div class="row">
-        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-            <h1>Create a new project</h1>
+        <div class="col-sm-10 offset-sm-1">
+            <h1 class="mb-1">Create a Project</h1>
             <hr>
-            <form role="form" method="post" action="{{ url_for('project.new') }}" enctype="multipart/form-data">
-                {{ form.hidden_tag() }}
-                <fieldset>
-                    {{ form_helpers.render_field(form.name, placeholder="The name of the project.", show_label=True, class="form-control", required="required", autofocus="autofocus") }}
-                    {{ form_helpers.render_field(form.short_name, placeholder="A shortcut for accessing the project via the web.", show_label=True, class="form-control", required="required") }}
-                    {{ form_helpers.render_field(form.long_description, class="form-control", rows="13", label_text="Long description", show_label=True, placeholder="Long description (use Markdown)!", required="required") }}
-                    <div class="pull-right" role="group">
-                        <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-default">Cancel</a>
-                        <input type="submit" value="Create" class="btn btn-success" />
-                    </div>
-                </fieldset>
-            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 offset-sm-1">
+            <div class="card">
+                {{ card_helpers.render_title('Project Details', 'Enter the name, short name and long description for the project') }}
+                <div class="card-block pt-1">
+                    <form method="post" action="{{ url_for('project.new') }}">
+                        {{ form.hidden_tag() }}
+                        {{ form_helpers.render_field(form.name, placeholder="The name of the project", class="form-control", required="required", autofocus="autofocus") }}
+                        {{ form_helpers.render_field(form.short_name, placeholder="A shortcut for URLs and filenames", class="form-control", required="required") }}
+                        {{ form_helpers.render_field(form.long_description, class="form-control", rows="13", label_text="Long description", placeholder="Long description (use Markdown)!", required="required") }}
+                        <div class="text-right">
+                            <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-secondary">Cancel</a>
+                            <input type="submit" value="Create" class="btn btn-success" />
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-{% else %}
-<div class="container container-main">
-    <div class="col-xs-12">
-        <h1>Unauthorized</h1>
-        <p class="lead">You are not authorized to access the URL requested.</p>
-        <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
-            <i class="fa fa-home"></i> Go Home
-        </a>
-    </div>
-</div>
-{% endif %}
-<script>
-    $("span[rel='tooltip']").tooltip();
-    $("i[rel='tooltip']").tooltip();
-</script>
-<script src="{{url_for('static', filename='js/forms.js')}}" type="text/javascript"></script>
+
 {% endblock %}

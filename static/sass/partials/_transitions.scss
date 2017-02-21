@@ -20,14 +20,14 @@ a {
 
 .navbar {
     transition: background-color 200ms, height 500ms;
-    
+
     .navbar-brand {
         transition: color 200ms;
     }
-    
+
     .nav-link {
         transition: color 200ms;
-        
+
         &:after {
             transition: opacity 200ms, transform 200ms;
         }
@@ -36,12 +36,14 @@ a {
 
 .jumbotron-fade {
     transition: brightness 1.5s, 500ms;
-    
+
     * {
         transition: opacity 1s;
     }
 }
 
-.card-button {
-    transition: border 250ms;
+.card
+
+.toggle-switch {
+    transition: all 0.3s ease-in 0s;
 }

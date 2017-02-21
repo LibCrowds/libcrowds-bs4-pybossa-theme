@@ -38,6 +38,37 @@
                 </p>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+                <hr class="my-4">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 my-3">
+                <span class="fa-stack fa-lg fa-4x text-success">
+                    <span class="fa fa-circle fa-stack-2x"></span>
+                    <span class="fa fa-flag fa-stack-1x fa-inverse"></span>
+                </span>
+                <p id="n-projects" class="display-4 mb-2 global-stat"><span class="fa fa-circle-o-notch fa-spin"></span></p>
+                <p class="lead my-1">Projects</p>
+            </div>
+            <div class="col-md-4 my-3">
+                <span class="fa-stack fa-lg fa-4x text-info">
+                    <span class="fa fa-circle fa-stack-2x"></span>
+                    <span class="fa fa-users fa-stack-1x fa-inverse"></span>
+                </span>
+                <p id="n-volunteers" class="display-4 mb-2 global-stat"><span class="fa fa-circle-o-notch fa-spin"></span></p>
+                <p class="lead my-1">Volunteers</p>
+            </div>
+            <div class="col-md-4 my-3">
+                <span class="fa-stack fa-lg fa-4x text-amethyst">
+                    <span class="fa fa-circle fa-stack-2x"></span>
+                    <span class="fa fa-tasks fa-stack-1x fa-inverse"></span>
+                </span>
+                <p id="n-contributions" class="display-4 mb-2 global-stat"><span class="fa fa-circle-o-notch fa-spin"></span></p>
+                <p class="lead my-1">Contributions</p>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -103,7 +134,7 @@
 
 
 {% if top_users %}
-<section id="top-users" class="bg-faded text-gray-dark text-center">
+<section id="top-users" class="text-gray-dark text-center">
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-5 offset-lg-1 pt-3">
@@ -111,7 +142,7 @@
                 <div>
                     <hr class="bw-3 w-50">
                     <p class="text-uppercase lead">
-                        To date, our top {{ top_users |length }} volunteers have completed an amazing {{ "{:,}".format(top_users | sum(attribute='score')) }} tasks!
+                        To date, our top {{ top_users |length }} volunteers have made an amazing {{ "{:,}".format(top_users | sum(attribute='score')) }} contributions!
                     </p>
                     <a class="btn btn-secondary mt-3" href="{{ url_for('project.index') }}" role="button">Get Involved</a>
                 </div>
@@ -160,5 +191,4 @@
 </section>
 {% endif %}
 
-{{ project_helpers.broken_image() }}
 {% endblock %}

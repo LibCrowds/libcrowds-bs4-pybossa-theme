@@ -1,4 +1,4 @@
-{% macro render_field(field, addon, prepend, tooltip, label_text, form_group_cls, show_label=false) %}
+{% macro render_field(field, addon, prepend, tooltip, label_text, form_group_cls, show_label=True) %}
 <div class="form-group {{ form_group_cls }} {% if field.errors %}has-error{% endif %}">
     {{ render_label(field, tooltip, label_text, show_label) }}
     {% if addon %}
@@ -24,27 +24,27 @@
 
 {% macro render_label(field, tooltip, text, show_label) %}
 {% if tooltip and text %}
-    {% if show_label == 'false' %}
+    {% if not show_label %}
         {{ field.label(class="sr-only", text=text) }}
     {% else %}
         {{ field.label(class="card-label text-muted", text=text) }}
     {% endif %}
     <button type="button" data-toggle="tooltip" title="{{ tooltip | safe }}" class="fa fa-question-circle"></button>
 {% elif tooltip and not text %}
-    {% if show_label == 'false' %}
+    {% if not show_label %}
         {{ field.label(class="sr-only") }}
     {% else %}
         {{ field.label(class="card-label text-muted") }}
     {% endif %}
 <button type="button" data-toggle="tooltip" title="{{ tooltip | safe }}" class="fa fa-question-circle"></button>
 {% elif not tooltip and text %}
-    {% if show_label == 'false' %}
+    {% if not show_label %}
         {{ field.label(class="sr-only", text=text) }}
     {% else %}
         {{ field.label(class="card-label text-muted", text=text) }}
     {% endif %}
 {% else %}
-    {% if show_label == 'false' %}
+    {% if not show_label %}
         {{ field.label(class="sr-only") }}
     {% else %}
         {{ field.label(class="card-label text-muted") }}
@@ -52,18 +52,18 @@
 {% endif %}
 {% endmacro %}
 
-{% macro render_toggle(field, label) %}
-<div class="row padding-top-xs vcenter padding-bottom-sm">
-    <div class="onoffswitch-group">
-        <div class="onoffswitch">
-            {{field(class="onoffswitch-checkbox")}}
-            <label class="onoffswitch-label" for="{{field.name}}">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
+{% macro render_toggle(field, label, toggle_target) %}
+<div class="my-2 d-flex flex-row align-items-center">
+    <div class="toggle-group mr-2">
+        <div class="toggle">
+            {{ field(class="toggle-checkbox") }}
+            <label class="toggle-label" for="{{ field.name }}">
+                <span class="toggle-inner"></span>
+                <span class="toggle-switch"></span>
             </label>
         </div>
     </div>
-    <div class="padding-left-sm onoffswitch-group">
+    <div class="toggle-group">
         <strong>{{ label }}</strong>
     </div>
 </div>

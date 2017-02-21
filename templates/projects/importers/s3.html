@@ -15,7 +15,7 @@
         <table class="table table-hover table-striped mb-4">
             {{ table_helpers.render_head(['Title']) }}
             <tbody id="objects">
-                
+
             </tbody>
         </table>
     </div>
@@ -23,7 +23,7 @@
         <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form.files(style="display: none;") }}
-            {{ form_helpers.render_field(form.bucket, class="form-control", placeholder="The name of the S3 bucket", show_label=True) }}
+            {{ form_helpers.render_field(form.bucket, class="form-control", placeholder="The name of the S3 bucket") }}
             <div class="text-right">
                 <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary">Cancel</a>
                 <a href="#" id="get-s3-bucket" class="btn btn-primary" role="button">Load bucket</a>

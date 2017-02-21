@@ -32,12 +32,12 @@
         .dropdown-menu {
             background-color: rgba($black, 0.5);
         }
-        
+
         .dropdown-item {
             color: $white;
         }
     }
-    
+
     .navbar-collapse:not(.show) .nav-link:after {
         position: absolute;
         left: 0;
@@ -61,21 +61,21 @@
         .navbar-brand,
         .navbar-toggler {
             color: $navbar-light-active-color;
-        
+
             @include hover-focus {
               color: $navbar-light-active-color;
             }
     }
-      
+
         .navbar-nav {
           .nav-link {
             color: $navbar-light-color;
-      
+
             &.disabled {
               color: $navbar-light-disabled-color;
             }
           }
-      
+
           .open > .nav-link,
           .active > .nav-link,
           .nav-link.open,
@@ -83,15 +83,15 @@
             color: $navbar-light-active-color;
           }
         }
-      
+
         .navbar-toggler {
           border-color: $navbar-light-toggler-border;
         }
-      
+
         .navbar-toggler-icon {
           background-image: $navbar-light-toggler-bg;
         }
-      
+
         .navbar-text {
           color: $navbar-light-color;
         }

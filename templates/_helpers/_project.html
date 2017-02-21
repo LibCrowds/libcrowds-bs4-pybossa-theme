@@ -57,30 +57,22 @@
 {% endmacro %}
 
 {% macro render_project_deck(projects) %}
-<div class="card-columns project-cards">
+{% for project_deck in projects | slice(4) %}
+<div class="project-cards">
     {% for project in projects %}
-        <div class="card text-center">
-            <a href="{{ url_for('project.details', short_name=project.short_name) }}">
-            {{ render_project_thumbnail(project, class='card-img img-fluid') }}
-            <div class="card-footer text-white bg-dark-overlay d-flex align-content-between flex-wrap justify-content-center">
-                <h6 class="card-title">{{ project.name | truncate(40, true) }}</h6>
-                <p class="card-text text-white">{{ project.description }}</p>
-                <p class="card-text align-self-end"><small class="text-white">{{ project.overall_progress | round | int }}% complete</small></p>
-            </div>
-            </a>
+    <div class="card text-center">
+        <a href="{{ url_for('project.details', short_name=project.short_name) }}">
+        {{ render_thumbnail(project, class='card-img img-fluid') }}
+        <div class="card-footer text-white bg-dark-overlay d-flex align-content-between flex-wrap justify-content-center">
+            <h6 class="card-title">{{ project.name | truncate(40, true) }}</h6>
+            <p class="card-text text-white">{{ project.description }}</p>
+            <p class="card-text align-self-end"><small class="text-white">{{ project.overall_progress | round | int }}% complete</small></p>
         </div>
+        </a>
+    </div>
     {% endfor %}
 </div>
-{% endmacro %}
-
-{% macro broken_image() %}
-<script>
-function imgError(image, h, w) {
-    image.onerror = "";
-    image.src = "http://placekitten.com/" + h + "/" + w + "?image={{ range(1, 10) | random }}";
-    return true;
-}
-</script>
+{% endfor %}
 {% endmacro %}
 
 {% macro knob(val) %}
@@ -169,17 +161,17 @@ function imgError(image, h, w) {
 </div>
 {% endmacro %}
 
-{% macro render_project_thumbnail(project, class, upload_method) %}
+{% macro render_thumbnail(project, upload_method, class, style, width='200') %}
     {% if project.info.container %}
         {% if upload_method == 'rackspace'%}
-        <img class="{{ class }}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container) }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
+        <img class="{{ class }}" style="{{ style }}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container) }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
         {% else %}
-        <img class="{{ class }}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
+        <img class="{{ class }}" style="{{ style }}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
         {% endif %}
     {% elif project.info.thumbnail %}
-        <img class="{{ class }}" src="{{ project.info.thumbnail }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
+        <img class="{{ class }}" style="{{ style }}" src="{{ project.info.thumbnail }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
     {% else %}
-        <img class="{{ class }}" src="http://placekitten.com/400/400?image=1" alt="{{ project.name }} thumbnail">
+        <img class="{{ class }}" style="{{ style }}" src="http://placekitten.com/400/400?image=1" alt="{{ project.name }} thumbnail">
     {% endif %}
 {% endmacro %}
 

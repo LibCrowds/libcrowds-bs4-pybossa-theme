@@ -1,0 +1,4 @@
+.hover-overlay:hover {
+    @include hover-focus;
+    filter: brightness(60%);
+}

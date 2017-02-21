@@ -21,7 +21,8 @@
     "codemirror": "^5.23.0",
     "jquery-circle-progress": "^1.2.1",
     "pnotify": "^3.0.0",
-    "rethinkdb": "^2.3.3"
+    "rethinkdb": "^2.3.3",
+    "cropper": "^2.3.4"
   },
   "devDependencies": {
     "jshint": "^2.9.4"

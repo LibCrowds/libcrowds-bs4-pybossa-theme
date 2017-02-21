@@ -1,21 +1,15 @@
 {% extends "projects/base.html" %}
 {% set active_page = "projects" %}
-{% set active_project = project.short_name %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% set active_link = 'tasks' %}
-{% set section = _('Import tasks') %}
 
 {% import "_helpers/_form.html" as form_helpers %}
 
 {% block projectcontent %}
-<style type="text/css">
-.selected {
-    background-color: #D4D4D4;
-}
-</style>
-<h3>{{_('From Youtube')}}</h3>
+
+<h3>From Youtube</h3>
 <br>
-<span class="help-inline"> {{ _('Please provide a URL to a Youtube playlist with videos for') }} {{ active_project }}.
+<span class="help-inline">Please provide a URL to a Youtube playlist.
 </span>
 <br>
 <div id="objects-container" class="row">

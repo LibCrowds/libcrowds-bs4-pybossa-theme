@@ -45,15 +45,17 @@
                   "../node_modules/jquery-circle-progress/dist/circle-progress.js",
                   "../node_modules/pnotify/dist/pnotify.js",
                   "../node_modules/pnotify/dist/pnotify.buttons.js",
+                  "../node_modules/cropper/dist/cropper.js",
+                  "js/notify.js",
+                  "js/log-error.js",
                   "js/scroll-events.js",
+                  "js/stats.js",
                   "js/popovers.js",
                   "js/tooltips.js",
                   "js/btn-anchor.js",
-                  "js/log-error.js",
                   "js/progress.js",
                   "js/pybossa-analyst.js",
-                  "js/s3.js",
-                  "js/notify.js"
+                  "js/s3.js"
                   %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
@@ -61,5 +63,6 @@
         {%- include "_includes/_sentry.js" %}
         {% include "_includes/_flash_messages.js" %}
         {% include "_includes/ajax_csrf_token.js" %}
+        {% include "_includes/image_error.js" %}
     </body>
 </html>

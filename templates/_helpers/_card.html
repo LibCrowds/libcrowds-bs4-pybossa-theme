@@ -26,3 +26,17 @@
     </a>
 </div>
 {% endmacro %}
+
+{% macro render_strip_item(title, url, font, active, tooltip) %}
+<div class="card card-button h-100 px-3 m-2" {% if tooltip %}data-toggle="tooltip" data-placement="top" title="{{ tooltip }}"{% endif %}>
+    <a href="{{ url }}">
+        <div class="card-block text-center d-flex flex-column align-items-center justify-content-center">
+            <span class="fa-stack fa-lg fa-3x {% if active %}text-success{% else %}text-info{% endif %} mb-1">
+                <span class="fa fa-circle fa-stack-2x"></span>
+                <span class="fa {{ font }} fa-stack-1x fa-inverse"></span>
+            </span>
+            <div class="card-text text-gray-dark">{{ title }}</div>
+        </div>
+    </a>
+</div>
+{% endmacro %}

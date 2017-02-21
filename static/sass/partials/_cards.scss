@@ -4,32 +4,32 @@
         overflow-y: hidden;
         border-radius: 2.25rem;
         margin-bottom: 1rem;
-        
+
         @include hover-focus {
             .card-footer {
                 height: 100%;
             }
         }
     }
-    
+
     .card-img {
         width: 100%;
     }
-    
+
     .card-footer {
         height: calc(#{$card-spacer-y} * 2 + #{$font-size-base});
         position: absolute;
         bottom: 0;
     }
-    
+
     @include media-breakpoint-between(xs, md) {
         margin-left: 15%;
         margin-right: 15%;
         column-count: 1;
     }
-    
+
     @include media-breakpoint-up(lg) {
-        column-count: 3;
+        column-count: 4;
     }
 }
 

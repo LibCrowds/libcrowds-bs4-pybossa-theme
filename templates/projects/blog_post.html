@@ -14,14 +14,14 @@
                 <em>Written: {{ blogpost.created[0:10] }}</em>
             </p>
             <p>
-                <a href="{{ url_for('project.show_blogposts', short_name=project.short_name )}}">Back</a>
+                <a href="{{ url_for('project.show_blogposts', short_name=project.short_name )}}" class="btn btn-sm btn-secondary" role="button">Back</a>
             </p>
         </header>
         <body>
             <p>{{ blogpost.body | e | markdown }}</p>
         </body>
     </article>
-    
+
     {% if current_user.is_authenticated() and current_user.id == project.owner_id or current_user.admin %}
     <form method="post" action="{{ url_for('project.delete_blogpost', short_name=project.short_name, id=blogpost.id) }}" onsubmit="return confirm('Do you really want to delete the blog post?');">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

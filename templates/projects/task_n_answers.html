@@ -1,31 +1,26 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
-{% set active_link = "dashboard" %}
 
 {% block content %}
 
-{% if project %}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ helper.render_project_title(project, subtitle="Task Redundancy") }}
-            <form id="task_redundancy" class="form-horizontal" method="post" action="{{ url_for('project.task_n_answers', short_name=project.short_name) }}">
-                {{ form.hidden_tag() }}
-                <fieldset>
-                    {{ form_helpers.render_field(form.n_answers, class_="input-block-level form-control", placeholder="The number of contributions required per task", type="number", autofocus="autofocus", required="required", pattern=".{1,100}", title="Must be a number between 1 and 100") }}
-                    <div class="pull-right" role="group">
-                        <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
-                        <input type="submit" value="Set redundancy" class="btn btn-danger">
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+{{ project_helpers.render_title(project, 'Task Redundancy', 'Set the number of contributions required per task') }}
+
+<div class="card">
+    {{ card_helpers.render_title('Task Redundancy', 'Set a value of anywhere between 1 and 10000 (the default is 30)') }}
+    <div class="card-block pt-1">
+        <form method="post" action="{{ url_for('project.task_n_answers', short_name=project.short_name) }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.n_answers, class_="form-control", placeholder="The number of contributions required per task", type="number",
+                                         autofocus="autofocus", required="required", pattern=".{1,10000}", title="Must be a number between 1 and 100") }}
+            <div class="text-right">
+                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary">Cancel</a>
+                <input id="submit" type="submit" value="Update" class="btn btn-success" />
+            </div>
+        </form>
     </div>
 </div>
-{% else %}
-    {{ helper.render_non_existant_project() }}
-{% endif %}
 
 {% endblock %}

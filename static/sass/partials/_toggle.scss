@@ -1,36 +1,33 @@
-.onoffswitch {
+.toggle {
     position: relative;
     width: 75px;
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select: none;
     color: white;
-    margin-left: 15px;
-    margin-right: 15px;
 }
 
-.onoffswitch-checkbox {
+.toggle-checkbox {
     display: none;
 }
 
-.onoffswitch-label {
+.toggle-label {
     display: block;
     overflow: hidden;
     cursor: pointer;
-    border: 2px solid #DDD;
-    border-radius: 3px;
-    margin-bottom: 0;
+    border: 2px solid $gray-light;
+    border-radius: $input-border-radius;
 }
 
-.onoffswitch-inner {
+.toggle-inner {
     display: block;
     width: 200%;
     margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
 }
 
-.onoffswitch-inner:before,
-.onoffswitch-inner:after {
+.toggle-inner:before,
+.toggle-inner:after {
     display: block;
     float: left;
     width: 50%;
@@ -41,40 +38,38 @@
     box-sizing: border-box;
 }
 
-.onoffswitch-inner:before {
+.toggle-inner:before {
     content: "ON";
     padding-left: 20px;
-    background-color: #357EBD;
+    background-color: $brand-primary;
 }
 
-.onoffswitch-inner:after {
+.toggle-inner:after {
     content: "OFF";
     padding-right: 15px;
-    background-color: #ADADAD;
+    background-color: $gray-light;
     text-align: right;
 }
 
-.onoffswitch-switch {
+.toggle-switch {
     display: block;
-    width: 12px;
-    margin: 0px;
-    background-color: #DDD;
+    width: 1rem;
+    background-color: $gray-lighter;
     position: absolute;
     top: 1px;
     bottom: 1px;
     right: 63px;
-    transition: all 0.3s ease-in 0s;
-    border-radius: 3px;
+    border-radius: $input-border-radius;
 }
 
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+.toggle-checkbox:checked + .toggle-label .toggle-inner {
     margin-left: 0;
 }
 
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px;
+.toggle-checkbox:checked + .toggle-label .toggle-switch {
+    right: 1px;
 }
 
-.onoffswitch-group {
+.toggle-group {
     display: inline-block;
 }

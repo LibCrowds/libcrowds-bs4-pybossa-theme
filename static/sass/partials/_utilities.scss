@@ -26,3 +26,8 @@
 @include text-emphasis-variant('.text-body', $body-color);
 
 @include text-emphasis-variant('.text-amethyst', $amethyst);
+
+// Borders
+.rounded-oblong {
+    border-radius: 2.5rem;
+}

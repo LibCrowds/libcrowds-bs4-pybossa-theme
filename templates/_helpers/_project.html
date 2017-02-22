@@ -1,33 +1,33 @@
 {% macro render_pagination(pagination) %}
-<div class="pagination pagination-centered">
-    <ul>
+<nav>
+    <ul class="pagination pagination-centered">
         {% if pagination.has_prev %}
-        <li>
-            <a href="{{ url_for_other_page(pagination.page - 1)}}">&laquo; </a>
+        <li class="page-item">
+            <a href="{{ url_for_other_page(pagination.page - 1)}}" class="page-link">&laquo; </a>
         </li>
         {% endif %}
 
         {% for page in pagination.iter_pages() %}
             {% if page %}
                 {% if page != pagination.page %}
-                <li>
-                    <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+                <li class="page-item">
+                    <a href="{{ url_for_other_page(page) }}" class="page-link">{{ page }}</a>
                 </li>
                 {% else %}
-                <li class="active">
-                    <a href="#">{{ page }}</a>
+                <li class="active page-item">
+                    <a href="#" class="page-link">{{ page }}</a>
                 </li>
                 {% endif %}
             {% endif %}
         {% endfor %}
 
         {% if pagination.has_next %}
-        <li>
-            <a href="{{ url_for_other_page(pagination.page + 1)}}"> &raquo;</a>
+        <li class="page-item">
+            <a href="{{ url_for_other_page(pagination.page + 1)}}" class="page-link"> &raquo;</a>
         </li>
         {% endif %}
     </ul>
-</div>
+</nav>
 {% endmacro %}
 
 {% macro render_project_admin_featured(project, upload_method) %}
@@ -56,20 +56,24 @@
 </tr>
 {% endmacro %}
 
-{% macro render_project_deck(projects) %}
-<div class="project-cards">
-    {% for project in projects %}
-    <div class="card text-center">
-        <a href="{{ url_for('project.details', short_name=project.short_name) }}">
-        {{ render_thumbnail(project, class='card-img img-fluid') }}
-        <div class="card-footer text-white bg-dark-overlay d-flex align-content-between flex-wrap justify-content-center">
-            <h6 class="card-title">{{ project.name | truncate(40, true) }}</h6>
-            <p class="card-text text-white">{{ project.description }}</p>
-            <p class="card-text align-self-end"><small class="text-white">{{ project.overall_progress | round | int }}% complete</small></p>
+{% macro render_grid(projects, shuffle=False) %}
+<div {% if not shuffle %}class="row overlay-cards"{% else %}class="shuffle-grid row overlay-cards" id="project-grid" data-initial-group="incomplete"{% endif %}>
+    {% for project in projects -%}
+    <div class="col-md-6 col-lg-4 grid-item" data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
+         data-created="{{ project.created }}" data-name="{{ project.name }}" data-progress="{{ project.overall_progress }}"
+         {% if shuffle and project.overall_progress == 100 %}style="visibility: hidden"{% endif%}>
+        <div class="card text-center">
+            <a href="{{ url_for('project.details', short_name=project.short_name) }}">
+                {{ render_thumbnail(project, class='card-img img-fluid') }}
+                <div class="card-footer text-white bg-dark-overlay d-flex align-content-between flex-wrap justify-content-center">
+                    <h6 class="card-title">{{ project.name | truncate(40, true) }}</h6>
+                    <p class="card-text lead">{{ project.description }}</p>
+                    <p class="card-text">{{ project.overall_progress | round | int }}% complete</p>
+                </div>
+            </a>
         </div>
-        </a>
     </div>
-    {% endfor %}
+    {% endfor -%}
 </div>
 {% endmacro %}
 

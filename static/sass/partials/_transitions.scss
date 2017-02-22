@@ -10,7 +10,7 @@ a {
     transition: background-color 200ms;
 }
 
-.project-cards .card-footer {
+.overlay-cards .card-footer {
     transition: height 250ms;
 }
 
@@ -41,8 +41,6 @@ a {
         transition: opacity 1s;
     }
 }
-
-.card
 
 .toggle-switch {
     transition: all 0.3s ease-in 0s;

@@ -5,61 +5,61 @@
     -moz-user-select:none;
     -ms-user-select: none;
     color: white;
-}
 
-.toggle-checkbox {
-    display: none;
-}
+    .toggle-checkbox {
+        display: none;
+    }
 
-.toggle-label {
-    display: block;
-    overflow: hidden;
-    cursor: pointer;
-    border: 2px solid $gray-light;
-    border-radius: $input-border-radius;
-}
+    .toggle-label {
+        display: block;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid lighten($gray-light, 25%);
+        border-radius: $input-border-radius;
+    }
 
-.toggle-inner {
-    display: block;
-    width: 200%;
-    margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
+    .toggle-inner {
+        display: block;
+        width: 200%;
+        margin-left: -100%;
+        transition: margin 0.3s ease-in 0s;
 
-.toggle-inner:before,
-.toggle-inner:after {
-    display: block;
-    float: left;
-    width: 50%;
-    height: 30px;
-    padding: 0;
-    line-height: 30px;
-    font-weight: bold;
-    box-sizing: border-box;
-}
+        &:before,
+        &:after {
+            display: block;
+            float: left;
+            width: 50%;
+            height: 30px;
+            padding: 0;
+            line-height: 30px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
 
-.toggle-inner:before {
-    content: "ON";
-    padding-left: 20px;
-    background-color: $brand-primary;
-}
+        &:before {
+            content: "ON";
+            padding-left: 20px;
+            background-color: $input-border-focus;
+        }
 
-.toggle-inner:after {
-    content: "OFF";
-    padding-right: 15px;
-    background-color: $gray-light;
-    text-align: right;
-}
+        &:after {
+            content: "OFF";
+            padding-right: 20px;
+            background-color: lighten($gray-light, 5%);
+            text-align: right;
+        }
+    }
 
-.toggle-switch {
-    display: block;
-    width: 1rem;
-    background-color: $gray-lighter;
-    position: absolute;
-    top: 1px;
-    bottom: 1px;
-    right: 63px;
-    border-radius: $input-border-radius;
+    .toggle-switch {
+        display: block;
+        width: 10px;
+        background-color: lighten($gray-light, 35%);
+        position: absolute;
+        top: 1px;
+        bottom: 1px;
+        right: 64px;
+        border-radius: $input-border-radius;
+    }
 }
 
 .toggle-checkbox:checked + .toggle-label .toggle-inner {

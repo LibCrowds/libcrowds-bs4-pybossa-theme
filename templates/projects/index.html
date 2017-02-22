@@ -5,30 +5,67 @@
 
 {% block content %}
 
-{% set project_icons = {'featured': 'fa-star-o', 'draft': 'fa-question', 'convert-a-card': 'fa-refresh', 'lcp': 'fa-refresh'} %}
+{% set project_icons = {'featured': 'fa-star-o', 'draft': 'fa-question-circle-o', 'convert-a-card': 'fa-refresh', 'lcp': 'fa-refresh'} %}
 
-<section class="bg-faded py-5">
-    <div class="container">
-        <div class="row d-flex flex-row justify-content-center">
-            {% for c in categories %}
-            {{ card_helpers.render_strip_item(c.name, url_for('project.project_cat_index', category=c.short_name), project_icons.get(c.short_name, ''), active_cat.short_name==c.short_name, c.description) }}
-            {% endfor %}
-            {% if current_user.is_authenticated() and current_user.admin %}
-            {{ card_helpers.render_strip_item('Draft', url_for('project.draft'), project_icons.get('draft', ''), active_cat.short_name=='draft', 'Unpublished projects') }}
-            {% endif %}
+<section class="pattern-white-wall pt-5">
+    <div class="container py-3">
+        <div class="d-flex flex-row align-items-center">
+            <span class="fa fa-chevron-left mr-2 scroll-target" data-target="#categories-strip" data-direction="left" role="button"></span>
+            <div id="categories-strip" class="card-strip">
+                {% for c in categories %}
+                {{ card_helpers.render_strip_item(c.name, url_for('project.project_cat_index', category=c.short_name),
+                   project_icons.get(c.short_name, 'fa-question-circle-o'), active_cat.short_name==c.short_name, c.description) }}
+                {% endfor %}
+                {% if current_user.is_authenticated() and current_user.admin %}
+                {{ card_helpers.render_strip_item('Draft', url_for('project.draft'), project_icons.get('draft', 'fa-question-circle-o'),
+                   active_cat.short_name=='draft', 'Unpublished projects') }}
+                {% endif %}
+            </div>
+            <span class="fa fa-chevron-right ml-2 scroll-target" data-target="#categories-strip" data-direction="right" role="button"></span>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <form class="form-inline d-flex flex-row align-items-center justify-content-center justify-content-md-end">
+                    <div class="my-2 d-flex align-items-center">
+                        <div class="toggle-group mr-2">Hide completed projects:</div>
+                        <div class="toggle-group mr-3">
+                            <div class="toggle">
+                                <input checked="true" class="toggle-checkbox shuffle-checkbox" type="checkbox" id="show-all" data-group="incomplete">
+                                <label class="toggle-label" for="show-all">
+                                    <span class="toggle-inner"></span>
+                                    <span class="toggle-switch"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="project-sort-options" class="mr-2">Sort:</label>
+                        <select class="shuffle-sort custom-select mr-3" id="project-sort-options">
+                            <option value="name">Title</option>
+                            <option value="created">Created</option>
+                            <option value="progress">Progress</option>
+                        </select>
+                    </div>
+                    <input type="text" class="form-control rounded-oblong shuffle-search mr-2 my-2" placeholder="Search">
+                </form>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="">
-    <div class="container">
+<section>
+    <div class="container text-center pt-5 pb-4">
         {% if projects %}
-            {{ project_helpers.render_project_deck(projects) }}
+            {{ project_helpers.render_grid(projects, shuffle=True) }}
             {% if pagination.pages > 1 %}
+            <div class="d-flex justify-content-center w-100 mt-4">
                 {{ project_helpers.render_pagination(pagination) }}
+            </div>
             {% endif %}
         {% else %}
-            <p class="lead">Sorry, there are no published projects for this category yet.</p>
+            <p class="lead mb-0">Sorry, there are no published projects for this category yet.</p>
         {% endif %}
     </div>
 </section>
+
 {% endblock %}

@@ -1,4 +1,4 @@
-.project-cards {
+.overlay-cards {
     .card {
         display: flex;
         overflow-y: hidden;
@@ -21,20 +21,25 @@
         position: absolute;
         bottom: 0;
     }
-
-    @include media-breakpoint-between(xs, md) {
-        margin-left: 15%;
-        margin-right: 15%;
-        column-count: 1;
-    }
-
-    @include media-breakpoint-up(lg) {
-        column-count: 3;
-    }
 }
 
 .card-button {
-    @include hover-focus {
+    &:hover,
+    &:focus,
+    &.active {
         border-color: rgba($link-hover-color, 0.5);
+    }
+}
+
+.card-strip {
+    overflow-y: auto;
+    white-space: nowrap;
+
+    .card {
+        @extend .card-button;
+        display: inline-block;
+        height: 100%;
+        padding: 0.75rem 1rem;
+        margin: 0.75rem;
     }
 }

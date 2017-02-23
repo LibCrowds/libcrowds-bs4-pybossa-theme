@@ -5,6 +5,7 @@
     background-image: url('/static/svg/fallback.svg');
     background-position: center center;
     background-repeat: no-repeat;
+    background-size: contain;
     margin: .25rem;
 
     @each $size in 2 3 4 5 6 7 8 9 10 {

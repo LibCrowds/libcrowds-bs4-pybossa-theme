@@ -1,14 +1,7 @@
-{% extends "_layouts/default.html" %}
-{% set active_page = "support" %}
+{% extends "_layouts/splash.html" %}
+{% import "_helpers/_error.html" as error_helpers %}
+{% set footer_class = "hidden-xs-up" %}
 
 {% block content %}
-<div class="container container-main">
-    <div class="col-xs-12">
-        <h1>Bad request</h1>
-        <p class="lead">Something about bad requests.</p>
-        <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
-            <i class="fa fa-home"></i> Go Home
-        </a>
-    </div>
-</div>
+{{ error_helpers.render_error("Bad request", "Your browser sent a request that the server couldn't understand.") }}
 {% endblock %}

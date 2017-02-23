@@ -23,3 +23,11 @@
 #code-jumbotron {
     background: url(/static/img/jumbotrons/code.png) no-repeat center fixed;
 }
+
+#error-jumbotron {
+    background-color: #7CC4F3;
+    background-image: url(/static/img/bl-graphic.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+}

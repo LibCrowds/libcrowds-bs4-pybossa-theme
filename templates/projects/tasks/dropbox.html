@@ -1,3 +1,3 @@
 {% import "_helpers/_card.html" as card_helpers %}
 
-{{ card_helpers.render_button('fa-dropbox', 'Dropbox', url_for(target, short_name=project.short_name, type='dropbox')) }}
+{{ card_helpers.render_button('Dropbox', url_for(target, short_name=project.short_name, type='dropbox'), 'fa-dropbox') }}

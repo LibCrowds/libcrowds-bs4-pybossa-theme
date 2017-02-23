@@ -11,34 +11,34 @@
     {{ card_helpers.render_stat('fa-users', n_volunteers, 'Volunteers', 'Last activity: {}'.format(last_activity)) }}
 </div>
 <div class="card-deck hidden-lg-up">
-    {{ card_helpers.render_button('fa-pencil-square-o', 'Edit Task Presenter', url_for('project.task_presenter_editor', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-file-o', 'Edit Details', url_for('project.update', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-hand-o-right', 'Contribute', url_for('project.presenter', short_name=project.short_name)) }}
+    {{ card_helpers.render_button('Edit Task Presenter', url_for('project.task_presenter_editor', short_name=project.short_name), 'fa-pencil-square-o') }}
+    {{ card_helpers.render_button('Edit Details', url_for('project.update', short_name=project.short_name), 'fa-file-o') }}
+    {{ card_helpers.render_button('Contribute', url_for('project.presenter', short_name=project.short_name), 'fa-hand-o-right') }}
 </div>
 <div class="card-deck hidden-lg-up">
-    {{ card_helpers.render_button('fa-calendar', 'Results', url_for('project.results', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-link', 'Statistics', url_for('project.show_stats', short_name=project.short_name)) }}
+    {{ card_helpers.render_button('Results', url_for('project.results', short_name=project.short_name), 'fa-calendar') }}
+    {{ card_helpers.render_button('Statistics', url_for('project.show_stats', short_name=project.short_name), 'fa-link') }}
     {% if config.get('LIBCROWDS_ANALYST_URL') %}
-    {{ card_helpers.render_button('fa-thumbs-up', 'Publish', '{0}/projects/{1}?api_key={2}'.format(config['LIBCROWDS_ANALYST_URL'], project.short_name, current_user.api_key)) }} Analysis
+    {{ card_helpers.render_button('Publish', '{0}/projects/{1}?api_key={2}'.format(config['LIBCROWDS_ANALYST_URL'], project.short_name, current_user.api_key), 'fa-thumbs-up') }} Analysis
     {% endif %}
 </div>
 <div class="card-deck">
-    {{ card_helpers.render_button('fa-upload', 'Import Tasks', url_for('project.import_task', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-download', 'Auto-import Tasks', url_for('project.setup_autoimporter', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-download', 'Export Data', url_for('project.export_to', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-list-alt', 'Browse Tasks', url_for('project.tasks_browse', short_name=project.short_name)) }}
+    {{ card_helpers.render_button('Import Tasks', url_for('project.import_task', short_name=project.short_name), 'fa-upload') }}
+    {{ card_helpers.render_button('Auto-import Tasks', url_for('project.setup_autoimporter', short_name=project.short_name), 'fa-download') }}
+    {{ card_helpers.render_button('Export Data', url_for('project.export_to', short_name=project.short_name), 'fa-download') }}
+    {{ card_helpers.render_button('Browse Tasks', url_for('project.tasks_browse', short_name=project.short_name), 'fa-list-alt') }}
 </div>
 <div class="card-deck">
-    {{ card_helpers.render_button('fa-repeat', 'Task Redundancy', url_for('project.task_n_answers', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-sort-numeric-asc', 'Task Priority', url_for('project.task_priority', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-trash-o', 'Delete Tasks', url_for('project.delete_tasks', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-trash', 'Delete Project', url_for('project.delete', short_name=project.short_name)) }}
+    {{ card_helpers.render_button('Task Redundancy', url_for('project.task_n_answers', short_name=project.short_name), 'fa-repeat') }}
+    {{ card_helpers.render_button('Task Priority', url_for('project.task_priority', short_name=project.short_name), 'fa-sort-numeric-asc') }}
+    {{ card_helpers.render_button('Delete Tasks', url_for('project.delete_tasks', short_name=project.short_name), 'fa-trash-o') }}
+    {{ card_helpers.render_button('Delete Project', url_for('project.delete', short_name=project.short_name), 'fa-trash') }}
 </div>
 <div class="card-deck">
-    {{ card_helpers.render_button('fa-filter', 'Task Scheduler', url_for('project.task_scheduler', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-calendar', 'Audit Logs', url_for('project.auditlog', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-link', 'Webhooks', url_for('project.webhook_handler', short_name=project.short_name)) }}
-    {{ card_helpers.render_button('fa-thumbs-up', 'Publish', url_for('project.publish', short_name=project.short_name)) }}
+    {{ card_helpers.render_button('Task Scheduler', url_for('project.task_scheduler', short_name=project.short_name), 'fa-filter') }}
+    {{ card_helpers.render_button('Audit Logs', url_for('project.auditlog', short_name=project.short_name), 'fa-calendar') }}
+    {{ card_helpers.render_button('Webhooks', url_for('project.webhook_handler', short_name=project.short_name), 'fa-link') }}
+    {{ card_helpers.render_button('Publish', url_for('project.publish', short_name=project.short_name), 'fa-thumbs-up') }}
 </div>
 
 {% endblock %}

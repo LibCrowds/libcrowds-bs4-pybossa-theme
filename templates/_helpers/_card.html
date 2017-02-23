@@ -16,23 +16,15 @@
 </div>
 {% endmacro %}
 
-{% macro render_button(font, title, url) %}
-<div class="card card-button mt-3">
+{% macro render_button(title, url, font, active=False, tooltip=None, inline=True) %}
+<div class="card card-button mt-3 p-0
+     {%- if active %} active {% endif %}"
+     {%- if tooltip %}data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}"{% endif %}>
     <a href="{{ url }}">
-        <div class="card-block d-flex justify-content-between">
-            <div class="card-title text-body align-self-center mb-0">{{ title }}</div>
-            <span class="fa {{ font }} fa-2x text-muted align-self-center hidden-md-down"></span>
-        </div>
-    </a>
-</div>
-{% endmacro %}
-
-{% macro render_strip_item(title, url, font, active, tooltip) %}
-<div class="card {% if active%}active{% endif %}" {% if tooltip %}data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}"{% endif %}>
-    <a href="{{ url }}">
-        <div class="card-block text-center">
-            <span class="fa {{ font }} text-body fa-3x"></span>
-            <div class="card-text text-body mt-2">{{ title }}</div>
+        <div class="card-block {% if inline %}d-flex justify-content-between align-content-center py-2 px-3{% else %}py-3 px-4 text-center{% endif %}">
+            {%- if inline %}<div class="card-title my-2 mr-2">{{ title }}</div>{% endif %}
+            <span class="fa {{ font }} {% if inline %}fa-2x text-muted align-self-center{% else %}fa-3x{% endif %}"></span>
+            {% if not inline %}<div class="card-title mt-2 mb-0">{{ title }}</div>{% endif %}
         </div>
     </a>
 </div>

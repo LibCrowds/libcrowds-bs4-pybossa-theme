@@ -7,12 +7,12 @@
 
 {{ project_helpers.render_title(project, 'Export Data', 'Export task or contribution data') }}
 <div class="card-deck">
-    {{ card_helpers.render_button('fa-file-excel-o', 'CSV Task Data', url_for('project.export_to', short_name=project.short_name, type='task', format='csv')) }}
-    {{ card_helpers.render_button('fa-code', 'JSON Task Data', url_for('project.export_to', short_name=project.short_name, type='task', format='json')) }}
+    {{ card_helpers.render_button('CSV Task Data', url_for('project.export_to', short_name=project.short_name, type='task', format='csv'), 'fa-file-excel-o') }}
+    {{ card_helpers.render_button('JSON Task Data', url_for('project.export_to', short_name=project.short_name, type='task', format='json'), 'fa-code') }}
 </div>
 <div class="card-deck">
-    {{ card_helpers.render_button('fa-file-excel-o', 'CSV Contribution Data', url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv')) }}
-    {{ card_helpers.render_button('fa-code', 'JSON Contribution Data', url_for('project.export_to', short_name=project.short_name, type='task_run', format='json')) }}
+    {{ card_helpers.render_button('CSV Contribution Data', url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv'), 'fa-file-excel-o') }}
+    {{ card_helpers.render_button('JSON Contribution Data', url_for('project.export_to', short_name=project.short_name, type='task_run', format='json'), 'fa-code') }}
 </div>
 
 {% endblock %}

@@ -24,22 +24,27 @@
 }
 
 .card-button {
+    display: inline-block;
+    height: 100%;
+    padding: 0.75rem 1rem;
+    margin: 0.75rem;
+
     &:hover,
     &:focus,
     &.active {
         border-color: rgba($link-hover-color, 0.5);
+
+        a {
+            color: $link-hover-color;
+        }
+    }
+
+    a {
+        color: $body-color;
     }
 }
 
 .card-strip {
     overflow-y: auto;
     white-space: nowrap;
-
-    .card {
-        @extend .card-button;
-        display: inline-block;
-        height: 100%;
-        padding: 0.75rem 1rem;
-        margin: 0.75rem;
-    }
 }

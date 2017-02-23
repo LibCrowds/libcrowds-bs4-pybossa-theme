@@ -1,3 +1,3 @@
 {% import "_helpers/_card.html" as card_helpers %}
 
-{{ card_helpers.render_button('fa-file-excel-o', 'CSV', url_for(target, short_name=project.short_name, type='csv')) }}
+{{ card_helpers.render_button('CSV', url_for(target, short_name=project.short_name, type='csv'), 'fa-file-excel-o') }}

@@ -5,7 +5,7 @@
 
 {% block content %}
 
-{% set project_icons = {'featured': 'fa-star-o', 'draft': 'fa-question-circle-o', 'convert-a-card': 'fa-refresh', 'lcp': 'fa-refresh'} %}
+{%- set project_icons = {'featured': 'fa-star-o', 'draft': 'fa-question-circle-o', 'convert-a-card': 'fa-refresh', 'lcp': 'fa-refresh'} -%}
 
 <section class="pattern-white-wall pt-5">
     <div class="container py-3">
@@ -13,12 +13,12 @@
             <span class="fa fa-chevron-left mr-2 scroll-target" data-target="#categories-strip" data-direction="left" role="button"></span>
             <div id="categories-strip" class="card-strip">
                 {% for c in categories %}
-                {{ card_helpers.render_strip_item(c.name, url_for('project.project_cat_index', category=c.short_name),
-                   project_icons.get(c.short_name, 'fa-question-circle-o'), active_cat.short_name==c.short_name, c.description) }}
+                {{ card_helpers.render_button(c.name, url_for('project.project_cat_index', category=c.short_name),
+                   project_icons.get(c.short_name, 'fa-question-circle-o'), active=(active_cat.short_name==c.short_name), tooltip=c.description, inline=False) }}
                 {% endfor %}
                 {% if current_user.is_authenticated() and current_user.admin %}
-                {{ card_helpers.render_strip_item('Draft', url_for('project.draft'), project_icons.get('draft', 'fa-question-circle-o'),
-                   active_cat.short_name=='draft', 'Unpublished projects') }}
+                {{ card_helpers.render_button('Draft', url_for('project.draft'), project_icons.get('draft', 'fa-question-circle-o'),
+                   active=(active_cat.short_name=='draft'), tooltip='Unpublished projects', inline=False) }}
                 {% endif %}
             </div>
             <span class="fa fa-chevron-right ml-2 scroll-target" data-target="#categories-strip" data-direction="right" role="button"></span>
@@ -26,9 +26,9 @@
         <div class="row mt-2">
             <div class="col-md-12">
                 <form class="form-inline d-flex flex-row align-items-center justify-content-center justify-content-md-end">
-                    <div class="my-2 d-flex align-items-center">
+                    <div class="my-2 d-flex align-items-center mr-4">
                         <div class="toggle-group mr-2">Hide completed projects:</div>
-                        <div class="toggle-group mr-3">
+                        <div class="toggle-group">
                             <div class="toggle">
                                 <input checked="true" class="toggle-checkbox shuffle-checkbox" type="checkbox" id="show-all" data-group="incomplete">
                                 <label class="toggle-label" for="show-all">
@@ -38,9 +38,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group my-2">
+                    <div class="form-group my-2 mr-4">
                         <label for="project-sort-options" class="mr-2">Sort:</label>
-                        <select class="shuffle-sort custom-select mr-3" id="project-sort-options">
+                        <select class="shuffle-sort custom-select" id="project-sort-options">
                             <option value="name">Title</option>
                             <option value="created">Created</option>
                             <option value="progress">Progress</option>

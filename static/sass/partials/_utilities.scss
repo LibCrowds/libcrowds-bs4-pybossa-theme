@@ -25,6 +25,8 @@
 // Colors
 @include text-emphasis-variant('.text-body', $body-color);
 
+@include text-emphasis-variant('.text-sky', $sky);
+
 // Borders
 .rounded-oblong {
     border-radius: 2.5rem;

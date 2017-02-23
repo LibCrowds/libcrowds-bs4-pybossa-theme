@@ -7,23 +7,13 @@
     background-repeat: no-repeat;
     margin: .25rem;
 
-    @each $size in 2 3 4 5 {
+    @each $size in 2 3 4 5 6 7 8 9 10 {
         &.icon-#{$size}x { height: #{$size}em; width: #{$size}em };
     }
 
-    &.playbills {
-        background-image: url('/static/svg/playbills.svg');
-    }
-
-    &.cardcatalogues {
-        background-image: url('/static/svg/cardcatalogues.svg');
-    }
-
-    &.draft {
-        background-image: url('/static/svg/draft.svg');
-    }
-
-    &.featured {
-        background-image: url('/static/svg/featured.svg');
+    @each $icon in $icons {
+        &.icon-#{$icon} {
+            background-image: url('/static/svg/#{$icon}.svg');
+        }
     }
 }

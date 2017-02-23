@@ -61,8 +61,6 @@ $gray:                             #404446;
 $gray-light:                       #888888;
 $black:                            #000000;
 
-$amethyst:                         #8E44AD;
-
 $brand-primary:                    #D00000;
 $brand-success:                    #398439;
 $brand-info:                       #4190C2;
@@ -109,6 +107,16 @@ $spacer:                           1.5rem;
 $progress-circle-font-size:        2.5rem;
 
 $fa-font-path:                     '../../fonts/font-awesome';
+
+$icons:
+    'cardcatalogues',
+    'contributions',
+    'draft',
+    'featured',
+    'playbills',
+    'projects',
+    'volunteers',
+;
 
 @import
     "../../node_modules/bootstrap/scss/bootstrap",

@@ -1,16 +1,15 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% set active_link = "dashboard" %}
+{% import "_helpers/_form.html" as form_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 
 {% block content %}
-{% import "_helpers/_form.html" as form_helpers %}
 
 
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
-            {{ helper.render_loading(loading_text) }}
             <h1><strong>{{project.name}}</strong>: Import tasks</h1>
             {% if form %}
                 <hr>

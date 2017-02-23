@@ -15,7 +15,6 @@ class ShuffleGrid {
             initialSort: { by: this.sortBy(this.initialSort) },
             sizer: this.sizer
         });
-        console.log(this.initialSort);
         this.setupFilters();
         this.setupSearching();
         this.setupSorting();
@@ -42,8 +41,6 @@ class ShuffleGrid {
                   element = evt.target.querySelector(`option[value="${value}"]`),
                   reverse = true ? element.getAttribute("data-reverse") : false,
                   options = { by: this.sortBy(value), reverse: reverse };
-            console.log(reverse);
-            console.log(evt.target);
             this.shuffle.sort(options);
         });
     }

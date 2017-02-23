@@ -33,10 +33,6 @@
     &:focus,
     &.active {
         border-color: rgba($link-hover-color, 0.5);
-
-        a {
-            color: $link-hover-color;
-        }
     }
 
     a {

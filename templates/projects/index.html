@@ -5,25 +5,23 @@
 
 {% block content %}
 
-{%- set project_icons = {'featured': 'fa-star-o', 'draft': 'fa-question-circle-o', 'convert-a-card': 'fa-refresh', 'lcp': 'fa-refresh'} -%}
-
 <section class="pattern-white-wall pt-5">
-    <div class="container py-3">
-        <div class="d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="d-flex flex-row align-items-center justify-content-center">
             <span class="fa fa-chevron-left mr-2 scroll-target" data-target="#categories-strip" data-direction="left" role="button"></span>
             <div id="categories-strip" class="card-strip">
                 {% for c in categories %}
-                {{ card_helpers.render_button(c.name, url_for('project.project_cat_index', category=c.short_name),
-                   project_icons.get(c.short_name, 'fa-question-circle-o'), active=(active_cat.short_name==c.short_name), tooltip=c.description, inline=False) }}
+                    {{ card_helpers.render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), icon=c.short_name,
+                       tooltip=c.description, active=(active_cat.short_name==c.short_name)) }}
                 {% endfor %}
                 {% if current_user.is_authenticated() and current_user.admin %}
-                {{ card_helpers.render_button('Draft', url_for('project.draft'), project_icons.get('draft', 'fa-question-circle-o'),
-                   active=(active_cat.short_name=='draft'), tooltip='Unpublished projects', inline=False) }}
+                    {{ card_helpers.render_icon_button('Draft', url_for('project.draft'), icon="draft", tooltip='Unpublished projects',
+                    active=(active_cat.short_name=='draft')) }}
                 {% endif %}
             </div>
             <span class="fa fa-chevron-right ml-2 scroll-target" data-target="#categories-strip" data-direction="right" role="button"></span>
         </div>
-        <div class="row mt-2">
+        <div class="row my-2">
             <div class="col-md-12">
                 <form class="form-inline d-flex flex-row align-items-center justify-content-center justify-content-md-end">
                     <div class="my-2 d-flex align-items-center mr-4">

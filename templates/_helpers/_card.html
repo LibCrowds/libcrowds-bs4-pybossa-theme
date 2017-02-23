@@ -16,15 +16,24 @@
 </div>
 {% endmacro %}
 
-{% macro render_button(title, url, font, active=False, tooltip=None, inline=True) %}
-<div class="card card-button mt-3 p-0
-     {%- if active %} active {% endif %}"
+{% macro render_button(title, url, icon) %}
+<div class="card card-button mt-3 p-0">
+    <a href="{{ url }}">
+        <div class="card-block d-flex justify-content-between align-content-center py-2 px-3">
+            <div class="card-title my-2 mr-2">{{ title }}</div>
+            <span class="fa {{ icon }} fa-2x text-muted align-self-center"></span>
+        </div>
+    </a>
+</div>
+{% endmacro %}
+
+{% macro render_icon_button(title, url, icon, tooltip=None, active=False) %}
+<div class="card card-button mt-3 p-0 {% if active %} active {% endif %}"
      {%- if tooltip %}data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}"{% endif %}>
     <a href="{{ url }}">
-        <div class="card-block {% if inline %}d-flex justify-content-between align-content-center py-2 px-3{% else %}py-3 px-4 text-center{% endif %}">
-            {%- if inline %}<div class="card-title my-2 mr-2">{{ title }}</div>{% endif %}
-            <span class="fa {{ font }} {% if inline %}fa-2x text-muted align-self-center{% else %}fa-3x{% endif %}"></span>
-            {% if not inline %}<div class="card-title mt-2 mb-0">{{ title }}</div>{% endif %}
+        <div class="card-block py-2 px-4 text-center">
+            <span class="icon icon-4x {{ icon }}"></span>
+            <div class="card-title mb-0">{{ title }}</div>
         </div>
     </a>
 </div>

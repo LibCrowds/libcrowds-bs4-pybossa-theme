@@ -1,0 +1,29 @@
+.icon {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    background-image: url('/static/svg/fallback.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: .25rem;
+
+    @each $size in 2 3 4 5 {
+        &.icon-#{$size}x { height: #{$size}em; width: #{$size}em };
+    }
+
+    &.playbills {
+        background-image: url('/static/svg/playbills.svg');
+    }
+
+    &.cardcatalogues {
+        background-image: url('/static/svg/cardcatalogues.svg');
+    }
+
+    &.draft {
+        background-image: url('/static/svg/draft.svg');
+    }
+
+    &.featured {
+        background-image: url('/static/svg/featured.svg');
+    }
+}

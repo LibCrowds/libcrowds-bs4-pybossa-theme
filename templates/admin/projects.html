@@ -20,7 +20,7 @@
 </div>
 
 <div class="card my-4">
-    {{ card_helpers.render_title('Projects', "Click a project's featured status to toggle between True and False", search_target="#featured-table tr") }}
+    {{ card_helpers.render_title('Projects', "Click a project's featured status to toggle between True and False", search_target="#featured-table tbody tr") }}
     <div>
         {% for c in categories %}
         <div id="{{ c.short_name }}" {% if not loop.first %}style="display: none;"{% endif %}>
@@ -30,8 +30,7 @@
                     {{ table_helpers.render_head(['Name', 'Progress', 'Featured']) }}
                     <tbody>
                         {% for p in projects[c.short_name] %}
-                        {{ table_helpers.render_row([p.name, p.overall_progress,
-                                                     '<a href="#" class="project-toggle-featured" data-project-id="{0}" data-featured="{1}">{1}</a>'.format(p.id, p.featured == True)]) }}
+                        {{ table_helpers.render_row([p.name, p.overall_progress, '<a href="#" class="project-toggle-featured" data-project-id="{0}" data-featured="{1}">{1}</a>'.format(p.id, p.featured == True)]) }}
                          {% endfor %}
                     </tbody>
                 </table>

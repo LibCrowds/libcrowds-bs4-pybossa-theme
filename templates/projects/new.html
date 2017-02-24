@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<div class="container mb-5 pt-4">
+<div class="container my-5 pt-4">
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
             <h1 class="mb-1">Create a Project</h1>
@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
             <div class="card">
-                {{ card_helpers.render_title('Project Details', 'Enter the name, short name and long description for the project') }}
+                {{ card_helpers.render_title('Project Details', 'Begin your journey to change the future of modern acedemic research forever') }}
                 <div class="card-block pt-1">
                     <form method="POST" action="{{ url_for('project.new') }}">
                         {{ form.hidden_tag() }}

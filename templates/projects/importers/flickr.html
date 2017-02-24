@@ -44,7 +44,7 @@
 
             <br>
             {% if form %}
-            <form id="import-form" role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+            <form id="import-form" role="form" method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
                 <fieldset>
                     {{ form.hidden_tag() }}
                     <span class="help-block">Alternatively, you can manually provide the ID of a Flickr album</span>

@@ -11,7 +11,7 @@
 <section>
     <div class="row">
         <div class="col-sm-12">
-            <form method="post" action="{{ url_for('project.task_presenter_editor', short_name=project.short_name) }}">
+            <form method="POST" action="{{ url_for('project.task_presenter_editor', short_name=project.short_name) }}">
                 {{ form.hidden_tag() }}
                 <div class="btn-group codemirror-buttons py-1 pl-4 bg-faded">
                     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-sm btn-secondary" role="button">Cancel</a>

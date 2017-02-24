@@ -9,7 +9,7 @@
 <div class="alert alert-danger">
     <strong>Warning!</strong> If you delete all task and contribution data it will be gone forever, there is no undo!
 </div>
-<form method="post" action="{{ url_for('project.delete_tasks', short_name=project.short_name) }}">
+<form method="POST" action="{{ url_for('project.delete_tasks', short_name=project.short_name) }}">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <div class="text-right" role="group">
         <button type="submit" name='btn' class="btn btn-secondary" value="Yes">Yes, delete everything</button>

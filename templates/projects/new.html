@@ -18,7 +18,7 @@
             <div class="card">
                 {{ card_helpers.render_title('Project Details', 'Enter the name, short name and long description for the project') }}
                 <div class="card-block pt-1">
-                    <form method="post" action="{{ url_for('project.new') }}">
+                    <form method="POST" action="{{ url_for('project.new') }}">
                         {{ form.hidden_tag() }}
                         {{ form_helpers.render_field(form.name, placeholder="The name of the project", class="form-control", required="required", autofocus="autofocus") }}
                         {{ form_helpers.render_field(form.short_name, placeholder="A shortcut for URLs and filenames", class="form-control", required="required") }}

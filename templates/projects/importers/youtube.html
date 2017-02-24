@@ -15,7 +15,7 @@
 <div id="objects-container" class="row">
     <ul id="objects"></ul>
 </div>
-<form class="form-group" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+<form class="form-group" method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
     <fieldset>
         {{ form.hidden_tag() }}
         {{ form_helpers.render_field(form.playlist_url, placeholder=_("URL of a Youtube Playlist")) }}

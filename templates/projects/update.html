@@ -10,7 +10,7 @@
 <div class="card">
     {{ card_helpers.render_title('Project Details', 'Edit the project details') }}
     <div class="card-block pt-1">
-        <form method="post" action="{{ url_for('project.update', short_name=project.short_name) }}">
+        <form method="POST" action="{{ url_for('project.update', short_name=project.short_name) }}">
             <div class="text-center">
                 {{ project_helpers.render_thumbnail(project, upload_method, class="img-thumbnail hover-overlay") }}
                 <span class="fa fa-pencil-square-o fa-3x"></span>
@@ -38,7 +38,7 @@
         </form>
 
 
-        <form method="post" action="{{ url_for('project.update', short_name = project.short_name) }}">
+        <form method="POST" action="{{ url_for('project.update', short_name = project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.name, class="form-control", placeholder="Name", required="required", autofocus="autofocus") }}
             {{ form_helpers.render_field(form.short_name, class="form-control", placeholder="Short name", label_text="Short name") }}

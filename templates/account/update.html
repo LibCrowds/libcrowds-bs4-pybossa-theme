@@ -15,7 +15,7 @@
 
         <!-- Avatar upload -->
         <div class="col-xs-12 col-sm-4 text-center">
-            <form method="post" role="form" class="upload-img-form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
+            <form method="POST" role="form" class="upload-img-form" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
                 <fieldset>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     <div class="center-block img-overlay-container">
@@ -73,7 +73,7 @@
         <!-- Update details -->
         <div class="col-sm-8 col-xs-12">
             <div class="white-panel inset-shadow-white">
-                <form method="post" role="form" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                <form method="POST" role="form" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                     <fieldset>
                         <h2>Update your profile</h2>
                         {{ form.id }}
@@ -93,7 +93,7 @@
                 {% if show_passwd_form %}
                 <hr class="extra-margins">
                 <h2 {% if password_form.errors %} name="password" {%endif%}>Change your Password</h2>
-                <form method="post" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                <form method="POST" class="form-horizontal" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                     <fieldset>
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         {{ password_form.id }}

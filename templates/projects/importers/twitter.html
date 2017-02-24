@@ -15,7 +15,7 @@
             <div class="row vcenter">
                 <h3>From a Twitter hashtag or account</h3>
             </div>
-            <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+            <form role="form" method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
                 <fieldset>
                     {{ form.hidden_tag() }}
                     {{ form_helpers.render_field(form.source, class_="input-block-level form-control", placeholder='#hashtag or @user or something else') }}

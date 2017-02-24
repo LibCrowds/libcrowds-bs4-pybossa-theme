@@ -22,7 +22,7 @@
             </div>
             <br>
             {% if form %}
-            <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+            <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
                 <fieldset>
                     {{ form.hidden_tag() }}
                     <p id="message" style="display: none;">You are about to import <span id="numFiles"></span> files.</p>

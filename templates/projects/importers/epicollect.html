@@ -16,7 +16,7 @@
             <hr>
             <h3>From an EpiCollect Plus project</h3>
 
-            <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+            <form role="form" method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
                 <fieldset>
                     {{ form.hidden_tag() }}
                     {{ form_helpers.render_field(form.epicollect_project, class_="input-block-level form-control", placeholder="The name of the public EpiCollect Plus project", required="required", autofocus="autofocus") }}

@@ -14,7 +14,7 @@
             {% if form %}
                 <hr>
             <h3>From a CSV file</h3>
-            <form role="form" method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+            <form role="form" method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
                 <fieldset>
                     {{ form.hidden_tag() }}
                     {{ form_helpers.render_field(form.csv_url, class_="input-block-level form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}

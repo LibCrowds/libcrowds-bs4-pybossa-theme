@@ -20,7 +20,7 @@
         </table>
     </div>
     <div class="card-block pt-1">
-        <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+        <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form.files(style="display: none;") }}
             {{ form_helpers.render_field(form.bucket, class="form-control", placeholder="The name of the S3 bucket") }}

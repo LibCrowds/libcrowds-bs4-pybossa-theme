@@ -12,7 +12,7 @@
         people will be able to contribute to it and answers will begin to be stored.
     </p>
 </div>
-<form method="post" action="{{ url_for('project.publish', short_name=project.short_name) }}">
+<form method="POST" action="{{ url_for('project.publish', short_name=project.short_name) }}">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <div class="text-right">
         <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>

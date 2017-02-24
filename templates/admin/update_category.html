@@ -1,29 +1,27 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "admin" %}
-{% set active_link = "catagories" %}
-{% from "admin/_helpers.html" import render_admin_local_nav %}
+{% set active_link = "categories" %}
+{% import "_helpers/_admin.html" as admin_helpers %}
+{% import "_helpers/_form.html" as form_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 
 {% block content %}
-{{ render_admin_local_nav(current_user, active_link) }}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            <h1><strong>Admin:</strong> Edit Category</h1>
-            <hr>
-            {% import "_helpers/_form.html" as form_helpers %}
-            <form role="form" method="POST" action="{{url_for('admin.update_category', id=category.id)}}">
-                {{form.hidden_tag()}}
-                <fieldset>
-                {{form.id}}
-                {{ form_helpers.render_field(form.name, placeholder="Category name", class="form-control", required="required", autofocus="autofocus") }}
+
+{{ admin_helpers.render_title('Update Category') }}
+
+<div class="card">
+    {{ card_helpers.render_title('Category Details', 'Update the category name and description') }}
+    <div class="card-block pt-1">
+        <form method="POST" action="{{ url_for('admin.update_category', id=category.id) }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.name, placeholder="Category name", class="form-control", required="required", autofocus="autofocus") }}
                 {{ form_helpers.render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
-                <div class="pull-right" role="group">
-                    <a href="{{url_for('admin.categories')}}" class="btn btn-default" >Cancel</a>
-                     <button type="submit" class="btn btn-danger">Update Category</button>
-                </div>
-                </fieldset>
-            </form>
-        </div>
+            <div class="text-right">
+                <a href="{{url_for('admin.categories')}}" class="btn btn-secondary" role="button">Cancel</a>
+                <input id="submit" type="submit" value="Update" class="btn btn-success" role="button" />
+            </div>
+        </form>
     </div>
 </div>
+
 {% endblock %}

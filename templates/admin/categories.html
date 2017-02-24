@@ -11,7 +11,7 @@
 {{ admin_helpers.render_title('Categories') }}
 
 <div class="card">
-    {{ card_helpers.render_title('Add Category', 'Expand the system with an exciting new category') }}
+    {{ card_helpers.render_title('Add Category', 'Because we all like putting things into a box') }}
     <div class="card-block pt-1">
         <form method="POST" action="{{ url_for('admin.categories') }}">
             {{ form_helpers.render_field(form.name, placeholder="Category name", class="form-control", required="required") }}
@@ -33,7 +33,7 @@
                 {% for c in categories %}
                 {{ table_helpers.render_row([c.id, c.name, n_projects_per_category[c.short_name],
                                              '<a href="{0}" class="btn btn-sm btn-outline-primary">Edit</a>'.format(url_for('admin.update_category', id=c.id)),
-                                             '<a href="{0}" class="btn btn-sm btn-outline-primary">Delete</a>'.format(url_for('admin.del_category', id=c.id)),]) }}
+                                             '<a href="{0}" class="btn btn-sm btn-outline-primary">Delete</a>'.format(url_for('admin.del_category', id=c.id))]) }}
                 {% endfor %}
             </tbody>
         </table>

@@ -3,10 +3,15 @@
 {% set active_link = "admin" %}
 {% import "account/_helpers.html" as helper %}
 {% import "_helpers/_project.html" as project_helper %}
-{% from "account/_helpers.html" import render_account_local_nav %}
-{% from "_helpers/_project.html" import render_project_admin_featured %}
 
 {% block content %}
+
+{{ card_helpers.render_button('Featured Projects', url_for('admin.featured'), 'fa-star') }}
+{{ card_helpers.render_button('Categories', url_for('admin.categories'), 'fa-folder-open-o') }}
+{{ card_helpers.render_button('Administrators', url_for('admin.users'), 'fa-user-plus') }}
+{{ card_helpers.render_button('Export Users', url_for('admin.export_users', format='csv'), 'fa-file-excel-o') }}
+{{ card_helpers.render_button('Background Jobs', url_for('rq_dashboard.overview'), 'fa-dashboard') }}
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 <style>

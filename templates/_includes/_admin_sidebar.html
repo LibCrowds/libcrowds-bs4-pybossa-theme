@@ -1,0 +1,25 @@
+<ul class="nav list-group">
+    <li class="list-group-item {% if active_link == 'dashboard' %}active{% endif %}">
+        <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+    </li>
+    <li class="list-group-item {% if active_link == 'news' %}active{% endif %}">
+        <a href="{{ url_for('admin.index') }}">News</a>
+    </li>
+    <li class="list-group-item {% if active_link == 'featured' %}active{% endif %}">
+        <a href="{{ url_for('admin.featured') }}">Featured</a>
+    </li>
+    <li class="list-group-item {% if active_link == 'categories' %}active{% endif %}">
+        <a href="{{ url_for('admin.categories') }}">Categories</a>
+    </li>
+    <li class="list-group-item {% if active_link == 'administrators' %}active{% endif %}">
+        <a href="{{ url_for('admin.users') }}">Administrators</a></li>
+    <li class="list-group-item">
+        <a href="{{ url_for('admin.export_users', format='csv') }}">Export Users</a>
+    </li>
+    <li class="list-group-item">
+        <a href="{{ url_for('rq_dashboard.overview') }}">Background Jobs</a>
+    </li>
+</ul>
+
+
+

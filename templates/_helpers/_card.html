@@ -1,7 +1,16 @@
-{% macro render_title(title, description) %}
+{% macro render_title(title, description, search_target=None) %}
 <div class="card-block">
-    <h4 class="card-title mb-1">{{ title }}</h4>
-    <p class="card-text text-muted">{{ description | safe }}</p>
+    <div class="d-flex flex-row align-items-end">
+        <div class="w-75 pr-3">
+            <h4 class="card-title mb-1">{{ title }}</h4>
+            <p class="card-text text-muted">{{ description | safe }}</p>
+        </div>
+        {% if search_target %}
+        <div class="w-25">
+            <input type="text" class="form-control rounded-oblong search" placeholder="Search" data-target="{{ search_target }}">
+        </div>
+        {% endif %}
+    </div>
 </div>
 {% endmacro %}
 
@@ -28,8 +37,8 @@
 {% endmacro %}
 
 {% macro render_icon_button(title, url, icon, tooltip=None, active=False) %}
-<div class="card card-button mt-3 p-0 {% if active %} active {% endif %}"
-     {%- if tooltip %}data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}"{% endif %}>
+<div class="card card-button mt-3 p-0 {% if active %}active{% endif %}"
+     {% if tooltip %}data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="{{ tooltip }}"{% endif %}>
     <a href="{{ url }}">
         <div class="card-block py-2 px-4 text-center">
             <span class="icon icon-4x icon-{{ icon }}"></span>

@@ -8,7 +8,7 @@
 <section class="pattern-white-wall pt-5">
     <div class="container">
         <div class="d-flex flex-row align-items-center justify-content-center">
-            <span class="fa fa-chevron-left mr-2 scroll-target" data-target="#categories-strip" data-direction="left" role="button"></span>
+            <span class="fa fa-chevron-left mr-2 btn-scroll" data-target="#categories-strip" data-direction="left" role="button"></span>
             <div id="categories-strip" class="card-strip">
                 {% for c in categories %}
                     {{ card_helpers.render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), icon=c.short_name,
@@ -19,34 +19,11 @@
                     active=(active_cat.short_name=='draft')) }}
                 {% endif %}
             </div>
-            <span class="fa fa-chevron-right ml-2 scroll-target" data-target="#categories-strip" data-direction="right" role="button"></span>
+            <span class="fa fa-chevron-right ml-2 btn-scroll" data-target="#categories-strip" data-direction="right" role="button"></span>
         </div>
         <div class="row my-2">
-            <div class="col-md-12">
-                <form class="form-inline d-flex flex-row align-items-center justify-content-center">
-                    <div class="my-2 d-flex align-items-center mr-4">
-                        <div class="toggle-group mr-2">Hide completed projects:</div>
-                        <div class="toggle-group">
-                            <div class="toggle">
-                                <input checked="true" class="toggle-checkbox shuffle-checkbox" type="checkbox" id="show-all" data-group="incomplete">
-                                <label class="toggle-label" for="show-all">
-                                    <span class="toggle-inner"></span>
-                                    <span class="toggle-switch"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group my-2 mr-4">
-                        <label for="project-sort-options" class="mr-2">Sort:</label>
-                        <select class="shuffle-sort custom-select" id="project-sort-options">
-                            <option value="progress">Most Help Needed</option>
-                            <option value="n-volunteers" data-reverse="true">Most Popular</option>
-                            <option value="created" data-reverse="true">Most Recently Launched</option>
-                            <option value="last-activity" data-reverse="true">Most Recently Active</option>
-                        </select>
-                    </div>
-                    <input type="text" class="form-control rounded-oblong shuffle-search mr-2 my-2" placeholder="Search">
-                </form>
+            <div class="col-sm-12">
+                {{ project_helpers.render_grid_shuffle_controls() }}
             </div>
         </div>
     </div>

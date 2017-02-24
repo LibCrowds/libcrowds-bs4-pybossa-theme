@@ -44,7 +44,7 @@ function styleNavigation() {
 /**
  * Handle clicking of a scroll button.
  */
-$('.scroll-target').on('click', function() {
+$('.btn-scroll').on('click', function() {
     const target    = $(this).data('target'),
           direction = $(this).data('direction');
     if (direction == 'left') {

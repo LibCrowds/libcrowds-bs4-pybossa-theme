@@ -30,32 +30,6 @@
 </nav>
 {% endmacro %}
 
-{% macro render_project_admin_featured(project, upload_method) %}
-<tr>
-    <td><a href="{{url_for('project.tasks', short_name=project.short_name)}}">{{project.name}}</a></td>
-
-    {% if project.featured %}
-    <td style="text-align:center;">
-        <a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})">
-            <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
-        </a>
-        <a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})" style="display:none;">
-                <i id="project{{project.id}}" class="fa fa-plus"></i> Add
-        </a>
-    </td>
-    {% else %}
-    <td style="text-align:center;">
-        <a id="projectBtnAdd{{project.id}}" class="btn btn-inverse" onclick="add({{project.id}})">
-            <i id="project{{project.id}}" class="fa fa-plus"></i> Add
-        </a>
-        <a id="projectBtnDel{{project.id}}" class="btn btn-inverse" onclick="del({{project.id}})" style="display:none;">
-                <i id="project{{project.id}}" class="fa fa-remove"></i> Remove
-        </a>
-    </td>
-    {% endif %}
-</tr>
-{% endmacro %}
-
 {% macro render_grid(projects, shuffle=False) %}
 <div {% if not shuffle %}class="row overlay-cards"{% else %}class="shuffle-grid row overlay-cards" id="project-grid" data-initial-group="incomplete"{% endif %}>
     {% for project in projects -%}
@@ -91,26 +65,6 @@
     <a href="{{ link }}" class="btn btn-primary">{{ link_text }}</a>
     </div>
     {% endif %}
-</div>
-<hr>
-{% endmacro %}
-
-{% macro render_overall_progress(project, n_tasks, overall_progress, show_contribute_btn=True, show_n_tasks=False) %}
-<div class="row vcenter-md hcenter">
-    <div class="col-md-8 col-xs-12 vcenter-sm text-center-xs">
-        <div class="col-sm-2 vcenter hcenter"><input type="text" value="{{overall_progress | round |int}}" class="dial"></div>
-        <h3><strong> Overall progress</strong>: {{ overall_progress | round | int }}% completed</h3>
-    </div>
-    <div class="col-md-4 col-xs-12 text-center">
-        {% if show_contribute_btn %}
-        <div class="pull-right-md" role="group">
-            <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-danger"> Contribute</a>
-        </div>
-        {% elif show_n_tasks %}
-        <span class="pull-right-md"><strong>{{n_tasks}}</strong> Tasks</span>
-        {% endif %}
-    </div>
-
 </div>
 <hr>
 {% endmacro %}
@@ -154,4 +108,31 @@
     {% else -%}
         <img class="{{ class }}" style="{{ style }}" src="http://placekitten.com/400/400?image=1" alt="{{ project.name }} thumbnail">
     {% endif -%}
+{% endmacro %}
+
+{% macro render_grid_shuffle_controls() %}
+<form class="form-inline d-flex flex-row align-items-center justify-content-center">
+    <div class="my-2 d-flex align-items-center mr-4">
+        <div class="toggle-group mr-2">Hide completed projects:</div>
+        <div class="toggle-group">
+            <div class="toggle">
+                <input checked="true" class="toggle-checkbox shuffle-checkbox" type="checkbox" id="show-all" data-group="incomplete">
+                <label class="toggle-label" for="show-all">
+                    <span class="toggle-inner"></span>
+                    <span class="toggle-switch"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group my-2 mr-4">
+        <label for="project-sort-options" class="mr-2">Sort:</label>
+        <select class="shuffle-sort custom-select" id="project-sort-options">
+            <option value="progress">Most Help Needed</option>
+            <option value="n-volunteers" data-reverse="true">Most Popular</option>
+            <option value="created" data-reverse="true">Most Recently Launched</option>
+            <option value="last-activity" data-reverse="true">Most Recently Active</option>
+        </select>
+    </div>
+    <input type="text" class="form-control rounded-oblong shuffle-search mr-2 my-2" placeholder="Search">
+</form>
 {% endmacro %}

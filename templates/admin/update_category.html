@@ -10,7 +10,7 @@
 {{ admin_helpers.render_title('Update Category') }}
 
 <div class="card">
-    {{ card_helpers.render_title('Category Details', 'Update the category name and description') }}
+    {{ card_helpers.render_title('Category Details', 'Finally found your inspiration? Well done you.') }}
     <div class="card-block pt-1">
         <form method="POST" action="{{ url_for('admin.update_category', id=category.id) }}">
             {{ form.hidden_tag() }}

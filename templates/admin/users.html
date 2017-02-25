@@ -1,58 +1,47 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "admin" %}
 {% set active_link = "administrators" %}
-{% import "admin/_helpers.html" as helper %}
+{% import "_helpers/_admin.html" as admin_helpers %}
+{% import "_helpers/_form.html" as form_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
 
 {% block content %}
-{{ helper.render_admin_local_nav(current_user, active_link) }}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            <h1><strong>Admin:</strong> Manage Administrators</h1>
-            {% import "_helpers/_form.html" as form_helpers %}
-            <form class="form-search" method="POST">
-                {{ form.hidden_tag() }}
-                <div class="input-group">
-                    <input id="user" name="user" type="text" class="search-query form-control" placeholder="Enter full name or username">
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default form-control margin-right-xs search-button"><i class="fa fa-search"></i></button>
-                    </span>
-                </div>
-            </form>
-            {% if found %}
-            <h2 class="padding-top-sm">Results</h2>
-            <table class="table table-stripped table-condensed table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th class="hidden-xs">Full Name</th>
-                        <th class="hidden-xs" style="text-align:center;">Joined</th>
-                        <th style="text-align:center;">Action</th>
-                    </tr>
-                </thead>
 
-            {% for user in found %}
-                {{ helper.render_admin_user(user) }}
-            {% endfor %}
-            </table>
+{{ admin_helpers.render_title('Administrators') }}
 
-            {% endif %}
-
-            <h2 class="padding-top-sm">Current Administrators</h2>
-            <table class="table table-stripped table-condensed table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th class="hidden-xs">Full Name</th>
-                        <th class="hidden-xs" style="text-align:center;">Joined</th>
-                        <th style="text-align:center;">Action</th>
-                    </tr>
-                </thead>
-            {% for user in users %}
-                {{ helper.render_admin_user(user) }}
-            {% endfor %}
-            </table>
-        </div>
+<div class="card my-4">
+    {{ card_helpers.render_title('Current Administrators', 'Look what the cat dragged in') }}
+    <div class="card-block pt-1">
     </div>
 </div>
+
+<div class="card my-4">
+    {{ card_helpers.render_title('Users', 'The hoi polloi') }}
+    <div class="card-block">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.user, placeholder="Search users", show_label=False, class="form-control rounded-oblong", required="true") }}
+            <div class="text-right">
+                <input id="submit" type="submit" value="Search" class="btn btn-success" role="button" />
+            </div>
+        </form>
+    </div>
+    {% if found %}
+    <div class="table-responsive">
+        <table id="featured-table" class="table table-hover table-striped mb-0">
+            {{ table_helpers.render_head(['ID', 'Name', 'Administrator']) }}
+            <tbody>
+                {% for user in found %}
+                {{ table_helpers.render_row([user.id, user.fullname, '<a href="{0}" class="btn btn-sm btn-outline-primary">{1}</a>'.format(url_for('admin.add_admin', user_id=user.id), user.admin)]) }}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <hr class="w-100 mt-2">
+    <p class="lead text-center">No results</p>
+    {% endif %}
+</div>
+
 {% endblock %}

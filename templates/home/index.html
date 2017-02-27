@@ -1,7 +1,7 @@
 {% extends "_layouts/splash.html" %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_social.html" as social_helpers %}
-{% import "account/_helpers.html" as account_helper %}
+{% import "_helpers/_user.html" as user_helpers %}
 
 {% block content %}
 <div id="crowd-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0 d-flex align-items-center">
@@ -155,7 +155,7 @@
                             {% elif loop.index == 2 %}
                             {% set width = 100 %}
                             {% endif %}
-                            {{ account_helper.render_user_avatar(user, class="img-thumbnail rounded-circle", width=width) }}
+                            {{ user_helpers.render_avatar(user, class="img-thumbnail rounded-circle", width=width) }}
                         </div>
                     </a>
                     <p class="badge badge-info">{{ user.score }}</p>

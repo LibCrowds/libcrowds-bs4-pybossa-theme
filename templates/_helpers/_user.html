@@ -50,7 +50,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_user_avatar(user, upload_method, class, style, width='90') %}
+{% macro render_avatar(user, upload_method, class, style, width='90') %}
 {% if user.info.avatar %}
     {% if upload_method == 'rackspace'%}
     <img class="{{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 200, 200);"  alt="{{ user.name }}'s avatar">

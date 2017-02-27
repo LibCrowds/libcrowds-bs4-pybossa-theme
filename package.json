@@ -24,7 +24,8 @@
     "rethinkdb": "^2.3.3",
     "cropper": "^2.3.4",
     "pace-progress": "^1.0.2",
-    "shufflejs": "^4.1.0"
+    "shufflejs": "^4.1.0",
+    "chart.js": "^2.5.0"
   },
   "devDependencies": {
     "jshint": "^2.9.4"

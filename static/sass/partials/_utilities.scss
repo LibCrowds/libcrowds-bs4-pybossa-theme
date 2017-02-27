@@ -3,10 +3,12 @@
     .brightness-#{$size} { filter: brightness(#{$length}) }
 }
 
+
 // Opacity
 @each $size, $length in $sizes {
     .opacity-#{$size} * { opacity: $size / 100 }
 }
+
 
 // Viewport height and width
 @each $prop, $abbrev in (width: w, height: h) {
@@ -15,6 +17,7 @@
   }
 }
 
+
 // Backgrounds
 @include bg-variant('.bg-white', $white);
 
@@ -22,12 +25,18 @@
 
 @include bg-variant('.bg-dark-overlay', rgba($black, 0.85));
 
+
 // Colors
 @include text-emphasis-variant('.text-body', $body-color);
 
 @include text-emphasis-variant('.text-sky', $sky);
 
+
 // Borders
 .rounded-oblong {
     border-radius: 2.5rem;
+}
+
+@each $width in 1 2 3 4 5 {
+    .bw-#{$width} { border-width: #{$width}px }
 }

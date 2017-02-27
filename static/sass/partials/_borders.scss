@@ -1,3 +1,0 @@
-@each $width in 1 2 3 4 5 {
-    .bw-#{$width} { border-width: #{$width}px }
-}

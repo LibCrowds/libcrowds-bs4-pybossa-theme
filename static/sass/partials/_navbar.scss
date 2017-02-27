@@ -28,6 +28,17 @@
 
 
 @include media-breakpoint-up(lg) {
+    .navbar {
+        &.navbar-dashboard .navbar-brand {
+            visibility: hidden;
+        }
+
+        .dropdown-menu {
+            left: initial;
+            right: 0;
+        }
+    }
+
     .navbar-inverse {
         .dropdown-menu {
             background-color: rgba($black, 0.5);

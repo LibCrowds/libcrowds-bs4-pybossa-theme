@@ -5,19 +5,30 @@
 {% import "_helpers/_form.html" as form_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_table.html" as table_helpers %}
+{% import "_helpers/_user.html" as user_helpers %}
 
 {% block content %}
 
 {{ admin_helpers.render_title('Administrators') }}
 
 <div class="card my-4">
-    {{ card_helpers.render_title('Current Administrators', 'Look what the cat dragged in') }}
+    {{ card_helpers.render_title('Manage Administrators', 'Use the search box below to locate users and set their admin privileges') }}
     <div class="card-block pt-1">
+        <div class="card-title">Current Administrators (apart from you):</div>
+        <ul class="list-unstyled">
+            {% for user in users %}
+            <li class="text-center d-inline-block mx-1">
+                <a href="{{ url_for('account.profile', name=user.name) }}" data-content="<strong>Email:</strong> {{ user.email_addr }}"
+                   data-toggle="popover" data-html="true" data-placement="top" data-trigger="hover" data-title="<strong>{{ user.fullname }}</strong>">
+                    <div class="my-1">
+                        {{ user_helpers.render_avatar(user, class="img-thumbnail rounded-circle", width=90) }}
+                    </div>
+                </a>
+                <p class="badge badge-info">{{ user.name }}</p>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-</div>
-
-<div class="card my-4">
-    {{ card_helpers.render_title('Users', 'The hoi polloi') }}
     <div class="card-block">
         <form method="POST">
             {{ form.hidden_tag() }}
@@ -30,10 +41,11 @@
     {% if found %}
     <div class="table-responsive">
         <table id="featured-table" class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['ID', 'Name', 'Administrator']) }}
+            {{ table_helpers.render_head(['ID', 'Name', 'Email', 'Administrator']) }}
             <tbody>
                 {% for user in found %}
-                {{ table_helpers.render_row([user.id, user.fullname, '<a href="{0}" class="btn btn-sm btn-outline-primary">{1}</a>'.format(url_for('admin.add_admin', user_id=user.id), user.admin)]) }}
+                {{ table_helpers.render_row([user.id, '<a href="{0}">{1}</a>'.format(url_for('account.profile', name=user.name), user.fullname), user.email_addr,
+                                             '<a href="{0}" class="btn btn-sm btn-outline-primary">{1}</a>'.format(url_for('admin.add_admin', user_id=user.id), user.admin)]) }}
                 {% endfor %}
             </tbody>
         </table>

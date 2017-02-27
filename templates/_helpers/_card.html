@@ -1,13 +1,13 @@
-{% macro render_title(title, description, search_target=None) %}
+{% macro render_title(title, description, search_table=None) %}
 <div class="card-block">
     <div class="d-flex flex-row align-items-end">
         <div class="w-75 pr-3">
             <h4 class="card-title mb-1">{{ title }}</h4>
             <p class="card-text text-muted">{{ description | safe }}</p>
         </div>
-        {% if search_target %}
+        {% if search_table %}
         <div class="w-25">
-            <input type="text" class="form-control rounded-oblong search" placeholder="Search" data-target="{{ search_target }}">
+            <input type="text" class="form-control rounded-oblong search-table" placeholder="Search" data-target="{{ search_table }}">
         </div>
         {% endif %}
     </div>

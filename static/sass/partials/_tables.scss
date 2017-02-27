@@ -1,0 +1,6 @@
+table tbody tr {
+    &.hidden,
+    &:not(.hidden) ~ tr.no-data {
+        display: none;
+    }
+}

@@ -24,24 +24,17 @@
     <div>
         {% for c in categories %}
         <div id="{{ c.short_name }}" {% if not loop.first %}style="display: none;"{% endif %}>
-            {% if projects[c.short_name] %}
             <div class="table-responsive">
                 <table id="featured-table" class="table table-hover table-striped mb-0">
                     {{ table_helpers.render_head(['Name', 'Progress', 'Featured']) }}
                     <tbody>
                         {% for p in projects[c.short_name] %}
                         {{ table_helpers.render_row([p.name, p.overall_progress, '<a href="#" class="project-toggle-featured btn btn-sm btn-outline-primary" data-project-id="{0}" data-featured="{1}">{1}</a>'.format(p.id, p.featured == True)]) }}
-                         {% endfor %}
-                         <tr class="text-center">
-                            <td class="lead text-center" colspan="3">There are no projects in this category.</td>
-                         </tr>
+                        {% endfor %}
+                        {{ table_helpers.render_no_data_row(3) }}
                     </tbody>
                 </table>
             </div>
-            {% else %}
-            <hr>
-            <p class="lead text-center">There are no projects in this category.</p>
-            {% endif %}
         </div>
         {% endfor %}
     </div>

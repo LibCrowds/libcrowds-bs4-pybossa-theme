@@ -9,7 +9,7 @@ function notify(msg, type) {
         type: type || 'info',
         hide : true,
         width: '400px',
-        delay: 2500,
+        delay: 1500,
         buttons: {
             closer: true,
             sticker: false

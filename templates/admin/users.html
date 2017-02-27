@@ -38,7 +38,6 @@
             </div>
         </form>
     </div>
-    {% if found %}
     <div class="table-responsive">
         <table id="featured-table" class="table table-hover table-striped mb-0">
             {{ table_helpers.render_head(['ID', 'Name', 'Email', 'Administrator']) }}
@@ -47,13 +46,10 @@
                 {{ table_helpers.render_row([user.id, '<a href="{0}">{1}</a>'.format(url_for('account.profile', name=user.name), user.fullname), user.email_addr,
                                              '<a href="{0}" class="btn btn-sm btn-outline-primary">{1}</a>'.format(url_for('admin.add_admin', user_id=user.id), user.admin)]) }}
                 {% endfor %}
+                {{ table_helpers.render_no_data_row(4) }}
             </tbody>
         </table>
     </div>
-    {% else %}
-    <hr class="w-100 mt-2">
-    <p class="lead text-center">No results</p>
-    {% endif %}
 </div>
 
 {% endblock %}

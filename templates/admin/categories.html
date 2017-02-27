@@ -11,9 +11,10 @@
 {{ admin_helpers.render_title('Categories') }}
 
 <div class="card">
-    {{ card_helpers.render_title('Add Category', 'Because we all like putting things into a box') }}
+    {{ card_helpers.render_title('Add Category', 'Add a new project category') }}
     <div class="card-block pt-1">
         <form method="POST" action="{{ url_for('admin.categories') }}">
+            {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.name, placeholder="Category name", class="form-control", required="required") }}
             {{ form_helpers.render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
             <div class="text-right">
@@ -25,9 +26,9 @@
 </div>
 
 <div class="card my-4">
-    {{ card_helpers.render_title('Current Categories', 'Edit or delete current categories') }}
+    {{ card_helpers.render_title('Current Categories', 'Edit or delete current categories', search_table="#categories-table") }}
     <div class="table-responsive">
-        <table id="featured-table" class="table table-hover table-striped mb-0">
+        <table id="categories-table" class="table table-hover table-striped mb-0">
             {{ table_helpers.render_head(['ID', 'Title', 'Projects', 'Edit', 'Delete']) }}
             <tbody>
                 {% for c in categories %}
@@ -35,6 +36,7 @@
                                              '<a href="{0}" class="btn btn-sm btn-outline-primary">Edit</a>'.format(url_for('admin.update_category', id=c.id)),
                                              '<a href="{0}" class="btn btn-sm btn-outline-primary">Delete</a>'.format(url_for('admin.del_category', id=c.id))]) }}
                 {% endfor %}
+                {{ table_helpers.render_no_data_row(5) }}
             </tbody>
         </table>
     </div>

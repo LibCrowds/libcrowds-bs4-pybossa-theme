@@ -10,14 +10,15 @@
 {{ admin_helpers.render_title('Delete Category') }}
 
 <div class="card">
-    {{ card_helpers.render_title('Danger Zone', 'You had better not screw this up, there is no undo!') }}
+    {{ card_helpers.render_title('Danger Zone', 'There is no undo!') }}
     <div class="card-block pt-1">
         <div class="alert alert-danger">
             <strong>Warning!</strong> Deleting the category will remove it from all associated projects.
         </div>
         <form method="POST" action="{{ url_for('admin.del_category', id=category.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="text-right">
-                <a href="{{url_for('admin.categories')}}" class="btn btn-secondary" role="button">No, do not delete it</a>
+                <a href="{{ url_for('admin.categories') }}" class="btn btn-secondary" role="button">No, do not delete it</a>
                 <input id="submit" type="submit" value="Delete" class="btn btn-danger" role="button" />
             </div>
         </form>

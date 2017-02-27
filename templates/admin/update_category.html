@@ -10,14 +10,14 @@
 {{ admin_helpers.render_title('Update Category') }}
 
 <div class="card">
-    {{ card_helpers.render_title('Category Details', 'Finally found your inspiration? Well done you.') }}
+    {{ card_helpers.render_title('Category Details', 'Update the category name or description') }}
     <div class="card-block pt-1">
         <form method="POST" action="{{ url_for('admin.update_category', id=category.id) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.name, placeholder="Category name", class="form-control", required="required", autofocus="autofocus") }}
                 {{ form_helpers.render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
             <div class="text-right">
-                <a href="{{url_for('admin.categories')}}" class="btn btn-secondary" role="button">Cancel</a>
+                <a href="{{ url_for('admin.categories') }}" class="btn btn-secondary" role="button">Cancel</a>
                 <input id="submit" type="submit" value="Update" class="btn btn-success" role="button" />
             </div>
         </form>

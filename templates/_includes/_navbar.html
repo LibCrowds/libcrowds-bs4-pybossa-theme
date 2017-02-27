@@ -3,9 +3,7 @@
             aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    {%- if not 'navbar-dashboard' in navbar_class %}
     <a class="navbar-brand py-0 mx-3" href="{{ url_for('home.home') }}">{{ brand }}</a>
-    {% endif -%}
 
     <div class="collapse navbar-collapse align-items-center" id="main-navbar">
         <ul class="navbar-nav mr-auto">

@@ -13,32 +13,33 @@
     background-size: cover;
     background-position: center center;
     display: none;
-    
+
     ul {
+        display: block;
         padding: 1rem 1rem 1.25rem 1rem;
     }
-    
+
     .list-group-item {
         border: none;
         background-color: initial;
         margin: calc(#{$list-group-item-padding-x} - #{$list-group-item-padding-y}) 0;
         padding: 0rem;
-        
+
         a {
             padding: $list-group-item-padding-y;
             width: 100%;
             color: $white;
         }
-        
+
         @include hover-focus {
             border-radius: $border-radius-lg;
             background-color: rgba($white, 0.23);
         }
     }
-    
+
     @include media-breakpoint-up(lg) {
         display: flex;
-        
+
         & + .dashboard {
             z-index: 2;
             max-height: 100%;

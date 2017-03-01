@@ -70,9 +70,16 @@
                         {{ form.hidden_tag() }}
                         {{ form_helpers.render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
                         {{ form_helpers.render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                        <div class="text-right">
-                            <a href="{{url_for('home.home' )}}" class="btn btn-secondary" role="button">Cancel</a>
+                        <div class="row d-flex flex-row align-items-center justify-content-between text-center">
+                            <div class="col-lg-8 text-lg-left my-1">
+                                <p class="mb-0">
+                                    <a href="{{ url_for('account.forgot_password') }}">Forgotten Password</a>
+                                </p>
+                            </div>
+                            <div class="col-lg-4 text-lg-right my-1">
+                                <a href="{{url_for('home.home' )}}" class="btn btn-secondary" role="button">Cancel</a>
                             <input type="submit" value="Sign in" class="btn btn-success" role="button" />
+                            </div>
                         </div>
                     </form>
                 </div>

@@ -13,18 +13,8 @@
     </div>
     <div class="row">
         <div class="col-sm-10 offset-sm-1">
-            {% if projects_published or projects_draft %}
-                {% if projects_published %}
-                <h2>Published</h2>
-                {{ project_helpers.render_projects_list(projects_published, current_user) }}
-                {% endif %}
-                {% if projects_draft %}
-                <h2>Draft</h2>
-                {{ project_helpers.render_projects_list(projects_draft, current_user) }}
-                {% endif %}
-            {% else %}
-            <p class="lead">You have not created any projects yet, <a href="{{ url_for('project.new') }}" >create one now!</a></>
-            {% endif %}
+            {{ project_helpers.render_table("Published", "Your published projects", "published-projects-table", projects_published) }}
+            {{ project_helpers.render_table("Draft", "Your draft projects", "draft-projects-table", projects_draft, class="mt-4") }}
         </div>
     </div>
 </div>

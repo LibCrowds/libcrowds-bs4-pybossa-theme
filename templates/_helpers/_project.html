@@ -1,3 +1,6 @@
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
+
 {% macro render_pagination(pagination) %}
 <nav>
     <ul class="pagination pagination-centered">
@@ -52,21 +55,22 @@
 </div>
 {% endmacro %}
 
-{% macro render_projects_list(projects, current_user) %}
-<div class="list-group">
-    {% for project in projects %}
-        {% if current_user.id == project.owner_id %}
-        <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="list-group-item list-group-item-action justify-content-between">
-        {% else %}
-        <a href="{{url_for('project.details', short_name=project.short_name)}}" class="list-group-item list-group-item-action justify-content-between">
-        {% endif %}
-            {{project.name}}
-            <span class="badge {% if project.overall_progress == 100 %}badge-success{% else %}badge-default{% endif %} badge-pill">
-                {{ project.overall_progress | round | int }}%
-            </span>
-        </a>
-    {% endfor %}
-<div>
+{% macro render_table(title, subtitle, id, projects, class=None) %}
+<div class="card {% if class %}{{ class }}{% endif %}">
+    {{ card_helpers.render_title(title, subtitle, search_table="#{0}".format(id)) }}
+    <div class="table-responsive">
+        <table id="{{ id }}" class="table table-hover table-striped mb-0">
+            {{ table_helpers.render_head(['Name', 'Progress', 'Details']) }}
+            <tbody>
+                {% for p in projects %}
+                {{ table_helpers.render_row([p.name, p.overall_progress,
+                                             '<a href="{0}" class="btn btn-sm btn-outline-primary">View</a>'.format(url_for('project.details', short_name=p.short_name))]) }}
+                {% endfor %}
+                {{ table_helpers.render_no_data_row(3) }}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endmacro %}
 
 {% macro render_loading(text) %}

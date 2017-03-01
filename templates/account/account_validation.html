@@ -1,17 +1,28 @@
 {% extends "_layouts/default.html" %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-<span class="set-body-bg" data-bg="pattern-white-wall"></span>
-<div class="container container-main">
+<div class="container my-5 pt-4">
     <div class="row">
-        <div class="col-xs-12">
-            <div class="col-sm-6 col-sm-offset-3">
-                <div class="white-panel inset-shadow-white">
-                    <h2>Great, just one more step!</h2>
-                    <p>In order to confirm your identity we've sent a link to the email address provided, please click on it to finish creating your {{ config.BRAND }} account.</p>
-                    <p>If you have not received the email in the next couple of minutes please check your spam folder. If it's not there drop us an email at <a href="mailto:issues@libcrowds.com">issues@libcrowds.com</a>.</p>
-                    <a id="btnHome" href="{{url_for('home.home')}}" class="btn btn-inverse">
-                    <i class="fa fa-home"></i> Home</a>
+        <div class="col-sm-10 offset-sm-1">
+            {{ general_helpers.render_title(prefix="", title="Account Validation") }}
+        </div>
+        <div class="col-sm-10 offset-sm-1">
+            <div class="card">
+                {{ card_helpers.render_title('Nearly There', 'Just one more step') }}
+                <div class="card-block pt-1">
+                    <p class="lead">
+                        In order to confirm your identity we've sent a link to the email address provided, please click on it to finish creating your
+                        {{ config.BRAND }} account.
+                    </p>
+                    <p class="lead">
+                        If you have not received the email in the next couple of minutes please check your spam folder. If it's not there
+                        drop us an email at <a href="mailto:issues@libcrowds.com">issues@libcrowds.com</a>.
+                    </p>
+                    <div class="text-right">
+						<a href="{{ url_for('home.home') }}" class="btn btn-secondary" role="button">Home</a>
+					</div>
                 </div>
             </div>
         </div>

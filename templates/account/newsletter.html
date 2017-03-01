@@ -1,20 +1,25 @@
 {% extends "_layouts/default.html" %}
-{% set active_page = "create" %}
-{% set body_class="account" %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-<div class="container container-main">
+<div class="container my-5 pt-4">
     <div class="row">
-        <div id="newsletter" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-            <h1>Thanks for signing up!</h1>
-            <p class="lead">
-		Before you get started, perhaps you would like to subscribe to our newsletter. We'll
-		update you from time to time with new features and developments on the platform
-		(and we promise not to write too often)!
-	    </p>
-            <div class="pull-right" role="group">
-                <a id="notinterested" class="btn btn-default" href="{{url_for('account.newsletter_subscribe', subscribe=False, next=next)}}">No thanks</a>
-		<a id="signmeup" class="btn btn-danger" href="{{url_for('account.newsletter_subscribe', subscribe=True, next=next)}}">Sure, sign me up</a>
+        <div class="col-sm-10 offset-sm-1">
+            {{ general_helpers.render_title(prefix="", title="Newsletter") }}
+        </div>
+        <div class="col-sm-10 offset-sm-1">
+            <div class="card">
+                {{ card_helpers.render_title('Newsletter', 'Subscribe to out newsletter') }}
+                <div class="card-block pt-1">
+					<p class="lead">
+						If you want to remain updated with new features, projects and developments subscribe to our newsletter.
+					</p>
+                    <div class="text-right">
+						<a href="{{ url_for('account.newsletter_subscribe', subscribe=False, next=next) }}" class="btn btn-secondary" role="button">No thanks</a>
+						<a href="{{ url_for('account.newsletter_subscribe', subscribe=True, next=next) }}" class="btn btn-success" role="button">Sure, sign me up</a>
+					</div>
+                </div>
             </div>
         </div>
     </div>

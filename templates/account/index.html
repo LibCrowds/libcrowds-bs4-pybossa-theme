@@ -1,6 +1,5 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "community"  %}
-{% import "privacy/locked.html" as privacy %}
 {% import "account/_helpers.html" as helper %}
 {% from "_helpers/_project.html" import broken_image %}
 
@@ -9,9 +8,6 @@
     <div class="container container-padded">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-                {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated() and not current_user.admin)) %}
-                    {{ privacy.render_lock_page() }}
-                {% else %}
                 <h1>Community <small>{{total}} registered users</small><a class="pull-right btn btn-danger" href="{{url_for('leaderboard.index')}}">Leaderboard</a></h1>
                     {% if accounts %}
                     <ul class="users text-center">
@@ -30,7 +26,6 @@
                         </li>
                     {% endfor %}
                     </ul>
-                {% endif %}
             <div class="row text-center">
                 <div class="col-sm-12">
                 {% if pagination.pages > 1 %}
@@ -41,14 +36,5 @@
         {% endif %}
     </div>
 </div>
-
-<script>
-$("a[rel=popover]").popover({
-        html: true,
-        animate: true,
-        trigger: 'hover',
-        placement: 'bottom'
-                });
-</script>
 
 {% endblock %}

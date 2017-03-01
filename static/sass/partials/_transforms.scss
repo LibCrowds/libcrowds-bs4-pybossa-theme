@@ -1,8 +1,8 @@
 .btn-circle a {
     transform: translateY(-90px);
-    
+
     @include hover-focus {
-        transform: none;   
+        transform: none;
     }
 }
 
@@ -11,14 +11,14 @@
         &:after {
             transform: translateY(10px);
         }
-        
+
         @include hover-focus {
             &:after {
                 transform: none;
             }
         }
     }
-    
+
     &.active .nav-link:after {
         transform: none;
     }

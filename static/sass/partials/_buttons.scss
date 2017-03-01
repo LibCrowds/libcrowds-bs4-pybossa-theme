@@ -1,6 +1,6 @@
 .btn-outline-white {
     @include button-outline-variant($white);
-    
+
     @include hover-focus {
         background-color: transparent;
     }
@@ -15,12 +15,12 @@
     display: block;
     position: relative;
     overflow: hidden;
-    
+
     a {
         width: 100%;
         color: $white;
         display: inline-block;
-        
+
         div {
             display: flex;
             align-items: center;
@@ -34,39 +34,39 @@
     @include hover-focus;
     border-radius: 0;
     color: $white;
-    
+
     &.btn-twitter {
         background: $twitter;
-        
+
         @include hover-focus {
             background: darken($twitter, 5%);
         }
     }
-    
+
     &.btn-facebook {
         background: $facebook;
-        
+
         @include hover-focus {
             background: darken($facebook, 5%);
         }
     }
-    
+
     &.btn-googleplus {
         background: $googleplus;
-        
+
         @include hover-focus {
             background: darken($googleplus, 5%);
         }
     }
-    
+
     &.btn-linkedin {
         background: $linkedin;
-        
+
         @include hover-focus {
             background: darken($linkedin, 5%);
         }
     }
-    
+
     @include hover-focus {
         color: $white;
     }

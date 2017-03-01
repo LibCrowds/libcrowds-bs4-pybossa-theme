@@ -1,7 +1,7 @@
 .black-ul-link  {
     border-bottom: 3px solid rgba($black, 0);
     display: inline-block;
-    
+
     @include hover-focus {
         border-bottom: 3px solid rgba($black, 1);
     }

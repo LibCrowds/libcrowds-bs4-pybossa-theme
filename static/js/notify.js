@@ -9,7 +9,7 @@ function notify(msg, type) {
         type: type || 'info',
         hide : true,
         width: '400px',
-        delay: 1500,
+        delay: 2500,
         buttons: {
             closer: true,
             sticker: false
@@ -27,6 +27,7 @@ function notify(msg, type) {
             break;
         case "success":
             opts.icon = 'fa fa-thumbs-up';
+            opts.delay = 1500;
             break;
         default:
             opts.icon = 'fa fa-info-circle';

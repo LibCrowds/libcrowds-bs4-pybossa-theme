@@ -8,7 +8,9 @@
     </div>
     {% if link and link_text %}
     <div>
-    <a href="{{ link }}" class="btn btn-outline-primary bg-white">{{ link_text }}</a>
+    <div class="bg-white">
+        <a href="{{ link }}" class="btn btn-outline-primary">{{ link_text }}</a>
+    </div>
     </div>
     {% endif %}
 </div>

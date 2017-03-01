@@ -25,7 +25,7 @@
     "cropper": "^2.3.4",
     "pace-progress": "^1.0.2",
     "shufflejs": "^4.1.0",
-    "chart.js": "^2.5.0"
+    "chartist": "^0.10.1"
   },
   "devDependencies": {
     "jshint": "^2.9.4"

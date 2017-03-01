@@ -1,170 +1,79 @@
-{% extends "/base.html" %}
-{% set active_page = "profile" %}
-{% set active_link = "admin" %}
-{% import "account/_helpers.html" as helper %}
-{% import "_helpers/_project.html" as project_helper %}
+{% extends "_layouts/dashboard.html" %}
+{% set active_page = "admin" %}
+{% set active_link = "dashboard" %}
+{% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% set jstop = True %}
 
 {% block content %}
 
-{{ card_helpers.render_button('Featured Projects', url_for('admin.featured'), 'fa-star') }}
-{{ card_helpers.render_button('Categories', url_for('admin.categories'), 'fa-folder-open-o') }}
-{{ card_helpers.render_button('Administrators', url_for('admin.users'), 'fa-user-plus') }}
-{{ card_helpers.render_button('Export Users', url_for('admin.export_users', format='csv'), 'fa-file-excel-o') }}
-{{ card_helpers.render_button('Background Jobs', url_for('rq_dashboard.overview'), 'fa-dashboard') }}
+{% assets filters="jsmin", output="js/gen/admin-dashboard.min.js",
+    "../node_modules/pace-progress/pace.js",
+    "../node_modules/jquery/dist/jquery.js",
+    "../node_modules/tether/dist/js/tether.js",
+    "../node_modules/bootstrap/dist/js/bootstrap.js",
+    "../node_modules/pnotify/dist/pnotify.js",
+    "../node_modules/pnotify/dist/pnotify.buttons.js",
+    "../node_modules/chartist/dist/chartist.js",
+    "js/notify.js",
+    "js/log-error.js"
+    %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-<style>
-    .ct-bar, .ct-line, .ct-point {
-        stroke: #3AB0D5 !important;
-    }
-</style>
-<div class="container">
-    <div class="col-md-10">
-        <h1><strong>{{ _('Dashboard last 7 days') }}</strong></h1>
-    </div>
-    <div class="col-md-2">
-        <h1><a href="{{url_for('admin.dashboard', refresh='1')}}" class="btn btn-default">{{ _('Refresh') }}</a></h1>
+{% if not wait %}
+{{ general_helpers.render_title('Admin', 'Dashboard', link=url_for('admin.dashboard', refresh='1'), link_text='Refresh') }}
+
+<div class="card-deck">
+{{ card_helpers.render_stat('fa-user-plus', new_users_week['series'][0] | sum, 'New users', 'Returning users: {}'.format(returning_users_week['series'][0] | sum)) }}
+{{ card_helpers.render_stat('fa-tasks', new_task_runs_week['series'][0] | sum, 'New task runs', 'New tasks: {}'.format(new_tasks_week['series'][0] | sum)) }}
+{{ card_helpers.render_stat('fa-users', active_users_last_week['series'][0] | sum, 'Active users', 'Active anonymous users: {}'.format(active_anon_last_week['series'][0] | sum)) }}
+</div>
+
+<div class="card my-4">
+    {{ card_helpers.render_title('Returning Users', 'Returning users over the past week') }}
+    <div class="card-block">
+        <div id="returning-users"></div>
     </div>
 </div>
-{% if wait == False %}
-<div class="container">
-    <div class="col-md-6">
-        <h2>{{ _('Active users') }}: {{active_users_last_week['series'][0] | sum}}</h2>
-        <div id="dashboard_week_users" class="ct-chart ct-perfect-fourth"></div>
-        <script>
-            var data = {{ active_users_last_week | tojson | safe }};
-var options ={ axisY: {onlyInteger: false}};
-new Chartist.Line('#dashboard_week_users', data, options);
-        </script>
-    </div>
-    <div class="col-md-6">
-        <h2>{{ _('Active anonymous users') }}: {{active_anon_last_week['series'][0] | sum}}</h2>
-        <div id="dashboard_week_anon"  class="ct-chart ct-perfect-fourth"></div>
-        <script>
-            var data = {{ active_anon_last_week | tojson | safe }};
-var options ={ axisY: {onlyInteger: false}};
-new Chartist.Line('#dashboard_week_anon', data, options);
-        </script>
-    </div>
-    <div class="col-md-4">
-        <h2>{{ _('Draft projects') }}: {{draft_projects_last_week|count}}</h2>
-        <ul>
-            {% for project in draft_projects_last_week %}
-            <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.p_name}}</a> by <a href="{{url_for('account.profile', name=project.u_name)}}">{{project.u_name}}</a> ({{project.email_addr}})</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="col-md-4">
-        <h2>{{ _('Published projects') }}: {{published_projects_last_week|count}}</h2>
-        <ul>
-            {% for project in published_projects_last_week %}
-            <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.p_name}}</a> by <a href="{{url_for('account.profile', name=project.u_name)}}">{{project.u_name}}</a> ({{project.email_addr}})</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="col-md-4">
-        <h2>{{ _('Updated projects') }}: {{update_projects_last_week|count}}</h2>
-        <ul>
-            {% for project in update_projects_last_week %}
-            <li><a href="{{url_for('project.details', short_name=project.short_name)}}">{{project.p_name}}</a> by <a href="{{url_for('account.profile', name=project.u_name)}}">{{project.u_name}}</a> ({{project.email_addr}})</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="col-md-6">
-        <h2>{{ _('New tasks') }}: {{new_tasks_week['series'][0] | sum}}</h2>
-        <div id="dashboard_week_new_tasks" class="ct-chart ct-perfect-fourth"></div>
-        <script>
-            var data = {{ new_tasks_week | tojson | safe }};
-var options ={ axisY: {onlyInteger: false}};
-new Chartist.Line('#dashboard_week_new_tasks', data, options);
-        </script>
-    </div>
-    <div class="col-md-6">
-        <h2>{{ _('New Answers') }}: {{new_task_runs_week['series'][0] | sum}}</h2>
-        <div id="dashboard_week_new_task_runs" class="ct-chart ct-perfect-fourth"></div>
-        <script>
-            var data = {{ new_task_runs_week | tojson | safe }};
-var options ={ axisY: {onlyInteger: false}};
-new Chartist.Line('#dashboard_week_new_task_runs', data, options);
-        </script>
-    </div>
-    <div class="col-md-6">
-        <h2>{{ _('New Users') }}: {{new_users_week['series'][0] | sum}}</h2>
-        <div id="dashboard_week_new_users" class="ct-chart ct-perfect-fourth"></div>
-        <script>
-            var data = {{ new_users_week | tojson | safe }};
-var options ={ axisY: {onlyInteger: false}};
-new Chartist.Line('#dashboard_week_new_users', data, options);
-        </script>
-    </div>
-    <div class="col-md-6">
-        <h2>{{ _('Returning Users') }}: {{returning_users_week['series'][0] | sum}}</h2>
-        <div id="dashboard_week_returning_users" class="ct-chart ct-perfect-fourth"></div>
-        <script>
-            var data = {{ returning_users_week | tojson | safe }};
-var options ={ axisY: {onlyInteger: false}};
-new Chartist.Bar('#dashboard_week_returning_users', data, options);
-        </script>
+
+<div class="card my-4">
+    {{ card_helpers.render_title('Active Users', 'Active users over the past week') }}
+    <div class="card-block">
+        <div id="active-users"></div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>{{ _('Recent activity') }}</h2>
-            {% if update_feed %}
-            <ul class="recent-activity", style="list-style-type:none; padding-left:0px;">
-                {% for u in update_feed[0:30] %}
-                <li>
-                {% if u.action_updated == 'Project' %}
-                <p><img class="img-circle" src="{{url_for('static', filename='img/placeholder.project.png')}}" style="max-width:30px;">
-                <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name }}</a> {{ _('new project created') }} {{u.updated | pretty_date }} </p>
-                {% endif %}
-                {% if u.action_updated == 'Blog' %}
-                <p><img class="img-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
-                <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has published a blog post') }} {{u.updated | pretty_date }} </p>
-                {% endif %}
-                {% if u.action_updated == 'Task' %}
-                <p><img class="img-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
-                <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has added new tasks') }} {{u.updated | pretty_date}}</p>
-                {% endif %}
-                {% if u.action_updated == 'TaskCompleted' %}
-                <p><img class="img-circle" src="{{project_helper.render_url_thumbnail(u, upload_method)}}" style="max-width:30px;">
-                <a href="{{url_for('project.details', short_name=u.short_name)}}">{{u.name}}</a> {{ _('has completed a task') }} {{u.updated | pretty_date}}</p>
-                {% endif %}
-                {% if u.action_updated == 'UserContribution' %}
-                <p>{{ helper.render_avatar(u, upload_method, class='img-circle', width='30px')}}
-                <a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a> {{ _('has contributed to') }}
-                <a href="{{url_for('project.details', short_name=u.project_short_name)}}">
-                    <span class="hidden-xs">{{u.project_name | truncate(28)}}</span>
-                    <span class="visible-xs-fullnames">{{u.project_name | truncate(10)}}</span></a>
-                {{u.updated | pretty_date}}</p>
-                {% endif %}
-                {% if u.action_updated == 'User' %}
-                <p>{{ helper.render_avatar(u, upload_method, class='img-circle', width='30px')}}
-                <a href="{{url_for('account.profile', name=u.name)}}">{{u.fullname}}</a> {{ _('has joined') }} {{u.updated | pretty_date}}</p>
-                {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-            {% elif accounts %}
-            <ul class="recent-activity">
-                {% for account in accounts %}
-                <li>
-                <p>{{ helper.render_avatar(account, upload_method, class='img-circle', width='30px') }}
-                <a href="{{url_for('account.profile', name=account.name)}}">{{account['fullname']}}</a><br />{{ _('has joined') }} {{account.registered_ago}} and has contributed {{ account.task_runs }} tasks</p>
-                </li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </div>
+
+<div class="card my-4">
+    {{ card_helpers.render_title('Active Anonymous Users', 'Active anonymous users over the past week') }}
+    <div class="card-block">
+        <div id="active-anon-users"></div>
+    </div>
+</div>
+
+<div class="card my-4">
+    {{ card_helpers.render_title('New tasks', 'Contributions over the past week') }}
+    <div class="card-block">
+        <div id="contributions"></div>
     </div>
 </div>
 {% else %}
-<div class="container">
-    <div class="col-md-12">
-        <h1>{{ _("No data available yet. You'll need to wait 24 hours.") }}</h1>
-    </div>
+{{ general_helpers.render_title('Admin', 'Dashboard') }}
+<div class="alert alert-info">
+    No data is available yet, please wait for 24 hours.
 </div>
 {% endif %}
+
+<script>
+    const opts = {
+        height: '300px',
+        onlyInteger: false
+    };
+    new Chartist.Line('#returning-users', {{ returning_users_week | tojson | safe }}, opts);
+    new Chartist.Line('#active-users', {{ active_users_last_week | tojson | safe }}, opts);
+    new Chartist.Line('#active-anon-users', {{ active_anon_last_week | tojson | safe }}, opts);
+    new Chartist.Line('#contributions', {{ new_task_runs_week | tojson | safe }}, opts);
+</script>
+
+
 {% endblock %}

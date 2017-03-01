@@ -108,6 +108,24 @@ $progress-circle-font-size:        2.5rem;
 
 $fa-font-path:                     '../../fonts/font-awesome';
 
+$ct-series-colors:
+    $brand-primary,
+    $brand-success,
+    $brand-info,
+    $brand-warning,
+    #453d3f,
+    #59922b,
+    #0544d3,
+    #6b0392,
+    #f05b4f,
+    #dda458,
+    #eacf7d,
+    #86797d,
+    #b2c326,
+    #6188e2,
+    #a748ca
+;
+
 $icons:
     'cardcatalogues',
     'contributions',
@@ -129,6 +147,7 @@ $icons:
     "../../node_modules/pnotify/dist/pnotify.brighttheme",
     "../../node_modules/cropper/src/scss/cropper",
     "../../node_modules/pace-progress/themes/red/pace-theme-minimal",
+    "../../node_modules/chartist/dist/scss/chartist.scss",
     "partials/base",
     "partials/typography",
     "partials/transitions",

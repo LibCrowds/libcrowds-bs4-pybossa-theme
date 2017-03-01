@@ -3,11 +3,11 @@
 {% set active_link = "featured" %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_table.html" as table_helpers %}
-{% import "_helpers/_admin.html" as admin_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
 
-{{ admin_helpers.render_title('Featured Projects') }}
+{{ general_helpers.render_title('Admin', 'Featured Projects') }}
 
 <div class="d-flex flex-row align-items-center justify-content-center">
     <span class="fa fa-chevron-left mr-2 btn-scroll" data-target="#categories-strip" data-direction="left" role="button"></span>

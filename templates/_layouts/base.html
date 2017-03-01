@@ -66,16 +66,6 @@
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
         {% endif %}
-        {% if jscharts %}
-        {% assets filters="jsmin", output="js/gen/charts.min.js",
-                  "../node_modules/chart.js/dist/Chart.js",
-                  "js/charts/chart-opts.js",
-                  "js/charts/chart-utils.js",
-                  "js/charts/admin-charts.js"
-                  %}
-            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
-        {% endif %}
         {%- include "_includes/_sentry.js" %}
         {% include "_includes/_flash_messages.js" %}
         {% include "_includes/ajax_csrf_token.js" %}

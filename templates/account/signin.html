@@ -66,7 +66,7 @@
                 </div>
                 {{ card_helpers.render_title('Or sign in with your LibCrowds account') }}
                 <div class="card-block pt-1">
-                    <form method="POST" action="{{ url_for('project.new') }}">
+                    <form method="POST" action="{{ url_for('account.signin') }}">
                         {{ form.hidden_tag() }}
                         {{ form_helpers.render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
                         {{ form_helpers.render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}

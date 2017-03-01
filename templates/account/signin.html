@@ -20,21 +20,21 @@
                     {% if next is not none %}
                         {% if auth.twitter %}
                         <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-social btn-twitter btn-block">
+                            <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-social btn-twitter btn-block" role="button">
                                 <span class="fa fa-twitter mr-1"></span>Sign in with Twitter
                             </a>
                         </div>
                         {% endif %}
                         {% if auth.facebook %}
                         <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-social btn-facebook btn-block">
+                            <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-social btn-facebook btn-block" role="button">
                                 <span class="fa fa-facebook mr-1"></span>Sign in with Facebook
                             </a>
                         </div>
                         {% endif %}
                         {% if auth.google %}
                         <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('google.login', next=next) }}" class="btn btn-social btn-googleplus btn-block">
+                            <a href="{{ url_for('google.login', next=next) }}" class="btn btn-social btn-googleplus btn-block" role="button">
                                 <span class="fa fa-google-plus mr-1"></span>Sign in with Google+
                             </a>
                         </div>
@@ -42,21 +42,21 @@
                         {% else %}
                         {% if auth.twitter %}
                         <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('twitter.login') }}" class="btn btn-social btn-twitter btn-block">
+                            <a href="{{ url_for('twitter.login') }}" class="btn btn-social btn-twitter btn-block" role="button">
                                 <span class="fa fa-twitter mr-1"></span>Sign in with Twitter
                             </a>
                         </div>
                         {% endif %}
                         {% if auth.facebook %}
                         <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('facebook.login') }}" class="btn btn-social btn-facebook btn-block">
+                            <a href="{{ url_for('facebook.login') }}" class="btn btn-social btn-facebook btn-block" role="button">
                                 <span class="fa fa-facebook mr-1"></span>Sign in with Facebook
                             </a>
                         </div>
                         {% endif %}
                         {% if auth.google %}
                         <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('google.login') }}" class="btn btn-social btn-googleplus btn-block">
+                            <a href="{{ url_for('google.login') }}" class="btn btn-social btn-googleplus btn-block" role="button">
                                 <span class="fa fa-google-plus mr-1"></span>Sign in with Google+
                             </a>
                         </div>
@@ -71,8 +71,8 @@
                         {{ form_helpers.render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
                         {{ form_helpers.render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                         <div class="text-right">
-                            <a href="{{url_for('home.home' )}}" class="btn btn-secondary">Cancel</a>
-                            <input type="submit" value="Sign in" class="btn btn-success" />
+                            <a href="{{url_for('home.home' )}}" class="btn btn-secondary" role="button">Cancel</a>
+                            <input type="submit" value="Sign in" class="btn btn-success" role="button" />
                         </div>
                     </form>
                 </div>

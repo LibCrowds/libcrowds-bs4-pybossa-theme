@@ -22,6 +22,7 @@
     .list-group-item {
         border: none;
         background-color: initial;
+        border-radius: $border-radius-lg;
         margin: calc(#{$list-group-item-padding-x} - #{$list-group-item-padding-y}) 0;
         padding: 0rem;
 
@@ -32,8 +33,11 @@
         }
 
         @include hover-focus {
-            border-radius: $border-radius-lg;
             background-color: rgba($white, 0.23);
+        }
+
+        &.active {
+            background-color: rgba(255,255,255,0.33);
         }
     }
 

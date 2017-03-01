@@ -60,7 +60,7 @@
                     </a>
                     {%- endif %}
                     {%- if current_user.admin -%}
-                    <a class="dropdown-item" href="{{ url_for('admin.index') }}"><i class="fa fa-cog"></i> Admin</a>
+                    <a class="dropdown-item" href="{{ url_for('admin.dashboard') }}"><i class="fa fa-cog"></i> Admin</a>
                     {%- endif %}
                     <div class="dropdown-divider"></div>
 

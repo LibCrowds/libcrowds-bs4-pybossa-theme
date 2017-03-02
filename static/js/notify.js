@@ -19,18 +19,18 @@ function notify(msg, type) {
     switch (type) {
         case "error":
         case "danger":
-            opts.icon = 'fa fa-exclamation-circle';
+            opts.icon = 'fa fa-exclamation-circle fa-2x';
             opts.hide = false;
             break;
         case "warning":
-            opts.icon = 'fa fa-exclamation-circle';
+            opts.icon = 'fa fa-exclamation-circle fa-2x';
             break;
         case "success":
-            opts.icon = 'fa fa-thumbs-up';
-            opts.delay = 1500;
+            opts.icon = 'fa fa-thumbs-up fa-2x';
+            opts.delay = 2000;
             break;
         default:
-            opts.icon = 'fa fa-info-circle';
+            opts.icon = 'fa fa-info-circle fa-2x';
             break;
     }
 

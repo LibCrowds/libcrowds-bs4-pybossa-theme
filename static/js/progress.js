@@ -6,6 +6,6 @@ $('.progress-circle').each(function() {
     $(this).circleProgress({
         value: value,
         fill: '#D00000',
-        size: 150
+        size: 180
     });
 });

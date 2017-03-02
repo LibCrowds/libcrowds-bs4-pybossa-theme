@@ -5,7 +5,6 @@
 {% set description = project.description %}
 
 {% block content %}
-
 <div class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0 d-flex align-items-center justify-content-center"
      style="background-image: url('{{ project.info['splash'] }}');">
     <div class="container text-white text-center">
@@ -18,18 +17,21 @@
                         <div class="my-4">Get Started</div>
                     </a>
                 </div>
-                <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-outline-white hidden-lg-up mt-2">Get Started</a>
+                <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-outline-white hidden-lg-up mt-4">Get Started</a>
+                {% if current_user.is_authenticated() and current_user.id == project.owner_id or current_user.admin %}
+                <a href="{{ url_for('project.settings', short_name=project.short_name)}}" class="btn btn-outline-white mt-4">View Dashboard</a>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
-<section>
-    <div class="container mb-5">
+<section class="my-5">
+    <div class="container py-3">
         <div class="row text-center">
             <p class="ml-auto"><small>{{ project.info['splash_attribution'] | safe }}</small></p>
         </div>
-        <div class="row text-center mt-5">
+        <div class="row text-center">
             <div class="col-sm-10 offset-sm-1">
                 <h2 class="font-family-serif display-4 mb-0">
                     {{ project.name }}
@@ -43,42 +45,38 @@
         </div>
         <div class="row mt-2">
             <div class="col-sm-10 offset-sm-1 text-center d-flex justify-content-around align-items-center">
-                <div class="hidden-md-down mb-5">
-                    <span class="fa fa-star-o fa-3x pb-1"></span>
-                    <p class="mb-0">Contributions</p>
-                    <hr class="bw-2 my-1 w-75">
-                    <p class="lead mb-2">{{ n_task_runs }}</p>
+                <div class="hidden-md-down">
+                    <span class="icon icon-contributions icon-5x"></span>
+                    <p class="display-5 mb-0">{{ n_task_runs }}</p>
+                    <p class="lead">Contributions</p>
                 </div>
-                <div class="hidden-md-down mb-5">
-                    <span class="fa fa-tasks fa-3x pb-1"></span>
-                    <p class="mb-0">Completed Tasks</p>
-                    <hr class="bw-2 my-1 w-75">
-                    <p class="lead mb-2">{{ n_completed_tasks }}</p>
+                <div class="hidden-md-down">
+                    <span class="icon icon-completed-tasks icon-5x"></span>
+                    <p class="display-5 mb-0">{{ n_completed_tasks }}</p>
+                    <p class="lead">Completed Tasks</p>
                 </div>
                 <div>
-                    <div data-progress="{{ overall_progress | round | int }}" class="progress-circle mb-2">
+                    <div data-progress="{{ overall_progress | round | int }}" class="progress-circle mb-3">
                         <p>{{ overall_progress | round | int }}%</p>
                     </div>
-                    <a href="{{ url_for('project.show_stats', short_name=project.short_name) }}" class="btn btn-secondary mt-4" role="button">View Statistics</a>
+                    <a href="{{ url_for('project.show_stats', short_name=project.short_name) }}" class="btn btn-secondary mt-3" role="button">View Statistics</a>
                 </div>
-                <div class="hidden-md-down mb-5">
-                    <span class="fa fa-clock-o fa-3x pb-1"></span>
-                    <p class="mb-0">Last Activity</p>
-                    <hr class="bw-2 my-1 w-75">
-                    <p class="lead mb-2">{{ last_activity | pretty_date }}</p>
+                <div class="hidden-md-down">
+                    <span class="icon icon-remaining-tasks icon-5x"></span>
+                    <p class="display-5 mb-0">{{ n_tasks - n_completed_tasks }}</p>
+                    <p class="lead">Remaining Tasks</p>
                 </div>
-                <div class="hidden-md-down mb-5">
-                    <span class="fa fa-users fa-3x pb-1"></span>
-                    <p class="mb-0">Volunteers</p>
-                    <hr class="bw-2 my-1 w-75">
-                    <p class="lead mb-2">{{ n_volunteers }}</p>
+                <div class="hidden-md-down">
+                    <span class="icon icon-volunteers icon-5x"></span>
+                    <p class="display-5 mb-0">{{ n_volunteers }}</p>
+                    <p class="lead">Volunteers</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="bg-faded">
+<section class="pattern-white-wall">
     <div class="container">
         <div class="row pt-5 text-center">
             <div class="col-sm-10 offset-sm-1">
@@ -109,7 +107,7 @@
                 <h3 class="text-uppercase display-4">Get Involved</h3>
                 <p class="lead">Your contributions will have a direct impact on enabling future reasearch at the British Library.<p>
                 <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" class="btn btn-outline-primary btn-lg my-3" role="button">Contribute Now</a>
-                <hr class="bw-3 w-50 pb-3">
+                <hr class="bw-2 w-50 pb-3">
                 {{ social_helpers.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "{{ project.description }}") }}
             </div>
         </div>

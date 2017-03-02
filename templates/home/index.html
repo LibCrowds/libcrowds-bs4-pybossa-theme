@@ -78,17 +78,21 @@
                  <span class="ribbon"><span class="fa fa-star"></span>
             </div>
         </div>
-        <div class="mt-4">
-            {% if categories_projects['featured'] %}
-            {{ project_helpers.render_grid(categories_projects['featured']) }}
-            {% else %}
-            <p class="text-center">
-                No projects are currently being featured, but we still need you help!
-            </p>
-            {% endif %}
-        </div>
-        <div class="text-center">
-            <a class="btn btn-primary btn-lg my-5" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="mt-4">
+                    {% if categories_projects['featured'] %}
+                    {{ project_helpers.render_grid(categories_projects['featured']) }}
+                    {% else %}
+                    <p class="text-center">
+                        No projects are currently being featured, but we still need you help!
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="text-center">
+                    <a class="btn btn-primary btn-lg my-5" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>

@@ -1,9 +1,100 @@
-{% extends "_layouts/default.html" %}
-{% set active_page = "about" %}
-{% set navbar_class = "navbar-toggleable-md navbar-inverse" %}
-{% set title = "About" %}
-{% set description = "Find out more about the LibCrowds crowdsourcing platform." %}
+{% extends "_layouts/splash.html" %}
+{% set active_page = 'about' %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
 
 {% block content %}
-    {% include ['custom/_about.html', 'home/_about.html'] ignore missing %}
+
+<div id="drawer-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0"></div>
+
+<section class="text-center">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <h1 class="text-uppercase font-weight-bold display-4">About {{ brand }}</h1>
+                <hr class="bw-3 my-4">
+                <p class="lead text-left">
+                    {{ brand }} is a platform built by <a href="https://github.com/alexandermendes" target="_blank">Alexander Mendes</a>,
+                    in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>. It aims to create searchable catalogue
+                    records for some of the hundreds of thousands of items that can only be found in printed and card catalogues. By
+                    participating in the crowdsourcing projects hosted here, you will help researchers everywhere to access our
+                    collections more easily in the future.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pattern-white-wall text-gray-dark text-center text-lg-left">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-5 offset-lg-1">
+                <h2 class="text-uppercase font-weight-bold display-4">Technology</h2>
+                <hr class="bw-3 mr-lg-5">
+            </div>
+            <div class="col-lg-3 offset-lg-3 hidden-md-down">
+                <a class="https://github.com/{{ brand }}" target="_blank"><span class="fa fa-github fa-5x text-muted"></span></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <p class="mt-3">
+                    {{ brand }} is built on top of <a href="http://docs.pybossa.com/"> PyBossa </a>, an open-source framework for the creation of
+                    crowdsourcing projects. PyBossa is written in Python and uses the <a href="http://flask.pocoo.org/">Flask</a> web framework.
+                    {% if 'pybossa_discourse' in plugins %} The community forum is powered by <a href="https://www.discourse.org/">Discourse</a>.{% endif %}
+                    Each project on the platform is written in a combination of HTML, CSS and Javascript. A range of plugins have also been developed to provide
+                    additional functionality.
+                </p>
+                <div class="card my-4">
+                    {{ card_helpers.render_title("Active Plugins", "These are the plugins currently running on the system", search_table="#plugins-table") }}
+                    <div class="table-responsive">
+                        <table id="plugins-table" class="table table-hover table-striped mb-0">
+                            {{ table_helpers.render_head(['Name', 'Description', 'Version']) }}
+                            <tbody>
+                                {% for p in plugins.values() %}
+                                {% if p.website %}
+                                {{ table_helpers.render_row(['<a href="{0}" target="_blank">{1}</a>'.format(p.website, p.name), p.description, p.version]) }}
+                                {% else %}
+                                {{ table_helpers.render_row([p.name, p.description, p.version]) }}
+                                {% endif %}
+                                {% endfor %}
+                                {{ table_helpers.render_no_data_row(3) }}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p>
+                    The {{ brand }} theme, all project templates and plugins are open-souce and available on <a href="https://github.com/{{ brand }}" target="_blank">GitHub</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-3 offset-lg-1">
+                <h3>Contact Details</h3>
+                <hr class="bw-2">
+            </div>
+            <div class="col-lg-10 offset-lg-1">
+                {% if 'pybossa_discourse' in plugins %}
+                <p>
+                    Visit the <a href="{{ url_for('discourse.index') }}">{{ brand }}</a> forum to ask any questions, report issues, or just let us know what you've discovered,
+                    or how you've made use of our data.
+                </p>
+                <p>
+                    Alternatively, you can get in touch via:
+                </p>
+                {% endif %}
+                <ul class="list-unstyled">
+                    <li><strong>Twitter: </strong><a href="https://twitter.com/{{ contact_twitter }}">@{{ contact_twitter }}</a></li>
+                    <li><strong>Email: </strong><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

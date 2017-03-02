@@ -1,39 +1,22 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "community"  %}
-{% import "account/_helpers.html" as helper %}
-{% from "_helpers/_project.html" import broken_image %}
+{% import "_helpers/_user.html" as user_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h1>Community <small>{{total}} registered users</small><a class="pull-right btn btn-danger" href="{{url_for('leaderboard.index')}}">Leaderboard</a></h1>
-                    {% if accounts %}
-                    <ul class="users text-center">
-                    {% for account in accounts %}
-                        <li class="text-center">
-                        <a href="{{url_for('account.profile', name=account.name)}}" data-content="
-                            <strong>Joined:</strong> {{account.created[8:10]}}-{{account.created[5:7]}}-{{account.created[0:4]}}
-                            <br>
-                            <strong>Contributions:</strong> {{account.score}}
-                            " class="avatar-popover" data-original-title="<strong>{{account.name}}</strong>
-                             ">
-                            <div class="shadow img-circle shadow-circle">
-                                {{ helper.render_user_avatar(account, upload_method, class="img-circle") }}
-                            </div>
-                        </a>
-                        </li>
-                    {% endfor %}
-                    </ul>
-            <div class="row text-center">
-                <div class="col-sm-12">
-                {% if pagination.pages > 1 %}
-                    {{ helper.render_pagination(pagination) }}
-                {% endif %}
-            </div>
+<div class="container my-5 pt-4">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+        {{ general_helpers.render_title(prefix="", title="Community") }}
         </div>
-        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            {{ user_helpers.render_avatar_list(accounts, badge='name') }}
+            {% if pagination.pages > 1 %}
+                {{ general_helpers.render_pagination(pagination) }}
+            {% endif %}
+        </div>
     </div>
 </div>
 

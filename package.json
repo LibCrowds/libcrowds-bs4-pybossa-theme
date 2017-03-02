@@ -22,7 +22,7 @@
     "jquery-circle-progress": "^1.2.1",
     "pnotify": "^3.0.0",
     "rethinkdb": "^2.3.3",
-    "cropper": "^2.3.4",
+    "croppie": "^2.4.0",
     "pace-progress": "^1.0.2",
     "shufflejs": "^4.1.0",
     "chartist": "^0.10.1"

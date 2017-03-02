@@ -1,90 +1,78 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "signin" %}
+{% set title_link = [url_for('account.register'), "Create a new Account"] %}
 {% import "_helpers/_form.html" as form_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
-{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
-<div class="container my-5 pt-4">
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
-        {{ general_helpers.render_title(prefix="", title="Sign in", link=url_for('account.register'), link_text="Create a new Account") }}
+<div class="card">
+    <div class="card-block text-center">
+        <div class="row">
+        {% if next is not none %}
+            {% if auth.twitter %}
+            <div class="col-lg-4 my-1">
+                <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-social btn-twitter btn-block" role="button">
+                    <span class="fa fa-twitter mr-1"></span>Sign in with Twitter
+                </a>
+            </div>
+            {% endif %}
+            {% if auth.facebook %}
+            <div class="col-lg-4 my-1">
+                <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-social btn-facebook btn-block" role="button">
+                    <span class="fa fa-facebook mr-1"></span>Sign in with Facebook
+                </a>
+            </div>
+            {% endif %}
+            {% if auth.google %}
+            <div class="col-lg-4 my-1">
+                <a href="{{ url_for('google.login', next=next) }}" class="btn btn-social btn-googleplus btn-block" role="button">
+                    <span class="fa fa-google-plus mr-1"></span>Sign in with Google+
+                </a>
+            </div>
+            {% endif %}
+            {% else %}
+            {% if auth.twitter %}
+            <div class="col-lg-4 my-1">
+                <a href="{{ url_for('twitter.login') }}" class="btn btn-social btn-twitter btn-block" role="button">
+                    <span class="fa fa-twitter mr-1"></span>Sign in with Twitter
+                </a>
+            </div>
+            {% endif %}
+            {% if auth.facebook %}
+            <div class="col-lg-4 my-1">
+                <a href="{{ url_for('facebook.login') }}" class="btn btn-social btn-facebook btn-block" role="button">
+                    <span class="fa fa-facebook mr-1"></span>Sign in with Facebook
+                </a>
+            </div>
+            {% endif %}
+            {% if auth.google %}
+            <div class="col-lg-4 my-1">
+                <a href="{{ url_for('google.login') }}" class="btn btn-social btn-googleplus btn-block" role="button">
+                    <span class="fa fa-google-plus mr-1"></span>Sign in with Google+
+                </a>
+            </div>
+            {% endif %}
+        {% endif %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
-            <div class="card">
-                <div class="card-block text-center">
-                    <div class="row">
-                    {% if next is not none %}
-                        {% if auth.twitter %}
-                        <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('twitter.login', next=next) }}" class="btn btn-social btn-twitter btn-block" role="button">
-                                <span class="fa fa-twitter mr-1"></span>Sign in with Twitter
-                            </a>
-                        </div>
-                        {% endif %}
-                        {% if auth.facebook %}
-                        <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('facebook.login', next=next) }}" class="btn btn-social btn-facebook btn-block" role="button">
-                                <span class="fa fa-facebook mr-1"></span>Sign in with Facebook
-                            </a>
-                        </div>
-                        {% endif %}
-                        {% if auth.google %}
-                        <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('google.login', next=next) }}" class="btn btn-social btn-googleplus btn-block" role="button">
-                                <span class="fa fa-google-plus mr-1"></span>Sign in with Google+
-                            </a>
-                        </div>
-                        {% endif %}
-                        {% else %}
-                        {% if auth.twitter %}
-                        <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('twitter.login') }}" class="btn btn-social btn-twitter btn-block" role="button">
-                                <span class="fa fa-twitter mr-1"></span>Sign in with Twitter
-                            </a>
-                        </div>
-                        {% endif %}
-                        {% if auth.facebook %}
-                        <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('facebook.login') }}" class="btn btn-social btn-facebook btn-block" role="button">
-                                <span class="fa fa-facebook mr-1"></span>Sign in with Facebook
-                            </a>
-                        </div>
-                        {% endif %}
-                        {% if auth.google %}
-                        <div class="col-lg-4 my-1">
-                            <a href="{{ url_for('google.login') }}" class="btn btn-social btn-googleplus btn-block" role="button">
-                                <span class="fa fa-google-plus mr-1"></span>Sign in with Google+
-                            </a>
-                        </div>
-                        {% endif %}
-                    {% endif %}
-                    </div>
+    {{ card_helpers.render_title('Or sign in with your LibCrowds account') }}
+    <div class="card-block pt-1">
+        <form method="POST" action="{{ url_for('account.signin') }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
+            {{ form_helpers.render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+            <div class="row d-flex flex-row align-items-center justify-content-between text-center">
+                <div class="col-lg-8 text-lg-left my-1">
+                    <p class="mb-0">
+                        <a href="{{ url_for('account.forgot_password') }}">Forgotten Password</a>
+                    </p>
                 </div>
-                {{ card_helpers.render_title('Or sign in with your LibCrowds account') }}
-                <div class="card-block pt-1">
-                    <form method="POST" action="{{ url_for('account.signin') }}">
-                        {{ form.hidden_tag() }}
-                        {{ form_helpers.render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
-                        {{ form_helpers.render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                        <div class="row d-flex flex-row align-items-center justify-content-between text-center">
-                            <div class="col-lg-8 text-lg-left my-1">
-                                <p class="mb-0">
-                                    <a href="{{ url_for('account.forgot_password') }}">Forgotten Password</a>
-                                </p>
-                            </div>
-                            <div class="col-lg-4 text-lg-right my-1">
-                                <a href="{{url_for('home.home' )}}" class="btn btn-secondary" role="button">Cancel</a>
-                            <input type="submit" value="Sign in" class="btn btn-success" role="button" />
-                            </div>
-                        </div>
-                    </form>
+                <div class="col-lg-4 text-lg-right my-1">
+                    <a href="{{url_for('home.home' )}}" class="btn btn-secondary" role="button">Cancel</a>
+                <input type="submit" value="Sign in" class="btn btn-success" role="button" />
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 {% endblock %}

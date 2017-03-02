@@ -1,22 +1,10 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
+{% set title = "Open Project" %}
+{% set title_link=[url_for('project.new'), "Create a Project"] %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
-<div class="container my-5 pt-4">
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
-        {{ general_helpers.render_title(prefix="", title="Open Project", link=url_for('project.new'), link_text="Create a Project") }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
-            {{ project_helpers.render_table("Published", "Your published projects", "published-projects-table", projects_published) }}
-            {{ project_helpers.render_table("Draft", "Your draft projects", "draft-projects-table", projects_draft, class="mt-4") }}
-        </div>
-    </div>
-</div>
-
+{{ project_helpers.render_table("Published", "Your published projects", "published-projects-table", projects_published) }}
+{{ project_helpers.render_table("Draft", "Your draft projects", "draft-projects-table", projects_draft, class="mt-4") }}
 {% endblock %}

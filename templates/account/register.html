@@ -1,44 +1,31 @@
 {% extends "_layouts/default.html" %}
-{% set active_page = "signin" %}
+{% set active_page = "register" %}
 {% import "_helpers/_form.html" as form_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
-{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
-<div class="container my-5 pt-4">
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
-        {{ general_helpers.render_title(prefix="", title="Register") }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
-            <div class="card">
-                {{ card_helpers.render_title('Your Details', 'Enter your details to create a new account') }}
-                <div class="card-block pt-1">
-                    <form method="POST" action="{{ url_for('project.new') }}">
-                        {{ form.hidden_tag() }}
-                        {{ form_helpers.render_field(form.fullname, placeholder="Enter your full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters", autofocus="autofocus") }}
-                        {{ form_helpers.render_field(form.name, placeholder="Enter a username", class="form-control", label_text="Username", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters") }}
-                        {{ form_helpers.render_field(form.email_addr, placeholder="Enter your email address", class="form-control", type="email", required="required") }}
-                        {{ form_helpers.render_field(form.password, placeholder="Choose a password", class="form-control", label_text="Password", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                        {{ form_helpers.render_field(form.confirm, placeholder="Confirm your password", class="form-control", label_text="Confirm Password", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                        <div class="row d-flex flex-row align-items-center justify-content-between text-center">
-                            <div class="col-lg-8 text-lg-left my-1">
-                                <p class="mb-0">
-                                    By creating an account you agree to our <a href="{{ url_for('help.tos') }}">Terms of Use</a>.
-                                </p>
-                            </div>
-                            <div class="col-lg-4 text-lg-right my-1">
-                                <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
-                                <input type="submit" value="Create" class="btn btn-success" role="button" />
-                            </div>
-                        </div>
-                    </form>
+<div class="card">
+    {{ card_helpers.render_title('Your Details', 'Enter your details to create a new account') }}
+    <div class="card-block pt-1">
+        <form method="POST" action="{{ url_for('project.new') }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.fullname, placeholder="Enter your full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters", autofocus="autofocus") }}
+            {{ form_helpers.render_field(form.name, placeholder="Enter a username", class="form-control", label_text="Username", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters") }}
+            {{ form_helpers.render_field(form.email_addr, placeholder="Enter your email address", class="form-control", type="email", required="required") }}
+            {{ form_helpers.render_field(form.password, placeholder="Choose a password", class="form-control", label_text="Password", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+            {{ form_helpers.render_field(form.confirm, placeholder="Confirm your password", class="form-control", label_text="Confirm Password", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+            <div class="row d-flex flex-row align-items-center justify-content-between text-center">
+                <div class="col-lg-8 text-lg-left my-1">
+                    <p class="mb-0">
+                        By creating an account you agree to our <a href="{{ url_for('help.tos') }}">Terms of Use</a>.
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-right my-1">
+                    <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                    <input type="submit" value="Create" class="btn btn-success" role="button" />
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 {% endblock %}

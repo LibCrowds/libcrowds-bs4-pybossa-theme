@@ -4,20 +4,8 @@
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-<div class="container my-5 pt-4">
-    <div class="row">
-        <div class="col-lg-10 offset-lg-1">
-        {{ general_helpers.render_title(prefix="", title="Community") }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-10 offset-lg-1">
-            {{ user_helpers.render_avatar_list(accounts, badge='name') }}
-            {% if pagination.pages > 1 %}
-                {{ general_helpers.render_pagination(pagination) }}
-            {% endif %}
-        </div>
-    </div>
-</div>
-
+{{ user_helpers.render_avatar_list(accounts, badge='name') }}
+{% if pagination.pages > 1 %}
+{{ general_helpers.render_pagination(pagination) }}
+{% endif %}
 {% endblock %}

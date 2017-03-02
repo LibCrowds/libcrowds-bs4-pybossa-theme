@@ -1,19 +1,16 @@
 {% extends "_layouts/default.html" %}
 {% set block_robots = True %}
 {% set active_page = "profile" %}
+{% set hide_title = True %}
+{% set full_width = True %}
 {% import "_helpers/_user.html" as user_helpers %}
 {% import "_helpers/_project.html" as project_helpers %}
 
 {% block content %}
-<div class="container my-5 pt-4">
-    <div class="row">
-        <div class="col-lg-4">
-            {{ user_helpers.render_profile_card(current_user, upload_method, private=False) }}
-        </div>
-        <div class="col-lg-8">
-            {{ project_helpers.render_table("Your Contributions", "The projects that you have contributed to", "projects-table", projects_contrib) }}
-        </div>
-    </div>
+<div class="col-lg-4">
+    {{ user_helpers.render_profile_card(current_user, upload_method, private=False) }}
 </div>
-
+<div class="col-lg-8">
+    {{ project_helpers.render_table("Your Contributions", "The projects that you have contributed to", "projects-table", projects_contrib) }}
+</div>
 {% endblock %}

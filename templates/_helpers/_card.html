@@ -1,4 +1,4 @@
-{% macro render_title(title, description, search_table=None) %}
+{% macro render_title(title, description, search_table=None, title_link=None) %}
 <div class="card-block">
     <div class="d-flex flex-row align-items-end">
         <div class="w-75 pr-3">
@@ -8,6 +8,11 @@
         {% if search_table %}
         <div class="w-25">
             <input type="text" class="form-control rounded-oblong search-table" placeholder="Search" data-target="{{ search_table }}">
+        </div>
+        {% endif %}
+        {% if title_link %}
+        <div class="w-25">
+            <a href="{{ title_link[0] }}" class="btn btn-outline-primary btn-block">{{ title_link[1] }}</a>
         </div>
         {% endif %}
     </div>

@@ -43,15 +43,15 @@
 </div>
 {% endmacro %}
 
-{% macro render_avatar(user, upload_method, class, style, width='90') %}
+{% macro render_avatar(user, upload_method, class, style, width='90', id=None) %}
 {% if user.info.avatar %}
     {% if upload_method == 'rackspace'%}
-    <img class="{{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 200, 200);"  alt="{{ user.name }}'s avatar">
+    <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('rackspace', filename=user.info.avatar, container=user.info.container)}}" onerror="imgError(this, 200, 200);"  alt="{{ user.name }}'s avatar">
     {% else %}
-    <img class="{{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar)) }}" onerror="imgError(this, 200, 200);" alt="{{ user.name }}'s avatar">
+    <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" width="{{ width }}" src="{{ url_for('uploads.uploaded_file', filename=(user.info.container + '/' + user.info.avatar)) }}" onerror="imgError(this, 200, 200);" alt="{{ user.name }}'s avatar">
     {% endif %}
 {% else %}
-    <img class="{{ class }}" style="{{ style }}" width="{{ width }}" src="http://placekitten.com/200/200?image=1" alt="{{ user.name }}'s avatar">
+    <img {% if id %}id="{{ id }}"{% endif %} style="{{ style }}" width="{{ width }}" src="http://placekitten.com/200/200?image=1" alt="{{ user.name }}'s avatar">
 {% endif %}
 {% endmacro %}
 

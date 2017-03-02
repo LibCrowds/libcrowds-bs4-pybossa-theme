@@ -35,9 +35,7 @@
         {% if projects %}
             {{ project_helpers.render_grid(projects, shuffle=True) }}
             {% if pagination.pages > 1 %}
-            <div class="d-flex justify-content-center w-100 mt-4">
                 {{ general_helpers.render_pagination(pagination) }}
-            </div>
             {% endif %}
         {% else %}
             <p class="lead mb-0">Sorry, there are no published projects for this category yet.</p>

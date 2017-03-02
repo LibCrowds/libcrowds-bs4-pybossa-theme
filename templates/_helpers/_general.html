@@ -18,33 +18,35 @@
 {% endmacro %}
 
 {% macro render_pagination(pagination) %}
-<nav>
-    <ul class="pagination pagination-centered">
-        {% if pagination.has_prev %}
-        <li class="page-item">
-            <a href="{{ url_for_other_page(pagination.page - 1)}}" class="page-link">&laquo; </a>
-        </li>
-        {% endif %}
-
-        {% for page in pagination.iter_pages() %}
-            {% if page %}
-                {% if page != pagination.page %}
-                <li class="page-item">
-                    <a href="{{ url_for_other_page(page) }}" class="page-link">{{ page }}</a>
-                </li>
-                {% else %}
-                <li class="active page-item">
-                    <a href="#" class="page-link">{{ page }}</a>
-                </li>
-                {% endif %}
+<div class="d-flex justify-content-center w-100 mt-4">
+    <nav>
+        <ul class="pagination pagination-centered">
+            {% if pagination.has_prev %}
+            <li class="page-item">
+                <a href="{{ url_for_other_page(pagination.page - 1)}}" class="page-link">&laquo; </a>
+            </li>
             {% endif %}
-        {% endfor %}
 
-        {% if pagination.has_next %}
-        <li class="page-item">
-            <a href="{{ url_for_other_page(pagination.page + 1)}}" class="page-link"> &raquo;</a>
-        </li>
-        {% endif %}
-    </ul>
-</nav>
+            {% for page in pagination.iter_pages() %}
+                {% if page %}
+                    {% if page != pagination.page %}
+                    <li class="page-item">
+                        <a href="{{ url_for_other_page(page) }}" class="page-link">{{ page }}</a>
+                    </li>
+                    {% else %}
+                    <li class="active page-item">
+                        <a href="#" class="page-link">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+            <li class="page-item">
+                <a href="{{ url_for_other_page(pagination.page + 1)}}" class="page-link"> &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
 {% endmacro %}

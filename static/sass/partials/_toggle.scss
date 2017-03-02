@@ -16,6 +16,7 @@
         cursor: pointer;
         border: 2px solid lighten($gray-light, 25%);
         border-radius: $input-border-radius;
+        margin: 0px;
     }
 
     .toggle-inner {

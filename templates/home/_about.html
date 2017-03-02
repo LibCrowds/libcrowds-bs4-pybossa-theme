@@ -8,11 +8,11 @@
         <div class="col-md-11">
             <h1 class="inset-text-grey">About</h1>
             <p class="lead">
-            	{{ brand }} is a platform built by <a href="https://github.com/alexandermendes" target="_blank">Alexander Mendes</a>,
-            	in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>. It aims to create searchable catalogue
-            	records for some of the hundreds of thousands of items that can only be found in printed and card catalogues. By
-            	participating in the crowdsourcing projects hosted here, you will help researchers everywhere to access our
-            	collections more easily in the future.
+                {{ brand }} is a platform built by <a href="https://github.com/alexandermendes" target="_blank">Alexander Mendes</a>,
+                in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>. It aims to create searchable catalogue
+                records for some of the hundreds of thousands of items that can only be found in printed and card catalogues. By
+                participating in the crowdsourcing projects hosted here, you will help researchers everywhere to access our
+                collections more easily in the future.
             </p>
         </div>
     </div>
@@ -55,25 +55,25 @@
                 crowdsourcing projects. PyBossa is written in Python and uses the <a href="http://flask.pocoo.org/">Flask</a> micro-framework. Each
                 project on the platform is written in a combination of HTML, CSS and Javascript. {% if 'pybossa_discourse' in plugins %} The
                 community forum is powered by <a href="https://www.discourse.org/">Discourse</a>.{% endif %} The
-				<a href="https://github.com/LibCrowds/libcrowds-pybossa-theme" target="_blank">LibCrowds theme</a> and any plugins developed to
-				provide additional functionality are open-souce and available on GitHub.
+                <a href="https://github.com/LibCrowds/libcrowds-pybossa-theme" target="_blank">LibCrowds theme</a> and any plugins developed to
+                provide additional functionality are open-souce and available on GitHub.
             </p>
             <p>
                 {% if plugins %}
                     LibCrowds is currently running the following plugins:
                     <ul class="no-style">
                     {% for p in plugins.values() %}
-						{% if p.name %}
+                        {% if p.name %}
                         <li>{% if p.website and p.version %}
-								<a href="{{ p.website }}"><strong>{{ p.name }}</a> (v{{ p.version }})</strong>
-							{% elif p.website %}
-								<a href="{{ p.website }}"><strong>{{ p.name }}</a></strong>
-							{% else %}
-								<strong>{{ p.name }}</strong>
-							{% endif %}
-							{% if p.description %}<strong>:</strong> {{ p.description }}{% endif %}
-						</li>
-						{% endif %}
+                                <a href="{{ p.website }}"><strong>{{ p.name }}</a> (v{{ p.version }})</strong>
+                            {% elif p.website %}
+                                <a href="{{ p.website }}"><strong>{{ p.name }}</a></strong>
+                            {% else %}
+                                <strong>{{ p.name }}</strong>
+                            {% endif %}
+                            {% if p.description %}<strong>:</strong> {{ p.description }}{% endif %}
+                        </li>
+                        {% endif %}
                     {% endfor %}
                     </ul>
                 {% endif %}

@@ -2,7 +2,7 @@
 {% set unsubscribe = True %}
 
 {% block title %}
-<a href="{{ url_for('project.show_blogpost', short_name=blog.project.short_name, id=blog.id, _external=True) }}">New Blog Post: {{ blog['title'] }} by {{ blog['owner']['fullname'] }}</a>
+<a href="{{ url_for('project.show_blogpost', short_name=blog.project.short_name, id=blog.id, _external=True) }}">{{ blog['title'] }}</a>
 {% endblock %}
 
 {% block teaser %}

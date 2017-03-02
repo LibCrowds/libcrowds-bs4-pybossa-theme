@@ -1,6 +1,5 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "statistics" %}
-{% import "privacy/locked.html" as privacy %}
 
 {% block content %}
 <link rel="stylesheet" href="{{url_for('static', filename='vendor/leaflet/leaflet.css')}}" />
@@ -16,9 +15,6 @@
 <span class="set-body-bg" data-bg="pattern-brushed"></span>
 <div class="container container-main">
     <div class="col-xs-12">
-        {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-        {{ privacy.render_lock_page() }}
-        {% else %}
         <h1><strong>{{brand}}</strong>: Global Statistics</h1>
         <br/>
             <!-- Users Stats CARD -->
@@ -183,7 +179,6 @@
             </div>
             {% endif %}
             <!-- END Anonymous Users Map CARD -->
-        {% endif %}
     </div>
 </div>
 {% endblock %}

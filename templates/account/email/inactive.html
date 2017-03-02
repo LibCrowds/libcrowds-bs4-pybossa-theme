@@ -2,7 +2,7 @@
 {% set unsubscribe = True %}
 
 {% block title %}
-We miss you!
+Come and see what's new at {{ config.BRAND }}
 {% endblock %}
 
 {% block teaser %}
@@ -14,10 +14,10 @@ We need your help!
 {% endblock %}
 
 {% block body %}
-Hello {{user['fullname']}},
+Hello {{ user['fullname'] }},
 <br>
 <br>
-We notice you haven’t been visited {{config.BRAND}} for more than three months.
+We notice you haven’t been visited {{ config.BRAND }} for more than three months.
 It would be great if you could come and help us again and improve access to the
 collections of the British Library!
 <br>

@@ -2,7 +2,6 @@
 {% set active_page = "projects" %}
 {% set active_link = "stats" %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% import "privacy/locked.html" as privacy %}
 {% set active_link = "dashboard" %}
 
 {% block content %}
@@ -20,9 +19,6 @@
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
-            {% if enforce_privacy and (current_user.is_anonymous() or (current_user.is_authenticated and not current_user.admin)) %}
-            {{ privacy.render_lock_page() }}
-            {% else %}
             {{ helper.render_project_title(project, subtitle="Statistics") }}
             <br/>
 
@@ -405,7 +401,6 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
         </div>
     </div>
 </div>

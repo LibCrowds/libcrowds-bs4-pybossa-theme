@@ -8,26 +8,12 @@
 {% import "_helpers/_user.html" as user_helpers %}
 
 {% block content %}
-
 {{ general_helpers.render_title('Admin', 'Administrators') }}
-
 <div class="card my-4">
     {{ card_helpers.render_title('Manage Administrators', 'Use the search box below to locate users and set their admin privileges') }}
     <div class="card-block pt-1">
         <div class="card-title">Current Administrators (apart from you):</div>
-        <ul class="list-unstyled">
-            {% for user in users %}
-            <li class="text-center d-inline-block mx-1">
-                <a href="{{ url_for('account.profile', name=user.name) }}" data-content="<strong>Email:</strong> {{ user.email_addr }}"
-                   data-toggle="popover" data-html="true" data-placement="top" data-trigger="hover" data-title="<strong>{{ user.fullname }}</strong>">
-                    <div class="my-1">
-                        {{ user_helpers.render_avatar(user, class="img-thumbnail rounded-circle", width=90) }}
-                    </div>
-                </a>
-                <p class="badge badge-info">{{ user.name }}</p>
-            </li>
-            {% endfor %}
-        </ul>
+        {{ user_helpers.render_avatar_list(users, badge="name") }}
     </div>
     <div class="card-block">
         <form method="POST">

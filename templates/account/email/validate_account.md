@@ -12,8 +12,9 @@ e-mail address by visiting the URL below:
 If you did not request this conformation, please ignore this email.
 
 Regards,
-
 {{ config.BRAND }} Team
 
 ***
-[Follow us on Twitter](http://twitter.com/LibCrowds)
+{% if config.get('CONTACT_TWITTER') %}
+[Follow us on Twitter](http://twitter.com/{{ config['CONTACT_TWITTER'] }})
+{% endif %}

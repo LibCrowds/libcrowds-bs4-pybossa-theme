@@ -9,8 +9,9 @@ We received a request to reset your {{ config.BRAND }} password.
 If you did not make this request, please ignore this email.
 
 Regards,
-
 {{ config.BRAND }} Team
 
 ***
-[Follow us on Twitter](http://twitter.com/LibCrowds)
+{% if config.get('CONTACT_TWITTER') %}
+[Follow us on Twitter](http://twitter.com/{{ config['CONTACT_TWITTER'] }})
+{% endif %}

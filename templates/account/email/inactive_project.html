@@ -1,22 +1,29 @@
 {% extends "account/email/base.html" %}
 
-{% block subject %}
-Your project has been inactive for three months
+{% block title %}
+We miss you!
 {% endblock %}
 
-{% block subtitle %}
-Hello {{user['fullname']}},
+{% block teaser %}
+Come and help us improve access to the collections of the British Library!
+{% endblock %}
+
+{% block header_text %}
+Inactive Project
 {% endblock %}
 
 {% block body %}
-<p>Your project {{ project.name }} has been inactive for the last 3 months. And we would like to inform you that if you need help with it, just contact us answering to this email.
-</p>
-<p>Otherwise, we will archive the project, removing it from the server. You have one month to upload any new tasks, add a new blog post, or engage new volunteers.
-</p>
-<p>If, at the end of one month, the project is deleted, we will send you a ZIP file where you can download your project.
-</p>
-<p>All the best,
-</p>
-<p>{{ config.BRAND }} Team
-</p>
+Hello {{ project.owner.fullname }},
+<br>
+<br>
+As your project {{ project.name }} has been inactive for the last 3 months and we have unpublished it.
+<br>
+<br>
+You can republish the project whenever you want, just access it on the server and click the publish button.
+<br>
+<br>
+All the best,
+<br>
+{{ config.BRAND }} Team
+
 {% endblock %}

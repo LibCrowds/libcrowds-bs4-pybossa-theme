@@ -1,8 +1,7 @@
 Hello {{ user['fullname'] }},
 
-You have updated your email address at {{ config.BRAND }}.
-
-To verify that you are the owner of this e-mail address, please visit the URL below:
+As you have updated your email address at {{ config.BRAND }} we need to verify that you
+are indeed the owner of this address. To do so, please visit the URL below:
 
 [Click here to validate your new e-mail address][confirm]
 
@@ -13,4 +12,6 @@ Regards,
 {{ config.BRAND }} Team
 
 ***
-[Follow us on Twitter](http://twitter.com/LibCrowds)
+{% if config.get('CONTACT_TWITTER') %}
+[Follow us on Twitter](http://twitter.com/{{ config['CONTACT_TWITTER'] }})
+{% endif %}

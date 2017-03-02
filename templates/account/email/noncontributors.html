@@ -1,25 +1,31 @@
 {% extends "account/email/base.html" %}
+{% set unsubscribe = True %}
 
-{% block subject %}
-We need your help!
+{% block title %}
+We Need Your Help!
 {% endblock %}
 
-{% block subtitle %}
-Hello {{user['fullname']}},
+{% block teaser %}
+Help us in improving access to the collections of the British Library!
+{% endblock %}
+
+{% block header_text %}
+We Need Your Help!
 {% endblock %}
 
 {% block body %}
-<p>We notice you signed up for {{config.BRAND}} some time ago but never contributed.</p>
-<p>It would be great if you could come and help us in improving access to the
-collections of the British Library!</p>
-<p>
-    <a href="{{ url_for('project.index') }}">Click here to see the projects that need your help.</a>
-</p>
-<p>
+Hello {{user['fullname']}},
+<br>
+<br>
+We notice you signed up for {{config.BRAND}} some time ago but never contributed.
+It would be great if you could come and help us in improving access to the collections
+of the British Library!
+<br>
+<br>
+<a href="{{ url_for('project.index') }}">Click here to see the projects that need your help.</a>
+<br>
+<br>
 Thanks,
-</p>
+<br>
 <p>{{ config.BRAND }} Team
-</p>
-<hr>
-<p><a href="{{url_for('account.update_profile', name=user['name'], _external=True)}}">Update your notification preferences</a></p>
 {% endblock %}

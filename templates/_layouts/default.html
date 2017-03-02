@@ -1,6 +1,13 @@
 {% extends "_layouts/base.html" %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block layout %}
+
+{% set prefix = prefix %}
+{% set title = title %}
+{% set title_link = title_link %}
+{% set hide_title = hide_title | default(False) %}
+{% set full_width = full_width | default(False) %}
 
 {% set staff_or_admin = staff_or_admin %}
 {% set active_page = active_page | default('index') %}
@@ -9,8 +16,25 @@
 
 {% include "_includes/_navbar.html" %}
 <main class="pattern-white-wall border-0">
-    {% block content %}
-    {% endblock %}
+    <div class="container my-5 pt-4">
+        {% if not hide_title %}
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+            {{ general_helpers.render_title(prefix=prefix, title=title, title_link=title_link) }}
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            {% if not full_width %}
+            <div class="col-lg-10 offset-lg-1">
+            {% endif %}
+                {% block content %}
+                {% endblock %}
+            {% if not full_width %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </main>
 {% include "_includes/_footer.html" %}
 

@@ -1,38 +1,6 @@
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_table.html" as table_helpers %}
 
-{% macro render_pagination(pagination) %}
-<nav>
-    <ul class="pagination pagination-centered">
-        {% if pagination.has_prev %}
-        <li class="page-item">
-            <a href="{{ url_for_other_page(pagination.page - 1)}}" class="page-link">&laquo; </a>
-        </li>
-        {% endif %}
-
-        {% for page in pagination.iter_pages() %}
-            {% if page %}
-                {% if page != pagination.page %}
-                <li class="page-item">
-                    <a href="{{ url_for_other_page(page) }}" class="page-link">{{ page }}</a>
-                </li>
-                {% else %}
-                <li class="active page-item">
-                    <a href="#" class="page-link">{{ page }}</a>
-                </li>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-
-        {% if pagination.has_next %}
-        <li class="page-item">
-            <a href="{{ url_for_other_page(pagination.page + 1)}}" class="page-link"> &raquo;</a>
-        </li>
-        {% endif %}
-    </ul>
-</nav>
-{% endmacro %}
-
 {% macro render_grid(projects, shuffle=False) %}
 <div {% if not shuffle %}class="row overlay-cards"{% else %}class="shuffle-grid row overlay-cards" id="project-grid" data-initial-group="incomplete"{% endif %}>
     {% for project in projects -%}

@@ -2,6 +2,7 @@
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
 
@@ -35,7 +36,7 @@
             {{ project_helpers.render_grid(projects, shuffle=True) }}
             {% if pagination.pages > 1 %}
             <div class="d-flex justify-content-center w-100 mt-4">
-                {{ project_helpers.render_pagination(pagination) }}
+                {{ general_helpers.render_pagination(pagination) }}
             </div>
             {% endif %}
         {% else %}

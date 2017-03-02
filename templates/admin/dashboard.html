@@ -22,7 +22,7 @@
 {% endassets %}
 
 {% if not wait %}
-{{ general_helpers.render_title('Admin', 'Dashboard', link=url_for('admin.dashboard', refresh='1'), link_text='Refresh') }}
+{{ general_helpers.render_title('Admin', 'Dashboard', title_link=[url_for('admin.dashboard', refresh='1'), 'Refresh']) }}
 
 <div class="card-deck">
 {{ card_helpers.render_stat('fa-user-plus', new_users_week['series'][0] | sum, 'New users', 'Returning users: {}'.format(returning_users_week['series'][0] | sum)) }}

@@ -1,31 +1,21 @@
 {% extends "_layouts/default.html" %}
-{% set active_page = "projects"  %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% set active_page = "projects" %}
+{% set prefix = project.name %}
+{% set title = "Tutorial" %}
+{% set title_link=[url_for('project.presenter', short_name=project.short_name), 'Get Started'] %}
 
 {% block content %}
-
-<div class="bg-faded">
-    <div class="container mb-5 pt-4">
-        <div class="row">
-            <div class="col-sm-10 offset-sm-1">
-                {{ project_helpers.render_title(project, 'Tutorial', link=url_for('project.presenter', short_name=project.short_name), link_text='Get Started') }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-10 offset-sm-1">
-                <div class="card bg-white">
-                    <div class="card-block">
-                        {{ project.info.tutorial | safe }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-10 col-sm-1">
-                <hr>
-                <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" class="btn btn-primary" role="button">Get Started</a>
-            </div>
-        </div>
+<div class="card">
+    <div class="card-block my-2">
+        {% if project.info.tutorial %}
+        {{ project.info.tutorial | safe }}
+        {% else %}
+        <p class="lead text-center">No tutorial has been created for this project.</p>
+        {% endif %}
+    </div>
+    <hr class="w-100 my-0">
+    <div class="card-block text-center my-2">
+        <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" class="btn btn-outline-primary btn-lg" role="button">Get Started</a>
     </div>
 </div>
 {% endblock %}

@@ -10,12 +10,6 @@
         <li class="list-group-item">
             <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}">Edit Task Presenter</a>
         </li>
-        <li class="list-group-item {% if active_link =='results' %}active{% endif %}">
-            <a href="{{url_for('project.results', short_name=project.short_name)}}">Results</a>
-        </li>
-         <li class="list-group-item {% if active_link =='stats' %}active{% endif %}">
-            <a href="{{url_for('project.show_stats', short_name=project.short_name)}}">Statistics</a>
-        </li>
         {% if config.get('LIBCROWDS_ANALYST_URL') %}
          <li class="list-group-item">
             <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/projects/{{ project.short_name }}?api_key={{ current_user.api_key }}">Analysis
@@ -24,7 +18,13 @@
         </li>
          {% endif %}
     {% endif %}
-   <li class="list-group-item">
-       <a href="{{url_for('project.presenter', short_name=project.short_name)}}">Contribute</a>
-   </li>
+    <li class="list-group-item {% if active_link =='results' %}active{% endif %}">
+        <a href="{{url_for('project.results', short_name=project.short_name)}}">Results</a>
+    </li>
+     <li class="list-group-item {% if active_link =='stats' %}active{% endif %}">
+        <a href="{{url_for('project.show_stats', short_name=project.short_name)}}">Statistics</a>
+    </li>
+    <li class="list-group-item">
+        <a href="{{url_for('project.presenter', short_name=project.short_name)}}">Contribute</a>
+    </li>
 </ul>

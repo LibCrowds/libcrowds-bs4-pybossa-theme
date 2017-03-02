@@ -9,20 +9,25 @@
 
 
 <div class="vh-100 vw-100">
-    <div class="sidebar">
-        <div class="sidebar-brand-wrapper text-center">
-            <a class="sidebar-brand py-0 text-white" href="{{ url_for('home.home') }}">{{ brand }}</a>
+    <div class="dashboard-menu side">
+        <div class="brand-wrapper text-center">
+            <a class="brand py-0 text-white" href="{{ url_for('home.home') }}">{{ brand }}</a>
         </div>
         {% if active_page == 'projects' %}
-        {% include "_includes/_project_sidebar.html" %}
-        {% elif active_page == 'account '%}
-        {% include "_includes/_account_sidebar.html" %}
+        {% include "_includes/_project_menu.html" %}
         {% elif active_page == 'admin' %}
-        {% include "_includes/_admin_sidebar.html" %}
+        {% include "_includes/_admin_menu.html" %}
         {% endif %}
     </div>
     <div class="dashboard d-flex flex-column h-100">
         {% include "_includes/_navbar.html" %}
+        <div class="dashboard-menu top">
+            {% if active_page == 'projects' %}
+            {% include "_includes/_project_menu.html" %}
+            {% elif active_page == 'admin' %}
+            {% include "_includes/_admin_menu.html" %}
+            {% endif %}
+        </div>
         <main class="bg-faded">
             <div class="container p-4">
                 {% block content %}

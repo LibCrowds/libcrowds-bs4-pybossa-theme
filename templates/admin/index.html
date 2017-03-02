@@ -6,9 +6,7 @@
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
 {{ general_helpers.render_title('Admin', 'News') }}
-
 <div class="card my-4">
     {{ card_helpers.render_title('Latest news', "GitHub feeds for PYBOSSA and related repositories.", search_table="#news-table") }}
     <div id="news-table" class="table-responsive">
@@ -20,8 +18,7 @@
                     {% set repo_name = new.links[0].href.split('/')[4] %}
                     {% set repo_url = "".join(new.links[0].href.split('/')[:4]) %}
                     {% set category = new.content[0].base.split('/')[-1].rstrip('.atom') %}
-                    {{ table_helpers.render_row(['{0}-{1}-{2}'.format(new.updated[8:10], new.updated[5:7], new.updated[0:4]),
-                                                 category,
+                    {{ table_helpers.render_row(['{0}-{1}-{2}'.format(new.updated[8:10], new.updated[5:7], new.updated[0:4]), category,
                                                  '<a target="_blank" href="{0}">{1}</a>'.format(repo_url, repo_name),
                                                  '<a target="_blank" href="{0}">{1}</a>'.format(new.link, new.title)]) }}
                     {% endif %}
@@ -31,5 +28,4 @@
         </table>
     </div>
 </div>
-
 {% endblock %}

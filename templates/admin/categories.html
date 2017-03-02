@@ -7,9 +7,7 @@
 {% import "_helpers/_table.html" as table_helpers %}
 
 {% block content %}
-
 {{ general_helpers.render_title('Admin', 'Categories') }}
-
 <div class="card">
     {{ card_helpers.render_title('Add Category', 'Add a new project category') }}
     <div class="card-block pt-1">
@@ -24,7 +22,6 @@
         </form>
     </div>
 </div>
-
 <div class="card my-4">
     {{ card_helpers.render_title('Current Categories', 'Edit or delete current categories', search_table="#categories-table") }}
     <div class="table-responsive">
@@ -41,5 +38,4 @@
         </table>
     </div>
 </div>
-
 {% endblock %}

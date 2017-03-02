@@ -6,9 +6,7 @@
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
 {{ general_helpers.render_title('Admin', 'Featured Projects') }}
-
 <div class="d-flex flex-row align-items-center justify-content-center">
     <span class="fa fa-chevron-left mr-2 btn-scroll" data-target="#categories-strip" data-direction="left" role="button"></span>
     <div id="categories-strip" class="card-strip">
@@ -18,7 +16,6 @@
     </div>
     <span class="fa fa-chevron-right ml-2 btn-scroll" data-target="#categories-strip" data-direction="right" role="button"></span>
 </div>
-
 <div class="card my-4">
     {{ card_helpers.render_title('Projects', 'Feature a project on the home page', search_table="#featured-table") }}
     <div>
@@ -39,5 +36,4 @@
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}

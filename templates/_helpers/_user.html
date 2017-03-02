@@ -54,3 +54,27 @@
     <img class="{{ class }}" style="{{ style }}" width="{{ width }}" src="http://placekitten.com/200/200?image=1" alt="{{ user.name }}'s avatar">
 {% endif %}
 {% endmacro %}
+
+{% macro render_avatar_list(users, badge=None, highlight_top_users=False) %}
+<ul class="list-unstyled">
+{% for u in users %}
+<li class="text-center d-inline-block mx-1">
+    <a href="{{ url_for('account.profile', name=u.name) }}" data-content="<strong>Joined:</strong> {{ u.created[8:10] }}-{{ u.created[5:7] }}-{{ u.created[0:4] }}"
+        data-toggle="popover" data-html="true" data-placement="top" data-trigger="hover" data-title="<strong>{{ u.name }}</strong>">
+        <div class="my-1">
+            {% set width = 90 %}
+            {% if loop.first and highlight_top_users %}
+            {% set width = 110 %}
+            {% elif loop.index == 2 and highlight_top_users %}
+            {% set width = 100 %}
+            {% endif %}
+            {{ render_avatar(u, class="img-thumbnail rounded-circle", width=width) }}
+        </div>
+    </a>
+    {% if badge %}
+    <p class="badge badge-info">{{ u[badge] }}</p>
+    {% endif %}
+</li>
+{% endfor %}
+</ul>
+{% endmacro %}

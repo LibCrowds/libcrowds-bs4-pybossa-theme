@@ -4,7 +4,7 @@
         {{ render_avatar(user, upload_method, class="img-thumbnail rounded-circle", width="200")}}
     </div>
     <div class="card-block">
-        <div class="card-title text-center"><h1>{{ user.name }}</h1></div>
+        <div class="card-title text-center"><h2>{{ user.name | truncate(15, True) }}</h2></div>
         <div class="card-text">
             <ul class="list-unstyled">
                 <li class="pb-1">
@@ -16,7 +16,7 @@
                 <li class="pb-1">
                     <span class="fa fa-clock-o fa-fw mr-1"></span>Joined {{ user.created[8:10] }}-{{ user.created[5:7] }}-{{ user.created[0:4] }}
                 </li>
-                {% if private %}
+                {% if not private %}
                 <li class="pb-1">
                     <span class="fa fa-envelope fa-fw mr-1"></span>{{ user.email_addr }}
                 </li>
@@ -26,7 +26,7 @@
                 {% endif %}
             </ul>
         </div>
-        {% if private %}
+        {% if not private %}
             <a href="{{ url_for('account.update_profile', name=user.name) }}" class="btn btn-outline-primary btn-block" role="button">
                 <span class="fa fa-pencil-square-o mr-1"></span>Edit
             </a>

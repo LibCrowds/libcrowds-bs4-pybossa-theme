@@ -8,7 +8,7 @@
 <div class="container my-5 pt-4">
     <div class="row">
         <div class="col-lg-4">
-            {{ user_helpers.render_profile_card(current_user, upload_method) }}
+            {{ user_helpers.render_profile_card(current_user, upload_method, private=False) }}
         </div>
         <div class="col-lg-8">
             {{ project_helpers.render_table("Your Contributions", "The projects that you have contributed to", "projects-table", projects_contrib) }}

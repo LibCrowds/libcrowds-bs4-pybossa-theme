@@ -6,39 +6,31 @@
 {% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
+{{ general_helpers.render_title(project.name, 'Project Details') }}
+    <div class="card my-4">
+        {{ card_helpers.render_title('Project Thumbnail', 'Upload a thumbnail image') }}
+        <div class="card-block pt-1">
+            <div class="my-2 text-center">
+                {{ project_helpers.render_thumbnail(project, upload_method, class="img-thumbnail", width="300", id="uploadPreview") }}
+            </div>
+            <form method="POST" action="{{ url_for('project.update', short_name=project.short_name) }}" enctype="multipart/form-data">
+                {{ upload_form.hidden_tag() }}
+                {{ form_helpers.render_field(upload_form.avatar, class="form-control hidden") }}
+                {{ upload_form.x1 }}
+                {{ upload_form.y1 }}
+                {{ upload_form.x2 }}
+                {{ upload_form.y2 }}
+                <div class="text-right">
+                    <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                    <button type="submit" name="btn" value="Upload" class="btn btn-success" role="button">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-{{ general_helpers.render_title(project.name, 'Project Details', 'Update details and settings for the project') }}
 <div class="card">
     {{ card_helpers.render_title('Project Details', 'Edit the project details') }}
     <div class="card-block pt-1">
-        <form method="POST" action="{{ url_for('project.update', short_name=project.short_name) }}">
-            <div class="text-center">
-                {{ project_helpers.render_thumbnail(project, upload_method, class="img-thumbnail hover-overlay") }}
-                <span class="fa fa-pencil-square-o fa-3x"></span>
-            </div>
-            {{ form.hidden_tag() }}
-            {{ form_helpers.render_field(upload_form.avatar, onchange="loadPreview()", class="form-control hidden") }}
-            {{ upload_form.x1 }}
-            {{ upload_form.y1 }}
-            {{ upload_form.x2 }}
-            {{ upload_form.y2 }}
-            <div id="modal" class="modal fade">
-                <div class="modal-dialog img-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <img id="uploadPreview">
-                        </div>
-                        <div class="modal-footer">
-                            <div class="form-actions text-center">
-                                <button type="submit" name='btn' value="Upload" class="btn btn-primary btn-large">Upload</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-
         <form method="POST" action="{{ url_for('project.update', short_name = project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.name, class="form-control", placeholder="Name", required="required", autofocus="autofocus") }}
@@ -48,11 +40,11 @@
             {{ form_helpers.render_field(form.category_id, class="form-control") }}
             {{ form_helpers.render_toggle(form.allow_anonymous_contributors, label="Allow anonymous contributors") }}
             {{ form_helpers.render_toggle(form.protect, label="Password protect") }}
-            <div id='password'>{{ form_helpers.render_field(form.password, class="form-control collapse", show_label=False) }}</div>
+            {{ form_helpers.render_field(form.password, class="form-control") }}
             {{ form_helpers.render_field(form.webhook, class="form-control") }}
             <div class="text-right">
-                <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Update" class="btn btn-success" />
+                <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-secondary" role="button">Cancel</a>
+                <input type="submit" value="Update" class="btn btn-success" role="button"/>
             </div>
         </form>
     </div>

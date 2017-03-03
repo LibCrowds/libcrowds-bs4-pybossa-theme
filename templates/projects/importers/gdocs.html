@@ -1,37 +1,24 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
-{% set active_link = "dashboard" %}
+{% set active_link = "importtasks" %}
+{% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_form.html" as form_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 
 {% block content %}
-{% import "_helpers/_form.html" as form_helpers %}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ helper.render_loading(loading_text) }}
-            <h1><strong>{{project.name}}</strong>: Import tasks</h1>
-            {% if form %}
-            <hr>
-            <div class="row vcenter">
-                <div class="col-xs-10">
-                <h3>From a Google Docs Spreadsheet</h3>
-                </div>
-              <div class="col-xs-2">
-                    <a href="https://docs.google.com/spreadsheet/ccc?key=0AsNlt0WgPAHwdHFEN29mZUF0czJWMUhIejF6dWZXdkE&usp=sharing"><i class="fa fa-book"></i> Sample Data</a>
-              </div>
+{{ general_helpers.render_title(project.name, 'Import Tasks') }}
+<div class="card">
+    {{ card_helpers.render_title('Google Docs Import', 'Import tasks from a Google Docs spreadsheet') }}
+    <div class="card-block pt-1">
+        <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.googledocs_url, class="form-control", placeholder="The public URL of the Google Docs spreadsheet", required="required", autofocus="autofocus", type="url") }}
+            <div class="text-right">
+                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <input id="import" type="submit" value="Import" class="btn btn-success" role="button"/>
             </div>
-            <form role="form" method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
-                <fieldset>
-                {{ form.hidden_tag() }}
-                {{ form_helpers.render_field(form.googledocs_url, class_="input-block-level form-control", placeholder="The URL of the Google Docs Spreadsheet", required="required", autofocus="autofocus", type="url") }}
-                    <div class="pull-right" role="group">
-                        <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-default">Cancel</a>
-                        <input id="import" type="submit" value="Import" class="btn btn-danger" />
-                    </div>
-                </fieldset>
-            </form>
-            {% endif %}
-        </div>
+        </form>
     </div>
 </div>
 {% endblock %}
+

@@ -7,7 +7,7 @@
 
 {% block content %}
 {{ general_helpers.render_title(project.name, 'Project Details') }}
-    <div class="card my-4">
+    <div class="card">
         {{ card_helpers.render_title('Project Thumbnail', 'Upload a thumbnail image') }}
         <div class="card-block pt-1">
             <div class="my-2 text-center">
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-<div class="card">
+<div class="card mt-4">
     {{ card_helpers.render_title('Project Details', 'Edit the project details') }}
     <div class="card-block pt-1">
         <form method="POST" action="{{ url_for('project.update', short_name = project.short_name) }}">

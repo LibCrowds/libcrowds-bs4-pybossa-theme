@@ -30,28 +30,28 @@
 {{ card_helpers.render_stat('fa-users', active_users_last_week['series'][0] | sum, 'Active users', 'Active anonymous users: {}'.format(active_anon_last_week['series'][0] | sum)) }}
 </div>
 
-<div class="card my-4">
+<div class="card mt-4">
     {{ card_helpers.render_title('Returning Users', 'Returning users over the past week') }}
     <div class="card-block">
         <div id="returning-users"></div>
     </div>
 </div>
 
-<div class="card my-4">
+<div class="card mt-4">
     {{ card_helpers.render_title('Active Users', 'Active users over the past week') }}
     <div class="card-block">
         <div id="active-users"></div>
     </div>
 </div>
 
-<div class="card my-4">
+<div class="card mt-4">
     {{ card_helpers.render_title('Active Anonymous Users', 'Active anonymous users over the past week') }}
     <div class="card-block">
         <div id="active-anon-users"></div>
     </div>
 </div>
 
-<div class="card my-4">
+<div class="card mt-4">
     {{ card_helpers.render_title('New tasks', 'Contributions over the past week') }}
     <div class="card-block">
         <div id="contributions"></div>

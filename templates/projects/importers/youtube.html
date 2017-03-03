@@ -1,33 +1,27 @@
-{% extends "projects/base.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
-{% set active_link = 'tasks' %}
-
+{% set active_link = "importtasks" %}
+{% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 
-{% block projectcontent %}
-
-<h3>From Youtube</h3>
-<br>
-<span class="help-inline">Please provide a URL to a Youtube playlist.
-</span>
-<br>
-<div id="objects-container" class="row">
-    <ul id="objects"></ul>
+{% block content %}
+{{ general_helpers.render_title(project.name, 'Import Tasks') }}
+<div class="card">
+    {{ card_helpers.render_title('YouTube Import', 'Import tasks from a YouTube playlist') }}
+    <div class="card-block pt-1">
+        <div id="objects-container" class="row">
+            <ul id="objects"></ul>
+        </div>
+        <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.playlist_url, class="form-control", placeholder="Enter the URL of a YouTube playlist") }}
+            <div class="text-right">
+                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <input id="import" type="submit" value="Import" class="btn btn-success" role="button"/>
+            </div>
+        </form>
+    </div>
 </div>
-<form class="form-group" method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
-    <fieldset>
-        {{ form.hidden_tag() }}
-        {{ form_helpers.render_field(form.playlist_url, placeholder=_("URL of a Youtube Playlist")) }}
-    </fieldset>
-    <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-primary" />
-</form>
 {% endblock %}
-{% block extrajs %}
-<script>
-    $("#submit").off('click').on('click', function(){
-            var msg = "{{_('Importing data...')}}";
-            notify(msg, true, "loading");
-            });
-</script>
-{% endblock %}
+

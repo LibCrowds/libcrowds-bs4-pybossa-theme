@@ -10,18 +10,6 @@
     {{ card_helpers.render_stat('fa-bullseye', '{}%'.format(overall_progress), 'Complete', 'Project created: {}'.format(project.created | pretty_date)) }}
     {{ card_helpers.render_stat('fa-users', n_volunteers, 'Volunteers', 'Last activity: {}'.format(last_activity)) }}
 </div>
-<div class="card-deck hidden-lg-up">
-    {{ card_helpers.render_button('Edit Task Presenter', url_for('project.task_presenter_editor', short_name=project.short_name), 'fa-pencil-square-o') }}
-    {{ card_helpers.render_button('Edit Details', url_for('project.update', short_name=project.short_name), 'fa-file-o') }}
-    {{ card_helpers.render_button('Contribute', url_for('project.presenter', short_name=project.short_name), 'fa-hand-o-right') }}
-</div>
-<div class="card-deck hidden-lg-up">
-    {{ card_helpers.render_button('Results', url_for('project.results', short_name=project.short_name), 'fa-calendar') }}
-    {{ card_helpers.render_button('Statistics', url_for('project.show_stats', short_name=project.short_name), 'fa-link') }}
-    {% if config.get('LIBCROWDS_ANALYST_URL') %}
-    {{ card_helpers.render_button('Publish', '{0}/projects/{1}?api_key={2}'.format(config['LIBCROWDS_ANALYST_URL'], project.short_name, current_user.api_key), 'fa-thumbs-up') }} Analysis
-    {% endif %}
-</div>
 <div class="card-deck">
     {{ card_helpers.render_button('Import Tasks', url_for('project.import_task', short_name=project.short_name), 'fa-upload') }}
     {{ card_helpers.render_button('Auto-import Tasks', url_for('project.setup_autoimporter', short_name=project.short_name), 'fa-download') }}

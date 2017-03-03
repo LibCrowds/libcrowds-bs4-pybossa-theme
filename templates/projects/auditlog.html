@@ -1,16 +1,15 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
+{% set active_link = "auditlog" %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_table.html" as table_helpers %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
-{{ project_helpers.render_title(project, 'Audit Logs') }}
+{{ general_helpers.render_title(project.name, 'Audit Logs') }}
 <div class="card my-4">
-    {{ card_helpers.render_title('Audit logs', 'It was probably you') }}
-    {% if logs %}
-    <div class="table-responsive">
+    {{ card_helpers.render_title('Audit logs', 'All activities affecting the project', search_table="#audit-table") }}
+    <div id="audit-table" class="table-responsive">
         <table class="table table-hover table-striped mb-0">
             {{ table_helpers.render_head(['When', 'Who', 'Source', 'Action', 'Attribute']) }}
             <tbody>
@@ -19,13 +18,10 @@
                                              '.format(log.id, log.created[8:10], log.created[5:7], log.created[0:4], log.created[11:16]),
                                              log.user_name, log.caller, log.action, log.attribute]) }}
                 {% endfor %}
+                {{ table_helpers.render_no_data_row(5) }}
             </tbody>
         </table>
     </div>
-    {% else %}
-    <hr>
-    <p class="lead text-center">No logs so far.</p>
-    {% endif %}
 </div>
 
 <!-- Modals to show old and new values for each entry -->

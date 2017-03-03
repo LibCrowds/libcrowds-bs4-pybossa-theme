@@ -45,3 +45,12 @@ a {
 .toggle-switch {
     transition: all 0.3s ease-in 0s;
 }
+
+.card-button .card-block {
+    &:after {
+        transition: transform 350ms ease-out;
+    }
+    &:before {
+        transition: opacity 200ms ease-in 400ms;
+    }
+}

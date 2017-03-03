@@ -1,23 +1,20 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 
 {% block content %}
-
-{{ project_helpers.render_title(project, 'Import Tasks', 'Use one of the following importers to import tasks') }}
-
-{% for row in available_importers | batch(3) %}
-<div class="card-deck">
-    {% for importer in row %}
-        {% include importer %}
-    {% endfor %}
-</div>
+{{ general_helpers.render_title(project.name, 'Import Tasks') }}
+<p class="lead">Use one of the following importers to import tasks</p>
+<div class="row">
+{% for importer in available_importers %}
+    {% include importer %}
 {% endfor %}
+</div>
 
 <p class="mt-5 mb-0">...or import a set of template tasks</p>
 {% for row in task_tmpls | batch(3) %}
-<div class="card-deck">
+<div class="card-deck row">
     {% for task_tmpl in row %}
         {% include task_tmpl %}
     {% endfor %}

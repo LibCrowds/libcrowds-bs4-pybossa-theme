@@ -21,7 +21,7 @@ body {
 
 .navbar .nav-link,
 .navbar .dropdown-item,
-.sidebar .list-group-item {
+.dashboard-menu .list-group-item {
     font-weight: 400;
     letter-spacing: 0.8px;
 }
@@ -32,7 +32,7 @@ body {
     text-transform: uppercase;
 }
 
-.sidebar {
+.dashboard-menu {
     font-size: $font-size-sm;
     text-transform: uppercase;
 }
@@ -56,7 +56,7 @@ body {
 @include media-breakpoint-up(lg) {
     .navbar .nav-link,
     .navbar .dropdown-item,
-    .sidebar .list-group-item {
+    .dashboard-menu .list-group-item {
         font-size: $font-size-sm;
     }
 }

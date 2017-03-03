@@ -1,12 +1,13 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
+{% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
 
-{{ project_helpers.render_title(project, 'Project Details', 'Update details and settings for the project') }}
+{{ general_helpers.render_title(project.name, 'Project Details', 'Update details and settings for the project') }}
 <div class="card">
     {{ card_helpers.render_title('Project Details', 'Edit the project details') }}
     <div class="card-block pt-1">

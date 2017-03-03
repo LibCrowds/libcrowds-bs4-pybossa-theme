@@ -1,20 +1,23 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% import "_helpers/_card.html" as card_helpers %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
-{{ project_helpers.render_title(project, 'Delete Project') }}
-<div class="alert alert-danger">
-    <strong>Warning!</strong> If you delete the project it will be gone forever, there is no undo!
-</div>
-<form method="POST" action="{{ url_for('project.delete', short_name=project.short_name) }}">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-    <div class="text-right" role="group">
-        <button type="submit" name='btn' class="btn btn-secondary" value="Yes">Yes, delete everything</button>
-        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-danger" role="button">No, do not delete anything!</a>
+{{ general_helpers.render_title(project.name, 'Delete Project') }}
+<div class="card my-4">
+    {{ card_helpers.render_title('Danger Zone', 'There is no undo!') }}
+    <div class="card-block pt-1">
+        <div class="alert alert-danger">
+            <strong>Warning!</strong> If you delete the project it will be gone forever!
+        </div>
+        <form method="POST" action="{{ url_for('project.delete', short_name=project.short_name) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="text-right">
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-secondary" role="button">No, do not delete anything!</a>
+                <button type="submit" name='btn' class="btn btn-danger" value="Yes">Yes, delete everything</button>
+            </div>
+        </form>
     </div>
-</form>
-
+</div>
 {% endblock %}

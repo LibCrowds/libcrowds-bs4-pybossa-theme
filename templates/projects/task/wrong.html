@@ -1,11 +1,13 @@
-{% extends "_layouts/default.html" %}
-{% set active_page = "projects"  %}
+{% extends "_layouts/presenter.html" %}
+{% set active_page = "projects" %}
 
 {% block content %}
-<div class="alert alert-danger">
-    <strong>Error!</strong> This task does not belong to {{ project.short_name }}.
-    <a class="btn-sm btn-danger" href={{ url_for('project.presenter', short_name=project.short_name )}}>
-        <i class="fa fa-random"></i> Try with another one
-    </a>
+<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+<span class="icon icon-error icon-5x"></span>
+<p class="display-5 my-1">Error</p>
+<div class="alert alert-danger my-1">
+    This task does not belong to {{ project.short_name }}.
+</div>
+<a class="btn btn-primary my-3" href={{ url_for('project.presenter', short_name=project.short_name )}} role="button">Try another one</a>
 </div>
 {% endblock %}

@@ -12,7 +12,7 @@
     <div class="card-block pt-1">
         <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
-            {{ form_helpers.render_field(form.csv_url, class="input-block-level form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}
+            {{ form_helpers.render_field(form.csv_url, class="form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}
             <div class="text-right">
                 <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
                 <input id="import" type="submit" value="Import" class="btn btn-success" role="button"/>

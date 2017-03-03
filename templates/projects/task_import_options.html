@@ -5,7 +5,7 @@
 
 {% block content %}
 {{ general_helpers.render_title(project.name, 'Import Tasks') }}
-<p class="lead">Use one of the following importers to import tasks</p>
+<p class="lead">Use one of the following to import tasks</p>
 <div class="row">
 {% for importer in available_importers %}
     {% include importer %}

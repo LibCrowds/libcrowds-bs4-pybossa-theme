@@ -7,7 +7,7 @@
         <li class="list-group-item {% if active_link =='update' %}active{% endif %}">
             <a href="{{url_for('project.update', short_name=project.short_name)}}">Edit Details</a>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item {% if active_link =='taskpresentereditor' %}active{% endif %}">
             <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}">Edit Task Presenter</a>
         </li>
         {% if config.get('LIBCROWDS_ANALYST_URL') %}

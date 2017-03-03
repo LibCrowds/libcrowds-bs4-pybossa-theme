@@ -1,6 +1,3 @@
-<a href="{{url_for('project.task_presenter_editor', short_name=project.short_name, template='image')}}">
-    <div class="well well-link">
-        <h2><i class="fa fa-picture-o"></i> Image</h2>
-        <h3>Re-use the image pattern recognition template</h3>
-    </div>
-</a>
+{% import "_helpers/_card.html" as card_helpers %}
+
+{{ card_helpers.render_button('Image', 'Use the image pattern recognition template', url_for('project.task_presenter_editor', short_name=project.short_name, template='image'), 'fa-picture-o') }}

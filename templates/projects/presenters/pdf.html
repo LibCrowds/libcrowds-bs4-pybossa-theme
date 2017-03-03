@@ -1,6 +1,3 @@
-<a href="{{url_for('project.task_presenter_editor', short_name=project.short_name, template='pdf')}}" >
-    <div class="well well-link">
-        <h2><i class="fa fa-pencil"></i>Transcription</h2>
-        <h3>Re-use the document transcription template</h3>
-    </div>
-</a>
+{% import "_helpers/_card.html" as card_helpers %}
+
+{{ card_helpers.render_button('Transcription', 'Use the PDF transcription template', url_for('project.task_presenter_editor', short_name=project.short_name, template='pdf'), 'fa-pencil') }}

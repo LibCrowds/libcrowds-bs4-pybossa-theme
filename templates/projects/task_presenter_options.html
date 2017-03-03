@@ -1,14 +1,14 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
-{% set active_link = "dashboard" %}
+{% set active_link = "taskpresentereditor" %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            {% include "projects/snippets/options.html" %}
-        </div>
-    </div>
+{{ general_helpers.render_title(project.name, 'Task Presenter Editor') }}
+<p class="lead">Choose one of the following templates as a basis for your project</p>
+<div class="row">
+    {% for presenter_tmpl in presenters %}
+    {% include presenter_tmpl %}
+    {% endfor %}
 </div>
 {% endblock %}

@@ -1,6 +1,3 @@
-<a href="{{url_for('project.task_presenter_editor', short_name=project.short_name, template='sound')}}">
-    <div class="well well-link">
-        <h2><i class="fa fa-music"></i> Sound</h2>
-        <h3>Re-use the sound pattern recognition template template</h3>
-    </div>
-</a>
+{% import "_helpers/_card.html" as card_helpers %}
+
+{{ card_helpers.render_button('Sound', 'Use the sound recognition template', url_for('project.task_presenter_editor', short_name=project.short_name, template='sound'), 'fa-music') }}

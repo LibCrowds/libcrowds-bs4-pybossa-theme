@@ -9,9 +9,12 @@ $('#get-s3-bucket').on('click', function() {
     $('#objects').empty();
     $.get('/amazon/bucket/'+ bucketName).done(function(objects) {
         objects.forEach(function(object) {
+            console.log(object);
             objectElement = $('<tr class="object" style="cursor:pointer;"><td>' + object + '</td></tr>');
             $('#objects').append(objectElement);
         });
+        
+        notify("Click on the rows containing the images you want to import.", 'info');
             
         $(".object").each(function(){
             let objectDomElement = $(this),

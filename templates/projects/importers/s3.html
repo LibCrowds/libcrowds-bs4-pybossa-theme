@@ -1,21 +1,20 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% set active_link = "importtasks" %}
+{% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_table.html" as table_helpers %}
 
 {% block content %}
-
-{{ project_helpers.render_title(project, 'Import Tasks', subtitle='From an Amazon S3 bucket') }}
-
+{{ general_helpers.render_title(project.name, 'Import Tasks') }}
 <div class="card">
-    {{ card_helpers.render_title('Import Tasks', 'See the <a href="http://docs.pybossa.com/en/latest/user/overview.html#importing-the-tasks-from-an-amazon-s3-bucket" target="_blank">documentation</a> for more details.') }}
+    {{ card_helpers.render_title('Amazon S3 Import', 'Import tasks from an Amazon S3 bucket', search_table="#s3-table") }}
     <div id="objects-container" class="table-responsive" style="display: none;">
-        <table class="table table-hover table-striped mb-4">
+        <table id="s3-table" class="table table-hover table-striped mb-4">
             {{ table_helpers.render_head(['Title']) }}
             <tbody id="objects">
-
+                {{ table_helpers.render_no_data_row(1) }}
             </tbody>
         </table>
     </div>
@@ -25,9 +24,9 @@
             {{ form.files(style="display: none;") }}
             {{ form_helpers.render_field(form.bucket, class="form-control", placeholder="The name of the S3 bucket") }}
             <div class="text-right">
-                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary">Cancel</a>
-                <a href="#" id="get-s3-bucket" class="btn btn-primary" role="button">Load bucket</a>
-                <input id="submit" type="submit" value="Import" class="btn btn-success" />
+                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <a href="#" id="get-s3-bucket" class="btn btn-outline-primary" role="button">Load bucket</a>
+                <input id="submit" type="submit" value="Import" class="btn btn-success" role="button" />
             </div>
         </form>
     </div>

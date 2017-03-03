@@ -25,7 +25,7 @@
                 {{ user_helpers.render_avatar(current_user, upload_method, class="img-thumbnail crop-circle", width="300", id="uploadPreview") }}
             </div>
             <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
-                {{ password_form.hidden_tag() }}
+                {{ upload_form.hidden_tag() }}
                 {{ form_helpers.render_field(upload_form.avatar, class="form-control hidden") }}
                 {{ upload_form.x1 }}
                 {{ upload_form.y1 }}

@@ -33,7 +33,7 @@
 {% macro render_button(title, description, url, icon) %}
 <div class="col-md-6 col-xl-4 my-2">
     <div class="card card-button">
-        <a href="{{ url }}">
+        <a href="{{ url }}" role="button">
             <div class="card-block" data-description="{{ description }}">
                 <div class="card-title">{{ title }}</div>
                 <div class="card-icon">

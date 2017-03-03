@@ -1,28 +1,25 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/presenter.html" %}
 {% set active_page = "projects" %}
 {% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
-
 {% assets output="css/gen/editor.min.css", "../node_modules/codemirror/lib/codemirror.css"%}
     <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
 {% endassets %}
-
 <section>
     <div class="row">
         <div class="col-sm-12">
             <form method="POST" action="{{ url_for('project.task_presenter_editor', short_name=project.short_name) }}">
                 {{ form.hidden_tag() }}
-                <div class="btn-group codemirror-buttons py-1 pl-4 bg-faded">
+                <div class="btn-group codemirror-buttons py-3 pl-4">
                     <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-sm btn-secondary" role="button">Cancel</a>
-                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                    <button type="submit" class="btn btn-sm btn-primary" role="button">Update</button>
                 </div>
-                {{ form_helpers.render_field(form.editor, form_group_cls="mb-0 pt-4")}}
+                {{ form_helpers.render_field(form.editor, form_group_cls="mb-0", show_label=False)}}
             </form>
         </div>
     </div>
 </section>
-
 {% assets filters="jsmin", output="js/gen/task_presenter_editor.min.js",
     "../node_modules/codemirror/lib/codemirror.js",
     "../node_modules/codemirror/mode/xml/xml.js",
@@ -33,5 +30,4 @@
     %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
-
 {% endblock %}

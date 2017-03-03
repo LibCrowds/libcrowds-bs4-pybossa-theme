@@ -14,7 +14,7 @@
 
 <p class="mt-5 mb-0">...or import a set of template tasks</p>
 {% for row in task_tmpls | batch(3) %}
-<div class="card-deck row">
+<div class="row">
     {% for task_tmpl in row %}
         {% include task_tmpl %}
     {% endfor %}

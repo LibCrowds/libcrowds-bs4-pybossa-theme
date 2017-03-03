@@ -14,8 +14,8 @@
             {{ form_helpers.render_field(form.short_name, placeholder="A shortcut for URLs and filenames", class="form-control", required="required") }}
             {{ form_helpers.render_field(form.long_description, class="form-control", rows="13", label_text="Long description", placeholder="Long description (use Markdown)!", required="required") }}
             <div class="text-right">
-                <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Create" class="btn btn-success" />
+                <a href="{{url_for('account.profile', name=current_user.name)}}" class="btn btn-secondary" role="button">Cancel</a>
+                <input type="submit" value="Create" class="btn btn-success" role="button" />
             </div>
         </form>
     </div>

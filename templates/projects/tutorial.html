@@ -5,17 +5,29 @@
 {% set title_link=[url_for('project.presenter', short_name=project.short_name), 'Get Started'] %}
 
 {% block content %}
-<div class="card">
-    <div class="card-block my-2">
-        {% if project.info.tutorial %}
-        {{ project.info.tutorial | safe }}
-        {% else %}
-        <p class="lead text-center">No tutorial has been created for this project.</p>
-        {% endif %}
+{% if project.info.tutorial %}
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-block">
+                <h3 class="append-contents">Contents</h3>
+            </div>
+        </div>
+        <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" class="btn btn-outline-primary btn-block bg-white mt-3" role="button">Get Started</a>
     </div>
-    <hr class="w-100 my-0">
-    <div class="card-block text-center my-2">
-        <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" class="btn btn-outline-primary btn-lg" role="button">Get Started</a>
+    <div class="col-lg-9 offset-lg-3">
+        <div class="card">
+            <div class="card-block">
+                {{ project.info.tutorial | safe }}
+            </div>
+        </div>
     </div>
 </div>
+{% else %}
+<div class="card">
+    <div class="card-block my-2">
+        <p class="lead text-center">No tutorial has been created for this project.</p>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

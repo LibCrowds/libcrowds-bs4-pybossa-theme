@@ -27,7 +27,8 @@
     "shufflejs": "^4.1.0",
     "chartist": "^0.10.1",
     "leaflet": "^1.0.3",
-    "leaflet.markercluster": "^1.0.3"
+    "leaflet.markercluster": "^1.0.3",
+    "bootstrap-toggle": "^2.2.2"
   },
   "devDependencies": {
     "jshint": "^2.9.4"

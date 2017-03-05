@@ -1,14 +1,11 @@
 <ul class="nav list-group">
     {% if staff_or_admin %}
-        <li class="list-group-item {% if active_link =='dashboard' %}active{% endif %}">
-            <a href="{{url_for('project.tasks', short_name=project.short_name)}}">Dashboard</a>
+        <li class="list-group-item {% if active_link =='tasks' %}active{% endif %}">
+            <a href="{{url_for('project.tasks', short_name=project.short_name)}}">Task Settings</a>
         </li>
         </li>
-        <li class="list-group-item {% if active_link =='update' %}active{% endif %}">
-            <a href="{{url_for('project.update', short_name=project.short_name)}}">Edit Details</a>
-        </li>
-        <li class="list-group-item {% if active_link =='taskpresentereditor' %}active{% endif %}">
-            <a href="{{url_for('project.task_presenter_editor', short_name=project.short_name)}}">Edit Task Presenter</a>
+        <li class="list-group-item {% if active_link =='settings' %}active{% endif %}">
+            <a href="{{url_for('project.settings', short_name=project.short_name)}}">Project Settings</a>
         </li>
         {% if config.get('LIBCROWDS_ANALYST_URL') %}
          <li class="list-group-item">

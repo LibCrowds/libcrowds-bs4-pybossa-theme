@@ -1,32 +1,20 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% set active_link = "dashboard" %}
+{% set active_link = "tasks" %}
 {% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
-<div class="card-deck">
-    {{ card_helpers.render_stat('fa-tasks', n_completed_tasks, 'Tasks completed', 'Total tasks: {}'.format(n_tasks)) }}
-    {{ card_helpers.render_stat('fa-bullseye', '{}%'.format(overall_progress), 'Complete', 'Project created: {}'.format(project.created | pretty_date)) }}
-    {{ card_helpers.render_stat('fa-users', n_volunteers, 'Volunteers', 'Last activity: {}'.format(last_activity)) }}
+{{ general_helpers.render_title(project.name, 'Tasks') }}
+<div class="row">
+{{ card_helpers.render_button('Import Tasks', 'Import tasks into the project', url_for('project.import_task', short_name=project.short_name), 'fa-upload') }}
+{{ card_helpers.render_button('Auto-import Tasks', 'Set up auto-importing of tasks', url_for('project.setup_autoimporter', short_name=project.short_name), 'fa-download') }}
+{{ card_helpers.render_button('Export Task Data', 'Export all task and contribution data', url_for('project.export_to', short_name=project.short_name), 'fa-download') }}
+{{ card_helpers.render_button('Task Scheduler', 'Set the order in which tasks are presented', url_for('project.task_scheduler', short_name=project.short_name), 'fa-filter') }}
+{{ card_helpers.render_button('Browse Tasks', 'Browse all tasks', url_for('project.tasks_browse', short_name=project.short_name), 'fa-list-alt') }}
+{{ card_helpers.render_button('Task Redundancy', 'Set the number of contributions required', url_for('project.task_n_answers', short_name=project.short_name), 'fa-repeat') }}
+{{ card_helpers.render_button('Task Priority', 'Set the priority for individual tasks', url_for('project.task_priority', short_name=project.short_name), 'fa-sort-numeric-asc') }}
+{{ card_helpers.render_button('Delete Tasks', 'Delete all tasks and associated task runs', url_for('project.delete_tasks', short_name=project.short_name), 'fa-trash-o') }}
+{{ card_helpers.render_button('Task Presenter Editor', 'Edit the task presenter', url_for('project.task_presenter_editor', short_name=project.short_name), 'fa-pencil-square-o') }}
 </div>
-<div class="card-deck">
-    {{ card_helpers.render_button('Import Tasks', url_for('project.import_task', short_name=project.short_name), 'fa-upload') }}
-    {{ card_helpers.render_button('Auto-import Tasks', url_for('project.setup_autoimporter', short_name=project.short_name), 'fa-download') }}
-    {{ card_helpers.render_button('Export Data', url_for('project.export_to', short_name=project.short_name), 'fa-download') }}
-    {{ card_helpers.render_button('Browse Tasks', url_for('project.tasks_browse', short_name=project.short_name), 'fa-list-alt') }}
-</div>
-<div class="card-deck">
-    {{ card_helpers.render_button('Task Redundancy', url_for('project.task_n_answers', short_name=project.short_name), 'fa-repeat') }}
-    {{ card_helpers.render_button('Task Priority', url_for('project.task_priority', short_name=project.short_name), 'fa-sort-numeric-asc') }}
-    {{ card_helpers.render_button('Delete Tasks', url_for('project.delete_tasks', short_name=project.short_name), 'fa-trash-o') }}
-    {{ card_helpers.render_button('Delete Project', url_for('project.delete', short_name=project.short_name), 'fa-trash') }}
-</div>
-<div class="card-deck">
-    {{ card_helpers.render_button('Task Scheduler', url_for('project.task_scheduler', short_name=project.short_name), 'fa-filter') }}
-    {{ card_helpers.render_button('Audit Logs', url_for('project.auditlog', short_name=project.short_name), 'fa-calendar') }}
-    {{ card_helpers.render_button('Webhooks', url_for('project.webhook_handler', short_name=project.short_name), 'fa-link') }}
-    {{ card_helpers.render_button('Publish', url_for('project.publish', short_name=project.short_name), 'fa-thumbs-up') }}
-</div>
-
 {% endblock %}

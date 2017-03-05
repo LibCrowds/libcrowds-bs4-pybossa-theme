@@ -1,14 +1,14 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% set active_link = "settings" %}
+{% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-{{ general_helpers.render_title(project.name, 'Settings') }}
-<div class="container">
-    <p class="lead">All settings are available via the project dashboard page.</p>
-    <div class="text-right">
-        <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-primary" role="button">View Dashboard</a>
-    </div>
+{{ general_helpers.render_title(project.name, 'Project Settings') }}
+<div class="row">
+{{ card_helpers.render_button('Edit Details', 'Edit the project details', url_for('project.update', short_name=project.short_name), 'fa-file-text-o') }}
+{{ card_helpers.render_button('Delete', 'Delete the project', url_for('project.delete', short_name=project.short_name), 'fa-trash') }}
+{{ card_helpers.render_button('Publish', 'Publish the project', url_for('project.publish', short_name=project.short_name), 'fa-thumbs-up') }}
 </div>
 {% endblock %}

@@ -36,7 +36,11 @@
     <a href="{{ url_for('home.home') }}"><span class="fa fa-home fa-3x"></span></a>
 </div>
 {% else %}
-{{ project.info.task_presenter|safe }}
+<script>
+    const currentUserName = '{{ current_user.name }}' || null;
+    console.log(currentUserName);
+</script>
+{{ project.info.task_presenter | safe }}
 {% endif %}
 
 {% endblock %}

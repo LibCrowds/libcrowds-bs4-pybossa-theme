@@ -15,8 +15,8 @@ $('.append-contents').each(function() {
             html += `</li>`;
         }
         level = newLevel;
-        html = `${html}<li><a href="${h.getAttribute('id')}" id="${h.innerHTML.trim()}">${h.innerHTML}</a>`;
-        h.setAttribute('id', this.innerHTML.trim());
+        html = `${html}<li><a href="#${h.innerHTML.replace(/ /g,'')}">${h.innerHTML}</a>`;
+        h.setAttribute('id', h.innerHTML.replace(/ /g,''));
     }
     
     while (level > 2) {

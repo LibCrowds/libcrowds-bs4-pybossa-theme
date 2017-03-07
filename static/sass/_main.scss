@@ -106,6 +106,15 @@ $spacer:                           1.5rem;
 
 $progress-circle-font-size:        2.5rem;
 
+$box-shadow-spread:                -5px;
+$box-shadow-blur:                  7px;
+$box-shadows: (
+    t: '0 4px', 
+    l: '4px 0', 
+    r: '-4 0', 
+    b: '0 -4px'
+);
+
 $fa-font-path:                     '../../fonts/font-awesome';
 
 $ct-series-colors:

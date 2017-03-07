@@ -88,6 +88,12 @@
 .card-strip {
     overflow-y: auto;
     white-space: nowrap;
+    
+    .card:hover,
+    .card:hover,
+    .card.active {
+        border: 1px solid rgba($brand-primary, 0.75);
+    }
 }
 
 .card-user {

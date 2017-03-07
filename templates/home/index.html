@@ -82,7 +82,7 @@
             <div class="col-lg-10 offset-lg-1">
                 <div class="mt-4">
                     {% if categories_projects['featured'] %}
-                    {{ project_helpers.render_grid(categories_projects['featured']) }}
+                    {{ project_helpers.render_grid(categories_projects['featured'], col_size="col-md-6") }}
                     {% else %}
                     <p class="text-center">
                         No projects are currently being featured, but we still need you help!

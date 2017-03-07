@@ -16,7 +16,7 @@ a {
             transition: max-height 250ms;
         
             .card-text {
-                transition: opacity 200ms 200ms;
+                transition: opacity 500ms ease-in-out 150ms;
             }
         }
     }

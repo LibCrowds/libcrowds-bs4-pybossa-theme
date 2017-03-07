@@ -4,13 +4,13 @@
 {% macro render_grid(projects, shuffle=False) %}
 <div {% if not shuffle %}class="row overlay-cards"{% else %}class="shuffle-grid row overlay-cards" id="project-grid" data-initial-group="incomplete"{% endif %}>
     {% for project in projects -%}
-    <div class="col-md-6 col-lg-4 grid-item" data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
-         data-created="{{ project.created }}" data-progress="{{ project.overall_progress }}"
-         data-last-activity="{{ project.last_activity_raw }}" data-n-volunteers="{{ project.n_volunteers }}"
-         {%- if shuffle and project.overall_progress == 100 %}style="visibility: hidden"{% endif %}>
+    <div class="col-md-6 grid-item" data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
+        data-created="{{ project.created }}" data-progress="{{ project.overall_progress }}"
+        data-last-activity="{{ project.last_activity_raw }}" data-n-volunteers="{{ project.n_volunteers }}"
+        {%- if shuffle and project.overall_progress == 100 %}style="visibility: hidden"{% endif %}>
         <div class="card text-center">
             <a href="{{ url_for('project.details', short_name=project.short_name) }}">
-                {{- render_thumbnail(project, class='card-img img-fluid') -}}
+                {{ render_thumbnail(project, class='card-img img-fluid') }}
                 <div class="card-footer text-white bg-dark-overlay d-flex align-content-between flex-wrap justify-content-center">
                     <h6 class="card-title">{{ project.name | truncate(40, true) }}</h6>
                     <p class="card-text lead">{{ project.description }}</p>

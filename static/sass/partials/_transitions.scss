@@ -10,8 +10,16 @@ a {
     transition: background-color 200ms;
 }
 
-.overlay-cards .card-footer {
-    transition: height 250ms;
+.overlay-cards .card {
+    @include hover-focus { 
+        .card-footer {
+            transition: max-height 250ms;
+        
+            .card-text {
+                transition: opacity 200ms 200ms;
+            }
+        }
+    }
 }
 
 .black-ul-link {

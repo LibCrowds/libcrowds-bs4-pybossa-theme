@@ -5,8 +5,7 @@
 {% set description = project.description %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0 d-flex align-items-center justify-content-center"
-     style="background-image: url('{{ project.info['splash'] }}');">
+<div id="category-{{ project.category_id }}-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0 d-flex align-items-center justify-content-center">
     <div class="container text-white text-center">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
@@ -28,9 +27,6 @@
 
 <section class="my-5">
     <div class="container py-3">
-        <div class="row text-center">
-            <p class="ml-auto"><small>{{ project.info['splash_attribution'] | safe }}</small></p>
-        </div>
         <div class="row text-center">
             <div class="col-sm-10 offset-sm-1">
                 <h2 class="font-family-serif display-4 mb-0">
@@ -84,16 +80,9 @@
                 <hr class="bw-3 mx-5 mt-4">
             </div>
         </div>
-        {% if project.info.get('tutorial_video') %}
-        <div class="row mt-3 text-center">
-            <div class="col-sm-10 offset-sm-1">
-                {{ project.info['tutorial_video'] | safe }}
-            </div>
-        </div>
-        {% endif %}
         <div class="row pt-3 pb-5">
             <div class="col-sm-10 offset-sm-1">
-                {{ project.long_description | e | markdown }}
+                {{ project.long_description | safe | e | markdown }}
             </div>
         </div>
     </div>

@@ -47,8 +47,8 @@
                 {{ form_helpers.render_field(form.fullname, show_label=True, placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                 {{ form_helpers.render_field(form.name, show_label=True, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
                 {{ form_helpers.render_field(form.email_addr, show_label=True, placeholder="Email", class="form-control", type="email" ) }}
-                {{ form_helpers.render_toggle(form.subscribed, label="Email updates") }}
-                {{ form_helpers.render_toggle(form.privacy_mode, label="Privacy mode") }}
+                {{ form_helpers.render_toggle(form.subscribed, label_text="Email updates") }}
+                {{ form_helpers.render_toggle(form.privacy_mode, label_text="Privacy mode") }}
                 {{ form_helpers.render_field(form.locale, class="hidden-xs-up", show_label=False) }}
                 <div class="text-right">
                     <input type="reset" value="Clear" class="btn btn-secondary" role="button" />

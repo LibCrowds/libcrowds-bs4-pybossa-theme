@@ -54,12 +54,12 @@
 {% macro render_thumbnail(project, upload_method, class, style, width='200', id=None) %}
     {% if project.info.container -%}
         {% if upload_method == 'rackspace' -%}
-        <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container) }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
+        <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" src="{{ url_for('rackspace', filename=project.info.thumbnail, container=project.info.container) }}" alt="{{ project.name }} thumbnail">
         {% else -%}
-        <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
+        <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" src="{{ url_for('uploads.uploaded_file', filename=(project.info.container + '/' + project.info.thumbnail)) }}" alt="{{ project.name }} thumbnail">
         {% endif -%}
     {% elif project.info.thumbnail -%}
-        <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" src="{{ project.info.thumbnail }}" onerror="imgError(this, 400, 400);" alt="{{ project.name }} thumbnail">
+        <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" src="{{ project.info.thumbnail }}" alt="{{ project.name }} thumbnail">
     {% else -%}
         <img {% if id %}id="{{ id }}"{% endif %} class="{{ class }}" style="{{ style }}" src="http://placekitten.com/400/400?image=1" alt="{{ project.name }} thumbnail">
     {% endif -%}

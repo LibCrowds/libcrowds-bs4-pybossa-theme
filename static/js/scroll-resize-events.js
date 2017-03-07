@@ -4,6 +4,7 @@
 $(window).on("load resize scroll",function() {
     styleNavigation();
     styleJumbotrons();
+    displayScrollButtons();
 });
 
 /**
@@ -42,14 +43,16 @@ function styleNavigation() {
 }
 
 /**
- * Handle clicking of a scroll button.
+ * Hide scroll buttons if siblings don't have overflow.
  */
-$('.btn-scroll').on('click', function() {
-    const target    = $(this).data('target'),
-          direction = $(this).data('direction');
-    if (direction == 'left') {
-        $(target).animate({scrollLeft: $(target).scrollLeft() - 400}, 300);
-    } else if (direction == 'right') {
-        $(target).animate({scrollLeft: $(target).scrollLeft() + 400}, 300);
-    }
-});
+function displayScrollButtons() {
+    $('.btn-scroll').each(function() {
+        const target = $($(this).data('target'))[0];
+        if (target.offsetWidth < target.scrollWidth) {
+            console.log('show')
+            $(this).css('visibility', 'visible');
+        } else {
+            $(this).css('visibility', 'hidden');
+        }
+    })
+}

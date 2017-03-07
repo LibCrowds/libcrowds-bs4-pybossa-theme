@@ -66,19 +66,11 @@
 {% endmacro %}
 
 {% macro render_grid_shuffle_controls() %}
-<form class="form-inline d-flex flex-row align-items-center justify-content-center">
-    <div class="my-2 d-flex align-items-center mr-4">
-        <div class="toggle-group mr-2">Hide completed projects:</div>
-        <div class="toggle-group">
-            <div class="toggle">
-                <input checked="true" class="toggle-checkbox shuffle-checkbox" type="checkbox" id="show-all" data-group="incomplete">
-                <label class="toggle-label" for="show-all">
-                    <span class="toggle-inner"></span>
-                    <span class="toggle-switch"></span>
-                </label>
-            </div>
-        </div>
-    </div>
+<form class="form-inline d-flex flex-row align-items-center justify-content-around">
+    <label>
+        <input checked="true" class="shuffle-checkbox" data-toggle="toggle" data-width="75" data-onstyle="info" type="checkbox" id="show-all" data-group="incomplete">
+        <span class="ml-1">Hide completed projects</span>
+    </label>
     <div class="form-group my-2 mr-4">
         <label for="project-sort-options" class="mr-2">Sort:</label>
         <select class="shuffle-sort custom-select" id="project-sort-options">

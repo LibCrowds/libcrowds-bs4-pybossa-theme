@@ -1,24 +1,27 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
+{% set full_width = True %}
+{% set hide_title = True %}
+{% set no_pattern = True %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
 
-<section class="pattern-white-wall pt-5">
-    <div class="container">
+<section class="pattern-white-wall w-100">
+    <div class="container pt-3">
         <div class="d-flex flex-row align-items-center justify-content-center">
             <span class="fa fa-chevron-left mr-2 btn-scroll" data-target="#categories-strip" data-direction="left" role="button"></span>
-            <div id="categories-strip" class="card-strip">
-                {% for c in categories %}
-                    {{ card_helpers.render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), icon=c.short_name,
-                       tooltip=c.description, active=(active_cat.short_name==c.short_name)) }}
-                {% endfor %}
-                {% if current_user.is_authenticated() and current_user.admin %}
-                    {{ card_helpers.render_icon_button('Draft', url_for('project.draft'), icon="draft", tooltip='Unpublished projects',
-                    active=(active_cat.short_name=='draft')) }}
-                {% endif %}
+            <div id="categories-strip" class="d-flex mw-75 oy-scroll">
+            {% for c in categories %}
+                {{ card_helpers.render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), icon=c.short_name,
+                   tooltip=c.description, active=(active_cat.short_name==c.short_name)) }}
+            {% endfor %}
+            {% if current_user.is_authenticated() and current_user.admin %}
+                {{ card_helpers.render_icon_button('Draft', url_for('project.draft'), icon="draft", tooltip='Unpublished projects',
+                active=(active_cat.short_name=='draft')) }}
+            {% endif %}
             </div>
             <span class="fa fa-chevron-right ml-2 btn-scroll" data-target="#categories-strip" data-direction="right" role="button"></span>
         </div>
@@ -30,16 +33,16 @@
     </div>
 </section>
 
-<section>
-    <div class="container text-center pt-5 pb-4">
-        {% if projects %}
-            {{ project_helpers.render_grid(projects, shuffle=True) }}
-            {% if pagination.pages > 1 %}
-                {{ general_helpers.render_pagination(pagination) }}
-            {% endif %}
-        {% else %}
-            <p class="lead mb-0">Sorry, there are no published projects for this category yet.</p>
+<section class="bg-white w-100 bst-inset">
+    <div class="container pt-4">
+    {% if projects %}
+        {{ project_helpers.render_grid(projects, shuffle=True) }}
+        {% if pagination.pages > 1 %}
+            {{ general_helpers.render_pagination(pagination) }}
         {% endif %}
+    {% else %}
+        <p class="lead mb-0">Sorry, there are no published projects for this category yet.</p>
+    {% endif %}
     </div>
 </section>
 

@@ -46,12 +46,12 @@
 {% endmacro %}
 
 {% macro render_icon_button(title, url, icon, tooltip=None, active=False) %}
-<div class="card card-button mt-3 p-0 {% if active %}active{% endif %}"
+<div class="card m-1 p-0 d-flex flex-column align-items-center {% if active %}active{% endif %}"
      {% if tooltip %}data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="{{ tooltip }}"{% endif %}>
-    <a href="{{ url }}">
+    <a href="{{ url }}" class="text-body">
         <div class="card-block py-2 px-4 text-center">
             <span class="icon icon-4x icon-{{ icon }}"></span>
-            <div class="card-title mb-0">{{ title }}</div>
+            <div class="card-title text-initial mb-0">{{ title }}</div>
         </div>
     </a>
 </div>

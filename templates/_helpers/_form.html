@@ -52,19 +52,11 @@
 {% endif %}
 {% endmacro %}
 
-{% macro render_toggle(field, label, toggle_target) %}
-<div class="my-3 d-flex flex-row align-items-center">
-    <div class="toggle-group mr-2">
-        <div class="toggle">
-            {{ field(class="toggle-checkbox") }}
-            <label class="toggle-label" for="{{ field.name }}">
-                <span class="toggle-inner"></span>
-                <span class="toggle-switch"></span>
-            </label>
-        </div>
-    </div>
-    <div class="toggle-group">
-        <strong>{{ label }}</strong>
-    </div>
+{% macro render_toggle(field, label_text) %}
+<div class="form-group">
+    <label>
+        {{ field(**{"data-toggle": "toggle", "data-onstyle": "info"}) }}
+        <span class="card-label text-muted ml-1">{{ label_text }}</span>
+    </label>
 </div>
 {% endmacro %}

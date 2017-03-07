@@ -66,20 +66,26 @@
 {% endmacro %}
 
 {% macro render_grid_shuffle_controls() %}
-<form class="form-inline d-flex flex-row align-items-center justify-content-around">
-    <label>
-        <input checked="true" class="shuffle-checkbox" data-toggle="toggle" data-width="75" data-onstyle="info" type="checkbox" id="show-all" data-group="incomplete">
-        <span class="ml-1">Hide completed projects</span>
-    </label>
-    <div class="form-group my-2 mr-4">
-        <label for="project-sort-options" class="mr-2">Sort:</label>
-        <select class="shuffle-sort custom-select" id="project-sort-options">
-            <option value="progress">Most Help Needed</option>
-            <option value="n-volunteers" data-reverse="true">Most Popular</option>
-            <option value="created" data-reverse="true">Most Recently Launched</option>
-            <option value="last-activity" data-reverse="true">Most Recently Active</option>
-        </select>
+<div class="row d-flex flex-row align-items-center justify-content-around">
+    <div class="col-xl-4 col-md-6 text-center text-lg-left">
+        <label class="my-2">
+            <input checked="true" class="shuffle-checkbox" data-toggle="toggle" data-width="75" data-onstyle="info" type="checkbox" id="show-all" data-group="incomplete">
+            <span class="ml-1">Hide completed projects</span>
+        </label>
     </div>
-    <input type="text" class="form-control rounded-oblong shuffle-search mr-2 my-2" placeholder="Search">
-</form>
+    <div class="col-xl-4 col-md-6 text-center text-xl-left text-lg-right">
+        <div class="form-group my-2">
+            <label for="project-sort-options" class="mr-2">Sort:</label>
+            <select class="shuffle-sort custom-select" id="project-sort-options">
+                <option value="progress">Most Help Needed</option>
+                <option value="n-volunteers" data-reverse="true">Most Popular</option>
+                <option value="created" data-reverse="true">Most Recently Launched</option>
+                <option value="last-activity" data-reverse="true">Most Recently Active</option>
+            </select>      
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-12 text-center text-lg-right my-2">
+        <input type="text" class="form-control rounded-oblong shuffle-search" placeholder="Search">
+    </div>
+</div>
 {% endmacro %}

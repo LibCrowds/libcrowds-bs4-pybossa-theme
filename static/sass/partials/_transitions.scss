@@ -27,7 +27,7 @@ a {
 }
 
 .navbar {
-    transition: background-color 200ms, height 500ms;
+    transition: background-color 200ms;
 
     .navbar-brand {
         transition: color 200ms;
@@ -48,10 +48,6 @@ a {
     * {
         transition: opacity 1s;
     }
-}
-
-.toggle-switch {
-    transition: all 0.3s ease-in 0s;
 }
 
 .card-button .card-block {

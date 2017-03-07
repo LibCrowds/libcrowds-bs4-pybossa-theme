@@ -1,5 +1,6 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
+{% set active_link = "settings" %}
 {% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
@@ -38,8 +39,8 @@
             {{ form_helpers.render_field(form.description, class="form-control", placeholder="Short description", required="required", pattern=".{0,255}", title="Must be a maximum of 255 characters") }}
             {{ form_helpers.render_field(form.long_description, rows="13", placeholder="Explain the project (use Markdown)!", class="form-control", required="required") }}
             {{ form_helpers.render_field(form.category_id, class="form-control") }}
-            {{ form_helpers.render_toggle(form.allow_anonymous_contributors, label="Allow anonymous contributors") }}
-            {{ form_helpers.render_toggle(form.protect, label="Password protect") }}
+            {{ form_helpers.render_toggle(form.allow_anonymous_contributors, label_text="Allow anonymous contributors") }}
+            {{ form_helpers.render_toggle(form.protect, label_text="Password protect") }}
             {{ form_helpers.render_field(form.password, class="form-control") }}
             {{ form_helpers.render_field(form.webhook, class="form-control") }}
             <div class="text-right">

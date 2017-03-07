@@ -1,11 +1,11 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "projects" %}
+{% set active_link = "tasks" %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% set active_link = "dashboard" %}
-
-{% block content %}
 {% import "_helpers/_form.html" as form_helpers %}
 
+{% block content %}
+{{ general_helpers.render_title(project.name, 'Import Tasks') }}
 
 <div class="container container-main">
     <div class="row">
@@ -59,6 +59,24 @@
         </div>
     </div>
 </div>
+
+
+{{ general_helpers.render_title(project.name, 'Import Tasks') }}
+<div class="card">
+    {{ card_helpers.render_title('CSV Import', 'Import tasks from a CSV file') }}
+    <div class="card-block pt-1">
+        <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.csv_url, class="form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}
+            <div class="text-right">
+                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <input id="import" type="submit" value="Import" class="btn btn-success" role="button"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <script>
     $("#import-form").on('submit', function(){
         $("#loading").show();

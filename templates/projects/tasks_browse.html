@@ -10,7 +10,7 @@
 <div class="container container-main">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
-            {{ project_helpers.render_title(project, subtitle="Browse tasks") }}
+            {{ general_helpers.render_title(project.name, "Browse tasks") }}
             <h3>The project contains {{n_tasks}} tasks</h3>
             {% for t in tasks %}
             {% set task_pct = t.pct_status*100 %}
@@ -26,7 +26,7 @@
                 </div>
                 {% if task_pct >= 100 %}
                 <div class="progress progress-success progress-striped col-md-5 remove-margin-bottom remove-padding">
-                    <div class="progress-bar remove-padding" role="progressbar"  style="width:{{ task_pct }}%;">
+                    <div class="progress-bar remove-padding" role="progressbar" style="width:{{ task_pct }}%;">
 
                     </div>
                 </div>

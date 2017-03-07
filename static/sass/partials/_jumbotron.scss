@@ -1,6 +1,7 @@
 .jumbotron-fullscreen {
     @extend .jumbotron-fluid;
     height: 400px;
+    background: url(/static/img/jumbotrons/drawer.png); // Fallback
     background-color: $black;
     background-repeat: no-repeat;
     background-size: cover;
@@ -30,4 +31,10 @@
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: cover;
+}
+
+// Category theming
+
+#category-8-jumbotron {
+    background: url(/static/img/jumbotrons/category-8.jpg) no-repeat center center / cover fixed;
 }

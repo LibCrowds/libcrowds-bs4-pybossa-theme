@@ -13,7 +13,7 @@
     <div class="container pt-3">
         <div class="d-flex flex-row align-items-center justify-content-center">
             <span class="fa fa-chevron-left mr-2 btn-scroll" data-target="#categories-strip" data-direction="left" role="button"></span>
-            <div id="categories-strip" class="d-flex mw-75 oy-scroll">
+            <div id="categories-strip" class="d-flex mw-75 card-strip">
             {% for c in categories %}
                 {{ card_helpers.render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), icon=c.short_name,
                    tooltip=c.description, active=(active_cat.short_name==c.short_name)) }}
@@ -41,7 +41,7 @@
             {{ general_helpers.render_pagination(pagination) }}
         {% endif %}
     {% else %}
-        <p class="lead mb-0">Sorry, there are no published projects for this category yet.</p>
+        <p class="lead pt-4 mb-0 text-center">Sorry, there are no published projects for this category yet.</p>
     {% endif %}
     </div>
 </section>

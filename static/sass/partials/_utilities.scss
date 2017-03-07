@@ -46,9 +46,3 @@
     .bs#{$pos}-inset { box-shadow: inset #{$shadow} #{$box-shadow-blur} #{$box-shadow-spread} rgba($black, .25) };
     .bs#{$pos} { box-shadow: #{$shadow} #{$box-shadow-blur} #{$box-shadow-spread} rgba($black, .25) };
 }
-
-// Overflow
-@each $opt in visible hidden scroll auto {
-    .ox-#{$opt} { overflow: $opt; }
-    .oy-#{$opt} { overflow: $opt; }
-}

@@ -16,7 +16,7 @@
             </div>
             <form method="POST" action="{{ url_for('project.update', short_name=project.short_name) }}" enctype="multipart/form-data">
                 {{ upload_form.hidden_tag() }}
-                {{ form_helpers.render_field(upload_form.avatar, class="form-control hidden") }}
+                {{ form_helpers.render_field(upload_form.avatar, class="form-control hidden", show_label=False) }}
                 {{ upload_form.x1 }}
                 {{ upload_form.y1 }}
                 {{ upload_form.x2 }}

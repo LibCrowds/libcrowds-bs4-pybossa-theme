@@ -5,7 +5,7 @@
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-<div class="container mt-5 text-center">
+<div class="container text-center">
 {{ general_helpers.render_title('', 'Community', title_link=[url_for('leaderboard.index'), 'View Leaderboard']) }}
 {{ user_helpers.render_avatar_list(accounts, badge='name') }}
 {% if pagination.pages > 1 %}

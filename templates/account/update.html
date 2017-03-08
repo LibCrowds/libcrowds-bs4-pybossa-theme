@@ -9,71 +9,75 @@
 {% import "_helpers/_card.html" as card_helpers %}
 
 {% block content %}
-<div class="col-lg-4">
-    {{ user_helpers.render_profile_card(current_user, upload_method, private=False) }}
-</div>
-<div class="col-lg-8">
+<div class="container mt-5">
+    <div class="row">
+    <div class="col-lg-4">
+        {{ user_helpers.render_profile_card(current_user, upload_method, private=False) }}
+    </div>
+    <div class="col-lg-8">
 
-    <div class="card">
-        {% if "pybossa_gravatar" in plugins %}
-        {{ card_helpers.render_title('Your Avatar', 'Upload an avatar', title_link=[url_for('set_gravatar', name=current_user.name), 'Use Gravatar']) }}
-        {% else %}
-        {{ card_helpers.render_title('Your Avatar', 'Upload an avatar') }}
-        {% endif %}
-        <div class="card-block pt-1">
-            <div class="my-2 text-center">
-                {{ user_helpers.render_avatar(current_user, upload_method, class="img-thumbnail crop-circle", width="300", id="uploadPreview") }}
+        <div class="card">
+            {% if "pybossa_gravatar" in plugins %}
+                {{ card_helpers.render_title('Your Avatar', 'Upload an avatar', title_link=[url_for('set_gravatar', name=current_user.name), 'Use Gravatar']) }}
+                {% else %}
+                {{ card_helpers.render_title('Your Avatar', 'Upload an avatar') }}
+                {% endif %}
+                <div class="card-block pt-1">
+                    <div class="my-2 text-center">
+                        {{ user_helpers.render_avatar(current_user, upload_method, class="img-thumbnail crop-circle", width="300", id="uploadPreview") }}
+                    </div>
+                    <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
+                        {{ upload_form.hidden_tag() }}
+                        {{ form_helpers.render_field(upload_form.avatar, class="form-control hidden") }}
+                        {{ upload_form.x1 }}
+                        {{ upload_form.y1 }}
+                        {{ upload_form.x2 }}
+                        {{ upload_form.y2 }}
+                        <div class="text-right">
+                            <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                            <button type="submit" name="btn" value="Upload" class="btn btn-success">Update</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
-                {{ upload_form.hidden_tag() }}
-                {{ form_helpers.render_field(upload_form.avatar, class="form-control hidden") }}
-                {{ upload_form.x1 }}
-                {{ upload_form.y1 }}
-                {{ upload_form.x2 }}
-                {{ upload_form.y2 }}
-                <div class="text-right">
-                    <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
-                    <button type="submit" name="btn" value="Upload" class="btn btn-success">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
-    <div class="card mt-4">
-        {{ card_helpers.render_title('Your Details', 'Edit your details') }}
-        <div class="card-block pt-1">
-            <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}">
-                {{ password_form.hidden_tag() }}
-                {{ form_helpers.render_field(form.fullname, show_label=True, placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
-                {{ form_helpers.render_field(form.name, show_label=True, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
-                {{ form_helpers.render_field(form.email_addr, show_label=True, placeholder="Email", class="form-control", type="email" ) }}
-                {{ form_helpers.render_toggle(form.subscribed, label_text="Email updates") }}
-                {{ form_helpers.render_toggle(form.privacy_mode, label_text="Privacy mode") }}
-                {{ form_helpers.render_field(form.locale, class="hidden-xs-up", show_label=False) }}
-                <div class="text-right">
-                    <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
-                    <button type="submit" name="btn" value="Profile" class="btn btn-success">Update</button>
+            <div class="card mt-4">
+                {{ card_helpers.render_title('Your Details', 'Edit your details') }}
+                <div class="card-block pt-1">
+                    <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                        {{ password_form.hidden_tag() }}
+                        {{ form_helpers.render_field(form.fullname, show_label=True, placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                        {{ form_helpers.render_field(form.name, show_label=True, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                        {{ form_helpers.render_field(form.email_addr, show_label=True, placeholder="Email", class="form-control", type="email" ) }}
+                        {{ form_helpers.render_toggle(form.subscribed, label_text="Email updates") }}
+                        {{ form_helpers.render_toggle(form.privacy_mode, label_text="Privacy mode") }}
+                        {{ form_helpers.render_field(form.locale, class="hidden-xs-up", show_label=False) }}
+                        <div class="text-right">
+                            <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                            <button type="submit" name="btn" value="Profile" class="btn btn-success">Update</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
 
-    {% if show_passwd_form %}
-    <div class="card mt-4">
-        {{ card_helpers.render_title('Your Password', 'Choose a new password') }}
-        <div class="card-block pt-1">
-            <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}">
-                {{ password_form.hidden_tag() }}
-                {{ form_helpers.render_field(password_form.current_password, show_label=True, placeholder="Current password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                {{ form_helpers.render_field(password_form.new_password, show_label=True, placeholder="New password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                {{ form_helpers.render_field(password_form.confirm, show_label=True, placeholder="Confirm new password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                <div class="text-right">
-                    <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
-                    <button type="submit" name="btn" value="Password" class="btn btn-success">Update</button>
+            {% if show_passwd_form %}
+            <div class="card mt-4">
+                {{ card_helpers.render_title('Your Password', 'Choose a new password') }}
+                <div class="card-block pt-1">
+                    <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}">
+                        {{ password_form.hidden_tag() }}
+                        {{ form_helpers.render_field(password_form.current_password, show_label=True, placeholder="Current password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        {{ form_helpers.render_field(password_form.new_password, show_label=True, placeholder="New password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        {{ form_helpers.render_field(password_form.confirm, show_label=True, placeholder="Confirm new password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        <div class="text-right">
+                            <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                            <button type="submit" name="btn" value="Password" class="btn btn-success">Update</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
 </div>
 {% endblock %}

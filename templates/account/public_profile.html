@@ -7,10 +7,14 @@
 {% import "_helpers/_project.html" as project_helpers %}
 
 {% block content %}
-<div class="col-lg-4">
-    {{ user_helpers.render_profile_card(user, upload_method) }}
-</div>
-<div class="col-lg-8">
-    {{ project_helpers.render_table("Your Contributions", "The projects that {0} has contributed to".format(user.name), "projects-table", projects) }}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-4">
+            {{ user_helpers.render_profile_card(user, upload_method) }}
+        </div>
+        <div class="col-lg-8">
+            {{ project_helpers.render_table("Your Contributions", "The projects that {0} has contributed to".format(user.name), "projects-table", projects) }}
+        </div>
+    </div>
 </div>
 {% endblock %}

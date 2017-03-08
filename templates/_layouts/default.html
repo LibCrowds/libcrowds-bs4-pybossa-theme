@@ -8,7 +8,7 @@
 {% set title_link = title_link %}
 {% set hide_title = hide_title | default(False) %}
 {% set full_width = full_width | default(False) %}
-{% set full_width = no_pattern | default(False) %}
+{% set no_pattern = no_pattern | default(False) %}
 
 {% set staff_or_admin = staff_or_admin %}
 {% set active_page = active_page | default('index') %}
@@ -20,9 +20,13 @@
     <div class="container-fluid mt-4 mb-5 pt-3">
         {% if not hide_title %}
         <div class="row mt-5">
+            {% if not full_width %}
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+            {% endif %}
             {{ general_helpers.render_title(prefix=prefix, title=title, title_link=title_link) }}
+            {% if not full_width %}
             </div>
+            {% endif %}
         </div>
         {% endif %}
         <div class="row">

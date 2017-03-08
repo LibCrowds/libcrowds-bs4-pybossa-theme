@@ -1,35 +1,27 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% set active_link = "tasks" %}
+{% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
-{% set active_link = "dashboard" %}
 
 {% block content %}
-
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ helper.render_project_title(project, subtitle="Task Scheduler")}}
-            <p>You can choose from the following schedulers:</p>
-            <ul class="padding-bottom-sm">
-                <li><strong>Default</strong> or
-                <strong>Depth First</strong>: returns the first task that has not been completed.</li>
-                <li><strong>Breadth First</strong>: returns a task with the least number of contributions.</li>
-                <li><strong>Random</strong>: returns a random task - a user could get the same task more than once.</li>
-            </ul>
-
-            <form id="task_scheduler" class="form-horizontal" method="POST" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
-                {{ form.hidden_tag() }}
-                <fieldset>
-                    {{ form_helpers.render_field(form.sched, class_="form-control", placeholder="Task scheduler for your project")}}
-                    <div class="pull-right" role="group">
-                        <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
-                        <input type="submit" value="Set" class="btn btn-danger" />
-                    </div>
-                </fieldset>
-            </form>
+{{ general_helpers.render_title(project.name, 'Task Scheduler') }}
+<div class="card">
+    {{ card_helpers.render_title('Scheduler', 'Present tasks depth first (the default), breadth first (least contributions) or random order') }}
+    <div class="card-block">
+        <div class="alert alert-warning">
+            With the breadth first and random schedulers tasks will never be marked as completed as task redundancy is not
+            respected and users can be presented with the same task more than once.
         </div>
+        <form method="post" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.sched, class_="form-control")}}
+            <div class="text-right">
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <input id="submit" type="submit" value="Update" class="btn btn-success" role="button"/>
+            </div>
+        </form>
     </div>
 </div>
-
 {% endblock %}

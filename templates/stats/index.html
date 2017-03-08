@@ -1,15 +1,11 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "leaderboard" %}
-{% set full_width = True %}
-{% set hide_title = True %}
+{% set title = "Community Leaderboard" %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_table.html" as table_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
 
-
 {% block content %}
-<div class="container">
-    {{ general_helpers.render_title('', 'Community Leaderboard') }}
     <div class="card">
         {{ card_helpers.render_title('Top Users', 'The top {} users'.format(top_users | length), search_table="#leaderboard-table") }}
         <div id="leaderboard-table" class="table-responsive">
@@ -19,10 +15,9 @@
                     {% for u in top_users %}
                     {{ table_helpers.render_row([u.rank, '<a href="{0}">{1}</a>'.format(url_for('account.profile', name=u.name), u.name), u.created, u.score]) }}
                     {% endfor %}
-                    {{ table_helpers.render_no_data_row(3) }}
+                    {{ table_helpers.render_no_data_row(4) }}
                 </tbody>
             </table>
         </div>
     </div>
-</div>
 {% endblock %}

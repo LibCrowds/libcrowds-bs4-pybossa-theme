@@ -1,6 +1,6 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% set active_link = "importtasks" %}
+{% set active_link = "tasks" %}
 {% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
@@ -9,7 +9,7 @@
 {{ general_helpers.render_title(project.name, 'Import Tasks') }}
 <div class="card">
     {{ card_helpers.render_title('Google Docs Import', 'Import tasks from a Google Docs spreadsheet') }}
-    <div class="card-block pt-1">
+    <div class="card-block">
         <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.googledocs_url, class="form-control", placeholder="The public URL of the Google Docs spreadsheet", required="required", autofocus="autofocus", type="url") }}

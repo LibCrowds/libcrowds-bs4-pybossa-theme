@@ -1,5 +1,6 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
+{% set active_link = "tasks" %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
 
@@ -7,7 +8,7 @@
 {{ general_helpers.render_title(project.name, 'Export Data') }}
 <div class="card">
     {{ card_helpers.render_title('CSV', 'Export data in CSV format') }}
-    <div class="card-block pt-1">
+    <div class="card-block">
         <p class="lead mb-3">Export all of the project's task or contribution data in CSV format.</p>
         <div class="text-right">
             <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task', format='csv') }}" class="btn btn-success" role="button">Task Data</a>
@@ -17,7 +18,7 @@
 </div>
 <div class="card mt-4">
     {{ card_helpers.render_title('JSON', 'Export data in JSON format') }}
-    <div class="card-block pt-1">
+    <div class="card-block">
         <p class="lead mb-3">Export all of the project's task or contribution data in JSON format.</p>
         <div class="text-right">
             <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task', format='json') }}" class="btn btn-success" role="button">Task Data</a>

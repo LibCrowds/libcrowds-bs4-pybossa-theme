@@ -1,63 +1,25 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% set active_link = "tasks" %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
-{% set active_link = "dashboard" %}
 
 {% block content %}
-
-{% if project %}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ general_helpers.render_title(project.name, "Browse tasks") }}
-            <h3>The project contains {{n_tasks}} tasks</h3>
-            {% for t in tasks %}
-            {% set task_pct = t.pct_status*100 %}
-            <div class="row vcenter hcenter padding-top-xs">
-                <div class="col-sm-3">
-                    {% if task_pct >= 100 %}
-                    Task <span class="label label-success">#{{ t.id }}</span>
-                    {% else %}
-                    Task <span class="label label-info">#{{ t.id }}</span>
-                    {% endif %}
-                    <br>
-                     {{ t.n_task_runs }} of {{ t.n_answers }} contributions
-                </div>
-                {% if task_pct >= 100 %}
-                <div class="progress progress-success progress-striped col-md-5 remove-margin-bottom remove-padding">
-                    <div class="progress-bar remove-padding" role="progressbar" style="width:{{ task_pct }}%;">
-
-                    </div>
-                </div>
-                {% else %}
-                <div class="progress progress-info progress-striped col-md-5 remove-margin-bottom remove-padding">
-                    <div class="progress-bar remove-padding" role="progressbar" style="width:{{ task_pct }}%;">
-
-                    </div>
-                </div>
-                {% endif %}
-                <div class="col-sm-4">
-                {% if task_pct >= 100 %}
-                    <a id="fulldownload" class="btn btn-success" href="{{ url_for('project.export',
-                        short_name=project.short_name,
-                        task_id=t.id) }}"><i class="fa fa-download"></i> Download Results</a>
-                {% elif task_pct > 0 and task_pct < 100 %}
-                    <a id="partialdownload" class="btn btn-primary" href="{{ url_for('project.export',
-                        short_name=project.short_name,
-                        task_id=t.id) }}"><i class="fa fa-download"></i> Download Partial results</a>
-
-                 {% else %}
-                    <a id="nothingtodownload" class="btn btn-default disabled" href="#"> Nothing to download yet</a>
-                 {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-            {{ general_helpers.render_pagination(pagination) }}
-        </div>
+{{ general_helpers.render_title(project.name, 'Browse Tasks') }}
+<div class="card">
+    {{ card_helpers.render_title('Tasks', 'The project contains {0} tasks'.format(n_tasks), search_table="#tasks-table") }}
+    <div id="tasks-table" class="table-responsive">
+        <table class="table table-hover table-striped mb-0">
+            {{ table_helpers.render_head(['Task ID', 'Contributions', 'Redundancy', 'Progress', 'Data']) }}
+            <tbody>
+                {% for t in tasks %}
+                {{ table_helpers.render_row([t.id, t.n_task_runs, t.n_answers, (t.pct_status*100) | round | int,
+                                             '<a class="btn btn-sm btn-outline-primary" href="{0}">View</a>'.format(url_for('project.export', short_name=project.short_name, task_id=t.id))]) }}
+                {% endfor %}
+                {{ table_helpers.render_no_data_row(4) }}
+            </tbody>
+        </table>
     </div>
 </div>
-{% else %}
-{% endif %}
-
 {% endblock %}

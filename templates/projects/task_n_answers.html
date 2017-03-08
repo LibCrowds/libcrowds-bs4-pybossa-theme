@@ -1,26 +1,24 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% set active_link = "tasks" %}
+{% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
-
-{{ project_helpers.render_title(project, 'Task Redundancy', 'Set the number of contributions required per task') }}
-
+{{ general_helpers.render_title(project.name, 'Task Redundancy') }}
 <div class="card">
-    {{ card_helpers.render_title('Task Redundancy', 'How many crowdsourcing participants does it take to change a lightbulb? Hopefully one.') }}
-    <div class="card-block pt-1">
+    {{ card_helpers.render_title('Task Redundancy', 'Set the number of contributions required per task') }}
+    <div class="card-block">
         <form method="post" action="{{ url_for('project.task_n_answers', short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.n_answers, class_="form-control", placeholder="The number of contributions required per task", type="number",
                                          autofocus="autofocus", required="required", pattern=".{1,10000}", title="Must be a number between 1 and 100") }}
             <div class="text-right">
-                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary">Cancel</a>
-                <input id="submit" type="submit" value="Update" class="btn btn-success" />
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <input id="submit" type="submit" value="Update" class="btn btn-success" role="button"/>
             </div>
         </form>
     </div>
 </div>
-
 {% endblock %}

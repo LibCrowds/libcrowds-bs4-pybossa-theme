@@ -64,7 +64,7 @@
 {{ general_helpers.render_title(project.name, 'Import Tasks') }}
 <div class="card">
     {{ card_helpers.render_title('CSV Import', 'Import tasks from a CSV file') }}
-    <div class="card-block pt-1">
+    <div class="card-block">
         <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.csv_url, class="form-control", placeholder="The URL of the CSV file", required="required", autofocus="autofocus", type="url") }}

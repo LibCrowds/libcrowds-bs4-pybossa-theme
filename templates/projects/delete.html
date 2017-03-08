@@ -1,5 +1,6 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
+{% set active_link = "tasks" %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
 
@@ -7,7 +8,7 @@
 {{ general_helpers.render_title(project.name, 'Delete Project') }}
 <div class="card">
     {{ card_helpers.render_title('Danger Zone', 'There is no undo!') }}
-    <div class="card-block pt-1">
+    <div class="card-block">
         <div class="alert alert-danger">
             <strong>Warning!</strong> If you delete the project it will be gone forever!
         </div>

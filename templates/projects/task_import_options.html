@@ -1,5 +1,6 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
+{% set active_link = "tasks" %}
 {% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 
@@ -11,14 +12,10 @@
     {% include importer %}
 {% endfor %}
 </div>
-
 <p class="mt-5 mb-0">...or import a set of template tasks</p>
-{% for row in task_tmpls | batch(3) %}
 <div class="row">
-    {% for task_tmpl in row %}
+    {% for task_tmpl in task_tmpls %}
         {% include task_tmpl %}
     {% endfor %}
 </div>
-{% endfor %}
-
 {% endblock %}

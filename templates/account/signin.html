@@ -56,7 +56,7 @@
         </div>
     </div>
     {{ card_helpers.render_title('Or sign in with your LibCrowds account') }}
-    <div class="card-block pt-1">
+    <div class="card-block">
         <form method="POST" action="{{ url_for('account.signin') }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}

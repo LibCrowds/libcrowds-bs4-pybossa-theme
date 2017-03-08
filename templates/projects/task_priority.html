@@ -1,32 +1,24 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% set active_link = "tasks" %}
+{% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
-{% set active_link = "dashboard" %}
 
 {% block content %}
-
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            {{ helper.render_project_title(project, subtitle="Task Priority") }}
-
-            <p>Set the <strong>priority</strong> of one or more tasks by providing a list of task IDs below.</p>
-            <p>The lowest priority is <span class="label label-danger">0.0</span> and the highest is <span class="label label-danger">1.0</span></p>
-            <p>This priority value is only respected by the <strong>default scheduler</strong>.</p>
-            <form id="task_priority" class="form-horizontal" method="POST" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
-                {{ form.hidden_tag() }}
-                <fieldset>
-                    {{ form_helpers.render_field(form.task_ids, class_="form-control", placeholder="Comma separated task IDs (e.g. 3, 532, 100)", required="required", autofocus="autofocus")}}
-                    {{ form_helpers.render_field(form.priority_0, class_="form-control", placeholder="Priority between 0.0 and 1.0", required="required", type="number", step="any")}}
-                    <div class="pull-right" role="group">
-                        <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-default">Cancel</a>
-                        <input type="submit" value="Set Priority" class="btn btn-danger" />
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+{{ general_helpers.render_title(project.name, 'Task Priority') }}
+<div class="card">
+    {{ card_helpers.render_title('Priority', 'Set priority for a list of tasks (only respected by the default scheduler)') }}
+    <div class="card-block">
+        <form method="post" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
+            {{ form.hidden_tag() }}
+            {{ form_helpers.render_field(form.task_ids, class_="form-control", placeholder="Comma separated task IDs (e.g. 3, 532, 100)", required="required", autofocus="autofocus")}}
+            {{ form_helpers.render_field(form.priority_0, class_="form-control", placeholder="Priority between the lowest of 0.0 and highest of 1.0", required="required", type="number", step="any")}}
+            <div class="text-right">
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <input id="submit" type="submit" value="Update" class="btn btn-success" role="button"/>
+            </div>
+        </form>
     </div>
 </div>
-
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
-{% set active_link = "importtasks" %}
+{% set active_link = "tasks" %}
 {% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_form.html" as form_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
@@ -9,7 +9,7 @@
 {{ general_helpers.render_title(project.name, 'Import Tasks') }}
 <div class="card">
     {{ card_helpers.render_title('YouTube Import', 'Import tasks from a YouTube playlist') }}
-    <div class="card-block pt-1">
+    <div class="card-block">
         <div id="objects-container" class="row">
             <ul id="objects"></ul>
         </div>

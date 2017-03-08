@@ -10,7 +10,7 @@
         overflow-y: hidden;
         border-radius: 15px;
         margin-bottom: 1rem;
-        min-height: 100%;
+        min-height: 300px;
         width: 100%;
         @include hover-focus {
             .card-footer {

@@ -1,9 +1,17 @@
 .overlay-cards {
-    .card {
+    display: flex;
+    
+    .grid-item {
         display: flex;
+        min-height: 100%;
+    }
+    .card {
+        flex-direction: column;
         overflow-y: hidden;
         border-radius: 15px;
         margin-bottom: 1rem;
+        min-height: 100%;
+        width: 100%;
         @include hover-focus {
             .card-footer {
                 height: 100%;

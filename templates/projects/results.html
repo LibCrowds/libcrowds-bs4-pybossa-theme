@@ -1,6 +1,7 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% set active_link = "results" %}
+{% import "_helpers/_general.html" as general_helpers %}
 {% set jstop = True %}
 
 {% block content %}
@@ -21,10 +22,10 @@
     %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
+{{ general_helpers.render_title(project.name, 'Results') }}
 {% if project.info.results and n_results > 0 %}
 {{ project.info.results | safe}}
 {% else %}
-    <h2>No results</h2>
     <p class="lead">Sorry, we haven't published any results for this project yet.</p>
 {% endif %}
 {% endblock %}

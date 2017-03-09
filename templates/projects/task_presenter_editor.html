@@ -4,7 +4,7 @@
 {% import "_helpers/_form.html" as form_helpers %}
 
 {% block content %}
-{% assets output="css/gen/editor.min.css", "../node_modules/codemirror/lib/codemirror.css"%}
+{% assets output="css/gen/editor.min.css", "../node_modules/codemirror/lib/codemirror.css" %}
     <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
 {% endassets %}
 <form method="POST" action="{{ url_for('project.task_presenter_editor', short_name=project.short_name) }}" class="h-100">

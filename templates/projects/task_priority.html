@@ -10,7 +10,7 @@
 <div class="card">
     {{ card_helpers.render_title('Priority', 'Set priority for a list of tasks (only respected by the default scheduler)') }}
     <div class="card-block">
-        <form method="post" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
+        <form method="POST" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.task_ids, class_="form-control", placeholder="Comma separated task IDs (e.g. 3, 532, 100)", required="required", autofocus="autofocus")}}
             {{ form_helpers.render_field(form.priority_0, class_="form-control", placeholder="Priority between the lowest of 0.0 and highest of 1.0", required="required", type="number", step="any")}}

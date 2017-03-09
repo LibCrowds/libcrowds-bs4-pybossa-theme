@@ -88,6 +88,37 @@
     </div>
 </section>
 
+<section id="data" class="bg-black">
+    <div id="newton-jumbotron" class="jumbotron jumbotron-fluid invert-navbar text-center mb-0">
+        <div class="container text-white py-4">
+            <div class="row py-2">
+                <div class="col-sm-12">
+                    <h2 class="display-2 font-weight-extra-light">Results</h2>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-sm-6 offset-sm-3">
+                    <p class="lead font-weight-extra-light">
+                        As the project progresses contributions will be analysed and 
+                        the results published in real-time.
+                        {% if "libcrowds_data" not in plugins %}
+                        As well as being made available for download via our data page, each
+                        {% else %} 
+                        Each 
+                        {% endif %}
+                        type of project provides unique ways of visualising these generated 
+                        datasets, making the efforts of our volunteers immediately apparent.
+                    </p>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-sm-12">
+                    <a href="{{ url_for('project.results', short_name=project.short_name) }}" class="btn btn-outline-white" role="button">See the Results</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section>
     <div class="container">

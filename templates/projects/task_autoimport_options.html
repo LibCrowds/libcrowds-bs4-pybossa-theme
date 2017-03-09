@@ -1,19 +1,14 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% set active_link = "tasks" %}
-{% import "_helpers/_project.html" as project_helpers %}
-{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-
-{{ project_helpers.render_title(project, 'Auto-import Tasks', 'Use one of the following importers to auto-import tasks') }}
-
-{% for row in available_importers | batch(3) %}
-<div class="card-deck">
-    {% for importer in row %}
-        {% include importer %}
-    {% endfor %}
-</div>
+{{ general_helpers.render_title(project.name, 'Auto-Import Tasks') }}
+<p class="lead">Use one of the following to auto-import tasks</p>
+<div class="row">
+{% for importer in available_importers %}
+    {% include importer %}
 {% endfor %}
-            
+</div>
 {% endblock %}

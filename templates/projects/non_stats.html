@@ -1,16 +1,9 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% set active_link = "stats" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-<div class="container container-main">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3">
-            {{helper.render_project_title(project, subtitle='Statistics') }}
-            <h3>Sorry, there are no statistics for this project yet</h3>
-        </div>
-    </div>
-</div>
-
+{{ general_helpers.render_title(project.name, 'Task Presenter Editor') }}
+<p class="lead">Sorry, there have not been enough contributions to generate statistics for this project yet.</p>
 {% endblock %}

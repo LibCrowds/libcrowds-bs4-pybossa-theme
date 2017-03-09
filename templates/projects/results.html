@@ -1,17 +1,30 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% set active_link = "results" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% set jstop = True %}
 
 {% block content %}
-
+{% assets filters="jsmin", output="js/gen/results.min.js",
+    "../node_modules/pace-progress/pace.js",
+    "../node_modules/jquery/dist/jquery.js",
+    "../node_modules/tether/dist/js/tether.js",
+    "../node_modules/bootstrap/dist/js/bootstrap.js",
+    "../node_modules/openseadragon/build/openseadragon/openseadragon.js",
+    "../node_modules/pnotify/dist/pnotify.js",
+    "../node_modules/pnotify/dist/pnotify.buttons.js",
+    "../node_modules/bootstrap-toggle/js/bootstrap-toggle.js",
+    "../node_modules/tesseract.js/dist/tesseract.js",
+    "js/notify.js",
+    "js/log-error.js",
+    "js/image-error.js",
+    "js/pybossa.js/pybossa.js"
+    %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 {% if project.info.results and n_results > 0 %}
 {{ project.info.results | safe}}
 {% else %}
-<div class="container">
     <h2>No results</h2>
     <p class="lead">Sorry, we haven't published any results for this project yet.</p>
-</div>
 {% endif %}
-
 {% endblock %}

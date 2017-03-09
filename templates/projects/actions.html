@@ -1,16 +1,7 @@
-{% extends "_layouts/dashboard.html" %}
-{% set active_page = "projects" %}
-{% set active_link = "tasks" %}
+{% extends "_layouts/splash.html" %}
+{% import "_helpers/_error.html" as error_helpers %}
+{% set footer_class = "hidden-xs-up" %}
 
 {% block content %}
-<section>
-    <div class="container mb-5">
-        <div class="card-deck">
-            {{ dashboard_helpers.render_button('fa-file-o', 'Edit Details', url_for('project.update', short_name=project.short_name)) }}
-            {{ dashboard_helpers.render_button('fa-pencil-square-o', 'Edit Task Presenter', url_for('project.task_presenter_editor', short_name=project.short_name)) }}
-            {{ dashboard_helpers.render_button('fa-upload', 'Edit Details', url_for('project.import_task', short_name=project.short_name)) }}
-            {{ dashboard_helpers.render_button('fa-trash', 'Edit Details', url_for('project.delete', short_name=project.short_name)) }}
-        </div>
-    </div>
-</section>
+{{ error_helpers.render_error("Page not found", "We can't find the page that you're looking for.") }}
 {% endblock %}

@@ -10,7 +10,7 @@
 <div class="card">
     {{ card_helpers.render_title('Task Redundancy', 'Set the number of contributions required per task') }}
     <div class="card-block">
-        <form method="post" action="{{ url_for('project.task_n_answers', short_name=project.short_name) }}">
+        <form method="POST" action="{{ url_for('project.task_n_answers', short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.n_answers, class_="form-control", placeholder="The number of contributions required per task", type="number",
                                          autofocus="autofocus", required="required", pattern=".{1,10000}", title="Must be a number between 1 and 100") }}

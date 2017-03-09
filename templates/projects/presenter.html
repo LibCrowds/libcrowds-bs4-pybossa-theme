@@ -3,12 +3,6 @@
 {% set jstop = True %}
 
 {% block content %}
-
-<!-- TODO: Replace this?
-<script type="text/javascript" src="{{url_for('static', filename='vendor/specialedit/specialedit.js')}}"></script>
-
--->
-
 {% assets filters="jsmin", output="js/gen/presenter.min.js",
     "../node_modules/pace-progress/pace.js",
     "../node_modules/jquery/dist/jquery.js",
@@ -27,21 +21,18 @@
     %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
-
 {% if invite_new_volunteers %}
-<div class="text-center mt-5">
-    <p class="lead">
-        Great, you've contributed to all the tasks for this project.
-        But this project still needs more volunteers, so please spread the word!
-    </p>
-    <a href="{{ url_for('home.home') }}"><span class="fa fa-home fa-3x"></span></a>
+<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+<span class="icon icon-success icon-5x"></span>
+<p class="display-5 my-1">Thank You</p>
+<div class="alert alert-success my-1">
+    Great, you've contributed to all the tasks for this project.
+    But this project still needs more volunteers, so please spread the word!
+</div>
+    <a class="btn btn-primary my-3" href={{ url_for('project.presenter', short_name=project.short_name )}} role="button">Pick another one</a>
 </div>
 {% else %}
-<script>
-    const currentUserName = '{{ current_user.name }}' || null;
-    console.log(currentUserName);
-</script>
+{% include "_includes/user-rank.js" %}
 {{ project.info.task_presenter | safe }}
 {% endif %}
-
 {% endblock %}

@@ -25,6 +25,10 @@
     background: url(/static/img/jumbotrons/code.png) no-repeat center fixed;
 }
 
+#newton-jumbotron {
+    background: url(/static/img/jumbotrons/newton.jpg) no-repeat bottom right / cover fixed;
+}
+
 #error-jumbotron {
     background-color: $sky;
     background-image: url(/static/img/bl-graphic.png);

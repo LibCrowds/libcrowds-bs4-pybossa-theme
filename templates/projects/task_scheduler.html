@@ -14,7 +14,7 @@
             With the breadth first and random schedulers tasks will never be marked as completed as task redundancy is not
             respected and users can be presented with the same task more than once.
         </div>
-        <form method="post" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
+        <form method="POST" action="{{ url_for('project.task_scheduler', short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.sched, class_="form-control")}}
             <div class="text-right">

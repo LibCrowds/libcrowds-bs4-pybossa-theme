@@ -22,7 +22,7 @@
         <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form.files(style="display: none;") }}
-            {{ form_helpers.render_field(form.bucket, class="form-control", placeholder="The name of the S3 bucket") }}
+            {{ form_helpers.render_field(form.bucket, class_="form-control", placeholder="The name of the S3 bucket") }}
             <div class="text-right">
                 <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
                 <a href="#" id="get-s3-bucket" class="btn btn-outline-primary" role="button">Load bucket</a>

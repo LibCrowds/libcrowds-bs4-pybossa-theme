@@ -13,8 +13,8 @@
     <div class="card-block">
         <form method="POST" action="{{ url_for('admin.categories') }}">
             {{ form.hidden_tag() }}
-            {{ form_helpers.render_field(form.name, placeholder="Category name", class="form-control", required="required") }}
-            {{ form_helpers.render_field(form.description, placeholder="Category description", class="form-control", required="required") }}
+            {{ form_helpers.render_field(form.name, placeholder="Category name", class_="form-control", required="required") }}
+            {{ form_helpers.render_field(form.description, placeholder="Category description", class_="form-control", required="required") }}
             <div class="text-right">
                 <input id="reset" type="reset" value="Reset" class="btn btn-secondary" role="button" />
                 <input id="submit" type="submit" value="Add" class="btn btn-success" role="button" />

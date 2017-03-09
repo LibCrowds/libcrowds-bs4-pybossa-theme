@@ -9,11 +9,11 @@
     <div class="card-block">
         <form method="POST" action="{{ url_for('project.new') }}">
             {{ form.hidden_tag() }}
-            {{ form_helpers.render_field(form.fullname, placeholder="Enter your full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters", autofocus="autofocus") }}
-            {{ form_helpers.render_field(form.name, placeholder="Enter a username", class="form-control", label_text="Username", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters") }}
-            {{ form_helpers.render_field(form.email_addr, placeholder="Enter your email address", class="form-control", type="email", required="required") }}
-            {{ form_helpers.render_field(form.password, placeholder="Choose a password", class="form-control", label_text="Password", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-            {{ form_helpers.render_field(form.confirm, placeholder="Confirm your password", class="form-control", label_text="Confirm Password", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+            {{ form_helpers.render_field(form.fullname, placeholder="Enter your full name", class_="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters", autofocus="autofocus") }}
+            {{ form_helpers.render_field(form.name, placeholder="Enter a username", class_="form-control", label_text="Username", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters") }}
+            {{ form_helpers.render_field(form.email_addr, placeholder="Enter your email address", class_="form-control", type="email", required="required") }}
+            {{ form_helpers.render_field(form.password, placeholder="Choose a password", class_="form-control", label_text="Password", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+            {{ form_helpers.render_field(form.confirm, placeholder="Confirm your password", class_="form-control", label_text="Confirm Password", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
             <div class="row d-flex flex-row align-items-center justify-content-between text-center">
                 <div class="col-lg-8 text-lg-left my-1">
                     <p class="mb-0">

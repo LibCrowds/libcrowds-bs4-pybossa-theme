@@ -28,7 +28,7 @@
                     </div>
                     <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}" enctype="multipart/form-data">
                         {{ upload_form.hidden_tag() }}
-                        {{ form_helpers.render_field(upload_form.avatar, class="form-control hidden") }}
+                        {{ form_helpers.render_field(upload_form.avatar, class_="form-control hidden") }}
                         {{ upload_form.x1 }}
                         {{ upload_form.y1 }}
                         {{ upload_form.x2 }}
@@ -46,9 +46,9 @@
                 <div class="card-block">
                     <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         {{ password_form.hidden_tag() }}
-                        {{ form_helpers.render_field(form.fullname, show_label=True, placeholder="Full name", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
-                        {{ form_helpers.render_field(form.name, show_label=True, placeholder="Username", class="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
-                        {{ form_helpers.render_field(form.email_addr, show_label=True, placeholder="Email", class="form-control", type="email" ) }}
+                        {{ form_helpers.render_field(form.fullname, show_label=True, placeholder="Full name", class_="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                        {{ form_helpers.render_field(form.name, show_label=True, placeholder="Username", class_="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
+                        {{ form_helpers.render_field(form.email_addr, show_label=True, placeholder="Email", class_="form-control", type="email" ) }}
                         {{ form_helpers.render_toggle(form.subscribed, label_text="Email updates") }}
                         {{ form_helpers.render_toggle(form.privacy_mode, label_text="Privacy mode") }}
                         {{ form_helpers.render_field(form.locale, class="hidden-xs-up", show_label=False) }}
@@ -66,9 +66,9 @@
                 <div class="card-block">
                     <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         {{ password_form.hidden_tag() }}
-                        {{ form_helpers.render_field(password_form.current_password, show_label=True, placeholder="Current password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                        {{ form_helpers.render_field(password_form.new_password, show_label=True, placeholder="New password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
-                        {{ form_helpers.render_field(password_form.confirm, show_label=True, placeholder="Confirm new password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        {{ form_helpers.render_field(password_form.current_password, show_label=True, placeholder="Current password", class_="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        {{ form_helpers.render_field(password_form.new_password, show_label=True, placeholder="New password", class_="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+                        {{ form_helpers.render_field(password_form.confirm, show_label=True, placeholder="Confirm new password", class_="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                         <div class="text-right">
                             <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
                             <button type="submit" name="btn" value="Password" class="btn btn-success">Update</button>

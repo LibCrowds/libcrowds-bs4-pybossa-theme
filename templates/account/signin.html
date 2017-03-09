@@ -59,8 +59,8 @@
     <div class="card-block">
         <form method="POST" action="{{ url_for('account.signin') }}">
             {{ form.hidden_tag() }}
-            {{ form_helpers.render_field(form.email, placeholder="Email", class="form-control", type="email", autofocus="autofocus", required="required") }}
-            {{ form_helpers.render_field(form.password, placeholder="Password", class="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
+            {{ form_helpers.render_field(form.email, placeholder="Email", class_="form-control", type="email", autofocus="autofocus", required="required") }}
+            {{ form_helpers.render_field(form.password, placeholder="Password", class_="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
             <div class="row d-flex flex-row align-items-center justify-content-between text-center">
                 <div class="col-lg-8 text-lg-left my-1">
                     <p class="mb-0">

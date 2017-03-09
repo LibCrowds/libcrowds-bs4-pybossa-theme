@@ -1,32 +1,7 @@
-{% extends "_layouts/default.html" %}
-{% set active_page = "projects" %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% extends "_layouts/splash.html" %}
+{% import "_helpers/_error.html" as error_helpers %}
+{% set footer_class = "hidden-xs-up" %}
 
 {% block content %}
-
-<div class="container mb-5 pt-4">
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
-            {{ project_helpers.render_title(project, 'Blog Posts') }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
-        {% if blogposts %}
-        <div class="list-group">
-            {% for blogpost in blogposts %}
-            <a href="{{url_for('project.show_blogpost', short_name=project.short_name, id=blogpost.id)}}" class="list-group-item list-group-item-action justify-content-between">
-                {{ blogpost.title }}
-                <span class="badge badge-default">
-                    {{ blogpost.created[8:10]}}-{{blogpost.created[5:7]}}-{{blogpost.created[0:4]}}
-                </span>
-            </a>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p class="lead">No posts so far.</p>
-        {% endif %}
-    </div>
-</div>
-
+{{ error_helpers.render_error("Page not found", "We can't find the page that you're looking for.") }}
 {% endblock %}

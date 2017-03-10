@@ -16,7 +16,7 @@
             <div id="categories-strip" class="d-flex mw-75 card-strip">
             {% for c in categories %}
                 {{ card_helpers.render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), icon=c.short_name,
-                   tooltip=c.description, active=(active_cat.short_name==c.short_name)) }}
+                   tooltip=c.description, active=(active_cat.short_name==c.short_name), nofollow=False) }}
             {% endfor %}
             {% if current_user.is_authenticated() and current_user.admin %}
                 {{ card_helpers.render_icon_button('Draft', url_for('project.draft'), icon="draft", tooltip='Unpublished projects',

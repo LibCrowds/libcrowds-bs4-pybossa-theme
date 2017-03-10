@@ -49,26 +49,26 @@
                    aria-haspopup="true" aria-expanded="false">{{ current_user.name | truncate(10, true) }} <span class="mr-1 fa fa-caret-down"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="main-navbar-dropdown-link">
-                    <a class="dropdown-item" href="{{ url_for('account.profile', name=current_user.name) }}"><i class="fa fa-user"></i> Profile</a>
-                    <a class="dropdown-item" href="{{ url_for('account.update_profile', name=current_user.name) }}"><i class="fa fa-cog"></i> Settings</a>
+                    <a class="dropdown-item" href="{{ url_for('account.profile', name=current_user.name) }}" rel="nofollow"><i class="fa fa-user"></i> Profile</a>
+                    <a class="dropdown-item" href="{{ url_for('account.update_profile', name=current_user.name) }}" rel="nofollow"><i class="fa fa-cog"></i> Settings</a>
 
                     {%- if staff_or_admin %}
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ url_for('project.new') }}"><span class="fa fa-plus"></span> New Project</a>
-                    <a class="dropdown-item" href="{{ url_for('account.projects', name=current_user.name) }}">
+                    <a class="dropdown-item" href="{{ url_for('project.new') }}"><span class="fa fa-plus" rel="nofollow"></span> New Project</a>
+                    <a class="dropdown-item" href="{{ url_for('account.projects', name=current_user.name) }}"  rel="nofollow">
                         <span class="fa fa-folder-open"></span> Open Project
                     </a>
                     {%- endif %}
                     {%- if current_user.admin -%}
-                    <a class="dropdown-item" href="{{ url_for('admin.dashboard') }}"><i class="fa fa-cog"></i> Admin</a>
+                    <a class="dropdown-item" href="{{ url_for('admin.dashboard') }}" rel="nofollow"><i class="fa fa-cog"></i> Admin</a>
                     {%- endif %}
                     <div class="dropdown-divider"></div>
 
                     <!-- See https://github.com/alexandermendes/pybossa-discourse -->
                     {%- if 'pybossa_discourse' in plugins %}
-                    <a class="dropdown-item" href="{{ url_for('discourse.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
+                    <a class="dropdown-item" href="{{ url_for('discourse.signout') }}" rel="nofollow"><i class="fa fa-power-off"></i> Sign Out</a>
                     {% else %}
-                    <a class="dropdown-item" href="{{ url_for('account.signout') }}"><i class="fa fa-power-off"></i> Sign Out</a>
+                    <a class="dropdown-item" href="{{ url_for('account.signout') }}" rel="nofollow"><i class="fa fa-power-off"></i> Sign Out</a>
                     {%- endif %}
                 </div>
             </li>

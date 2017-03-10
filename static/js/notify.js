@@ -17,6 +17,8 @@ function notify(msg, type) {
     };
 
     switch (type) {
+        case "message":
+            opts.type = 'info';
         case "error":
         case "danger":
             opts.icon = 'fa fa-exclamation-circle fa-2x';

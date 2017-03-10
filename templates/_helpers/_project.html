@@ -44,16 +44,6 @@
 </div>
 {% endmacro %}
 
-{% macro render_loading(text) %}
-<div class="row">
-    <div class="col-xs-12">
-        <div id="loading" class="alert alert-info" style="display:none;">
-            <span class="fa fa-refresh fa-spin"></span> {{text}}
-        </div>
-    </div>
-</div>
-{% endmacro %}
-
 {% macro render_thumbnail(project, upload_method, class, style, width='200', id=None) %}
     {% if project.info.container -%}
         {% if upload_method == 'rackspace' -%}

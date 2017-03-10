@@ -10,7 +10,10 @@ const getUserRankAndScore = function() {
     }).done(function(data) {
         for (let user of data.top_users) {
             if (user.name == currentUserName) {
-                def.resolve([user.rank, user.score]);
+                def.resolve({
+                    rank: user.rank, 
+                    score: user.score
+                });
             }
         }
         def.resolve(null);

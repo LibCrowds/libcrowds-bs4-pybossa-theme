@@ -5,6 +5,6 @@
 {% import "_helpers/_project.html" as project_helpers %}
 
 {% block content %}
-{{ project_helpers.render_table("Published", "Your published projects", "published-projects-table", projects_published) }}
-{{ project_helpers.render_table("Draft", "Your draft projects", "draft-projects-table", projects_draft, class="mt-4") }}
+{{ project_helpers.render_list_table("Published", "Your published projects", "published-projects-table", projects_published) }}
+{{ project_helpers.render_list_table("Draft", "Your draft projects", "draft-projects-table", projects_draft, class="mt-4") }}
 {% endblock %}

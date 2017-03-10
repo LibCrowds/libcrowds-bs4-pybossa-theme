@@ -23,7 +23,7 @@
 </div>
 {% endmacro %}
 
-{% macro render_table(title, subtitle, id, projects, class=None) %}
+{% macro render_list_table(title, subtitle, id, projects, class=None) %}
 <div class="card {% if class %}{{ class }}{% endif %}">
     {{ card_helpers.render_title(title, subtitle, search_table="#project-{0}".format(id)) }}
     <div class="table-responsive">

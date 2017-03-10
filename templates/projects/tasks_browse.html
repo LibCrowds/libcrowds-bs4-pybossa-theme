@@ -8,7 +8,7 @@
 {% block content %}
 {{ general_helpers.render_title(project.name, 'Browse Tasks') }}
 <div class="card">
-    {{ card_helpers.render_title('Tasks', 'The project contains {0} tasks'.format(n_tasks), search_table="#tasks-table") }}
+    {{ card_helpers.render_title('Tasks', 'The project contains {0} tasks (note that searching only works for the current page).'.format(n_tasks), search_table="#tasks-table") }}
     <div id="tasks-table" class="table-responsive">
         <table class="table table-hover table-striped mb-0">
             {{ table_helpers.render_head(['Task ID', 'Contributions', 'Redundancy', 'Progress', 'Data'], center_indexes=[2, 3, 4, 5]) }}
@@ -27,4 +27,7 @@
         </table>
     </div>
 </div>
+{% if pagination.pages > 1 %}
+{{ general_helpers.render_pagination(pagination) }}
+{% endif %}
 {% endblock %}

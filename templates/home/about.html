@@ -1,7 +1,6 @@
 {% extends "_layouts/splash.html" %}
 {% set active_page = 'about' %}
-{% import "_helpers/_card.html" as card_helpers %}
-{% import "_helpers/_table.html" as table_helpers %}
+{% import "_helpers/_plugin.html" as plugin_helpers %}
 
 {% block content %}
 
@@ -45,24 +44,7 @@
                     Each project on the platform is written in a combination of HTML, CSS and Javascript. A range of plugins have also been developed to provide
                     additional functionality.
                 </p>
-                <div class="card my-4">
-                    {{ card_helpers.render_title("Active Plugins", "These are the plugins currently running on the system", search_table="#plugins-table") }}
-                    <div class="table-responsive">
-                        <table id="plugins-table" class="table table-hover table-striped mb-0">
-                            {{ table_helpers.render_head(['Name', 'Description', 'Version']) }}
-                            <tbody>
-                                {% for p in plugins.values() %}
-                                {% if p.website %}
-                                {{ table_helpers.render_row(['<a href="{0}" target="_blank">{1}</a>'.format(p.website, p.name), p.description, p.version]) }}
-                                {% else %}
-                                {{ table_helpers.render_row([p.name, p.description, p.version]) }}
-                                {% endif %}
-                                {% endfor %}
-                                {{ table_helpers.render_no_data_row(3) }}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                {{ plugin_helpers.render_active_plugins(plugins) }}
                 <p>
                     The {{ brand }} theme, all project templates and plugins are open-souce and available on <a href="https://github.com/{{ brand }}" target="_blank">GitHub</a>.
                 </p>

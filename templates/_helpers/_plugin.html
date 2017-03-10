@@ -1,0 +1,25 @@
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
+
+{% macro render_active_plugins(plugins) %}
+    <div class="card mb-4">
+        {{ card_helpers.render_title("Active Plugins", "These are the plugins currently running on the system", search_table="#plugins-table") }}
+        <div class="table-responsive">
+            <table id="plugins-table" class="table table-hover table-striped mb-0">
+                {{ table_helpers.render_head(['Name', 'Description', 'Version']) }}
+                <tbody>
+                    {% for p in plugins.values() %}
+                    {% if p.website %}
+                    {{ table_helpers.render_cell(p.name, url=p.website) }}
+                    {% else %}
+                    {{ table_helpers.render_cell(p.name) }}
+                    {% endif %}
+                    {{ table_helpers.render_cell(p.description) }}
+                    {{ table_helpers.render_cell(p.version) }}
+                    {% endfor %}
+                    {{ table_helpers.render_no_data_row(3) }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endmacro %}

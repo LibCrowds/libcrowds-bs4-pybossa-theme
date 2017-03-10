@@ -1,5 +1,5 @@
 <script>
-const getUserRank = function() {
+const getUserRankAndScore = function() {
     const currentUserName = '{{ current_user.name }}' || null;
     let def = $.Deferred();
     $.ajax({

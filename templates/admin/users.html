@@ -26,11 +26,19 @@
     </div>
     <div class="table-responsive">
         <table id="featured-table" class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['ID', 'Name', 'Email', 'Administrator']) }}
+            {{ table_helpers.render_head(['ID', 'Name', 'Email', 'Admin Rights'], center_indexes=[4]) }}
             <tbody>
                 {% for user in found %}
-                {{ table_helpers.render_row([user.id, '<a href="{0}">{1}</a>'.format(url_for('account.profile', name=user.name), user.fullname), user.email_addr,
-                                             '<a href="{0}" class="btn btn-sm btn-outline-primary">{1}</a>'.format(url_for('admin.del_admin', user_id=user.id) if user.admin else url_for('admin.add_admin', user_id=user.id), user.admin)]) }}
+                <tr>
+                    {{ table_helpers.render_cell(user.id) }}
+                    {{ table_helpers.render_cell(user.fullname, url_for('account.profile', name=user.name)) }}
+                    {{ table_helpers.render_cell(user.email_addr) }}
+                    {% if user.admin %}
+                    {{ table_helpers.render_cell('Remove', url=url_for('admin.del_admin', user_id=user.id), btn=True, center=True) }}
+                    {% else %}
+                    {{ table_helpers.render_cell('Add', url=url_for('admin.add_admin', user_id=user.id), btn=True, center=True) }}
+                    {% endif %}
+                </tr>
                 {% endfor %}
                 {{ table_helpers.render_no_data_row(4) }}
             </tbody>

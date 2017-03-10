@@ -11,14 +11,22 @@
     {{ card_helpers.render_title('Audit logs', 'All activities affecting the project', search_table="#audit-table") }}
     <div id="audit-table" class="table-responsive">
         <table class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['When', 'Who', 'Source', 'Action', 'Attribute']) }}
+            {{ table_helpers.render_head(['When', 'Who', 'Source', 'Action', 'Attribute', 'Action'], center_indexes=[6]) }}
             <tbody>
                 {% for log in logs | sort(reverse=True, attribute='created') %}
-                {{ table_helpers.render_row(['<a href="#" data-toggle="modal" data-target="#modal-log-{0}">{1}-{2}-{3}, {4}</a>
-                                             '.format(log.id, log.created[8:10], log.created[5:7], log.created[0:4], log.created[11:16]),
-                                             log.user_name, log.caller, log.action, log.attribute]) }}
+                <tr>
+                    {{ table_helpers.render_cell(log.created) }}
+                    {{ table_helpers.render_cell(log.user_name) }}
+                    {{ table_helpers.render_cell(log.caller) }}
+                    {{ table_helpers.render_cell(log.action) }}
+                    {{ table_helpers.render_cell(log.attribute) }}
+                    <td class="visible text-center">
+                        <button class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#modal-log-{{ log.id }}" role="button">View
+                        </button>
+                    </td>
+                </tr>
                 {% endfor %}
-                {{ table_helpers.render_no_data_row(5) }}
+                {{ table_helpers.render_no_data_row(6) }}
             </tbody>
         </table>
     </div>

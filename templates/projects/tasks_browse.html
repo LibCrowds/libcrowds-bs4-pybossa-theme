@@ -11,13 +11,18 @@
     {{ card_helpers.render_title('Tasks', 'The project contains {0} tasks'.format(n_tasks), search_table="#tasks-table") }}
     <div id="tasks-table" class="table-responsive">
         <table class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['Task ID', 'Contributions', 'Redundancy', 'Progress', 'Data']) }}
+            {{ table_helpers.render_head(['Task ID', 'Contributions', 'Redundancy', 'Progress', 'Data'], center_indexes=[2, 3, 4, 5]) }}
             <tbody>
                 {% for t in tasks %}
-                {{ table_helpers.render_row([t.id, t.n_task_runs, t.n_answers, (t.pct_status*100) | round | int,
-                                             '<a class="btn btn-sm btn-outline-primary" href="{0}">View</a>'.format(url_for('project.export', short_name=project.short_name, task_id=t.id))]) }}
+                <tr>
+                    {{ table_helpers.render_cell(t.id) }}
+                    {{ table_helpers.render_cell(t.n_task_runs, center=True) }}
+                    {{ table_helpers.render_cell(t.n_answers, center=True) }}
+                    {{ table_helpers.render_cell((t.pct_status*100) | round | int, center=True) }}
+                    {{ table_helpers.render_cell('Export', url=url_for('project.export', short_name=project.short_name, task_id=t.id), btn=True, center=True) }}
+                </tr>
                 {% endfor %}
-                {{ table_helpers.render_no_data_row(4) }}
+                {{ table_helpers.render_no_data_row(5) }}
             </tbody>
         </table>
     </div>

@@ -18,9 +18,12 @@
                     {% set repo_name = new.links[0].href.split('/')[4] %}
                     {% set repo_url = "".join(new.links[0].href.split('/')[:4]) %}
                     {% set category = new.content[0].base.split('/')[-1].rstrip('.atom') %}
-                    {{ table_helpers.render_row(['{0}-{1}-{2}'.format(new.updated[8:10], new.updated[5:7], new.updated[0:4]), category,
-                                                 '<a target="_blank" href="{0}">{1}</a>'.format(repo_url, repo_name),
-                                                 '<a target="_blank" href="{0}">{1}</a>'.format(new.link, new.title)]) }}
+                    <tr>
+                        {{ table_helpers.render_cell(new.updated) }}
+                        {{ table_helpers.render_cell(category) }}
+                        {{ table_helpers.render_cell(repo_name, url=repo_url) }}
+                        {{ table_helpers.render_cell(new.title, url=new.link) }}
+                    </tr>
                     {% endif %}
                 {% endfor %}
                 {{ table_helpers.render_no_data_row(4) }}

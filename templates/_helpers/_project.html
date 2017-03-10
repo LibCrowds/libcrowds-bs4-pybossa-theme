@@ -25,14 +25,17 @@
 
 {% macro render_table(title, subtitle, id, projects, class=None) %}
 <div class="card {% if class %}{{ class }}{% endif %}">
-    {{ card_helpers.render_title(title, subtitle, search_table="#{0}".format(id)) }}
+    {{ card_helpers.render_title(title, subtitle, search_table="#project-{0}".format(id)) }}
     <div class="table-responsive">
-        <table id="{{ id }}" class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['Name', 'Progress', 'Details']) }}
+        <table id="project-{{ id }}" class="table table-hover table-striped mb-0">
+            {{ table_helpers.render_head(['Name', 'Progress', 'Details'], center_indexes=[2, 3]) }}
             <tbody>
                 {% for p in projects %}
-                {{ table_helpers.render_row([p.name, p.overall_progress,
-                                             '<a href="{0}" class="btn btn-sm btn-outline-primary">View</a>'.format(url_for('project.details', short_name=p.short_name))]) }}
+                <tr>
+                    {{ table_helpers.render_cell(p.name) }}
+                    {{ table_helpers.render_cell(p.overall_progress, center=True) }}
+                    {{ table_helpers.render_cell('View', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
+                </tr>
                 {% endfor %}
                 {{ table_helpers.render_no_data_row(3) }}
             </tbody>
@@ -85,7 +88,7 @@
         </div>
     </div>
     <div class="col-xl-4 col-lg-12 text-center text-lg-right my-2">
-        <input type="text" class="form-control rounded-oblong shuffle-search" placeholder="Search">
+        <input type="text" class_="form-control rounded-oblong shuffle-search" placeholder="Search">
     </div>
 </div>
 {% endmacro %}

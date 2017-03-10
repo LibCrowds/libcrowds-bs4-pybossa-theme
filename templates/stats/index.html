@@ -10,10 +10,15 @@
         {{ card_helpers.render_title('Top Users', 'The top {} users'.format(top_users | length), search_table="#leaderboard-table") }}
         <div id="leaderboard-table" class="table-responsive">
             <table class="table table-hover table-striped mb-0">
-                {{ table_helpers.render_head(['Rank', 'Name', 'Joined', 'Contributions']) }}
+                {{ table_helpers.render_head(['Rank', 'Name', 'Joined', 'Contributions'], center_indexes=[1, 4]) }}
                 <tbody>
                     {% for u in top_users %}
-                    {{ table_helpers.render_row([u.rank, '<a href="{0}">{1}</a>'.format(url_for('account.profile', name=u.name), u.name), u.created, u.score]) }}
+                    <tr>
+                        {{ table_helpers.render_cell(u.rank, center=True) }}
+                        {{ table_helpers.render_cell(u.name, url=url_for('account.profile', name=u.name)) }}
+                        {{ table_helpers.render_cell(u.created) }}
+                        {{ table_helpers.render_cell(u.score, center=True) }}
+                    </tr>
                     {% endfor %}
                     {{ table_helpers.render_no_data_row(4) }}
                 </tbody>

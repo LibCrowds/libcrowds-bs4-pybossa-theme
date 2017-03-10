@@ -26,12 +26,16 @@
     {{ card_helpers.render_title('Current Categories', 'Edit or delete current categories', search_table="#categories-table") }}
     <div class="table-responsive">
         <table id="categories-table" class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['ID', 'Title', 'Projects', 'Edit', 'Delete']) }}
+            {{ table_helpers.render_head(['ID', 'Title', 'Projects', 'Edit', 'Delete'], center_indexes=[3, 4, 5]) }}
             <tbody>
                 {% for c in categories %}
-                {{ table_helpers.render_row([c.id, c.name, n_projects_per_category[c.short_name],
-                                             '<a href="{0}" class="btn btn-sm btn-outline-primary">Edit</a>'.format(url_for('admin.update_category', id=c.id)),
-                                             '<a href="{0}" class="btn btn-sm btn-outline-primary">Delete</a>'.format(url_for('admin.del_category', id=c.id))]) }}
+                <tr>
+                {{ table_helpers.render_cell(c.id) }}
+                {{ table_helpers.render_cell(c.name) }}
+                {{ table_helpers.render_cell(n_projects_per_category[c.short_name], center=True) }}
+                {{ table_helpers.render_cell('Edit', url=url_for('admin.update_category', id=c.id), btn=True, center=True) }}
+                {{ table_helpers.render_cell('Delete', url=url_for('admin.del_category', id=c.id), btn=True, center=True) }}
+                </tr>
                 {% endfor %}
                 {{ table_helpers.render_no_data_row(5) }}
             </tbody>

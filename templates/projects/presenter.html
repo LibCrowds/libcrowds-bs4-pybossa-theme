@@ -1,26 +1,7 @@
 {% extends "_layouts/presenter.html" %}
 {% set active_page = "projects" %}
-{% set jstop = True %}
 
 {% block content %}
-{% assets filters="jsmin", output="js/gen/presenter.min.js",
-    "../node_modules/pace-progress/pace.js",
-    "../node_modules/jquery/dist/jquery.js",
-    "../node_modules/tether/dist/js/tether.js",
-    "../node_modules/bootstrap/dist/js/bootstrap.js",
-    "../node_modules/openseadragon/build/openseadragon/openseadragon.js",
-    "../node_modules/openseadragonselection/dist/openseadragonselection.js",
-    "../node_modules/pnotify/dist/pnotify.js",
-    "../node_modules/pnotify/dist/pnotify.buttons.js",
-    "../node_modules/bootstrap-toggle/js/bootstrap-toggle.js",
-    "../node_modules/tesseract.js/dist/tesseract.js",
-    "js/notify.js",
-    "js/log-error.js",
-    "js/image-error.js",
-    "js/pybossa.js/pybossa.js"
-    %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
 {% if invite_new_volunteers %}
 <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
 <span class="icon icon-success icon-5x"></span>

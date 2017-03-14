@@ -1,7 +1,8 @@
-{% extends "_layouts/splash.html" %}
-{% import "_helpers/_error.html" as error_helpers %}
-{% set footer_class = "hidden-xs-up" %}
+{% extends "_layouts/error.html" %}
 
-{% block content %}
-{{ error_helpers.render_error("Page not found", "We can't find the page that you're looking for.") }}
+{% block title %}
+Page not found
+{% endblock %}
+{% block description %}
+We can't find the page that you're looking for.
 {% endblock %}

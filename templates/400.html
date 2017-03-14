@@ -1,7 +1,8 @@
-{% extends "_layouts/splash.html" %}
-{% import "_helpers/_error.html" as error_helpers %}
-{% set footer_class = "hidden-xs-up" %}
+{% extends "_layouts/error.html" %}
 
-{% block content %}
-{{ error_helpers.render_error("Bad request", "Your browser sent a request that the server couldn't understand.") }}
+{% block title %}
+Bad request
+{% endblock %}
+{% block description %}
+Your browser sent a request that the server couldn't understand.
 {% endblock %}

@@ -1,7 +1,8 @@
-{% extends "_layouts/splash.html" %}
-{% import "_helpers/_error.html" as error_helpers %}
-{% set footer_class = "hidden-xs-up" %}
+{% extends "_layouts/error.html" %}
 
-{% block content %}
-{{ error_helpers.render_error("Unauthorised", "You're not authorised to access the request resource.") }}
+{% block title %}
+Unauthorised
+{% endblock %}
+{% block description %}
+You're not authorised to access the request resource.
 {% endblock %}

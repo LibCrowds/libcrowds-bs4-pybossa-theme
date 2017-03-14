@@ -1,7 +1,8 @@
-{% extends "_layouts/splash.html" %}
-{% import "_helpers/_error.html" as error_helpers %}
-{% set footer_class = "hidden-xs-up" %}
+{% extends "_layouts/error.html" %}
 
-{% block content %}
-{{ error_helpers.render_error("Uh oh, something's broken", "We'll fix it as soon as we can.") }}
+{% block title %}
+Uh oh, something's broken
+{% endblock %}
+{% block description %}
+We'll fix it as soon as we can.
 {% endblock %}

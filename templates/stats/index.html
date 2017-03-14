@@ -7,16 +7,17 @@
 
 {% block content %}
     <div class="card">
+        {{ filters }}
         {{ card_helpers.render_title('Top Users', 'The top {} users'.format(top_users | length), search_table="#leaderboard-table") }}
         <div id="leaderboard-table" class="table-responsive">
             <table class="table table-hover table-striped mb-0">
-                {{ table_helpers.render_head(['Rank', 'Name', 'Joined', 'Contributions'], center_indexes=[1, 4]) }}
+                {{ table_helpers.render_head(['Rank', 'Name', 'Joined', 'Contributions'], center_indexes=[1, 3, 4]) }}
                 <tbody>
                     {% for u in top_users %}
                     <tr>
                         {{ table_helpers.render_cell(u.rank, center=True) }}
                         {{ table_helpers.render_cell(u.name, url=url_for('account.profile', name=u.name)) }}
-                        {{ table_helpers.render_cell(u.created) }}
+                        {{ table_helpers.render_cell(general_helpers.format_date(u.created), center=True) }}
                         {{ table_helpers.render_cell(u.score, center=True) }}
                     </tr>
                     {% endfor %}

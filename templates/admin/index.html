@@ -19,7 +19,7 @@
                     {% set repo_url = "".join(new.links[0].href.split('/')[:4]) %}
                     {% set category = new.content[0].base.split('/')[-1].rstrip('.atom') %}
                     <tr>
-                        {{ table_helpers.render_cell(new.updated) }}
+                        {{ table_helpers.render_cell(general_helpers.format_date(new.updated)) }}
                         {{ table_helpers.render_cell(category) }}
                         {{ table_helpers.render_cell(repo_name, url=repo_url) }}
                         {{ table_helpers.render_cell(new.title, url=new.link) }}

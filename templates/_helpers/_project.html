@@ -1,11 +1,12 @@
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_table.html" as table_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 
 {% macro render_grid(projects, shuffle=False, col_size="col-md-4") %}
 <div {% if not shuffle %}class="row overlay-cards"{% else %}class="row shuffle-grid overlay-cards" id="project-grid" data-initial-group="incomplete"{% endif %}>
     {% for project in projects -%}
     <div class="{{ col_size }} grid-item" data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
-        data-created="{{ project.created }}" data-progress="{{ project.overall_progress }}"
+        data-created="{{ general_helpers.format_date(project.created) }}" data-progress="{{ project.overall_progress }}"
         data-last-activity="{{ project.last_activity_raw }}" data-n-volunteers="{{ project.n_volunteers }}"
         {%- if shuffle and project.overall_progress == 100 %}style="visibility: hidden"{% endif %}>
         <div class="card text-center">

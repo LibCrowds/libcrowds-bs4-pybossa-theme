@@ -43,3 +43,7 @@
     </nav>
 </div>
 {% endmacro %}
+
+{% macro format_date(dateStr, appendTime=False) %}
+{{ "-".join(dateStr[:10].split('-')[::-1]) }}{% if appendTime %}, {{ dateStr[11:16] }}{% endif %}
+{% endmacro %}

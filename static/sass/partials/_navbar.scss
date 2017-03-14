@@ -33,32 +33,34 @@
             visibility: hidden;
         }
 
-        .dropdown-menu {
-            left: initial;
-            right: 0;
+        &:not(.navbar-dashboard) {
+            .navbar-collapse .nav-link:after {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 2px;
+                content: '';
+                background-color: $brand-primary;
+                opacity: 0;
+                margin-left: 0;
+            }
+            
+            .dropdown-menu {
+                left: -25%;
+                right: 0;
+            }
         }
     }
 
     .navbar-inverse {
         .dropdown-menu {
             background-color: rgba($black, 0.5);
+            
+            .dropdown-item {
+                color: $white;
+            }
         }
-
-        .dropdown-item {
-            color: $white;
-        }
-    }
-
-    .navbar-collapse:not(.show) .nav-link:after {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 2px;
-        content: '';
-        background-color: $brand-primary;
-        opacity: 0;
-        margin-left: 0;
     }
 }
 
@@ -67,8 +69,7 @@
         position: relative;
         background: $white;
         border-bottom: 1px solid $gray-lighter;
-    }
-    .navbar-invertable {
+        
         .navbar-brand,
         .navbar-toggler {
             color: $navbar-light-active-color;
@@ -76,35 +77,35 @@
             @include hover-focus {
               color: $navbar-light-active-color;
             }
-    }
+        }
 
         .navbar-nav {
-          .nav-link {
-            color: $navbar-light-color;
+            .nav-link {
+                color: $navbar-light-color;
 
-            &.disabled {
-              color: $navbar-light-disabled-color;
+                &.disabled {
+                    color: $navbar-light-disabled-color;
+                }
             }
-          }
 
-          .open > .nav-link,
-          .active > .nav-link,
-          .nav-link.open,
-          .nav-link.active {
-            color: $navbar-light-active-color;
-          }
+            .open > .nav-link,
+            .active > .nav-link,
+            .nav-link.open,
+            .nav-link.active {
+                color: $navbar-light-active-color;
+            }
         }
 
         .navbar-toggler {
-          border-color: $navbar-light-toggler-border;
+            border-color: $navbar-light-toggler-border;
         }
 
         .navbar-toggler-icon {
-          background-image: $navbar-light-toggler-bg;
+            background-image: $navbar-light-toggler-bg;
         }
 
         .navbar-text {
-          color: $navbar-light-color;
+            color: $navbar-light-color;
         }
-      }
+    }
 }

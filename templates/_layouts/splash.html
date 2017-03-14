@@ -1,17 +1,14 @@
 {% extends "_layouts/base.html" %}
 
 {% block layout %}
-
 {% set staff_or_admin = staff_or_admin %}
 {% set active_page = active_page | default('index') %}
 {% set navbar_class = "navbar fixed-top navbar-toggleable-md navbar-inverse navbar-invertable" %}
-{% set footer_class = footer_class | default("footer bg-faded") %}
-
+{% set footer_class = footer_class | default("footer bg-white") %}
 {% include "_includes/_navbar.html" %}
 <main>
     {% block content %}
     {% endblock %}
 </main>
 {% include "_includes/_footer.html" %}
-
 {% endblock %}

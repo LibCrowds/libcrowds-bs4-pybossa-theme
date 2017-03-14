@@ -12,15 +12,12 @@
         {% endif -%}
         <link href="https://google.com/+LibcrowdsBL" rel="publisher">
         <link rel="shortcut icon" href="/static/img/favicon.png">
-
         {%- assets filters="libsass", output="css/gen/styles.min.css", depends="sass/**/*.scss", "sass/_main.scss" %}
-        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+            <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
         {% endassets %}
-
         {% include "_includes/_ga.js" ignore missing %}
         {% include "_includes/_cookies_warning.html" %}
     </head>
-
     <body>
         {% if not current_user.is_anonymous() -%}
         <!-- checkpoint::logged-in::{{current_user.name}} -->

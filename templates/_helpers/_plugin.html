@@ -9,13 +9,15 @@
                 {{ table_helpers.render_head(['Name', 'Description', 'Version'], center_indexes=[3]) }}
                 <tbody>
                     {% for p in plugins.values() %}
-                    {% if p.website %}
-                    {{ table_helpers.render_cell(p.name, url=p.website) }}
-                    {% else %}
-                    {{ table_helpers.render_cell(p.name) }}
-                    {% endif %}
-                    {{ table_helpers.render_cell(p.description) }}
-                    {{ table_helpers.render_cell(p.version, center=True) }}
+                    <tr>
+                        {% if p.website %}
+                        {{ table_helpers.render_cell(p.name, url=p.website) }}
+                        {% else %}
+                        {{ table_helpers.render_cell(p.name) }}
+                        {% endif %}
+                        {{ table_helpers.render_cell(p.description) }}
+                        {{ table_helpers.render_cell(p.version, center=True) }}
+                    </tr>
                     {% endfor %}
                     {{ table_helpers.render_no_data_row(3) }}
                 </tbody>

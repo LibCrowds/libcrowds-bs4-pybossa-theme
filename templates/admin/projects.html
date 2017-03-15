@@ -2,20 +2,13 @@
 {% set active_page = "admin" %}
 {% set active_link = "featured" %}
 {% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_category.html" as category_helpers %}
 {% import "_helpers/_table.html" as table_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
 {{ general_helpers.render_title('Admin', 'Featured Projects') }}
-<div class="d-flex flex-row align-items-center justify-content-center">
-    <span class="fa fa-chevron-left mr-2 btn-scroll" data-target="#categories-strip" data-direction="left" role="button"></span>
-    <div id="categories-strip" class="card-strip">
-        {%- for c in categories %}
-            {{ card_helpers.render_icon_button(c.name, '#{0}'.format(c.short_name), icon=c.short_name, tooltip=c.description, active=loop.first) }}
-        {%- endfor %}
-    </div>
-    <span class="fa fa-chevron-right ml-2 btn-scroll" data-target="#categories-strip" data-direction="right" role="button"></span>
-</div>
+{{ category_helpers.render_strip(categories) }}
 <div class="card mt-4">
     {{ card_helpers.render_title('Projects', 'Feature a project on the home page', search_table="#featured-table") }}
     <div>

@@ -6,25 +6,12 @@
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_category.html" as category_helpers %}
 
 {% block content %}
-
 <section class="pattern-white-wall w-100">
     <div class="container pt-3">
-        <div class="d-flex flex-row align-items-center justify-content-center">
-            <span class="fa fa-chevron-left mr-2 btn-scroll" data-target="#categories-strip" data-direction="left" role="button"></span>
-            <div id="categories-strip" class="d-flex mw-75 card-strip">
-            {% for c in categories %}
-                {{ card_helpers.render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), icon=c.short_name,
-                   tooltip=c.description, active=(active_cat.short_name==c.short_name), nofollow=False) }}
-            {% endfor %}
-            {% if current_user.is_authenticated() and current_user.admin %}
-                {{ card_helpers.render_icon_button('Draft', url_for('project.draft'), icon="draft", tooltip='Unpublished projects',
-                active=(active_cat.short_name=='draft')) }}
-            {% endif %}
-            </div>
-            <span class="fa fa-chevron-right ml-2 btn-scroll" data-target="#categories-strip" data-direction="right" role="button"></span>
-        </div>
+        {{ category_helpers.render_strip(categories, active_cat=active_cat, current_user=current_user) }}
         <div class="my-2 mx-4">
         {{ project_helpers.render_grid_shuffle_controls() }}
         </div>

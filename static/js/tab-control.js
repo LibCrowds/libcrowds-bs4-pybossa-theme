@@ -1,8 +1,8 @@
 /**
- * Show linked element when a card button with an internal link is clicked.
- * So we can have tooltips for buttons while also toggling tab-like behaviour.
+ * Show linked element when a .tab-control is clicked.
+ * So we can still use tooltips while also toggling tab-like behaviour.
  */
-$('.card-button a[href*=\\#]').on('click', function(evt) {
+$('a[href*=\\#].tab-control').on('click', function(evt) {
     const link = $(this).attr('href');
     $(link).show();
     $(link).siblings().hide();

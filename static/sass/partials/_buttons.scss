@@ -1,9 +1,5 @@
 .btn-outline-white {
-    @include button-outline-variant($white);
-
-    @include hover-focus {
-        background-color: transparent;
-    }
+    @include button-outline-variant($white, $black);
 }
 
 .btn-circle {

@@ -1,50 +1,9 @@
 {% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% set active_link = "stats" %}
-{% import "_helpers/_project.html" as project_helpers %}
-{% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
-{% set jstop = True %}
 
 {% block content %}
-{% assets filters="jsmin", output="js/gen/project-stats.min.js",
-    "../node_modules/pace-progress/pace.js",
-    "../node_modules/jquery/dist/jquery.js",
-    "../node_modules/tether/dist/js/tether.js",
-    "../node_modules/bootstrap/dist/js/bootstrap.js",
-    "../node_modules/pnotify/dist/pnotify.js",
-    "../node_modules/pnotify/dist/pnotify.buttons.js",
-    "../node_modules/chartist/dist/chartist.js",
-    "../node_modules/leaflet/dist/leaflet.js",
-    "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
-    "js/notify.js",
-    "js/log-error.js"
-    %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
-{{ general_helpers.render_title(project.name, 'Statistics') }}
-
-
-<div class="card">
-    {{ card_helpers.render_title('Active Anonymous Users', 'Active anonymous users over the past week') }}
-    <div class="card-block">
-        <div id="returning-users"></div>
-    </div>
-</div>
-
-<script>
-    const projectStats = JSON.parse({{ projectStats | tojson | safe }});
-    const opts = {
-        height: '300px',
-        onlyInteger: false
-    };
-    console.log(projectStats);
-
-    const data = {
-        labels: [projectStats.userStats.values[0].label, projectStats.userStats.values[1].label],
-        series: [projectStats.userStats.values[0].value[1], projectStats.userStats.values[1].value[1]]
-    }
-    new Chartist.Pie('#returning-users', data, opts);
-</script>
-
+{{ general_helpers.render_title(project.name, 'Task Presenter Editor') }}
+<p class="lead">Sorry, project statistics are currently unavailable, but they will be back soon!</p>
 {% endblock %}

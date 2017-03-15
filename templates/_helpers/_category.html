@@ -14,12 +14,12 @@
 <div class="d-flex flex-row align-items-center justify-content-center">
     <span class="fa fa-chevron-left mr-2 btn-scroll" data-target="#categories-strip" data-direction="left" role="button"></span>
         <div id="categories-strip" class="d-flex mw-75 card-strip">
-        {% if active_category %}
+        {% if active_cat %}
             {% for c in categories %}
-                {{ card_helpers.render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), c.short_name, c.description, active=(active_cat.short_name==c.short_name)) }}
+                {{ render_icon_button(c.name, url_for('project.project_cat_index', category=c.short_name), c.short_name, c.description, active=(active_cat.short_name==c.short_name)) }}
             {% endfor %}
             {% if current_user and (current_user.is_authenticated() and current_user.admin) %}
-                {{ card_helpers.render_icon_button('Draft', url_for('project.draft'), "draft", 'Unpublished projects', active=(active_cat.short_name=='draft'), nofollow=True) }}
+                {{ render_icon_button('Draft', url_for('project.draft'), "draft", 'Unpublished projects', active=(active_cat.short_name=='draft'), nofollow=True) }}
             {% endif %}
         {% else %}
             {%- for c in categories %}

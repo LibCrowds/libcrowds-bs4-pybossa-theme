@@ -8,7 +8,6 @@
 {% set title_link = title_link %}
 {% set hide_title = hide_title | default(False) %}
 {% set full_width = full_width | default(False) %}
-{% set no_pattern = no_pattern | default(False) %}
 
 {% set staff_or_admin = staff_or_admin %}
 {% set active_page = active_page %}
@@ -16,7 +15,7 @@
 {% set footer_class = "footer bg-white" %}
 
 {% include "_includes/_navbar.html" %}
-<main {% if not no_pattern %}class="pattern-white-wall border-0"{% endif %}>
+<main class="pattern-white-wall border-0">
     <div class="container-fluid my-5 pt-3">
         {% if not hide_title %}
         <div class="row">

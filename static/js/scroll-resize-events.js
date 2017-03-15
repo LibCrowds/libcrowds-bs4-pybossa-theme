@@ -49,7 +49,6 @@ function displayScrollButtons() {
     $('.btn-scroll').each(function() {
         const target = $($(this).data('target'))[0];
         if (target.offsetWidth < target.scrollWidth) {
-            console.log('show')
             $(this).css('visibility', 'visible');
         } else {
             $(this).css('visibility', 'hidden');

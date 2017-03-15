@@ -9,7 +9,6 @@ $('.send-webhook').on('click', function() {
         url: `/project/${projectShortName}/webhook/${webhookId}`,
         dataType: 'json'
     }).done((data) => {
-        console.log(data);
         $(this).html(buttonHtml);
         notify('Webhook sent!', 'success');
     });

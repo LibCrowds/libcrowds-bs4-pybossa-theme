@@ -13,7 +13,7 @@
     {{ card_helpers.render_title('Projects', 'Feature a project on the home page', search_table="#featured-table") }}
     <div>
         {% for c in categories %}
-        <div id="{{ c.short_name }}" {% if not loop.first %}style="display: none;"{% endif %}>
+        <div id="category-{{ c.id }}" {% if not loop.first %}style="display: none;"{% endif %}>
             <div class="table-responsive">
                 <table id="featured-table" class="table table-hover table-striped mb-0">
                     {{ table_helpers.render_head(['Name', 'Progress', 'Featured'], center_indexes=[2, 3]) }}

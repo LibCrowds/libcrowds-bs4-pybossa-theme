@@ -1,7 +1,7 @@
 {% macro render_icon_button(title, url, icon, tooltip, active=False, nofollow=False) %}
 <div class="card m-1 p-0 d-flex flex-column align-items-center {% if active %}active{% endif %}"
      data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="{{ tooltip }}">
-    <a href="{{ url }}" class="text-body" {% if nofollow%}rel="nofollow"{% endif %}>
+    <a href="{{ url }}" class="text-body tab-control" {% if nofollow%}rel="nofollow"{% endif %}>
         <div class="card-block py-2 px-4 text-center">
             <span class="icon icon-4x icon-{{ icon }}"></span>
             <div class="card-title text-initial mb-0">{{ title }}</div>
@@ -23,7 +23,7 @@
             {% endif %}
         {% else %}
             {%- for c in categories %}
-                {{ render_icon_button(c.name, '#{0}'.format(c.short_name), c.short_name, c.description, active=loop.first) }}
+                {{ render_icon_button(c.name, '#category-{0}'.format(c.id), c.short_name, c.description, active=loop.first) }}
             {%- endfor %}
         {% endif %}
     </div>

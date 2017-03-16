@@ -10,16 +10,16 @@
         {% if block_robots %}
         <meta name="robots" content="noindex, nofollow">
         {% endif -%}
-        <link href="https://google.com/+LibcrowdsBL" rel="publisher">
-
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='/favicons/apple-touch-icon.png?v=rM3QjMjGEj') }}">
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename=/favicon-32x32.png?v=rM3QjMjGEj') }}" sizes="32x32">
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename=/favicon-16x16.png?v=rM3QjMjGEj') }}" sizes="16x16">
-        <link rel="manifest" href="{{ url_for('static', filename=/manifest.json?v=rM3QjMjGEj') }}">
-        <link rel="mask-icon" href="{{ url_for('static', filename=/safari-pinned-tab.svg?v=rM3QjMjGEj') }}" color="#d00000">
-        <link rel="shortcut icon" href="{{ url_for('static', filename=/favicon.ico?v=rM3QjMjGEj') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicons/apple-touch-icon.png') }}?v=xM3QjMjGEa">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicons/favicon-32x32.png') }}?v=xM3QjMjGEa" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicons/favicon-16x16.png') }}?v=xM3QjMjGEa" sizes="16x16">
+        <link rel="manifest" href="{{ url_for('static', filename='img/favicons/manifest.json') }}">
+        <link rel="mask-icon" href="{{ url_for('static', filename='img/favicons/safari-pinned-tab.svg') }}?v=xM3QjMjGEa" color="#d00000">
         <meta name="apple-mobile-web-app-title" content="LibCrowds">
         <meta name="application-name" content="LibCrowds">
+        <meta name="msapplication-TileColor" content="#d00000">
+        <meta name="msapplication-TileImage" content="{{ url_for('static', filename='img/favicons/mstile-144x144.png') }}?v=xM3QjMjGEa">
+        <meta name="msapplication-config" content="{{ url_for('static', filename='img/favicons/browserconfig.xml') }}">
         <meta name="theme-color" content="#da0000">
         {%- assets filters="libsass", output="css/gen/styles.min.css", depends="sass/**/*.scss", "sass/_main.scss" %}
             <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">

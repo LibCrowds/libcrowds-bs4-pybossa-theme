@@ -7,7 +7,7 @@
 <div class="card">
     {{ card_helpers.render_title('Your Details', 'Enter your details to create a new account') }}
     <div class="card-block">
-        <form method="POST" action="{{ url_for('project.new') }}">
+        <form method="POST" action="{{ url_for('account.register') }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.fullname, placeholder="Enter your full name", class_="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters", autofocus="autofocus") }}
             {{ form_helpers.render_field(form.name, placeholder="Enter a username", class_="form-control", label_text="Username", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters") }}

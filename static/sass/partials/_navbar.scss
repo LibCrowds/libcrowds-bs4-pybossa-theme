@@ -27,14 +27,14 @@
 }
 
 
-@include media-breakpoint-down(xl) {
+@include media-breakpoint-up(lg) {
     .navbar {
         &.navbar-dashboard .navbar-brand {
             visibility: hidden;
         }
 
         &:not(.navbar-dashboard) {
-            .navbar-collapse .nav-link:after {
+            .nav-item .nav-link:after {
                 position: absolute;
                 left: 0;
                 bottom: 0;
@@ -43,7 +43,12 @@
                 content: '';
                 background-color: $brand-primary;
                 opacity: 0;
-                margin-left: 0;
+            }
+            
+            .nav-item.active .nav-link:after,
+            .nav-item .nav-link:hover:after,
+            .nav-item .nav-link:focus:after {
+                opacity: 1;
             }
             
             .dropdown-menu {
@@ -59,6 +64,7 @@
             
             .dropdown-item {
                 color: $white;
+                
                 @include hover-focus {
                     color: $link-hover-color;
                 }

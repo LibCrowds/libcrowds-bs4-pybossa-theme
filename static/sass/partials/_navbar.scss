@@ -34,7 +34,7 @@
         }
 
         &:not(.navbar-dashboard) {
-            .nav-item .nav-link:after {
+            .nav-item:not(.dropdown) .nav-link:after {
                 position: absolute;
                 left: 0;
                 bottom: 0;

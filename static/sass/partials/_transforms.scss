@@ -5,21 +5,3 @@
         transform: none;
     }
 }
-
-.navbar .nav-item {
-    .nav-link {
-        &:after {
-            transform: translateY(10px);
-        }
-
-        @include hover-focus {
-            &:after {
-                transform: none;
-            }
-        }
-    }
-
-    &.active .nav-link:after {
-        transform: none;
-    }
-}

@@ -12,7 +12,6 @@ main {
 
 footer {
     border-top: 1px solid $gray-lighter;
-    z-index: 2000;
 }
 
 @include media-breakpoint-up(md) {

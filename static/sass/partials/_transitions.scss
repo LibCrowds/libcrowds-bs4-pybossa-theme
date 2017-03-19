@@ -40,6 +40,10 @@ a {
             transition: opacity 200ms, transform 200ms;
         }
     }
+    
+    .navbar-collapse {
+        transition: transform 450ms !important;
+    }
 }
 
 .jumbotron-fade {

@@ -1,11 +1,15 @@
 /**
  * Handle scroll and resize events.
  */
-$(window).on("load resize scroll",function() {
+$(window).on("resize scroll",function() {
     styleNavigation();
     styleJumbotrons();
     displayScrollButtons();
 });
+
+styleNavigation();
+styleJumbotrons();
+displayScrollButtons();
 
 /**
  * Handle styling of jumbotrons.

@@ -71,7 +71,7 @@ $brand-success:                    #398439;
 $brand-info:                       #4190C2;
 $brand-warning:                    #E38D13;
 $brand-danger:                     #D00000;
-$brand-inverse:                    #141B24;
+$brand-inverse:                    #111111;
 
 $body-color:                       #292A2B;
 
@@ -114,6 +114,9 @@ $box-shadows: (
     r: '-4 0', 
     b: '0 -4px'
 );
+
+$hamburger-hover-opacity:          100%;
+$hamburger-types:                  (collapse);
 
 $fa-font-path:                     '../../fonts/font-awesome';
 
@@ -164,6 +167,7 @@ $icons:
     "../../node_modules/leaflet.markercluster/dist/MarkerCluster",
     "../../node_modules/leaflet.markercluster/dist/MarkerCluster.Default",
     "../../node_modules/bootstrap-toggle/css/bootstrap-toggle",
+    "../../node_modules/hamburgers/_sass/hamburgers/hamburgers",
     "partials/base",
     "partials/typography",
     "partials/transitions",

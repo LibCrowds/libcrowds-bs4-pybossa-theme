@@ -16,13 +16,13 @@
     </div>
     <div class="col-lg-8">
 
-        <div class="card">
+        <div class="card mt-4">
             {% if "pybossa_gravatar" in plugins %}
                 {{ card_helpers.render_title('Your Avatar', 'Upload an avatar', title_link=[url_for('set_gravatar', name=current_user.name), 'Use Gravatar']) }}
                 {% else %}
                 {{ card_helpers.render_title('Your Avatar', 'Upload an avatar') }}
                 {% endif %}
-                <div class="card-block">
+                <div class="card-block pt-0">
                     <div class="my-2 text-center">
                         {{ user_helpers.render_avatar(current_user, upload_method, class="img-thumbnail crop-circle", width="300", id="uploadPreview") }}
                     </div>
@@ -43,7 +43,7 @@
 
             <div class="card mt-4">
                 {{ card_helpers.render_title('Your Details', 'Edit your details') }}
-                <div class="card-block">
+                <div class="card-block pt-0">
                     <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         {{ password_form.hidden_tag() }}
                         {{ form_helpers.render_field(form.fullname, show_label=True, placeholder="Full name", class_="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters" ) }}
@@ -63,7 +63,7 @@
             {% if show_passwd_form %}
             <div class="card mt-4">
                 {{ card_helpers.render_title('Your Password', 'Choose a new password') }}
-                <div class="card-block">
+                <div class="card-block pt-0">
                     <form method="POST" action="{{ url_for('account.update_profile', name=current_user.name) }}">
                         {{ password_form.hidden_tag() }}
                         {{ form_helpers.render_field(password_form.current_password, show_label=True, placeholder="Current password", class_="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}

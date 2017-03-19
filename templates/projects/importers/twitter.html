@@ -9,7 +9,7 @@
 {{ general_helpers.render_title(project.name, 'Import Tasks') }}
 <div class="card">
     {{ card_helpers.render_title('Twitter Import', 'Import tasks from a Twitter hashtag or account') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.source, class_="form-control", placeholder="Enter a #hashtag, @user or something else") }}

@@ -7,7 +7,7 @@
 {% block content %}
 <div class="card">
     {{ card_helpers.render_title('Project Details', 'Begin your journey to change the future of modern acedemic research forever') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for('project.new') }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.name, placeholder="The name of the project", class_="form-control", required="required", autofocus="autofocus") }}

@@ -10,7 +10,7 @@
 {{ general_helpers.render_title('Admin', 'Categories') }}
 <div class="card">
     {{ card_helpers.render_title('Add Category', 'Add a new project category') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for('admin.categories') }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.name, placeholder="Category name", class_="form-control", required="required") }}

@@ -9,7 +9,7 @@
 {{ general_helpers.render_title(project.name, 'Task Redundancy') }}
 <div class="card">
     {{ card_helpers.render_title('Task Redundancy', 'Set the number of contributions required per task') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for('project.task_n_answers', short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.n_answers, class_="form-control", placeholder="The number of contributions required per task", type="number",

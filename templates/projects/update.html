@@ -31,7 +31,7 @@
 
 <div class="card mt-4">
     {{ card_helpers.render_title('Details', 'Edit the project details') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for('project.update', short_name = project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.name, class_="form-control", placeholder="Name", required="required", autofocus="autofocus") }}

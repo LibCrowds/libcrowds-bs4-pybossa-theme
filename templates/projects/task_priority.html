@@ -9,7 +9,7 @@
 {{ general_helpers.render_title(project.name, 'Task Priority') }}
 <div class="card">
     {{ card_helpers.render_title('Priority', 'Set priority for a list of tasks (only respected by the default scheduler)') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for('project.task_priority', short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.task_ids, class_="form-control", placeholder="Comma separated task IDs (e.g. 3, 532, 100)", required="required", autofocus="autofocus")}}

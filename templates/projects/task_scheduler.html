@@ -9,7 +9,7 @@
 {{ general_helpers.render_title(project.name, 'Task Scheduler') }}
 <div class="card">
     {{ card_helpers.render_title('Scheduler', 'Present tasks depth first (the default), breadth first (least contributions) or random order') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <div class="alert alert-warning">
             With the breadth first and random schedulers tasks will never be marked as completed as task redundancy is not
             respected and users can be presented with the same task more than once.

@@ -6,7 +6,7 @@
 {% block content %}
 <div class="card">
     {{ card_helpers.render_title('Your Details', 'Enter your details to create a new account') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for('account.register') }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.fullname, placeholder="Enter your full name", class_="form-control", required="required", pattern=".{3,35}", title="Must be between 3 and 35 characters", autofocus="autofocus") }}

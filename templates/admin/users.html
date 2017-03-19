@@ -11,11 +11,11 @@
 {{ general_helpers.render_title('Admin', 'Administrators') }}
 <div class="card">
     {{ card_helpers.render_title('Manage Administrators', 'Use the search box below to locate users and set their admin privileges') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <div class="card-title">Current Administrators (apart from you):</div>
         {{ user_helpers.render_avatar_list(users, badge="name") }}
     </div>
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.user, placeholder="Search users", show_label=False, class_="form-control rounded-oblong", required="true") }}

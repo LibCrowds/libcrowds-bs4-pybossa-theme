@@ -18,7 +18,7 @@
             </tbody>
         </table>
     </div>
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form.files(style="display: none;") }}

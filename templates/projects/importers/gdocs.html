@@ -9,7 +9,7 @@
 {{ general_helpers.render_title(project.name, 'Import Tasks') }}
 <div class="card">
     {{ card_helpers.render_title('Google Docs Import', 'Import tasks from a Google Docs spreadsheet') }}
-    <div class="card-block">
+    <div class="card-block pt-0">
         <form method="POST" action="{{ url_for(target, short_name=project.short_name) }}">
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.googledocs_url, class_="form-control", placeholder="The public URL of the Google Docs spreadsheet", required="required", autofocus="autofocus", type="url") }}

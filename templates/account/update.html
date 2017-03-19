@@ -16,7 +16,7 @@
     </div>
     <div class="col-lg-8">
 
-        <div class="card mt-4">
+        <div class="card mt-4 mt-lg-0">
             {% if "pybossa_gravatar" in plugins %}
                 {{ card_helpers.render_title('Your Avatar', 'Upload an avatar', title_link=[url_for('set_gravatar', name=current_user.name), 'Use Gravatar']) }}
                 {% else %}

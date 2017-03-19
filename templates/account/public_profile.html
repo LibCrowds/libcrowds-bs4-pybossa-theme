@@ -13,7 +13,7 @@
             {{ user_helpers.render_profile_card(user, upload_method) }}
         </div>
         <div class="col-lg-8">
-            {{ project_helpers.render_list_table("Contributions", "The projects that {0} has contributed to".format(user.name), "projects-table", projects, class="mt-4") }}
+            {{ project_helpers.render_list_table("Contributions", "The projects that {0} has contributed to".format(user.name), "projects-table", projects, class="mt-4 mt-lg-0") }}
         </div>
     </div>
 </div>

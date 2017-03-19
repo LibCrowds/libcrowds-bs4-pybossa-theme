@@ -14,7 +14,7 @@
         <form method="POST" action="{{ url_for('project.delete_tasks', short_name=project.short_name) }}">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="text-right">
-                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-secondary" role="button">No, do not delete anything!</a>
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-outline-secondary" role="button">No, do not delete anything!</a>
                 <button type="submit" name='btn' class="btn btn-danger" value="Yes" role="button">Yes, delete everything</button>
             </div>
         </form>

@@ -17,7 +17,7 @@
             {{ form.hidden_tag() }}
             {{ form_helpers.render_field(form.playlist_url, class_="form-control", placeholder="Enter the URL of a YouTube playlist") }}
             <div class="text-right">
-                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-outline-secondary" role="button">Cancel</a>
                 <input id="import" type="submit" value="Import" class="btn btn-success" role="button"/>
             </div>
         </form>

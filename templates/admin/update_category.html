@@ -15,7 +15,7 @@
             {{ form_helpers.render_field(form.name, placeholder="Category name", class_="form-control", required="required", autofocus="autofocus") }}
             {{ form_helpers.render_field(form.description, placeholder="Category description", class_="form-control", required="required") }}
             <div class="text-right">
-                <a href="{{ url_for('admin.categories') }}" class="btn btn-secondary" role="button">Cancel</a>
+                <a href="{{ url_for('admin.categories') }}" class="btn btn-outline-secondary" role="button">Cancel</a>
                 <input id="submit" type="submit" value="Update" class="btn btn-success" role="button" />
             </div>
         </form>

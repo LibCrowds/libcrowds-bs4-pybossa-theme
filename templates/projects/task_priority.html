@@ -15,7 +15,7 @@
             {{ form_helpers.render_field(form.task_ids, class_="form-control", placeholder="Comma separated task IDs (e.g. 3, 532, 100)", required="required", autofocus="autofocus")}}
             {{ form_helpers.render_field(form.priority_0, class_="form-control", placeholder="Priority between the lowest of 0.0 and highest of 1.0", required="required", type="number", step="any")}}
             <div class="text-right">
-                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-outline-secondary" role="button">Cancel</a>
                 <input id="submit" type="submit" value="Update" class="btn btn-success" role="button"/>
             </div>
         </form>

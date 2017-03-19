@@ -22,7 +22,7 @@
                 {{ upload_form.x2 }}
                 {{ upload_form.y2 }}
                 <div class="text-right">
-                    <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                    <input type="reset" value="Clear" class="btn btn-outline-secondary" role="button" />
                     <button type="submit" name="btn" value="Upload" class="btn btn-success" role="button">Update</button>
                 </div>
             </form>
@@ -44,7 +44,7 @@
             {{ form_helpers.render_field(form.password, class_="form-control") }}
             {{ form_helpers.render_field(form.webhook, class_="form-control") }}
             <div class="text-right">
-                <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-secondary" role="button">Cancel</a>
+                <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-outline-secondary" role="button">Cancel</a>
                 <input type="submit" value="Update" class="btn btn-success" role="button" />
             </div>
         </form>

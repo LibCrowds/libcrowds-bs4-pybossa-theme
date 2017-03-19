@@ -55,7 +55,7 @@
                     <div data-progress="{{ overall_progress | round | int }}" class="progress-circle mb-3">
                         <p>{{ overall_progress | round | int }}%</p>
                     </div>
-                    <a href="{{ url_for('project.show_stats', short_name=project.short_name) }}" class="btn btn-secondary mt-3" role="button">View Statistics</a>
+                    <a href="{{ url_for('project.show_stats', short_name=project.short_name) }}" class="btn btn-outline-secondary mt-3" role="button">View Statistics</a>
                 </div>
                 <div class="hidden-md-down">
                     <span class="icon icon-remaining-tasks icon-5x"></span>

@@ -34,7 +34,7 @@
                         {{ upload_form.x2 }}
                         {{ upload_form.y2 }}
                         <div class="text-right">
-                            <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                            <input type="reset" value="Clear" class="btn btn-outline-secondary" role="button" />
                             <button type="submit" name="btn" value="Upload" class="btn btn-success">Update</button>
                         </div>
                     </form>
@@ -53,7 +53,7 @@
                         {{ form_helpers.render_toggle(form.privacy_mode, label_text="Privacy mode") }}
                         {{ form_helpers.render_field(form.locale, class="hidden-xs-up", show_label=False) }}
                         <div class="text-right">
-                            <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                            <input type="reset" value="Clear" class="btn btn-outline-secondary" role="button" />
                             <button type="submit" name="btn" value="Profile" class="btn btn-success">Update</button>
                         </div>
                     </form>
@@ -70,7 +70,7 @@
                         {{ form_helpers.render_field(password_form.new_password, show_label=True, placeholder="New password", class_="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                         {{ form_helpers.render_field(password_form.confirm, show_label=True, placeholder="Confirm new password", class_="form-control", type="password", required="required", pattern=".{6,}", title="Must be a minimum of 6 characters") }}
                         <div class="text-right">
-                            <input type="reset" value="Clear" class="btn btn-secondary" role="button" />
+                            <input type="reset" value="Clear" class="btn btn-outline-secondary" role="button" />
                             <button type="submit" name="btn" value="Password" class="btn btn-success">Update</button>
                         </div>
                     </form>

@@ -15,7 +15,7 @@
             {{ form_helpers.render_field(form.n_answers, class_="form-control", placeholder="The number of contributions required per task", type="number",
                                          autofocus="autofocus", required="required", pattern=".{1,10000}", title="Must be a number between 1 and 100") }}
             <div class="text-right">
-                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <a href="{{ url_for('project.tasks', short_name=project.short_name) }}" class="btn btn-outline-secondary" role="button">Cancel</a>
                 <input id="submit" type="submit" value="Update" class="btn btn-success" role="button"/>
             </div>
         </form>

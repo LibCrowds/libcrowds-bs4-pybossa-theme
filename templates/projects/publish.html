@@ -16,7 +16,7 @@
         <form method="POST" action="{{ url_for('project.publish', short_name=project.short_name) }}">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="text-right">
-                <a href="{{ url_for('project.settings', short_name=project.short_name) }}" class="btn btn-secondary" role="button">Cancel</a>
+                <a href="{{ url_for('project.settings', short_name=project.short_name) }}" class="btn btn-outline-secondary" role="button">Cancel</a>
                 <button type="submit" name='btn' class="btn btn-success" value="Yes" role="button">Publish</button>
             </div>
         </form>

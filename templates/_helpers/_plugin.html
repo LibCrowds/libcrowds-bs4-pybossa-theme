@@ -2,7 +2,7 @@
 {% import "_helpers/_table.html" as table_helpers %}
 
 {% macro render_active_plugins(plugins) %}
-    <div class="card mb-4">
+    <div class="card my-4">
         {{ card_helpers.render_title("Active Plugins", "These are the plugins currently running on the system", search_table="#plugins-table") }}
         <div class="table-responsive">
             <table id="plugins-table" class="table table-hover table-striped mb-0">

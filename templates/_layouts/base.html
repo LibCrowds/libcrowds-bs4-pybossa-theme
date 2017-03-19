@@ -54,30 +54,34 @@
                   "../node_modules/croppie/croppie.js",
                   "../node_modules/shufflejs/dist/shuffle.js",
                   "../node_modules/bootstrap-toggle/js/bootstrap-toggle.js",
-                  "js/hamburger.js",
                   "js/notify.js",
-                  "js/log-error.js",
-                  "js/scroll-resize-events.js",
-                  "js/btn-scroll.js",
-                  "js/append-contents.js",
-                  "js/stats.js",
-                  "js/popovers.js",
-                  "js/tooltips.js",
-                  "js/anchor-scroll.js",
-                  "js/progress.js",
-                  "js/pybossa-analyst.js",
-                  "js/s3.js",
-                  "js/shuffle.js",
-                  "js/featured-projects.js",
-                  "js/tab-control.js",
-                  "js/search.js",
-                  "js/image-error.js",
-                  "js/image-crop.js",
-                  "js/webhook.js"
+                  "js/log-error.js"
                   %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
         {% endif %}
+        {% assets filters="jsmin", output="js/gen/bottom.min.js",
+            "js/scroll-resize-events.js",
+            "js/stats.js",
+            "js/image-error.js",
+            "js/image-crop.js",
+            "js/anchor-scroll.js",
+            "js/progress.js",
+            "js/s3.js",
+            "js/shuffle.js",
+            "js/featured-projects.js",
+            "js/search.js",
+            "js/btn-scroll.js",
+            "js/append-contents.js",
+            "js/pybossa-analyst.js",
+            "js/popovers.js",
+            "js/tooltips.js",
+            "js/tab-control.js",
+            "js/hamburger.js",
+            "js/webhook.js"
+            %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
         {%- include "_includes/_sentry.js" %}
         {% include "_includes/_flash_messages.js" %}
         {% include "_includes/ajax_csrf_token.js" %}

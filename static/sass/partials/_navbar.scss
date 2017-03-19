@@ -5,14 +5,6 @@
     .hamburger {
         display: none;
         padding: 0;
-        
-        &.white {
-            .hamburger-inner, 
-            .hamburger-inner:before, 
-            .hamburger-inner:after {
-                background-color: $white;
-            }
-        }
     }
     
     &.navbar-inverse {
@@ -211,6 +203,14 @@
     .navbar {
         .navbar-collapse {
             width: 100%;
+        }
+        
+        .hamburger.white {
+            .hamburger-inner, 
+            .hamburger-inner:before, 
+            .hamburger-inner:after {
+                background-color: $white;
+            }
         }
     }
 }

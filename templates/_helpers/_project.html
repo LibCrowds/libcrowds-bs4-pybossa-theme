@@ -29,12 +29,12 @@
     <div class="col-xl-4 col-md-6 text-center text-lg-left">
         <label class="my-2">
             <input checked="true" class="shuffle-checkbox" data-toggle="toggle" data-width="75" data-onstyle="info" type="checkbox" id="show-all" data-group="incomplete">
-            <span class="ml-1">Hide completed projects</span>
+            <span class="ml-1">Hide completed</span>
         </label>
     </div>
     <div class="col-xl-4 col-md-6 text-center text-xl-left text-lg-right">
-        <div class="form-group my-2">
-            <label for="project-sort-options" class="mr-2">Sort:</label>
+        <div class="d-flex flex-row form-group my-2 align-items-center">
+            <label for="project-sort-options" class="mr-2 mb-0">Sort:</label>
             <select class="shuffle-sort custom-select" id="project-sort-options">
                 <option value="progress">Most Help Needed</option>
                 <option value="n-volunteers" data-reverse="true">Most Popular</option>
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="col-xl-4 col-lg-12 text-center text-lg-right my-2">
-        <input type="text" class_="form-control rounded-oblong shuffle-search" placeholder="Search">
+        <input type="text" class="form-control rounded-oblong shuffle-search" placeholder="Search">
     </div>
 </div>
 {% endmacro %}

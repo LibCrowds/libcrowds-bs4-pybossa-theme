@@ -13,7 +13,6 @@
     "../node_modules/pnotify/dist/pnotify.buttons.js",
     "../node_modules/bootstrap-toggle/js/bootstrap-toggle.js",
     "../node_modules/tesseract.js/dist/tesseract.js",
-    "js/hamburger.js",
     "js/notify.js",
     "js/log-error.js",
     "js/image-error.js",
@@ -24,8 +23,7 @@
 {% endassets %}
 {% set staff_or_admin = staff_or_admin -%}
 {% set active_page = active_page -%}
-{% set navbar_class = "navbar navbar-fixed navbar-toggleable-xl navbar-light" -%}
-{% set footer_class = "footer footer-slim" %}
+{% set navbar_class = navbar_class | default("navbar fixed-top navbar-toggleable-xl navbar-inverse navbar-invertable") %}
 <div class="vh-100 vw-100">
     <div class="d-flex flex-column h-100">
         {% include "_includes/_navbar.html" %}
@@ -33,7 +31,6 @@
             {% block content %}
             {% endblock %}
         </main>
-        {% include "_includes/_footer.html" %}
     </div>
 </div>
 {% endblock %}

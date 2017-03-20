@@ -1,7 +1,8 @@
-$('.project-toggle-featured').on('click', function() {
+$('.toggle-featured').on('click', function() {
     const projectId = $(this).data("project-id"),
-          featured  = $(this).val() === "Remove";
+          featured  = $(this).text() === "Remove";
           method    =  featured ? "DELETE" : "POST";
+          console.log($(this).text() === "Remove", $(this).text())
     $.ajax({
           type: method,
           url: `/admin/featured/${projectId}`,
@@ -9,5 +10,7 @@ $('.project-toggle-featured').on('click', function() {
     }).done(() => {
         const newStatus = featured ? "Add" : "Remove";
         $(this).html(newStatus);
+    }).fail(function(jqXHR) {
+        notify(jqXHR.responseText, 'error');
     });
-})
+});

@@ -37,13 +37,13 @@ function styleNavigation() {
 
     for(let b of bounds) {
         if (document.body.scrollTop >= b[0] - 50 && document.body.scrollTop <= b[1] + 25) {
-            $('.navbar').addClass('navbar-inverse');
-            $('.navbar').removeClass('navbar-light');
+            $('.navbar-invertable').addClass('navbar-inverse');
+            $('.navbar-invertable').removeClass('navbar-light');
             return;
         }
     }
-    $('.navbar').removeClass('navbar-inverse');
-    $('.navbar').addClass('navbar-light');
+    $('.navbar-invertable').removeClass('navbar-inverse');
+    $('.navbar-invertable').addClass('navbar-light');
 }
 
 /**

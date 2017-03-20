@@ -64,6 +64,7 @@
     </div>
 </section>
 
+{% if categories_projects['featured'] %}
 <section id="featured-projects" class="pattern-white-wall text-gray-dark text-center text-lg-left">
     <div class="container">
         <div class="row">
@@ -81,13 +82,7 @@
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 <div class="mt-4">
-                    {% if categories_projects['featured'] %}
                     {{ project_helpers.render_grid(categories_projects['featured'], col_size="col-md-6 col-xl-4") }}
-                    {% else %}
-                    <p class="text-center">
-                        No projects are currently being featured, but we still need you help!
-                    </p>
-                    {% endif %}
                 </div>
                 <div class="text-center">
                     <a class="btn btn-primary btn-lg my-5" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
@@ -96,6 +91,7 @@
         </div>
     </div>
 </section>
+{% endif %}
 
 <!-- See https://github.com/LibCrowds/libcrowds-data -->
 {% if "libcrowds_data" in plugins %}

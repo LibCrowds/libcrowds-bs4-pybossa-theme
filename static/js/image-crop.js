@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+if ($('#uploadPreview').length) {
     let $uploadCrop;
     let $preview = $('#uploadPreview');
 
@@ -33,4 +33,4 @@ $( document ).ready(function() {
     });
 
     $('#avatar').on('change', function () { readFile(this); });
-});
+}

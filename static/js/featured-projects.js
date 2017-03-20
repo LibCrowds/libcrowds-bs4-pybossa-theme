@@ -2,7 +2,6 @@ $('.toggle-featured').on('click', function() {
     const projectId = $(this).data("project-id"),
           featured  = $(this).text() === "Remove";
           method    =  featured ? "DELETE" : "POST";
-          console.log($(this).text() === "Remove", $(this).text())
     $.ajax({
           type: method,
           url: `/admin/featured/${projectId}`,

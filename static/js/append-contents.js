@@ -23,5 +23,5 @@ $('.append-contents').each(function() {
         html += `</ul>`;
         level -= 1;
     }
-    $(this).after(html)
+    $(this).after(html);
 });

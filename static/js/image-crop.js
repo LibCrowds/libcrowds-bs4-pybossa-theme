@@ -2,18 +2,6 @@ if ($('#uploadPreview').length) {
     let $uploadCrop;
     let $preview = $('#uploadPreview');
 
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            let reader = new FileReader();
-            reader.onload = function (evt) {
-                $uploadCrop.croppie('bind', {
-                    url: evt.target.result
-                });
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
     $uploadCrop = $preview.croppie({
         viewport: {
             width: $preview.width() || 300,
@@ -32,5 +20,16 @@ if ($('#uploadPreview').length) {
         }
     });
 
-    $('#avatar').on('change', function () { readFile(this); });
+    $('#avatar').on('change', function () {
+        let input = this;
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (evt) {
+                $uploadCrop.croppie('bind', {
+                    url: evt.target.result
+                });
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
 }

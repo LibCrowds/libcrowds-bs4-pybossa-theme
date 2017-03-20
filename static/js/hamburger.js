@@ -8,4 +8,4 @@ $('.hamburger').on('click', function(evt) {
     setTimeout(() => {
         $(this).toggleClass('white');
     }, timeout);
-})
+});

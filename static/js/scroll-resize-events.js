@@ -57,5 +57,5 @@ function displayScrollButtons() {
         } else {
             $(this).css('visibility', 'hidden');
         }
-    })
+    });
 }

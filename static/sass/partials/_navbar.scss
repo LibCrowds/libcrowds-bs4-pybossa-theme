@@ -144,7 +144,7 @@
                     left: 0;
                     background-color: $brand-inverse;
                     overflow-x: hidden;
-                    overflow-y: scroll;
+                    overflow-y: auto;
                     text-align: center;
                     
                     &:not(.show) {

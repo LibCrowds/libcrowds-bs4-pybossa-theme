@@ -18,7 +18,7 @@
                 </div>
                 <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-outline-white hidden-lg-up mt-4">Get Started</a>
                 {% if current_user.is_authenticated() and current_user.id == project.owner_id or current_user.admin %}
-                <a href="{{ url_for('project.settings', short_name=project.short_name)}}" class="btn btn-outline-white mt-4" rel="nofollow">View Dashboard</a>
+                <a href="{{ url_for('project.settings', short_name=project.short_name)}}" class="btn btn-outline-white mt-4" rel="nofollow">Dashboard</a>
                 {% endif %}
             </div>
         </div>

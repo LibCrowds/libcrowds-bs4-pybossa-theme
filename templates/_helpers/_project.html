@@ -13,7 +13,7 @@
             <a href="{{ url_for('project.details', short_name=project.short_name) }}">
                 {{ render_thumbnail(project, class='card-img img-fluid') }}
                 <div class="card-footer text-white bg-dark-overlay d-flex align-content-between flex-wrap justify-content-center">
-                    <h6 class="card-title">{{ project.name | truncate(40, true) }}</h6>
+                    <h6 class="card-title">{{ project.name }}</h6>
                     <p class="card-text lead">{{ project.description }}</p>
                     <p class="card-text">{{ project.overall_progress | round | int }}% complete</p>
                 </div>

@@ -15,7 +15,7 @@
                 {{ project_helpers.render_thumbnail(project, upload_method, class="img-thumbnail", width="300", id="uploadPreview") }}
             </div>
             <form method="POST" action="{{ url_for('project.update', short_name=project.short_name) }}" enctype="multipart/form-data">
-                {{ upload_form.hidden_tag() }}
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                 {{ form_helpers.render_field(upload_form.avatar, class_="form-control hidden", show_label=False) }}
                 {{ upload_form.x1 }}
                 {{ upload_form.y1 }}

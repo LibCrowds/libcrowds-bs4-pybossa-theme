@@ -20,7 +20,7 @@
                     <tbody>
                         {% for p in projects[c.short_name] %}
                         <tr>
-                            {{ table_helpers.render_cell(p.name) }}
+                            {{ table_helpers.render_cell(p.name, url=url_for('project.details', short_name=p.short_name)) }}
                             {{ table_helpers.render_cell(p.overall_progress, center=True) }}
                             <td class="visible text-center">
                                 <a href="#" class="toggle-featured btn btn-sm btn-outline-primary" 

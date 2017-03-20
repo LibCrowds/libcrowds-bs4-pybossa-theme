@@ -10,7 +10,7 @@
     Great, you've contributed to all the tasks for this project.
     But this project still needs more volunteers, so please spread the word!
 </div>
-    <a class="btn btn-primary my-3" href={{ url_for('project.presenter', short_name=project.short_name )}} role="button">Pick another one</a>
+    <a class="btn btn-primary my-3" href={{ url_for('project.index') }} role="button">Pick another one</a>
 </div>
 {% else %}
 {% include "_includes/user-rank.js" %}

@@ -2,7 +2,6 @@
 {% set active_page = "projects" %}
 {% set prefix = project.name %}
 {% set title = "Tutorial" %}
-{% set title_link=[url_for('project.presenter', short_name=project.short_name), 'Get Started'] %}
 
 {% block content %}
 <div class="card">
@@ -13,5 +12,9 @@
         <p class="lead text-center">No tutorial has been created for this project.</p>
         {% endif %}
     </div>
+</div>
+<div class="text-center">
+    <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" 
+       class="btn btn-outline-primary bg-white btn-lg mt-4" role="button">Get Started</a>
 </div>
 {% endblock %}

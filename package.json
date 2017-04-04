@@ -28,7 +28,8 @@
     "leaflet.markercluster": "^1.0.3",
     "bootstrap-toggle": "^2.2.2",
     "tesseract.js": "^1.0.10",
-    "hamburgers": "^0.8.1"
+    "hamburgers": "^0.8.1",
+	"aos": "^2.1.1"
   },
   "devDependencies": {
     "jshint": "^2.9.4"

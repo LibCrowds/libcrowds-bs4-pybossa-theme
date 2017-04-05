@@ -1,3 +1,7 @@
+.btn {
+	background-color: $white;
+}
+
 .btn-outline-white {
     @include button-outline-variant($white, $black);
 }
@@ -8,6 +12,7 @@
     height: 8rem;
     border-radius: 50%;
     border: 1px solid $white;
+	background-color: transparent;
     display: block;
     position: relative;
     overflow: hidden;

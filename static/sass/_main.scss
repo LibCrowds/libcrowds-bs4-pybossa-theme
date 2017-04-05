@@ -78,6 +78,9 @@ $body-color:                       #292A2B;
 $btn-secondary-color:              $brand-inverse;
 $btn-secondary-bg:                 $white;
 $btn-secondary-border:             $brand-inverse;
+$btn-border-radius:                0px;
+$btn-border-radius-lg:             0px;
+$btn-border-radius-sm:             0px;
 
 $link-color:                       $brand-danger;
 $link-hover-color:                 darken($link-color, 5%);
@@ -187,5 +190,6 @@ $icons:
     "partials/patterns",
     "partials/icons",
     "partials/tables",
-    "partials/notifications"
+    "partials/notifications",
+	"partials/animations"
 ;

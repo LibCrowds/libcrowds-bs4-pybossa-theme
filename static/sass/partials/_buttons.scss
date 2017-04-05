@@ -16,12 +16,12 @@
     display: block;
     position: relative;
     overflow: hidden;
-	transform: translateY(-90px);
 	
     a {
         width: 100%;
         color: $white;
         display: inline-block;
+		transform: translateY(-90px);
 
         div {
             display: flex;
@@ -29,10 +29,10 @@
             justify-content: center;
             white-space: normal;
         }
-    }
-	
-    @include hover-focus {
-        transform: none;
+		
+		@include hover-focus {
+			transform: none;
+		}
     }
 }
 

@@ -13,7 +13,6 @@ function fadeJumbotrons() {
 		    visiblePercent = Math.round(visiblePixels * 100 / $(this).height()),
 			brightness     = visiblePercent < 100 ? visiblePercent / 2 : 100,
 			opacity        = visiblePercent < 100 ? visiblePercent / 10 : 1;
-		console.log(opactiy)
 		
 		$(this).css('filter', 'brightness(' + brightness + '%)');
         $(this).children().css('opacity', opacity);

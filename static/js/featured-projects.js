@@ -1,14 +1,16 @@
 $('.toggle-featured').on('click', function() {
-    const projectId = $(this).data("project-id"),
-          featured  = $(this).text() === "Remove";
-          method    =  featured ? "DELETE" : "POST";
-    $.ajax({
+    var projectId = $(this).data("project-id"),
+        featured  = $(this).text() === "Remove",
+        method    =  featured ? "DELETE" : "POST",
+		_this     = $(this);
+    
+	
+	$.ajax({
           type: method,
-          url: `/admin/featured/${projectId}`,
+          url: '/admin/featured/' + projectId,
           dataType: 'json'
-    }).done(() => {
-        const newStatus = featured ? "Add" : "Remove";
-        $(this).html(newStatus);
+    }).done(function() {
+        _this.html(featured ? "Add" : "Remove");
     }).fail(function(jqXHR) {
         notify(jqXHR.responseText, 'error');
     });

@@ -2,7 +2,7 @@
  * Load the contents of an Amazon S3 bucket.
  */
 $('#get-s3-bucket').on('click', function() {
-    let files      = [],
+    var files      = [],
         bucketName = $('#bucket').val(),
         filesInput = document.getElementById("files");
     filesInput.innerHTML = null;
@@ -13,14 +13,14 @@ $('#get-s3-bucket').on('click', function() {
 
 		// Load each object into a new table row
 		objects.forEach(function(object) {
-            let row = $('<tr class="object" style="cursor:pointer;"><td>' + object + '</td></tr>');
+            var row = $('<tr class="object" style="cursor:pointer;"><td>' + object + '</td></tr>');
             $('#objects').append(row);
         });
 
         notify("Click on the rows containing the images you want to import.", 'info');
 
         $(".object").each(function() {
-            let objectDomElement = $(this),
+            var objectDomElement = $(this),
                 objectName       = $(this).text();
 
 			// Toggle selection on click
@@ -39,7 +39,7 @@ $('#get-s3-bucket').on('click', function() {
 				filesInput.innerHTML = null;
 
 				files.forEach(function(file, index) {
-					let element = document.createElement("li"),
+					var element = document.createElement("li"),
 						content = document.createTextNode(file),
 						input   = document.createElement('input');
 					input.id = "files-" + index;

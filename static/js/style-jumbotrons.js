@@ -1,6 +1,8 @@
 $(window).on("resize scroll", function() {
     styleJumbotrons();
-}).trigger("resize");
+});
+
+styleJumbotrons();
 
 /**
  * Fade .jumbotron-fade if not scrolled to top.

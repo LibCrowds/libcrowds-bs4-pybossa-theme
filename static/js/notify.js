@@ -3,7 +3,7 @@
  */
 function notify(msg, type) {
 
-    const opts = {
+    var opts = {
         title: type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Info',
         text: msg,
         type: type || 'info',

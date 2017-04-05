@@ -1,6 +1,6 @@
 if ($('#uploadPreview').length) {
-    let $uploadCrop;
-    let $preview = $('#uploadPreview');
+    var $uploadCrop;
+    var $preview = $('#uploadPreview');
 
     $uploadCrop = $preview.croppie({
         viewport: {
@@ -21,9 +21,9 @@ if ($('#uploadPreview').length) {
     });
 
     $('#avatar').on('change', function () {
-        let input = this;
+        var input = this;
         if (input.files && input.files[0]) {
-            let reader = new FileReader();
+            var reader = new FileReader();
             reader.onload = function (evt) {
                 $uploadCrop.croppie('bind', {
                     url: evt.target.result

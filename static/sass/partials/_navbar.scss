@@ -108,6 +108,10 @@
     
     .hamburger {
         z-index: 20;
+		
+		&.hamburger--arrow {
+			transform: rotate(180deg);
+		}
     }
     
     .fa {

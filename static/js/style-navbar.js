@@ -13,6 +13,7 @@ styleNavigation();
 function styleNavigation() {
     var bounds = [];
     $('.invert-navbar').each(function() {
+		console.log($(this)[0].offsetTop);
         bounds.push([
 			$(this).offset().top, $(this).offset().top + $(this).height()
 		]);

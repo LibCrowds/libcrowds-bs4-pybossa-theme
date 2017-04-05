@@ -1,20 +1,16 @@
 $(window).on("resize scroll", function() {
-    styleJumbotrons();
-});
-
-styleJumbotrons();
+    fadeJumbotrons();
+}).trigger('resize');
 
 /**
- * Fade .jumbotron-fade if not scrolled to top.
+ * Fade .jumbotron-fade when scrolling over.
  */
-function styleJumbotrons() {
+function fadeJumbotrons() {
     $('.jumbotron-fade').each(function() {
-        if (document.body.scrollTop > $(this).offset().top) {
-            $(this).addClass('brightness-50');
-            $(this).children().addClass('opacity-50');
-        } else {
-            $(this).removeClass('brightness-50');
-            $(this).children().removeClass('opacity-50');
-        }
+		var visiblePixels  = $(this).height() - document.body.scrollTop - $(this).offset().top,
+		    visiblePercent = Math.round(visiblePixels * 100 / $(this).height()),
+			stylePercent   = visiblePercent < 100 ? visiblePercent / 2 : 100;
+		$(this).css('filter', 'brightness(' + stylePercent + '%)');
+        $(this).children().css('opacity', stylePercent + '%');
     });
 }

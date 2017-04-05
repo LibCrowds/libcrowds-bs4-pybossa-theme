@@ -15,7 +15,7 @@
             {{ form_helpers.render_field(form.googledocs_url, class_="form-control", placeholder="The public URL of the Google Docs spreadsheet", required="required", autofocus="autofocus", type="url") }}
             <div class="text-right">
                 <a href="{{ url_for('project.import_task', short_name=project.short_name) }}" class="btn btn-outline-secondary" role="button">Cancel</a>
-                <input id="import" type="submit" value="Import" class="btn btn-success" role="button"/>
+                <input id="import" type="submit" value="Import" class="btn btn-outline-success" role="button"/>
             </div>
         </form>
     </div>

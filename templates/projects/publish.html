@@ -17,7 +17,7 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="text-right">
                 <a href="{{ url_for('project.settings', short_name=project.short_name) }}" class="btn btn-outline-secondary" role="button">Cancel</a>
-                <button type="submit" name='btn' class="btn btn-success" value="Yes" role="button">Publish</button>
+                <button type="submit" name='btn' class="btn btn-outline-success" value="Yes" role="button">Publish</button>
             </div>
         </form>
     </div>

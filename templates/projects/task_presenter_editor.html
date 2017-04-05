@@ -11,7 +11,7 @@
     {{ form.hidden_tag() }}
     <div class="btn-group codemirror-buttons p-3">
         <a href="{{url_for('project.tasks', short_name=project.short_name)}}" class="btn btn-sm btn-outline-secondary" role="button">Cancel</a>
-        <button type="submit" class="btn btn-sm btn-primary" role="button">Update</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary" role="button">Update</button>
     </div>
     {{ form.editor }}
 </form>

@@ -35,7 +35,7 @@
 
             {% if (user.valid_email == False) %}
                 {% if (user.confirmation_email_sent == False) %}
-                <a href="{{ url_for('account.confirm_email')}}" class="btn btn-primary" role="button">Validate email</a>
+                <a href="{{ url_for('account.confirm_email')}}" class="btn btn-outline-primary" role="button">Validate email</a>
                 {% else %}
                 <p class="label label-info">Email sent for validation</p>
                 {% endif %}

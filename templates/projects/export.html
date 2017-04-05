@@ -11,8 +11,8 @@
     <div class="card-block pt-0">
         <p class="lead mb-3">Export all of the project's task or contribution data in CSV format.</p>
         <div class="text-right">
-            <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task', format='csv') }}" class="btn btn-success" role="button">Task Data</a>
-            <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv') }}" class="btn btn-success" role="button">Contribution Data</a>
+            <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task', format='csv') }}" class="btn btn-outline-success" role="button">Task Data</a>
+            <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task_run', format='csv') }}" class="btn btn-outline-success" role="button">Contribution Data</a>
         </div>
     </div>
 </div>
@@ -21,8 +21,8 @@
     <div class="card-block pt-0">
         <p class="lead mb-3">Export all of the project's task or contribution data in JSON format.</p>
         <div class="text-right">
-            <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task', format='json') }}" class="btn btn-success" role="button">Task Data</a>
-            <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task_run', format='json') }}" class="btn btn-success" role="button">Contribution Data</a>
+            <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task', format='json') }}" class="btn btn-outline-success" role="button">Task Data</a>
+            <a href="{{ url_for('project.export_to', short_name=project.short_name, type='task_run', format='json') }}" class="btn btn-outline-success" role="button">Contribution Data</a>
         </div>
     </div>
 </div>

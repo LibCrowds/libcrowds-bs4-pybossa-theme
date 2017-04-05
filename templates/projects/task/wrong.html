@@ -8,6 +8,6 @@
 <div class="alert alert-danger my-1">
     This task does not belong to {{ project.short_name }}.
 </div>
-    <a class="btn btn-primary my-3" href={{ url_for('project.presenter', short_name=project.short_name )}} role="button">Try another one</a>
+    <a class="btn btn-outline-primary my-3" href={{ url_for('project.presenter', short_name=project.short_name )}} role="button">Try another one</a>
 </div>
 {% endblock %}

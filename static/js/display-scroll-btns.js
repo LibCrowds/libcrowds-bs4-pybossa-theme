@@ -1,8 +1,6 @@
 $(window).on("resize", function() {
     displayScrollButtons();
-});
-
-displayScrollButtons();
+}).trigger('resize');
 
 /**
  * Hide scroll buttons if siblings don't have overflow.

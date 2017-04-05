@@ -7,10 +7,15 @@ $(window).on("resize scroll", function() {
  */
 function fadeJumbotrons() {
     $('.jumbotron-fade').each(function() {
-		var visiblePixels  = $(this).height() - document.body.scrollTop - $(this).offset().top,
+		var ieScrollTop    = document.documentElement.scrollTop,
+	        scrollTop      = document.body.scrollTop == 0 ? ieScrollTop : document.body.scrollTop,
+		    visiblePixels  = $(this).height() - scrollTop - $(this).offset().top,
 		    visiblePercent = Math.round(visiblePixels * 100 / $(this).height()),
-			stylePercent   = visiblePercent < 100 ? visiblePercent / 2 : 100;
-		$(this).css('filter', 'brightness(' + stylePercent + '%)');
-        $(this).children().css('opacity', stylePercent + '%');
+			brightness     = visiblePercent < 100 ? visiblePercent / 2 : 100,
+			opacity        = visiblePercent < 100 ? visiblePercent / 10 : 1;
+		console.log(opactiy)
+		
+		$(this).css('filter', 'brightness(' + brightness + '%)');
+        $(this).children().css('opacity', opacity);
     });
 }

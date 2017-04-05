@@ -1,11 +1,16 @@
+html {
+	display: flex;
+}
+
 body {
     display: flex;
     min-height: 100vh;
+	min-width: 100vw;
     flex-direction: column;
 }
 
 main {
-    flex: 1;
+    flex: 1 0 auto;
     position: relative;
     overflow-y: auto;
 }

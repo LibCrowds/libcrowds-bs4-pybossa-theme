@@ -5,23 +5,19 @@
 {% set description = project.description %}
 
 {% block content %}
-<div id="category-{{ project.category_id }}-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0 d-flex align-items-center justify-content-center">
-    <div class="container text-white text-center">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-                <h2 class="font-weight-bold">{{ project.description }}</h3>
-                <div class="btn btn-circle mx-auto hidden-md-down mt-4">
-                    <a href="{{ url_for('project.presenter', short_name=project.short_name)}}">
-                        <div class="my-3"><span class="fa fa-play fa-4x ml-2"></span></div>
-                        <div class="my-4">Get Started</div>
-                    </a>
-                </div>
-                <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-outline-white hidden-lg-up mt-4">Get Started</a>
-                {% if current_user.is_authenticated() and current_user.id == project.owner_id or current_user.admin %}
-                <a href="{{ url_for('project.settings', short_name=project.short_name)}}" class="btn btn-outline-white mt-4" rel="nofollow">Dashboard</a>
-                {% endif %}
-            </div>
+<div id="category-{{ project.category_id }}-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0">
+    <div class="container text-center h-100 d-flex align-items-center justify-content-center flex-column">
+        <h2 class="font-weight-bold text-white">{{ project.description }}</h3>
+        <div class="btn btn-circle mx-auto hidden-md-down mt-4">
+			<a href="{{ url_for('project.presenter', short_name=project.short_name)}}">
+				<div class="my-3"><span class="fa fa-play fa-4x ml-2"></span></div>
+                <div class="my-4">Get Started</div>
+            </a>
         </div>
+        <a href="{{ url_for('project.presenter', short_name=project.short_name)}}" class="btn btn-outline-white hidden-lg-up mt-4">Get Started</a>
+        {% if current_user.is_authenticated() and current_user.id == project.owner_id or current_user.admin %}
+        <a href="{{ url_for('project.settings', short_name=project.short_name)}}" class="btn btn-outline-white mt-4" rel="nofollow">Dashboard</a>
+        {% endif %}
     </div>
 </div>
 

@@ -12,8 +12,8 @@ $('.search-table[data-target]').on('keyup', function(evt) {
  * Hide a row if it doesn't contain all search words.
  */
 function checkRow(row, searchWords) {
-    for (let word of searchWords) {
-        if (row.text().toLowerCase().indexOf(word) === -1) {
+    for (i = 0; i < searchWords.length; i++) {
+        if (row.text().toLowerCase().indexOf(searchWords[i]) === -1) {
             row.addClass('hidden');
             return;
         }

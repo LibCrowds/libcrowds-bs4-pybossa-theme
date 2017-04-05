@@ -16,7 +16,8 @@
     display: block;
     position: relative;
     overflow: hidden;
-
+	transform: translateY(-90px);
+	
     a {
         width: 100%;
         color: $white;
@@ -28,6 +29,10 @@
             justify-content: center;
             white-space: normal;
         }
+    }
+	
+    @include hover-focus {
+        transform: none;
     }
 }
 

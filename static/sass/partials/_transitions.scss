@@ -11,14 +11,8 @@ a {
 }
 
 .overlay-cards .card {
-    @include hover-focus { 
-        .card-footer {
-            transition: max-height 250ms;
-        
-            .card-text {
-                transition: opacity 500ms ease-in-out 150ms;
-            }
-        }
+    .card-img-overlay {
+        transition: transform 450ms;
     }
 }
 

@@ -3,16 +3,16 @@
         <div class="row d-flex flex-row align-items-center">
             {% if 'footer-slim' not in footer_class %}
             <div class="col-lg-4 offset-lg-1">
-				<ul class="list-inline mb-0 hidden-md-down">
-					<li class="list-inline-item"><small>&copy; {{ copyright }}, 2017</small></li>
-					<li class="ml-2 list-inline-item"><a href="{{ url_for('help.tos') }}"><small>Terms</small></a></li>
-					<li class="ml-2 list-inline-item"><a href="{{ url_for('help.privacy') }}"><small>Privacy</small></a></li>
-					<li class="ml-2 list-inline-item"><a href="{{ url_for('help.cookies_policy') }}"><small>Cookies</small></a></li>
-					<li class="ml-2 list-inline-item"><a href="{{ url_for('help.license') }}"><small>Licenses</small></a></li>
-				<ul>
+                <ul class="list-inline mb-0 hidden-md-down">
+                    <li class="list-inline-item"><small>&copy; {{ copyright }}, 2017</small></li>
+                    <li class="ml-2 list-inline-item"><a href="{{ url_for('help.tos') }}"><small>Terms</small></a></li>
+                    <li class="ml-2 list-inline-item"><a href="{{ url_for('help.privacy') }}"><small>Privacy</small></a></li>
+                    <li class="ml-2 list-inline-item"><a href="{{ url_for('help.cookies_policy') }}"><small>Cookies</small></a></li>
+                    <li class="ml-2 list-inline-item"><a href="{{ url_for('help.license') }}"><small>Licenses</small></a></li>
+                <ul>
             </div>
             {% endif %}
-			<div class="col-sm-12 {% if 'footer-slim' not in footer_class %}col-lg-2{% endif %} py-2 text-center">
+            <div class="col-sm-12 {% if 'footer-slim' not in footer_class %}col-lg-2{% endif %} py-2 text-center">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item m-0">
                         <a href="http://twitter.com/{{ contact_twitter }}" target="_blank" class="text-muted">
@@ -31,11 +31,11 @@
                     </li>
                 </ul>
             </div>
-			{% if 'footer-slim' not in footer_class %}
+            {% if 'footer-slim' not in footer_class %}
             <div class="col-lg-4">
-				<ul class="list-inline mb-0 hidden-md-down text-right">
-					<li class="ml-2 list-inline-item"><a href="{{ url_for('help.api') }}"><small>API</small></a></li>
-				<ul>
+                <ul class="list-inline mb-0 hidden-md-down text-right">
+                    <li class="ml-2 list-inline-item"><a href="{{ url_for('help.api') }}"><small>API</small></a></li>
+                <ul>
             </div>
             {% endif %}
         </div>

@@ -8,33 +8,33 @@
     <div class="col-md-6 col-xl-4 grid-item" data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
         data-created="{{ general_helpers.format_date(project.created) }}" data-progress="{{ project.overall_progress }}"
         data-last-activity="{{ project.last_activity_raw }}" data-n-volunteers="{{ project.n_volunteers }}"
-		{%- if shuffle and project.overall_progress == 100 %}style="visibility: hidden"{% endif %}>
+        {%- if shuffle and project.overall_progress == 100 %}style="visibility: hidden"{% endif %}>
         
-		<div class="card text-center">
+        <div class="card text-center">
             <div class="card-img-overlay-wrapper">
-				{{ render_thumbnail(project, class='card-img-top img-fluid') }}
-				<div class="card-img-overlay text-white d-flex flex-column justify-content-center align-content-center">
-					<div data-progress="{{ project.overall_progress | round | int }}" class="progress-circle progress-circle-white">
-						<p class="text-white">{{ project.overall_progress | round | int }}%</p>
-					</div>
-				</div>
-			</div>
-			<div class="card-block">
-				<h5 class="card-title font-weight-bold">{{ project.name }}</h5>
+                {{ render_thumbnail(project, class='card-img-top img-fluid') }}
+                <div class="card-img-overlay text-white d-flex flex-column justify-content-center align-content-center">
+                    <div data-progress="{{ project.overall_progress | round | int }}" class="progress-circle progress-circle-white">
+                        <p class="text-white">{{ project.overall_progress | round | int }}%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <h5 class="card-title font-weight-bold">{{ project.name }}</h5>
                 <p class="card-text">{{ project.description }}</p>
-				<p class="card-text text-muted mt-3">
-					<span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}
-					<span class="fa fa-tasks ml-4 mr-1"></span>{{ project.n_tasks }}
-				</p>
-			</div>
-			<a href="{{ url_for('project.details', short_name=project.short_name) }}">
-				<div class="card-footer text-uppercase">
-					<p class="mb-0">Contribute</p>
-				</div>
-			</a>
+                <p class="card-text text-muted mt-3">
+                    <span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}
+                    <span class="fa fa-tasks ml-4 mr-1"></span>{{ project.n_tasks }}
+                </p>
+            </div>
+            <a href="{{ url_for('project.details', short_name=project.short_name) }}">
+                <div class="card-footer text-uppercase">
+                    <p class="mb-0">Contribute</p>
+                </div>
+            </a>
         </div>
     </div>
-	
+    
     {% endfor %}
 </div>
 {% endmacro %}

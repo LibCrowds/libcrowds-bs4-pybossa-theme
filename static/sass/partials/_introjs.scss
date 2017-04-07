@@ -1,0 +1,16 @@
+.introjs-helperLayer {
+    background-color: rgba($white,.25);
+}
+    
+.introjs-button {
+    text-shadow: none;
+    
+    @include hover-focus {
+        color: #fff !important;
+    }
+    
+    .introjs-donebutton {
+        @extend .btn-success;
+        color: $white !important;
+    }
+}

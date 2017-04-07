@@ -30,7 +30,8 @@
     "tesseract.js": "^1.0.10",
     "hamburgers": "^0.8.1",
 	"aos": "^2.1.1",
-	"intro.js": "^2.5.0"
+	"intro.js": "^2.5.0",
+    "imagesloaded": "^4.1.1"
   },
   "devDependencies": {
     "jshint": "latest"

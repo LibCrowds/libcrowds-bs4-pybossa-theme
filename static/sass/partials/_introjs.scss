@@ -9,7 +9,7 @@
         color: #fff !important;
     }
     
-    .introjs-donebutton {
+    &.introjs-donebutton {
         @extend .btn-success;
         color: $white !important;
     }

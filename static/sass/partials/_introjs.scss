@@ -11,6 +11,13 @@
     
     &.introjs-donebutton {
         @extend .btn-success;
+        background: $brand-success;
         color: $white !important;
+        
+        &:active,
+        &:focus,
+        &:hover {
+            background: darken($brand-success, 10%);
+        }
     }
 }

@@ -1,6 +1,5 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "statistics" %}
-{% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% set jstop = True %}
 
@@ -15,7 +14,6 @@
     "../node_modules/chart.js/dist/Chart.js",
     "../node_modules/leaflet/dist/leaflet.js",
     "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
-    "js/stats.js",
     "js/notify.js"
     %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
@@ -24,170 +22,107 @@
 <div class="card text-center">
     {{ card_helpers.render_title('Most Active Volunteers') }}
     <div class="card-block pt-0">
-        <div class="canvas-container">
-            <canvas></canvas>
-        </div>
+        <canvas id="leaderboard"></canvas>
+        <script>
+            $.ajax({
+                url: "/leaderboard",
+                contentType: "application/json",
+                dataType: 'json'
+            }).done(function(results) {
+                let ctx   = $("#leaderboard"),
+                    data  = {
+                        labels: labels = $.map(results.top_users, function(user) {
+                            return user.name;
+                        }),
+                        datasets: [{
+                            label: "Contributions",
+                            data: $.map(results.top_users, function(user) {
+                                return user.score;
+                            }),
+                            backgroundColor: "rgba(151, 187, 205, 0.2)",
+                            borderColor: "rgba(151, 187, 205, 1)",
+                            borderWidth: 1
+                        }]
+                    };
+                
+                let chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data
+                });
+            });
+        </script>
     </div>
     <div class="card-footer bg-white text-center">
         <a class="btn btn-outline-primary" href="{{ url_for('leaderboard.index') }}" role="button">View Leaderboard</a>
     </div>
 </div>
 
+{% if show_locs %}
+<div class="card text-center mt-4">
+    {{ card_helpers.render_title('Locations of Anonymous Volunteers') }}
+    <div class="card-block pt-0">
+        <div id="map" style="height: 400px;"></div>
+        <script>
+            let locs  = {{ locs | safe }},
+                map   = L.map('map', { scrollWheelZoom: false, minZoom:1 }),
+                token = 'pk.eyJ1IjoibGliY3Jvd2RzIiwiYSI6ImNpdmlxaHFzNTAwN3YydHBncHV3dHc3aXgifQ.V4WUx9SDcU_XLFJo2M3RxQ',
+                url   = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + token;
+                map.fitWorld();
+                map.setZoom(2);
+                L.tileLayer(url, {
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,' + 
+                                 '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy;' +
+                                 '<a href="http://mapbox.com">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: token
+                }).addTo(map);
+                
+                let markers = new L.MarkerClusterGroup();
+                for (var i = 0; i < locs.length; i++) {
+                    if (locs[i].loc !== null) {
+                        let lat = parseFloat(locs[i].loc.latitude),
+                            lng = parseFloat(locs[i].loc.longitude);
+                        markers.addLayer(L.marker([lat, lng]));
+                    }
+                }
+                map.addLayer(markers);
+        </script>
+    </div>
+</div>
+{% endif %}
 
-    <div id="summary" class="col-xs-12 padding-bottom-sm">
-        <div class="white-panel inset-shadow-white">
-            <h3 class="text-center text-stats"></h3>
+<div class="card-deck mt-4">
+    <div class="card text-center">
+        {{ card_helpers.render_title('Proportion of Authenticated Users') }}
+        <div class="card-block pt-0">
+            <canvas id="users" style="height:200px;"></canvas>
+            <script>
+                let userStats = {{ users | safe }},
+                    ctx       = $("#users"),
+                    data      = {
+                        labels: $.map(userStats.values, function(value) {
+                            return value.label;
+                        }),
+                        datasets: [{
+                            label: "Contributions",
+                            data: $.map(userStats.values, function(value) {
+                                return value.value[1];
+                            }),
+                            backgroundColor: [
+                                "rgba(151, 187, 205, 1)",
+                                "rgba(186, 0, 0, 1)",
+                            ]
+                        }]
+                    };
+                
+                let chart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data
+                });
+            </script>
         </div>
     </div>
-
-    <section id="stats" style="display: none;">
-
-        <div id="leaderboard" class="col-xs-12 padding-bottom-sm">
-            <div class="white-panel inset-shadow-white">
-                <h4 class="padding-bottom-sm text-center">Most Active Volunteers</h4>
-                <div class="canvas-container">
-                    <canvas></canvas>
-                </div>
-                <div class="text-center padding-top-xs">
-                    <a class="btn btn-danger" href="{{url_for('leaderboard.index')}}">View Leaderboard</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="locations-summary" class="col-xs-12 padding-bottom-sm">
-            <div class="white-panel inset-shadow-white">
-                <h3 class="text-stats text-center"></h3>
-            </div>
-        </div>
-
-        <div id="locations" class="col-xs-12 padding-bottom-sm">
-            <div class="white-panel inset-shadow-white">
-                <h4 class="padding-bottom-sm text-center">Locations of Active Volunteers</h4>
-                <div id="map" style="height:480px;"></div>
-            </div>
-        </div>
-
-        <div id="top-countries" class="col-xs-12 padding-bottom-sm">
-            <div class="white-panel inset-shadow-white">
-                <h4 class="padding-bottom-sm text-center">Most Active Countries</h4>
-                <div class="canvas-container">
-                    <canvas></canvas>
-                </div>
-
-                <div class="text-center padding-top-xs padding-bottom-sm">
-                    <a class="btn btn-danger" href="#all-countries" data-toggle="collapse"
-                       aria-expanded="false" aria-controls="all-countries">View All Countries</a>
-                </div>
-                <div id="all-countries" class="collapse">
-                    <table class="table table-stripped table-condensed table-hover table-responsive">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Country</th>
-                                <th class="text-center">Contributions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div id="daily-contributions" class="col-xs-12 padding-bottom-sm">
-            <div class="white-panel inset-shadow-white">
-                <h4 class="padding-bottom-sm text-center">Daily Contributions</h4>
-                <div class="canvas-container">
-                    <canvas></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div id="top-users-this-week" class="col-xs-12 padding-bottom-sm">
-            <div class="white-panel inset-shadow-white">
-                <h4 class="padding-bottom-sm text-center">Most Active Volunteers This Week</h4>
-                <div class="canvas-container">
-                    <canvas></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div id="daily-volunteers" class="col-xs-12 padding-bottom-sm">
-            <div class="white-panel inset-shadow-white">
-                <h4 class="padding-bottom-sm text-center">Daily Volunteers</h4>
-                <div class="canvas-container">
-                    <canvas></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="stats-row">
-
-            <div id="proportion-auth-users" class="col-md-4 col-xs-12 padding-bottom-sm">
-                <div class="white-panel inset-shadow-white">
-                    <h4 class="padding-bottom-sm text-center">Proportion of Authenticated Users</h4>
-                    <div class="canvas-container">
-                        <canvas></canvas>
-                    </div>
-                    <div class="legend-container padding-top-sm"></div>
-                </div>
-            </div>
-
-            <div id="dow" class="col-md-4 col-xs-12 padding-bottom-sm">
-                <div class="white-panel inset-shadow-white">
-                    <h4 class="padding-bottom-sm text-center">Contributions per Day of the Week</h4>
-                    <div class="canvas-container">
-                        <canvas></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div id="top-10-percent" class="col-md-4 col-xs-12 padding-bottom-sm">
-                <div class="white-panel inset-shadow-white">
-                    <h4 class="padding-bottom-sm text-center">Most Active 10% of Volunteers</h4>
-                    <div class="canvas-container">
-                        <canvas></canvas>
-                    </div>
-                    <div class="legend-container padding-top-sm"></div>
-                </div>
-            </div>
-
-        </div>
-
-        <div id="hourly-activity" class="col-xs-12 padding-bottom-sm">
-            <div class="white-panel inset-shadow-white">
-                <h4 class="padding-bottom-sm text-center">Total Hourly Activity</h4>
-                <div class="canvas-container">
-                    <canvas></canvas>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-{{ stats }}
-<script>
-$(function(){
-    let stats                  = {{ stats | tojson }},
-        locs                   = {{ locs | tojson }},
-        tasks                  = {{ tasks | tojson }},
-        projects               = {{ projects | tojson }},
-        users                  = {{ users | tojson }},
-        top5_users_24_hours    = {{ top5_users_24_hours | tojson }},
-        top5_projects_24_hours = {{ top5_projects_24_hours | tojson }};
-    
-    $.ajax({
-        url: '/leaderboard',
-        dataType: 'json'
-    }).done(function(results) {
-         console.log(results);
-    }).fail(function(err) {
-        console.log(err)
-    });
-});
-$(window).on("resize", function() {
-    resizeStatsRow();
-}).resize();
-</script>
-
+</div>
 
 {% endblock %}

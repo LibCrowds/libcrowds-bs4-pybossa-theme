@@ -14,7 +14,7 @@
     "../node_modules/bootstrap/dist/js/bootstrap.js",
     "../node_modules/pnotify/dist/pnotify.js",
     "../node_modules/pnotify/dist/pnotify.buttons.js",
-    "../node_modules/chart.js/dist/Chart.js",
+    "../node_modules/chart.js/dist/Chart.bundle.js",
     "../node_modules/leaflet/dist/leaflet.js",
     "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
     "js/notify.js"
@@ -34,13 +34,14 @@
 </div>
 
 <div class="card text-center mt-4">
-    {{ card_helpers.render_title('Daily Contributions over the Past Two Weeks') }}
+    {{ card_helpers.render_title('Daily Contributions', 'Over the past two weeks') }}
     <div class="card-block pt-0">
         <canvas id="day-stats"></canvas>
         <script>
-            let dayStats = projectStats.dayStats,
-                ctx   = $("#day-stats"),
-                data  = {
+            let dayStats = projectStats.dayStats;
+            new Chart($("#day-stats"), {
+                type: 'line',
+                data: {
                     labels: labels = $.map(dayStats[0].values, function(stat) {
                         return stat[0];
                     }),
@@ -71,24 +72,27 @@
                         borderColor: "rgba(65, 144, 194, 1)",
                         borderWidth: 1
                     }]
-                };
-            
-            let chart = new Chart(ctx, {
-                type: 'bar',
-                data: data
-            });
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'time'
+                        }]
+                    }
+                }
+            }).update();
         </script>
     </div>
 </div>
 
 <div class="card text-center mt-4">
-    {{ card_helpers.render_title('Hourly Contributions over the Past Two Weeks') }}
+    {{ card_helpers.render_title('Hourly Contributions', 'Over the past two weeks') }}
     <div class="card-block pt-0">
         <canvas id="hour-stats"></canvas>
         <script>
             let hourStats = projectStats.hourStats;
             new Chart($("#hour-stats"), {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: labels = $.map(hourStats[0].values, function(stat) {
                         return stat[0];
@@ -122,19 +126,19 @@
                         borderWidth: 1
                     }]
                 }
-            });
+            }).update();
         </script>
     </div>
 </div>
 
 <div class="card text-center mt-4">
-    {{ card_helpers.render_title('Completed Tasks over the Past Two Weeks') }}
+    {{ card_helpers.render_title('Completed Tasks', 'Over the past two weeks') }}
     <div class="card-block pt-0">
         <canvas id="completed-tasks"></canvas>
         <script>
             let completedTasks = projectStats.dayStats[3];
             new Chart($("#completed-tasks"), {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: labels = $.map(completedTasks.values, function(stat) {
                         return stat[0];
@@ -149,15 +153,55 @@
                         borderColor: "rgba(65, 144, 194, 1)",
                         borderWidth: 1
                     }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'time'
+                        }]
+                    }
                 }
-            });
+            }).update();
+        </script>
+    </div>
+</div>
+
+<div class="card text-center mt-4">
+    {{ card_helpers.render_title('Most Active Authenticated Volunteers', 'Over the past two weeks') }}
+    <div class="card-block pt-0">
+        <canvas id="top5-users"></canvas>
+        <script>
+            let top5Users = userStats.authenticated.top5;
+            new Chart($("#top5-users"), {
+                type: 'bar',
+                data: {
+                    labels: labels = $.map(top5Users, function(user) {
+                        return user.name;
+                    }),
+                    datasets: [{
+                        label: "Contributions",
+                        data: $.map(top5Users, function(user) {
+                            return user.tasks;
+                        }),
+                        
+                        backgroundColor: "rgba(65, 144, 194, 0.2)",
+                        borderColor: "rgba(65, 144, 194, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    legend: { 
+                        display: false
+                    }
+                }
+            }).update();
         </script>
     </div>
 </div>
 
 {% if userStats.geo %}
 <div class="card text-center mt-4">
-    {{ card_helpers.render_title('Locations of Anonymous Volunteers') }}
+    {{ card_helpers.render_title('Locations of Most Active Anonymous Volunteers', 'Over the past two weeks') }}
     <div class="card-block pt-0">
         <div id="map" style="height: 400px;"></div>
         <script>

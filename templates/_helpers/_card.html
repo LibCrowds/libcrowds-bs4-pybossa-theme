@@ -1,7 +1,7 @@
 {% macro render_title(title, description, search_table=None, title_link=None) %}
 <div class="card-block">
     <div class="row">
-        <div class="col-lg-8 my-2">
+        <div class="{% if search_table or title_link %}col-lg-8{% else %}col-lg-12{% endif %} my-2">
             <h4 class="card-title mb-1">{{ title }}</h4>
             <p class="card-text text-muted">{{ description | safe }}</p>
         </div>
@@ -11,7 +11,7 @@
         </div>
         {% endif %}
         {% if title_link %}
-        <div class="col-sm-4">
+        <div class="col-lg-4 my-2">
             <a href="{{ title_link[0] }}" class="btn btn-outline-primary btn-block">{{ title_link[1] }}</a>
         </div>
         {% endif %}

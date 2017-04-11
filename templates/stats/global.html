@@ -15,13 +15,24 @@
     "../node_modules/chart.js/dist/Chart.js",
     "../node_modules/leaflet/dist/leaflet.js",
     "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
+    "js/stats.js",
     "js/notify.js"
     %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
 
-<span class="set-body-bg" data-bg="pattern-brushed"></span>
-<div class="container container-main">
+<div class="card text-center">
+    {{ card_helpers.render_title('Most Active Volunteers') }}
+    <div class="card-block pt-0">
+        <div class="canvas-container">
+            <canvas></canvas>
+        </div>
+    </div>
+    <div class="card-footer bg-white text-center">
+        <a class="btn btn-outline-primary" href="{{ url_for('leaderboard.index') }}" role="button">View Leaderboard</a>
+    </div>
+</div>
+
 
     <div id="summary" class="col-xs-12 padding-bottom-sm">
         <div class="white-panel inset-shadow-white">
@@ -152,45 +163,31 @@
         </div>
 
     </section>
-</div>
 
-<!--
-
+{{ stats }}
 <script>
 $(function(){
-    let stats          = {{ stats|safe }},
-        locs           = {{ locs|safe }},
-        leaderboard    = {{ leaderboard|safe }},
-        topCountries   = {{top_countries|safe}},
-        taskRunsDaily  = {{ task_runs_daily|safe }},
-        usersDaily     = {{ users_daily|safe }},
-        hourlyActivity = {{ hourly_activity|safe }},
-        dow            = {{ dow|safe }},
-        top5Users1Week = {{ top_5_users_1_week|safe }};
-    if (stats.n_tasks_completed === 0) {
-        $('#summary').find('h3').html('Statistics will be available once some tasks have been completed!');
-    } else {
-        $('#stats').show();
-        populateSummary(stats, "summary");
-        populateLeaderboardChart(leaderboard, "leaderboard");
-        populateLocationsSummary(stats, "locations-summary");
-        populateLocationsChart(locs, "locations");
-        populateMostActiveCountriesChart(topCountries, "top-countries");
-        populateDailyContributionsChart(taskRunsDaily, "daily-contributions");
-        populateUsersPerDayChart(usersDaily, "daily-volunteers");
-        populateProportionAuthChart(stats, "proportion-auth-users");
-        populateDowChart(dow, "dow");
-        populateTop10PercentChart(stats, "top-10-percent");
-        populateTopUsersThisWeekChart(top5Users1Week, "top-users-this-week");
-        populateHourlyActivityChart(hourlyActivity, "hourly-activity");
-    }
+    let stats                  = {{ stats | tojson }},
+        locs                   = {{ locs | tojson }},
+        tasks                  = {{ tasks | tojson }},
+        projects               = {{ projects | tojson }},
+        users                  = {{ users | tojson }},
+        top5_users_24_hours    = {{ top5_users_24_hours | tojson }},
+        top5_projects_24_hours = {{ top5_projects_24_hours | tojson }};
+    
+    $.ajax({
+        url: '/leaderboard',
+        dataType: 'json'
+    }).done(function(results) {
+         console.log(results);
+    }).fail(function(err) {
+        console.log(err)
+    });
 });
 $(window).on("resize", function() {
     resizeStatsRow();
 }).resize();
 </script>
-
--->
 
 
 {% endblock %}

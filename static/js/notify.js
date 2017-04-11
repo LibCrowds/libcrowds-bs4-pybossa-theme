@@ -2,7 +2,7 @@
  * Display a notification.
  */
 function notify(msg, type) {
-
+    
     var opts = {
         title: type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Info',
         text: msg,
@@ -12,8 +12,13 @@ function notify(msg, type) {
         delay: 2500,
         buttons: {
             closer: true,
-            sticker: false
-        }
+            sticker: false,
+            closer_hover: false
+        },
+        mobile: {
+            styling: true
+        },
+        addclass: "p-sm-4"
     };
 
     switch (type) {
@@ -22,6 +27,7 @@ function notify(msg, type) {
             break;
         case "error":
         case "danger":
+            opts.type = 'error';
             opts.icon = 'fa fa-exclamation-circle fa-2x';
             opts.hide = false;
             break;

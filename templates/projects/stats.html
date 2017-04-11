@@ -2,8 +2,192 @@
 {% set active_page = "projects" %}
 {% set active_link = "stats" %}
 {% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% set jstop = True %}
 
 {% block content %}
 {{ general_helpers.render_title(project.name, 'Statistics') }}
-<p class="lead">Sorry, project statistics are currently unavailable, but they will be back soon!</p>
+{% assets filters="jsmin", output="js/gen/project-stats.min.js",
+    "../node_modules/pace-progress/pace.js",
+    "../node_modules/jquery/dist/jquery.js",
+    "../node_modules/tether/dist/js/tether.js",
+    "../node_modules/bootstrap/dist/js/bootstrap.js",
+    "../node_modules/pnotify/dist/pnotify.js",
+    "../node_modules/pnotify/dist/pnotify.buttons.js",
+    "../node_modules/chart.js/dist/Chart.js",
+    "../node_modules/leaflet/dist/leaflet.js",
+    "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
+    "js/notify.js"
+    %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+<script>
+    var projectStats = {{ projectStats | safe }},
+        userStats    = {{ userStats | tojson }};
+    console.log(userStats);
+</script>
+
+<div class="card-deck">
+    {{ card_helpers.render_stat('fa-clock-o', avg_contrib_time, 'Average seconds per contribution') }}
+    {{ card_helpers.render_stat('fa-users', n_volunteers, 'Volunteers') }}
+    {{ card_helpers.render_stat('fa-tasks', n_volunteers, 'Completed tasks') }}
+</div>
+
+<div class="card text-center mt-4">
+    {{ card_helpers.render_title('Daily Contributions over the Past Two Weeks') }}
+    <div class="card-block pt-0">
+        <canvas id="day-stats"></canvas>
+        <script>
+            let dayStats = projectStats.dayStats,
+                ctx   = $("#day-stats"),
+                data  = {
+                    labels: labels = $.map(dayStats[0].values, function(stat) {
+                        return stat[0];
+                    }),
+                    datasets: [{
+                        label: "All",
+                        data: $.map(dayStats[0].values, function(anonAuthStats) {
+                            return anonAuthStats[1];
+                        }),
+                        backgroundColor: "rgba(208, 0, 0, 0.2)",
+                        borderColor: "rgba(208, 0, 0, 1)",
+                        borderWidth: 1
+                    },
+                    {
+                        label: dayStats[1].label,
+                        data: $.map(dayStats[1].values, function(anonStats) {
+                            return anonStats[1];
+                        }),
+                        backgroundColor: "rgba(227, 141, 19, 0.2)",
+                        borderColor: "rgba(227, 141, 19, 1)",
+                        borderWidth: 1
+                    },
+                    {
+                        label: dayStats[2].label,
+                        data: $.map(dayStats[2].values, function(authStats) {
+                            return authStats[1];
+                        }),
+                        backgroundColor: "rgba(65, 144, 194, 0.2)",
+                        borderColor: "rgba(65, 144, 194, 1)",
+                        borderWidth: 1
+                    }]
+                };
+            
+            let chart = new Chart(ctx, {
+                type: 'bar',
+                data: data
+            });
+        </script>
+    </div>
+</div>
+
+<div class="card text-center mt-4">
+    {{ card_helpers.render_title('Hourly Contributions over the Past Two Weeks') }}
+    <div class="card-block pt-0">
+        <canvas id="hour-stats"></canvas>
+        <script>
+            let hourStats = projectStats.hourStats;
+            new Chart($("#hour-stats"), {
+                type: 'bar',
+                data: {
+                    labels: labels = $.map(hourStats[0].values, function(stat) {
+                        return stat[0];
+                    }),
+                    datasets: [{
+                        label: "All",
+                        data: $.map(hourStats[0].values, function(anonAuthStats) {
+                            return anonAuthStats[1];
+                        }),
+                        backgroundColor: "rgba(208, 0, 0, 0.2)",
+                        borderColor: "rgba(208, 0, 0, 1)",
+                        borderWidth: 1
+                    },
+                    {
+                        label: hourStats[1].label,
+                        data: $.map(hourStats[1].values, function(anonStats) {
+                            return anonStats[1];
+                        }),
+                        backgroundColor: "rgba(227, 141, 19, 0.2)",
+                        borderColor: "rgba(227, 141, 19, 1)",
+                        borderWidth: 1
+                    },
+                    {
+                        label: hourStats[2].label,
+                        data: $.map(hourStats[2].values, function(authStats) {
+                            return authStats[1];
+                        }),
+                        
+                        backgroundColor: "rgba(65, 144, 194, 0.2)",
+                        borderColor: "rgba(65, 144, 194, 1)",
+                        borderWidth: 1
+                    }]
+                }
+            });
+        </script>
+    </div>
+</div>
+
+<div class="card text-center mt-4">
+    {{ card_helpers.render_title('Completed Tasks over the Past Two Weeks') }}
+    <div class="card-block pt-0">
+        <canvas id="completed-tasks"></canvas>
+        <script>
+            let completedTasks = projectStats.dayStats[3];
+            new Chart($("#completed-tasks"), {
+                type: 'bar',
+                data: {
+                    labels: labels = $.map(completedTasks.values, function(stat) {
+                        return stat[0];
+                    }),
+                    datasets: [{
+                        label: completedTasks.label,
+                        data: $.map(completedTasks.values, function(stat) {
+                            return stat[1];
+                        }),
+                        
+                        backgroundColor: "rgba(65, 144, 194, 0.2)",
+                        borderColor: "rgba(65, 144, 194, 1)",
+                        borderWidth: 1
+                    }]
+                }
+            });
+        </script>
+    </div>
+</div>
+
+{% if userStats.geo %}
+<div class="card text-center mt-4">
+    {{ card_helpers.render_title('Locations of Anonymous Volunteers') }}
+    <div class="card-block pt-0">
+        <div id="map" style="height: 400px;"></div>
+        <script>
+            let locs  = projectStats.userAnonStats.locs,
+                map   = L.map('map', { scrollWheelZoom: false, minZoom:1 }),
+                token = 'pk.eyJ1IjoibGliY3Jvd2RzIiwiYSI6ImNpdmlxaHFzNTAwN3YydHBncHV3dHc3aXgifQ.V4WUx9SDcU_XLFJo2M3RxQ',
+                url   = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + token;
+                map.fitWorld();
+                map.setZoom(2);
+                L.tileLayer(url, {
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,' + 
+                                 '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy;' +
+                                 '<a href="http://mapbox.com">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: token
+                }).addTo(map);
+                
+                let markers = new L.MarkerClusterGroup();
+                for (var i = 0; i < locs.length; i++) {
+                    if (locs[i].loc !== null) {
+                        let lat = parseFloat(locs[i].loc.latitude),
+                            lng = parseFloat(locs[i].loc.longitude);
+                        markers.addLayer(L.marker([lat, lng]));
+                    }
+                }
+                map.addLayer(markers);
+        </script>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}

@@ -1,8 +1,196 @@
 {% extends "_layouts/default.html" %}
 {% set active_page = "statistics" %}
+{% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% set jstop = True %}
 
 {% block content %}
+{% assets filters="jsmin", output="js/gen/stats.min.js",
+    "../node_modules/pace-progress/pace.js",
+    "../node_modules/jquery/dist/jquery.js",
+    "../node_modules/tether/dist/js/tether.js",
+    "../node_modules/bootstrap/dist/js/bootstrap.js",
+    "../node_modules/pnotify/dist/pnotify.js",
+    "../node_modules/pnotify/dist/pnotify.buttons.js",
+    "../node_modules/chart.js/dist/Chart.js",
+    "../node_modules/leaflet/dist/leaflet.js",
+    "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
+    "js/notify.js"
+    %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
+<span class="set-body-bg" data-bg="pattern-brushed"></span>
 <div class="container container-main">
-    <p class="lead">We're making some changes, the statistics will be back soon!</p>
+
+    <div id="summary" class="col-xs-12 padding-bottom-sm">
+        <div class="white-panel inset-shadow-white">
+            <h3 class="text-center text-stats"></h3>
+        </div>
+    </div>
+
+    <section id="stats" style="display: none;">
+
+        <div id="leaderboard" class="col-xs-12 padding-bottom-sm">
+            <div class="white-panel inset-shadow-white">
+                <h4 class="padding-bottom-sm text-center">Most Active Volunteers</h4>
+                <div class="canvas-container">
+                    <canvas></canvas>
+                </div>
+                <div class="text-center padding-top-xs">
+                    <a class="btn btn-danger" href="{{url_for('leaderboard.index')}}">View Leaderboard</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="locations-summary" class="col-xs-12 padding-bottom-sm">
+            <div class="white-panel inset-shadow-white">
+                <h3 class="text-stats text-center"></h3>
+            </div>
+        </div>
+
+        <div id="locations" class="col-xs-12 padding-bottom-sm">
+            <div class="white-panel inset-shadow-white">
+                <h4 class="padding-bottom-sm text-center">Locations of Active Volunteers</h4>
+                <div id="map" style="height:480px;"></div>
+            </div>
+        </div>
+
+        <div id="top-countries" class="col-xs-12 padding-bottom-sm">
+            <div class="white-panel inset-shadow-white">
+                <h4 class="padding-bottom-sm text-center">Most Active Countries</h4>
+                <div class="canvas-container">
+                    <canvas></canvas>
+                </div>
+
+                <div class="text-center padding-top-xs padding-bottom-sm">
+                    <a class="btn btn-danger" href="#all-countries" data-toggle="collapse"
+                       aria-expanded="false" aria-controls="all-countries">View All Countries</a>
+                </div>
+                <div id="all-countries" class="collapse">
+                    <table class="table table-stripped table-condensed table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Country</th>
+                                <th class="text-center">Contributions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="daily-contributions" class="col-xs-12 padding-bottom-sm">
+            <div class="white-panel inset-shadow-white">
+                <h4 class="padding-bottom-sm text-center">Daily Contributions</h4>
+                <div class="canvas-container">
+                    <canvas></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="top-users-this-week" class="col-xs-12 padding-bottom-sm">
+            <div class="white-panel inset-shadow-white">
+                <h4 class="padding-bottom-sm text-center">Most Active Volunteers This Week</h4>
+                <div class="canvas-container">
+                    <canvas></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="daily-volunteers" class="col-xs-12 padding-bottom-sm">
+            <div class="white-panel inset-shadow-white">
+                <h4 class="padding-bottom-sm text-center">Daily Volunteers</h4>
+                <div class="canvas-container">
+                    <canvas></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-row">
+
+            <div id="proportion-auth-users" class="col-md-4 col-xs-12 padding-bottom-sm">
+                <div class="white-panel inset-shadow-white">
+                    <h4 class="padding-bottom-sm text-center">Proportion of Authenticated Users</h4>
+                    <div class="canvas-container">
+                        <canvas></canvas>
+                    </div>
+                    <div class="legend-container padding-top-sm"></div>
+                </div>
+            </div>
+
+            <div id="dow" class="col-md-4 col-xs-12 padding-bottom-sm">
+                <div class="white-panel inset-shadow-white">
+                    <h4 class="padding-bottom-sm text-center">Contributions per Day of the Week</h4>
+                    <div class="canvas-container">
+                        <canvas></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div id="top-10-percent" class="col-md-4 col-xs-12 padding-bottom-sm">
+                <div class="white-panel inset-shadow-white">
+                    <h4 class="padding-bottom-sm text-center">Most Active 10% of Volunteers</h4>
+                    <div class="canvas-container">
+                        <canvas></canvas>
+                    </div>
+                    <div class="legend-container padding-top-sm"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="hourly-activity" class="col-xs-12 padding-bottom-sm">
+            <div class="white-panel inset-shadow-white">
+                <h4 class="padding-bottom-sm text-center">Total Hourly Activity</h4>
+                <div class="canvas-container">
+                    <canvas></canvas>
+                </div>
+            </div>
+        </div>
+
+    </section>
 </div>
+
+<!--
+
+<script>
+$(function(){
+    let stats          = {{ stats|safe }},
+        locs           = {{ locs|safe }},
+        leaderboard    = {{ leaderboard|safe }},
+        topCountries   = {{top_countries|safe}},
+        taskRunsDaily  = {{ task_runs_daily|safe }},
+        usersDaily     = {{ users_daily|safe }},
+        hourlyActivity = {{ hourly_activity|safe }},
+        dow            = {{ dow|safe }},
+        top5Users1Week = {{ top_5_users_1_week|safe }};
+    if (stats.n_tasks_completed === 0) {
+        $('#summary').find('h3').html('Statistics will be available once some tasks have been completed!');
+    } else {
+        $('#stats').show();
+        populateSummary(stats, "summary");
+        populateLeaderboardChart(leaderboard, "leaderboard");
+        populateLocationsSummary(stats, "locations-summary");
+        populateLocationsChart(locs, "locations");
+        populateMostActiveCountriesChart(topCountries, "top-countries");
+        populateDailyContributionsChart(taskRunsDaily, "daily-contributions");
+        populateUsersPerDayChart(usersDaily, "daily-volunteers");
+        populateProportionAuthChart(stats, "proportion-auth-users");
+        populateDowChart(dow, "dow");
+        populateTop10PercentChart(stats, "top-10-percent");
+        populateTopUsersThisWeekChart(top5Users1Week, "top-users-this-week");
+        populateHourlyActivityChart(hourlyActivity, "hourly-activity");
+    }
+});
+$(window).on("resize", function() {
+    resizeStatsRow();
+}).resize();
+</script>
+
+-->
+
+
 {% endblock %}

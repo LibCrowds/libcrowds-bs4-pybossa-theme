@@ -27,11 +27,11 @@
                     <span class="fa fa-tasks ml-4 mr-1"></span>{{ project.n_tasks }}
                 </p>
             </div>
-            <a href="{{ url_for('project.details', short_name=project.short_name) }}">
-                <div class="card-footer text-uppercase">
-                    <p class="mb-0">Contribute</p>
-                </div>
-            </a>
+            <div class="card-footer text-uppercase">
+                <a href="{{ url_for('project.details', short_name=project.short_name) }}" class="btn btn-outline-primary">
+                    Contribute
+                </a>
+            </div>
         </div>
     </div>
     

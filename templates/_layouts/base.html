@@ -61,6 +61,17 @@
                   %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
+        {% assets filters="jsmin", output="js/gen/code-editor.min.js",
+            "../node_modules/codemirror/lib/codemirror.js",
+            "../node_modules/codemirror/mode/xml/xml.js",
+            "../node_modules/codemirror/mode/javascript/javascript.js",
+            "../node_modules/codemirror/mode/css/css.js",
+            "../node_modules/codemirror/mode/http/http.js",
+            "../node_modules/codemirror/mode/htmlmixed/htmlmixed.js",
+            "js/editor.js"
+            %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
         {% endif %}
         {% assets filters="jsmin", output="js/gen/bottom.min.js",
             "js/style-navbar.js",

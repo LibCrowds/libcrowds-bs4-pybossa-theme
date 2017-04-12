@@ -55,10 +55,6 @@ body {
     }
 }
 
-.CodeMirror {
-    font-size: $font-size-xs;
-}
-
 .card {
     font-size: $font-size-sm;
 
@@ -73,6 +69,10 @@ body {
         font-size: $font-size-sm;
         font-weight: 300;
     }
+}
+
+pre {
+    font-size: 1rem;
 }
 
 .progress-circle p {

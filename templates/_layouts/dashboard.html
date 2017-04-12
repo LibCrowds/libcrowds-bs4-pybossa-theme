@@ -7,6 +7,8 @@
 {% set active_link = active_link %}
 {% set navbar_class = "navbar navbar-fixed navbar-toggleable-xl navbar-light navbar-dashboard" %}
 {% set footer_class = "footer-slim" %}
+{% set contained = contained | default(True) %}
+
 <div class="vh-100 vw-100">
     <div class="dashboard-menu side">
         <div class="brand-wrapper text-center">
@@ -28,7 +30,7 @@
             {% endif %}
         </div>
         <main class="bg-faded">
-            <div class="container p-4">
+            <div class="{% if contained %}container p-4{% endif %}">
                 {% block content %}
                 {% endblock %}
             </div>

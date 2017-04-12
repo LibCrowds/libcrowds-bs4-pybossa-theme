@@ -71,7 +71,7 @@
             }
             
             .nav-link {
-                padding: .25rem 0;
+                padding: .35rem 0;
                 
                 &:not(.dropdown-toggle) {
                     &:after {
@@ -89,6 +89,12 @@
             .dropdown-menu {
                 left: -25%;
                 right: 0;
+            }
+            
+            &.active {
+                .nav-link:after {
+                    transform: none;
+                }
             }
         }
     }

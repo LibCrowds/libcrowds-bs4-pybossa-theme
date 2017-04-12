@@ -1,24 +1,55 @@
 {% extends "_layouts/default.html" %}
-{% set active_page = "help" %}
+{% import "_helpers/_card.html" as card_helpers %}
 
 {% block content %}
-{% if not project_id %}
-{% set project_id=1 %}
-{% endif %}
-<div class="container-padded">
-    <div class="container container-padded">
-        <div class="row">
-            <div class="col-sm-12">
-
-                <h1>{{brand}}: API Help</h1>
-                <p>
-                    {{brand}} has a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>
-                    that can be used for getting information about tasks, submitting contributions, etc.
-                    The API end point is available at:
-                </p>
-                <ul>
-                    <li><a href="{{url_for('api.index')}}">{{url_for('api.index', _external=True)}}</a></li>
-                </ul>
+<div class="card">
+    {{ card_helpers.render_title('{} API'.format(brand)) }}
+    <div class="card-block pt-0">
+    <p>
+        {{brand}} has a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>
+        that can be used for getting information about tasks, submitting contributions, etc.
+        The API end point is available at:
+    </p>
+    <pre>
+        <code data-language="http">{{url_for('api.index', _external=True)}}</code>
+    </pre>
+    <p>
+        The API expects and returns JSON.
+    </p>
+    <p>
+        Some requests will need an API key to authenticate and authorize the operation. You can find your API key
+        listed in your profile.
+    </p>
+    <p>
+        The returned objects will have a links and link fields, not included in the model in order to support 
+        <a href="https://en.wikipedia.org/wiki/HATEOAS">Hypermedia as the Engine of Application State</a> (also known as HATEOAS), 
+        to show the relationships between objects.
+    </p>
+    <p>
+        All objects will return a <strong>link</strong> field which will be the absolute URL for that specific object within the API. If the object has any parents, 
+        you will find the relations in the links list. For example, for a Task Run you will get something like this:
+    </p>
+    <pre>
+        <code data-mode="javascript" data-readOnly="true" data-theme="lesser-dark">
+    {
+        "info": 65,
+        "user_id": null,
+        "links": [
+            "<link rel='parent' title='project' href='http://localhost:5000/api/project/90'/>",
+            "<link rel='parent' title='task' href='http://localhost:5000/api/task/5894'/>"
+        ],
+        "task_id": 5894,
+        "created": "2012-07-07T17:23:45.714184",
+        "finish_time": "2012-07-07T17:23:45.714210",
+        "calibration": null,
+        "project_id": 90,
+        "user_ip": "X.X.X.X",
+        "link": "<link rel='self' title='taskrun' href='http://localhost:5000/api/taskrun/8969'/>",
+        "timeout": null,
+        "id": 8969
+    }
+        </code>
+    </pre>
 
                 <h2>Projects API end point</h2>
                 <p>To get a list of available projects:</p>

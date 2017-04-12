@@ -5,99 +5,185 @@
 <div class="card">
     {{ card_helpers.render_title('{} API'.format(brand)) }}
     <div class="card-block pt-0">
-    <p>
-        {{brand}} has a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>
-        that can be used for getting information about tasks, submitting contributions, etc.
-        The API end point is available at:
-    </p>
-    <pre>
-        <code data-language="http">{{url_for('api.index', _external=True)}}</code>
-    </pre>
-    <p>
-        The API expects and returns JSON.
-    </p>
-    <p>
-        Some requests will need an API key to authenticate and authorize the operation. You can find your API key
-        listed in your profile.
-    </p>
-    <p>
-        The returned objects will have a links and link fields, not included in the model in order to support 
-        <a href="https://en.wikipedia.org/wiki/HATEOAS">Hypermedia as the Engine of Application State</a> (also known as HATEOAS), 
-        to show the relationships between objects.
-    </p>
-    <p>
-        All objects will return a <strong>link</strong> field which will be the absolute URL for that specific object within the API. If the object has any parents, 
-        you will find the relations in the links list. For example, for a Task Run you will get something like this:
-    </p>
-    <pre>
-        <code data-mode="javascript" data-readOnly="true" data-theme="lesser-dark">
-    {
-        "info": 65,
-        "user_id": null,
-        "links": [
-            "<link rel='parent' title='project' href='http://localhost:5000/api/project/90'/>",
-            "<link rel='parent' title='task' href='http://localhost:5000/api/task/5894'/>"
-        ],
-        "task_id": 5894,
-        "created": "2012-07-07T17:23:45.714184",
-        "finish_time": "2012-07-07T17:23:45.714210",
-        "calibration": null,
-        "project_id": 90,
-        "user_ip": "X.X.X.X",
-        "link": "<link rel='self' title='taskrun' href='http://localhost:5000/api/taskrun/8969'/>",
-        "timeout": null,
-        "id": 8969
-    }
-        </code>
-    </pre>
-
-                <h2>Projects API end point</h2>
-                <p>To get a list of available projects:</p>
-                <ul>
-                    <li><a href="{{url_for('api.api_project')}}">{{url_for('api.api_project', _external=True)}}</a></li>
-                </ul>
-                <p>To search for a specific project:</p>
-                <ul>
-                    <li><a href="{{url_for('api.api_project', short_name='pinyincardcatalogue')}}">{{url_for('api.api_project', short_name='pinyincardcatalogue', _external=True)}}</a></li>
-                </ul>
-                <hr>
-
-                <h2>Tasks API end point</h2>
-                <p>To get a list of available tasks:</p>
-                <ul>
-                    <li><a href="{{url_for('api.api_task')}}">{{url_for('api.api_task', _external=True)}}</a></li>
-                </ul>
-                <p>To get the tasks for a given project:</p>
-                <ul>
-                    <li><a href="{{url_for('api.api_task', project_id=project_id)}}">{{url_for('api.api_task', project_id=project_id, _external=True)}}</a></li>
-                </ul>
-                <p>Or, to get a list of completed tasks for a given project:</p>
-                <ul>
-                    <li><a href="{{url_for('api.api_task', project_id=project_id, state='completed')}}">{{url_for('api.api_task', project_id=project_id,  state='completed', _external=True)}}</a></li>
-                </ul>
-                <hr>
-
-                <h2>Task Runs API end point</h2>
-                <p>To get a list of contributions:
-                </p>
-                <ul>
-                    <li><a href="{{url_for('api.api_taskrun')}}">{{url_for('api.api_taskrun', _external=True)}}</a></li>
-                </ul>
-                <p>To get the contributions for a given project:</p>
-                <ul>
-                    <li><a href="{{url_for('api.api_taskrun', project_id=project_id)}}">{{url_for('api.api_taskrun', project_id=project_id, _external=True)}}</a></li>
-                </ul>
-                <hr>
-                <p>
-                    <strong>Note: </strong>GET actions are limited to only 20 items by default,
-                    you can use <em>limit</em> and <em>offset</em> to tune the number of results.
-                    For further information read the <a href="http://docs.pybossa.com/en/latest/api.html">documentation</a>.
-                </p>
-                <p>
-                    For more information about the API please, see the <a href="http://docs.pybossa.com/en/latest/api.html">PyBossa documentation</a> and the <a href="http://docs.pybossa.com/en/latest/user/tutorial.html">step by step tutorial</a>.
-                </p>
-            </div>
-        </div>
+        <p>
+            {{brand}} has a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">RESTful API</a>
+            that can be used for getting information about tasks, submitting contributions, etc.
+            The API expects and returns JSON and is available at:
+        </p>
+        <pre class="mb-0">
+            <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+                {{ url_for('api.index', _external=True) }}
+            </code>
+        </pre>
+        <p>
+            Some requests will need an API key to authenticate and authorize the operation. You can find your API key
+            listed in your profile.
+        </p>
+        <p>
+            The API is extensive; as well as endpoints for things such as listing or searching domain objects, since PyBossa v2.3.6 almost all server endpoints speak JSON.
+        </p>    
+        <p>    
+            Please refer to the full <a href="http://docs.pybossa.com/en/latest/api.html">PyBossa API documentation</a> for more details.
+        </p>
     </div>
 </div>
+
+{% if "pybossa_z3950" in plugins %}
+<div class="card mt-4">
+    {{ card_helpers.render_title('Z39.50 API') }}
+    <div class="card-block pt-0">
+    <p>
+        During development of the Convert-a-Card projects we wrote the <a href="https://pythonhosted.org/Flask-Z3950/">Flask-Z3950</a> extension and 
+        as an offshoot of this we can provide access to search the British Library's main MARC 21 database via the Z39.50 protocol. The endpoint is available at:
+    </p>
+    <pre class="mb-0">
+        <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+            {{ url_for('api.index', _external=True) }}z3950/search/bl/json
+        </code>
+    </pre>
+    <h4>Configuration</h4>
+    <p>
+        Refer to the <a href="http://www.bl.uk/bibliographic/z3950configuration.html" target="_blank">British Library's Z39.50 configuration</a> to identify
+        the integers for the attributes and use values for the fields that you want to search. There are six attributes:
+    </p>
+    <ol>
+        <li>Use</li>
+        <li>Relation</li>
+        <li>Position</li>
+        <li>Structure</li>
+        <li>Truncation</li>
+        <li>Completeness</li>
+    </ol>
+    <p>
+        With the values that can be used against each attribute listed on the above configuration page.
+    </p>
+    <h4 class="mt-4">Building a query</h4>
+    <p class="mb-0">
+        The basic syntax for a query is:
+    </p>
+    <pre class="mb-0">
+        <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+            {{ url_for('api.index', _external=True) }}z3950/search/bl/json?query=(attribute,value)="item"
+        </code>
+    </pre>
+    <p class="mb-0">
+        Multiple attributes can be joined by using a comma:
+    </p>
+    <pre class="mb-0">
+        <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+            {{ url_for('api.index', _external=True) }}z3950/search/bl/json?query=(attribute,value),(attribute,value)="item"
+        </code>
+    </pre>
+    <p class="mb-0">
+        Multiple fields can be searched by using logical operators:
+    </p>
+    <pre class="mb-0">
+        <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+            {{ url_for('api.index', _external=True) }}z3950/search/bl/json?query=(attribute,value)="item"and(attribute, value)="item"
+        </code>
+    </pre>
+    <p class="mb-0">
+        Logical operators can also be used while searching within a particular field:
+    </p>
+    <pre class="mb-0">
+        <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+            {{ url_for('api.index', _external=True) }}z3950/search/bl/json?query=(attribute,value)="item or another_item"
+        </code>
+    </pre>
+    <p>
+        The following parameters apply to all search functions:
+    </p>
+    <ul>
+        <li><strong>query:</strong> The Z39.50 database query.</li>
+        <li><strong>position:</strong> The position of the first record (the default is 1).</li>
+        <li><strong>size:</strong> The maximum number of records returned (the default is 10).</li>
+    </ul>
+    
+    
+    <h4 class="mt-4">Example</h4>
+    <p class="mb-0">
+        <strong>Request:</strong>
+    </p>
+    <pre class="mb-0">
+        <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+            {{ url_for('api.index', _external=True) }}z3950/search/bl/json?query=(1,4)="cheese"&position=10&size=5
+        </code>
+    </pre>
+    <p class="mb-0">
+        <strong>Response:</strong>
+    </p>
+    <pre class="mb-0">
+        <code data-mode="javascript" data-readOnly="true" data-theme="lesser-dark">
+            {
+                "created": 1453334119.273325,
+                "data": [
+                    {
+                        "fields": [
+                            {
+                                "001": "18392793"
+                            },
+                            ...
+                            {
+                                "245": {
+                                    "ind1": "1",
+                                    "ind2": "0",
+                                    "subfields": [
+                                        {
+                                            "a": "Days of wine and roquefort /"
+                                        },
+                                        {
+                                            "c": "Avery Aames."
+                                        }
+                                    ]
+                                }
+                            },
+                            ...
+                        ]
+                        "leader": "02373cam  22004453i 4500"
+                    },
+                    ...
+                ],
+                "message": null,
+                "n_records": 5,
+                "next": "{{ url_for('api.index', _external=True) }}z3950/search/bl/json?query=(1,4)=\"cheese\"&position=15&size=5"
+                "previous": "{{ url_for('api.index', _external=True) }}z3950/search/bl/json?query=(1,4)=\"cheese\"&position=5&size=5"
+                "position": 10,
+                "previous": null,
+                "size": 5,
+                "status": "success",
+                "total": 941
+            }
+        </code>
+    </pre>
+    <h4>Alternative syntaxes</h4>
+    <p>
+        A number of alternative syntaxes are provided, each with their own complexities. 
+        Documentation for the most common of these syntaxes can be found below:
+    </p>
+    <ul>
+        <li><a href="http://www.indexdata.com/yaz/doc/tools.html#CCL">CCL</a>: ISO 8777</li>
+        <li><a href="http://www.loc.gov/standards/sru/cql/">CQL</a>: The Common Query Language</li>
+        <li><a href="http://www.indexdata.com/yaz/doc/tools.html#PQF">PQF</a>: Index Data’s Prefix Query Format</li>
+        <li><a href="http://cheshire.berkeley.edu/cheshire2.html#zfind">C2</a>: Cheshire II query syntax</li>
+    </ul>
+    <h4 class="mt-4">Alternative response formats</h4>
+    <p class="mb-0">
+        You can also retreive records as MARCXML:
+    </p>
+    <pre class="mb-0">
+        <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+            {{ url_for('api.index', _external=True) }}z3950/search/bl/marcxml
+        </code>
+    </pre>
+    <p class="mb-0">
+        Or as the raw MARC string:
+    </p>
+    <pre class="mb-0">
+        <code data-mode="http" data-readOnly="true" data-theme="lesser-dark">
+            {{ url_for('api.index', _external=True) }}z3950/search/bl/marcxml
+        </code>
+    </pre>
+</div>
+{% endif %}
+
 {% endblock %}

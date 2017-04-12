@@ -15,8 +15,11 @@ if ($('#editor').length) {
  * Initialise code editor for code blocks.
  */
  $('code').each(function() {
-    var code = $(this).html(),
+    var code = $(this).text(),
         opts = $(this).data();
+    
+    // Trim leading whitespace
+    code = code.replace(new RegExp(code.match(/\s*\n[\t\s]*/), "g"),'\n')
     
     opts.value = code;
     $(this).empty();

@@ -1,20 +1,17 @@
-{% extends "_layouts/default.html" %}
+{% extends "_layouts/presenter.html" %}
 {% set active_page = "projects" %}
-{% set prefix = project.name %}
-{% set title = "Tutorial" %}
 
 {% block content %}
-<div class="card">
-    <div class="card-block">
-        {% if project.info.tutorial %}
-        {{ project.info.tutorial | safe }}
-        {% else %}
-        <p class="lead text-center">No tutorial has been created for this project.</p>
-        {% endif %}
-    </div>
+{% if project.info.tutorial %}
+{{ project.info.tutorial | safe }}
+{% else %}
+<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+<span class="icon icon-error icon-5x"></span>
+<p class="display-5 my-1">Tutorial Missing</p>
+<div class="alert alert-success my-1">
+    No tutorial has been created for this project.
 </div>
-<div class="text-center">
-    <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" 
-       class="btn btn-outline-primary bg-white btn-lg mt-4" role="button">Get Started</a>
+    <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" class="btn btn-outline-primary btn-lg mt-4" role="button">Get Started</a>
 </div>
+{% endif %}
 {% endblock %}

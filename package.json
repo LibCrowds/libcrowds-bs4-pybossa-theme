@@ -31,7 +31,12 @@
     "hamburgers": "^0.8.1",
 	"aos": "^2.1.1",
 	"intro.js": "^2.5.0",
-    "imagesloaded": "^4.1.1"
+    "imagesloaded": "^4.1.1",
+    "lightgallery": "^1.3.9",
+    "lg-thumbnail": "^1.0.3",
+    "lg-share": "^1.0.2",
+    "lg-zoom": "^1.0.4",
+    "lg-fullscreen": "^1.0.0"
   },
   "devDependencies": {
     "jshint": "latest"
@@ -44,7 +49,8 @@
     "copy:font-awesome": "cp -R node_modules/font-awesome/fonts ./static/fonts/font-awesome/",
     "copy:openseadragon": "cp -R node_modules/openseadragon/build/openseadragon/images ./static/img/openseadragon/",
     "copy:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./static/img/openseadragonselection/",
-    "postinstall": "npm run copy:font-awesome && npm run copy:openseadragon && npm run copy:openseadragonselection",
+    "copy:lightgallery": "cp -R node_modules/lightgallery/dist/fonts ./static/fonts/lightgallery/ && cp -R node_modules/lightgallery/dist/img ./static/img/lightgallery/",
+    "postinstall": "npm run copy:font-awesome && npm run copy:openseadragon && npm run copy:openseadragonselection && npm run copy:lightgallery",
     "lint": "jshint ./static/js/*.js --exclude ./static/js/pybossa.js/"
   }
 }

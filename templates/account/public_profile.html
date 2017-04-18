@@ -14,10 +14,10 @@
             {{ user_helpers.render_profile_card(user, upload_method) }}
         </div>
         <div class="col-lg-8">
-            <div class="card mt-4 mt-lg-0">
+            <div class="card mt-4">
                 {{ card_helpers.render_title("Contributions", search_table="#projects-table") }}
                 <div class="table-responsive">
-                    <table id="project-table" class="table table-hover table-striped mb-0">
+                    <table id="projects-table" class="table table-hover table-striped mb-0">
                         {{ table_helpers.render_head(['Name', 'Progress', 'Details'], center_indexes=[2, 3]) }}
                         <tbody>
                             {% for p in projects %}

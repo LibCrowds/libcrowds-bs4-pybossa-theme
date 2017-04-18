@@ -3,6 +3,8 @@ static/css/gen/*
 static/js/gen/*
 static/.webassets-cache/*
 static/fonts/font-awesome/*
+static/fonts/lightgallery/*
+static/img/lightgallery/*
 static/img/openseadragon/*
 static/img/openseadragonselection/*
 node_modules/*

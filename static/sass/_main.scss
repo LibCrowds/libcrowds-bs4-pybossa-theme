@@ -124,6 +124,9 @@ $hamburger-types:                  (collapse, arrow);
 
 $fa-font-path:                     '../../fonts/font-awesome';
 
+$lg-path-fonts:                    '../../fonts/lightgallery';
+$lg-path-images:                   '../../img/lightgallery';
+
 $ct-series-colors:
     $brand-primary,
     $brand-success,
@@ -178,6 +181,7 @@ $icons:
     "../../node_modules/intro.js/themes/introjs-nassim",
     "../../node_modules/codemirror/lib/codemirror",
     "../../node_modules/codemirror/theme/lesser-dark",
+    "../../node_modules/lightgallery/src/sass/lightgallery",
     "partials/base",
     "partials/typography",
     "partials/transitions",

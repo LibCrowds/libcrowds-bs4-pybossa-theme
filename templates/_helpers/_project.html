@@ -11,14 +11,16 @@
         {%- if shuffle and project.overall_progress == 100 %}style="visibility: hidden"{% endif %}>
         
         <div class="card text-center">
-            <div class="card-img-overlay-wrapper">
-                {{ render_thumbnail(project, class='card-img-top img-fluid') }}
-                <div class="card-img-overlay text-white d-flex flex-column justify-content-center align-content-center">
-                    <div data-progress="{{ project.overall_progress | round | int }}" class="progress-circle progress-circle-white">
-                        <p class="text-white">{{ project.overall_progress | round | int }}%</p>
+            <a href="{{ url_for('project.details', short_name=project.short_name) }}">
+                <div class="card-img-overlay-wrapper">
+                    {{ render_thumbnail(project, class='card-img-top img-fluid') }}
+                    <div class="card-img-overlay text-white d-flex flex-column justify-content-center align-content-center">
+                        <div data-progress="{{ project.overall_progress | round | int }}" class="progress-circle progress-circle-white">
+                            <p class="text-white">{{ project.overall_progress | round | int }}%</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
             <div class="card-block">
                 <h5 class="card-title font-weight-bold">{{ project.name }}</h5>
                 <p class="card-text">{{ project.description }}</p>

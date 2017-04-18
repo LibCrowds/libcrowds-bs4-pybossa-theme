@@ -4,16 +4,34 @@
 {% set hide_title = True %}
 {% set full_width = True %}
 {% import "_helpers/_user.html" as user_helpers %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="row">
         <div class="col-lg-4">
             {{ user_helpers.render_profile_card(user, upload_method) }}
         </div>
         <div class="col-lg-8">
-            {{ project_helpers.render_list_table("Contributions", "The projects that {0} has contributed to".format(user.name), "projects-table", projects, class="mt-4 mt-lg-0") }}
+            <div class="card mt-4 mt-lg-0">
+                {{ card_helpers.render_title("Contributions", search_table="#projects-table") }}
+                <div class="table-responsive">
+                    <table id="project-table" class="table table-hover table-striped mb-0">
+                        {{ table_helpers.render_head(['Name', 'Progress', 'Details'], center_indexes=[2, 3]) }}
+                        <tbody>
+                            {% for p in projects %}
+                            <tr>
+                                {{ table_helpers.render_cell(p.name) }}
+                                {{ table_helpers.render_cell(p.overall_progress, center=True) }}
+                                {{ table_helpers.render_cell('View', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
+                            </tr>
+                            {% endfor %}
+                            {{ table_helpers.render_no_data_row(3) }}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -2,9 +2,44 @@
 {% set active_page = "projects" %}
 {% set title = "Open Project" %}
 {% set title_link=[url_for('project.new'), "Create a Project"] %}
-{% import "_helpers/_project.html" as project_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
 
 {% block content %}
-{{ project_helpers.render_list_table("Published", "Your published projects", "published-projects-table", projects_published) }}
-{{ project_helpers.render_list_table("Draft", "Your draft projects", "draft-projects-table", projects_draft, class="mt-4") }}
+<div class="card mt-4 mt-lg-0">
+    {{ card_helpers.render_title("Published", search_table="#published-table") }}
+    <div class="table-responsive">
+        <table id="published-table" class="table table-hover table-striped mb-0">
+            {{ table_helpers.render_head(['Name', 'Progress', 'Details'], center_indexes=[2, 3]) }}
+            <tbody>
+                {% for p in projects_published %}
+                <tr>
+                    {{ table_helpers.render_cell(p.name) }}
+                    {{ table_helpers.render_cell(p.overall_progress, center=True) }}
+                    {{ table_helpers.render_cell('View', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
+                </tr>
+                {% endfor %}
+                {{ table_helpers.render_no_data_row(3) }}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card mt-4">
+    {{ card_helpers.render_title("Draft", search_table="#draft-table") }}
+    <div class="table-responsive">
+        <table id="draft-table" class="table table-hover table-striped mb-0">
+            {{ table_helpers.render_head(['Name', 'Progress', 'Details'], center_indexes=[2, 3]) }}
+            <tbody>
+                {% for p in projects_draft %}
+                <tr>
+                    {{ table_helpers.render_cell(p.name) }}
+                    {{ table_helpers.render_cell(p.overall_progress, center=True) }}
+                    {{ table_helpers.render_cell('View', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
+                </tr>
+                {% endfor %}
+                {{ table_helpers.render_no_data_row(3) }}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

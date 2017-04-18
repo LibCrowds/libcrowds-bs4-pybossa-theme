@@ -1,5 +1,3 @@
-{% import "_helpers/_card.html" as card_helpers %}
-{% import "_helpers/_table.html" as table_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% macro render_grid(projects, shuffle=False) %}
@@ -63,27 +61,6 @@
     </div>
     <div class="col-xl-4 col-lg-12 text-center text-lg-right my-2">
         <input type="text" class="form-control rounded-oblong shuffle-search" placeholder="Search">
-    </div>
-</div>
-{% endmacro %}
-
-{% macro render_list_table(title, subtitle, id, projects, class=None) %}
-<div class="card {% if class %}{{ class }}{% endif %}">
-    {{ card_helpers.render_title(title, subtitle, search_table="#project-{0}".format(id)) }}
-    <div class="table-responsive">
-        <table id="project-{{ id }}" class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['Name', 'Progress', 'Details'], center_indexes=[2, 3]) }}
-            <tbody>
-                {% for p in projects %}
-                <tr>
-                    {{ table_helpers.render_cell(p.name) }}
-                    {{ table_helpers.render_cell(p.overall_progress, center=True) }}
-                    {{ table_helpers.render_cell('View', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
-                </tr>
-                {% endfor %}
-                {{ table_helpers.render_no_data_row(3) }}
-            </tbody>
-        </table>
     </div>
 </div>
 {% endmacro %}

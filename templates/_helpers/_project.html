@@ -18,20 +18,21 @@
                         </div>
                     </div>
                 </div>
+            
+                <div class="card-block">
+                    <h5 class="card-title font-weight-bold text-body">{{ project.name }}</h5>
+                    <p class="card-text text-body">{{ project.description }}</p>
+                    <p class="card-text text-muted mt-3">
+                        <span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}
+                        <span class="fa fa-tasks ml-4 mr-1"></span>{{ project.n_tasks }}
+                    </p>
+                </div>
+                <div class="card-footer text-uppercase">
+                    <button type="button" role="button" class="btn btn-outline-primary">
+                        Contribute
+                    </button>
+                </div>
             </a>
-            <div class="card-block">
-                <h5 class="card-title font-weight-bold">{{ project.name }}</h5>
-                <p class="card-text">{{ project.description }}</p>
-                <p class="card-text text-muted mt-3">
-                    <span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}
-                    <span class="fa fa-tasks ml-4 mr-1"></span>{{ project.n_tasks }}
-                </p>
-            </div>
-            <div class="card-footer text-uppercase">
-                <a href="{{ url_for('project.details', short_name=project.short_name) }}" class="btn btn-outline-primary">
-                    Contribute
-                </a>
-            </div>
         </div>
     </div>
     

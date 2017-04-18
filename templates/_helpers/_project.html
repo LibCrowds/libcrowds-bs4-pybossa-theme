@@ -51,10 +51,11 @@
         <div class="d-flex flex-row form-group my-2 align-items-center">
             <label for="project-sort-options" class="mr-2 mb-0">Sort:</label>
             <select class="shuffle-sort custom-select" id="project-sort-options">
-                <option value="progress">Most Help Needed</option>
-                <option value="n-volunteers" data-reverse="true">Most Popular</option>
-                <option value="created" data-reverse="true">Most Recently Launched</option>
-                <option value="last-activity" data-reverse="true">Most Recently Active</option>
+                <option value="progress" data-sortby="progress">Most Help Needed</option>
+                <option value="progress-reverse" data-sortby="progress" data-reverse="true">Closest to Completion</option>
+                <option value="n-volunteers" data-sortby="n-volunteers" data-reverse="true">Most Popular</option>
+                <option value="created" data-sortby="created" data-reverse="true">Most Recently Launched</option>
+                <option value="last-activity" data-sortby="last-activity" data-reverse="true">Most Recently Active</option>
             </select>      
         </div>
     </div>

@@ -37,7 +37,8 @@ ShuffleGrid.prototype.setupSorting = function() {
 		var value   = evt.target.value,
 			element = evt.target.querySelector('option[value="' + value + '"]'),
 			reverse = true ? element.getAttribute("data-reverse") : false,
-			options = { by: _this.sortBy(value), reverse: reverse };
+			sortBy  = element.getAttribute("data-sortby"),
+            options = { by: _this.sortBy(sortBy), reverse: reverse };
 		_this.shuffle.sort(options);
 	});
 };

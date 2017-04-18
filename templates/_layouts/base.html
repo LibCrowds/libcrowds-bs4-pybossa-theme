@@ -91,12 +91,13 @@
             "js/popovers.js",
             "js/tooltips.js",
             "js/tab-control.js",
-            "js/hamburger.js"
+            "js/hamburger.js",
+            "js/favourites.js"
             %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
         {%- include "_includes/_sentry.js" %}
         {% include "_includes/_flash_messages.js" %}
-        {% include "_includes/ajax_csrf_token.js" %}
+        {% include "_includes/_ajax_csrf_token.js" %}
     </body>
 </html>

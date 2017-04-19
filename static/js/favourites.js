@@ -136,7 +136,7 @@ function updateFavouritesButton(btn, isFavourite) {
     let text = isFavourite ? "Remove from Favourites" : "Add to Favourites",
         icon = isFavourite ? "fa-thumbs-down" : "fa-thumbs-up",
         html = `<span class="fa ${icon} mr-1"></span>${text}`;
-    btn.html(text);
+    btn.html(html);
 }
 
 

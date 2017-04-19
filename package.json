@@ -36,7 +36,8 @@
     "lg-thumbnail": "^1.0.3",
     "lg-share": "^1.0.2",
     "lg-zoom": "^1.0.4",
-    "lg-fullscreen": "^1.0.0"
+    "lg-fullscreen": "^1.0.0",
+    "justifiedGallery": "^3.6.2"
   },
   "devDependencies": {
     "jshint": "latest"

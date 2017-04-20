@@ -1,12 +1,89 @@
 {% extends "_layouts/splash.html" %}
 {% set active_page = "projects" %}
-{% set navbar_class = "navbar fixed-top navbar-toggleable-md navbar-light" %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
 {% import "_helpers/_category.html" as category_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
 
 {% block content %}
+{% if active_cat.name == 'Featured' %}
+<section class="mt-5 mb-4">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 text-center">
+                <h1 class="text-uppercase font-weight-bold display-4">Projects</h1>
+                <hr class="bw-3 my-4">
+                <p class="lead text-md-left">
+                    {{ brand }} projects are grouped into categories according to the type of material, such as
+                    card catalogues or playbills, and a subject, such as location or language.
+                </p>
+                <p class="lead text-md-left">
+                    Each category contains a set of projects that ask you to complete a particular task, which
+                    could be anything from transcribing or highlighting areas of an image to locating matching 
+                    catalogue records in an external database.
+                </p>
+                <p class="lead text-md-left">
+                    To locate your ideal project start by selecting a category from the table below. For example,
+                    you might try searching for "Playbills Margate" or "Chinese Card Catalogues".
+                </p>
+            </div>
+        </div>
+        <hr class="my-4 w-75">
+        <div class="card mt-5">
+            {{ card_helpers.render_title("Project Categories", search_table="#categories-table") }}
+            <div class="table-responsive">
+                <table id="categories-table" class="table table-hover table-striped mb-0">
+                    {{ table_helpers.render_head(['Name', 'Created'], center_indexes=[2]) }}
+                    <tbody>
+                        {% for c in categories if c.name != 'Featured' %}
+                        <tr>
+                            {{ table_helpers.render_cell(c.name, url_for('project.project_cat_index', category=c.short_name)) }}
+                            {{ table_helpers.render_cell(general_helpers.format_date(c.created), center=true) }}
+                        </tr>
+                        {% endfor %}
+                        {{ table_helpers.render_no_data_row(2) }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% if projects %}
+<section id="featured-projects" class="bg-faded text-gray-dark pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1 text-center pt-5">
+                <h3 class="text-uppercase font-weight-bold display-4">Featured Projects</h3>
+                <hr class="bw-3 w-50">
+                <p class="text-uppercase">
+                    Can't decide? Why not have a go at one of our featured projects.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1">
+                <div class="mx-4">
+                    <hr class="w-75">
+                    {{ project_helpers.render_grid_shuffle_controls() }}
+                    <hr class="w-75">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-sm-10 offset-sm-1">
+            {{ project_helpers.render_grid(projects, shuffle=True) }}
+            {% if pagination.pages > 1 %}
+                {{ general_helpers.render_pagination(pagination) }}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% else %}
 <section class="pattern-white-wall w-100 pt-5">
     <div class="container pt-3">
         {{ category_helpers.render_strip(categories, active_cat=active_cat, current_user=current_user) }}
@@ -16,7 +93,7 @@
     </div>
 </section>
 
-<section class="bg-white w-100 bst-inset">
+<section class="w-100">
     <div class="container py-4">
     {% if projects %}
         {{ project_helpers.render_grid(projects, shuffle=True) }}
@@ -28,5 +105,5 @@
     {% endif %}
     </div>
 </section>
-
+{% endif %}
 {% endblock %}

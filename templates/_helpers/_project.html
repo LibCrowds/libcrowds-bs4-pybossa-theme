@@ -35,7 +35,6 @@
             </a>
         </div>
     </div>
-    
     {% endfor %}
 </div>
 {% endmacro %}
@@ -62,6 +61,19 @@
     </div>
     <div class="col-xl-4 col-lg-12 text-center text-lg-right my-2">
         <input type="text" class="form-control rounded-oblong shuffle-search" placeholder="Search">
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_grid_complete_placeholder() %}
+<div class="text-center shuffle-grid-placeholder">
+    <span class="icon icon-in-love icon-5x"></span>
+    <p class="display-5 my-1">Success</p>
+    <div class="alert alert-success my-4">
+        All projects in this category have been completed! If you want to see the statistics or results
+        for a particular project just toggle the "Hide completed" button above.
+    </div>
+    <a class="btn btn-outline-primary btn-lg mt-2" href={{ url_for('project.index') }} role="button">Choose Another Category</a>
     </div>
 </div>
 {% endmacro %}

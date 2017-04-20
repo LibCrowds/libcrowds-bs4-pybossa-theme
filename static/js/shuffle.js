@@ -2,6 +2,7 @@
  * A class for handling shuffleable grids.
  */
 function ShuffleGrid(grid, initialGroup) {
+    this.grid = grid;
     this.checkboxes = $('.shuffle-checkbox');
     this.searchbox = $('.shuffle-search');
     this.sortOptions = $('.shuffle-sort');
@@ -28,6 +29,11 @@ ShuffleGrid.prototype.setupFilters = function() {
 		var checked = evt.target.checked,
 			group   = checked ? evt.target.getAttribute('data-group') : 'all';
 		_this.shuffle.filter(group);
+        if (_this.grid.height() === 0 && group == "all") {
+            $('.shuffle-grid-placeholder').hide();
+        } else {
+            $('.shuffle-grid-placeholder').show();
+        }
 	});
 };
 
@@ -54,6 +60,10 @@ ShuffleGrid.prototype.setupSearching = function() {
 	});
 };
 
+// Toggle placeholder depending on height of grid
+$('.shuffle-grid').on('resize', function() {
+    
+})
 
 $(window).on("load", function() {
     if ($('.shuffle-grid').length == 1) {

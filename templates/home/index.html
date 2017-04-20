@@ -84,7 +84,7 @@
                     {{ project_helpers.render_grid(categories_projects['featured']) }}
                 </div>
                 <div class="text-center">
-                    <a class="btn btn-outline-primary btn-lg my-5 bg-white" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
+                    <a class="btn btn-outline-primary btn-lg my-5" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
                 </div>
             </div>
         </div>
@@ -131,9 +131,9 @@
                 <div>
                     <hr class="bw-3 w-50">
                     <p class="text-uppercase lead">
-                        To date, our top {{ top_users |length }} volunteers have made an amazing {{ "{:,}".format(top_users | sum(attribute='score')) }} contributions!
+                        To date, our top {{ top_users | length }} volunteers have made an amazing {{ "{:,}".format(top_users | sum(attribute='score')) }} contributions!
                     </p>
-                    <a class="btn btn-outline-secondary bg-white mt-3" href="{{ url_for('project.index') }}" role="button">Get Involved</a>
+                    <a class="btn btn-outline-secondary mt-3" href="{{ url_for('project.index') }}" role="button">Get Involved</a>
                 </div>
             </div>
             <div class="col-lg-5 offset-lg-1 hidden-md-down">

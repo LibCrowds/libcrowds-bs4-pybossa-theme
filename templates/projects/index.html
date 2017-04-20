@@ -84,25 +84,56 @@
 {% endif %}
 
 {% else %}
-<section class="pattern-white-wall w-100 pt-5">
-    <div class="container pt-3">
-        {{ category_helpers.render_strip(categories, active_cat=active_cat, current_user=current_user) }}
-        <div class="my-2 mx-4">
-        {{ project_helpers.render_grid_shuffle_controls() }}
-        </div>
+<div id="category-{{ active_cat.category_id }}-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0">
+    <div class="container text-center h-100 d-flex align-items-center justify-content-between flex-column">
+        <div></div>
+        <h2 class="font-weight-bold text-white mb-0">{{ active_cat.name }}</h3>
+        <a href="#about" data-aos="fade-up" data-aos-delay="200" data-aos-duration="400" data-aos-easing="ease-out-sine" data-aos-offset="0">
+            <p class="mb-1 text-uppercase text-white">Scroll Down</p>
+            <span class="fa fa-chevron-down fa-2x text-primary pulse"></span>
+        </a>
     </div>
-</section>
-
-<section class="w-100">
-    <div class="container py-4">
-    {% if projects %}
-        {{ project_helpers.render_grid(projects, shuffle=True) }}
-        {% if pagination.pages > 1 %}
-            {{ general_helpers.render_pagination(pagination) }}
+</div>
+<section id="about" class="my-5">
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 text-center">
+                <h1 class="text-uppercase font-weight-bold display-4">About The Projects</h1>
+                <hr class="bw-3 my-4">
+                <p class="lead text-md-left">
+                    {{ active_cat.description }}
+                </p>
+            </div>
+        </div>
+        {% if projects %}
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1">
+                <div class="mx-4">
+                    <hr class="w-75">
+                    {{ project_helpers.render_grid_shuffle_controls() }}
+                    <hr class="w-75">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-sm-10 offset-sm-1">
+            {{ project_helpers.render_grid(projects, shuffle=True) }}
+            {% if pagination.pages > 1 %}
+                {{ general_helpers.render_pagination(pagination) }}
+            {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1">
+                <div class="mx-4 text-center">
+                    <hr class="w-75">
+                    <p class="lead pt-4">Sorry, there are no projects available for this category.</p>
+                    <a class="btn btn-outline-primary btn-lg my-3" href={{ url_for('project.index') }} role="button">Choose another</a>
+                </div>
+            </div>
+        </div>
         {% endif %}
-    {% else %}
-        <p class="lead pt-4 mb-0 text-center">Sorry, there are no published projects for this category yet.</p>
-    {% endif %}
     </div>
 </section>
 {% endif %}

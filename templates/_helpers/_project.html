@@ -2,7 +2,7 @@
 
 {% macro render_grid(projects, shuffle=False) %}
 <div {% if not shuffle %}class="row overlay-cards"{% else %}class="row shuffle-grid overlay-cards" id="project-grid" data-initial-group="incomplete"{% endif %}>
-    {% for project in projects %}
+    {% for project in projects | sort(attribute='overall_progress') %}
     <div class="col-md-6 col-xl-4 grid-item" 
          data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
          {% if shuffle and project.overall_progress == 100 %}style="visibility: hidden"{% endif %}

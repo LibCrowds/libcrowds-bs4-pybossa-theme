@@ -1,8 +1,6 @@
 .nav-pills {
-    border-radius: $border-radius;
-    
     a.nav-link {
         color: $component-active-bg;
-        border: 1px solid info;
+        border: 1px solid $brand-info;
     }
 }

@@ -108,6 +108,9 @@ $card-spacer-y:                    1.5rem;
 
 $spacer:                           1.5rem;
 
+$nav-pills-border-radius:          0px;
+$component-active-bg:              $brand-info;
+
 $progress-circle-font-size:        2.5rem;
 
 $box-shadow-spread:                -5px;
@@ -190,6 +193,7 @@ $icons:
     "partials/jumbotrons",
     "partials/buttons",
     "partials/navbar",
+    "partials/nav",
     "partials/editor",
     "partials/sidebar",
     "partials/utilities",

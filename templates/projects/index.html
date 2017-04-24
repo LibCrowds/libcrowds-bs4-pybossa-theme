@@ -109,21 +109,44 @@
         <div class="row">
             <div class="col-sm-10 offset-sm-1">
                 <div class="mx-4">
-                    <hr class="w-75">
-                    {{ project_helpers.render_grid_shuffle_controls() }}
-                    <hr class="w-75">
+                {{ project_helpers.render_grid_shuffle_controls() }}
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-2">
             <div class="col-sm-10 offset-sm-1">
-            {{ project_helpers.render_grid(projects, shuffle=True) }}
-            {% if projects | sum(attribute="overall_progress") == projects | length * 100 %}
-            {{ project_helpers.render_grid_complete_placeholder() }}
-            {% endif %}
-            {% if pagination.pages > 1 %}
-                {{ general_helpers.render_pagination(pagination) }}
-            {% endif %}
+                <div class="tab-content">
+                    <div class="tab-pane active" id="project-grid" role="tabpanel">
+                    {{ project_helpers.render_grid(projects, shuffle=True) }}
+                    {% if projects | sum(attribute="overall_progress") == projects | length * 100 %}
+                    {{ project_helpers.render_grid_complete_placeholder() }}
+                    {% endif %}
+                    </div>
+                    <div class="tab-pane" id="project-table" role="tabpanel">
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table id="plugins-table" class="table table-hover table-striped mb-0">
+                                    {{ table_helpers.render_head(['Name', 'Tasks', 'Volunteers', 'Progress', 'Action'], center_indexes=[2, 3, 4, 5]) }}
+                                    <tbody>
+                                        {% for p in projects %}
+                                        <tr>
+                                            {{ table_helpers.render_cell(p.name, url=url_for('project.details', short_name=p.short_name)) }}
+                                            {{ table_helpers.render_cell(p.n_tasks, center=True) }}
+                                            {{ table_helpers.render_cell(p.n_volunteers, center=True) }}
+                                            {{ table_helpers.render_cell(p.overall_progress, center=True) }}
+                                            {{ table_helpers.render_cell('Contribute', center=True, btn=True, url=url_for('project.details', short_name=p.short_name)) }}
+                                        </tr>
+                                        {% endfor %}
+                                        {{ table_helpers.render_no_data_row(4) }}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if pagination.pages > 1 %}
+                    {{ general_helpers.render_pagination(pagination) }}
+                {% endif %}
             </div>
         </div>
         {% else %}

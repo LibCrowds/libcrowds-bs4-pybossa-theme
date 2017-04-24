@@ -1,7 +1,11 @@
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% macro render_grid(projects, shuffle=False) %}
-<div {% if not shuffle %}class="row overlay-cards"{% else %}class="row shuffle-grid overlay-cards" id="project-grid" data-initial-group="incomplete"{% endif %}>
+<div {% if not shuffle %}
+     class="row overlay-cards"
+     {% else %}
+     class="row shuffle-grid overlay-cards" id="project-grid" data-initial-group="incomplete"
+     {% endif %}>
     {% for project in projects | sort(attribute='overall_progress') %}
     <div class="col-md-6 col-xl-4 grid-item" 
          data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
@@ -44,13 +48,13 @@
 {% macro render_grid_shuffle_controls() %}
 <hr class="w-100">
 <div class="row d-flex flex-row align-items-center">
-    <div class="col-md-4 text-center text-lg-left">
+    <div class="col-lg-4 text-center text-lg-left">
         <label class="my-2">
             <input checked="true" class="shuffle-checkbox" data-toggle="toggle" data-width="75" data-onstyle="info" type="checkbox" id="show-all" data-group="incomplete">
             <span class="ml-1">Hide completed</span>
         </label>
     </div>
-    <div class="col-md-4 text-center">
+    <div class="col-lg-4 text-center">
         <div class="my-2">
             <label for="project-sort-options" class="sr-only">Sort:</label>
             <select class="shuffle-sort custom-select" id="project-sort-options">
@@ -62,9 +66,9 @@
             </select>      
         </div>
     </div>
-    <div class="col-md-4 my-2">
+    <div class="col-lg-4 my-2 d-flex flex-row justify-content-center justify-content-lg-end">
         <ul class="nav nav-pills" role="tablist">
-            <li class="nav-item ml-lg-auto">
+            <li class="nav-item">
                 <a class="nav-link active" href="#project-grid" data-toggle="tab" role="tab">
                     <span class="fa fa-table fa-fw"></span>
                 </a>

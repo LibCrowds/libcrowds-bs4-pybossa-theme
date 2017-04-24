@@ -3,10 +3,11 @@
 
 {% block content %}
 <div class="card">
-    {{ card_helpers.render_title('Newsletter', 'Sign up to receive updates about the platform') }}
+    {{ card_helpers.render_title('Newsletter') }}
     <div class="card-block pt-0">
         <p class="lead">
-            If you want to remain updated with new features, projects and developments subscribe to our newsletter.
+            To receive occasional updates about new features, projects and developments 
+            for {{ organisation }} crowdsourcing projects, subscribe to our newsletter.
         </p>
         <div class="text-right">
             <a href="{{ url_for('account.newsletter_subscribe', subscribe=False, next=next) }}" class="btn btn-outline-secondary" role="button">No thanks</a>

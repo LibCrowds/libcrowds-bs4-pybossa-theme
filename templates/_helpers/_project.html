@@ -2,8 +2,9 @@
 {% import "_helpers/_table.html" as table_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 
-{% macro render_shuffle_grid(projects, pagination=None) %}
+{% macro render_shuffle_grid(projects, pagination=None, show_controls=True) %}
 <section id="project-shuffle">
+    {% if show_controls %}
     <nav id="shuffle-controls">    
         <hr class="w-100">
         <div class="row d-flex flex-row align-items-center">
@@ -49,7 +50,8 @@
         </div>
         <hr class="w-100">
     </nav>
-
+    {% endif %}
+    
     <div class="tab-content">
         <div id="grid-pane" class="tab-pane active" role="tabpanel">
             <div id="shuffle-grid" class="row overlay-cards" data-initial-group="incomplete">

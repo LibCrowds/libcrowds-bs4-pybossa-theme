@@ -2,9 +2,7 @@
 <div class="d-flex flex-row justify-content-between align-items-center">
     <h1 class="mb-1">{% if prefix %}<strong>{{ prefix }}: </strong>{% endif %}{{ title }}</h1>
     {% if title_link %}
-    <div class="bg-white">
-        <a href="{{ title_link[0] }}" class="btn btn-outline-primary">{{ title_link[1] }}</a>
-    </div>
+    <a href="{{ title_link[0] }}" class="btn btn-outline-primary btn-bg-white">{{ title_link[1] }}</a>
     {% endif %}
 </div>
 <hr class="mb-4">

@@ -10,13 +10,13 @@
     {{ card_helpers.render_title("Published", search_table="#published-table") }}
     <div class="table-responsive">
         <table id="published-table" class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['Name', 'Progress', 'Details'], center_indexes=[2, 3]) }}
+            {{ table_helpers.render_head(['Name', 'Progress', 'Action'], center_indexes=[2, 3]) }}
             <tbody>
                 {% for p in projects_published %}
                 <tr>
                     {{ table_helpers.render_cell(p.name) }}
                     {{ table_helpers.render_cell(p.overall_progress, center=True) }}
-                    {{ table_helpers.render_cell('View', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
+                    {{ table_helpers.render_cell('Open', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
                 </tr>
                 {% endfor %}
                 {{ table_helpers.render_no_data_row(3) }}
@@ -28,13 +28,13 @@
     {{ card_helpers.render_title("Draft", search_table="#draft-table") }}
     <div class="table-responsive">
         <table id="draft-table" class="table table-hover table-striped mb-0">
-            {{ table_helpers.render_head(['Name', 'Progress', 'Details'], center_indexes=[2, 3]) }}
+            {{ table_helpers.render_head(['Name', 'Progress', 'Action'], center_indexes=[2, 3]) }}
             <tbody>
                 {% for p in projects_draft %}
                 <tr>
                     {{ table_helpers.render_cell(p.name) }}
                     {{ table_helpers.render_cell(p.overall_progress, center=True) }}
-                    {{ table_helpers.render_cell('View', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
+                    {{ table_helpers.render_cell('Open', url=url_for('project.details', short_name=p.short_name), btn=True, center=True) }}
                 </tr>
                 {% endfor %}
                 {{ table_helpers.render_no_data_row(3) }}

@@ -1,67 +1,133 @@
 /**
- * A class for handling shuffleable grids.
+ * A class for handling project shuffle grids and tables.
  */
-function ShuffleGrid(grid, initialGroup) {
-    this.checkboxes = $('.shuffle-checkbox');
-    this.searchbox = $('.shuffle-search');
-    this.sortOptions = $('.shuffle-sort');
-    this.initialSort = $('.shuffle-sort option').first().val();
-    this.sizer = grid.find('.grid-item').first();
-    this.shuffle = new shuffle(grid, {
-        itemSelector: '.grid-item',
-        group: initialGroup || Shuffle.ALL_ITEMS,
-        initialSort: { by: this.sortBy(this.initialSort) },
-        sizer: this.sizer
-    });
+class ProjectShuffle {
+    
+    constructor(gridSelector, tableSelector) {
+        this.grid = $(gridSelector);
+        this.table = $(tableSelector);
+        this.sizer = this.grid.find('.grid-item').first();
+        this.shuffle = new shuffle(this.grid, {
+            itemSelector: '.grid-item',
+            sizer: this.sizer
+        });
+        this.run();
+    }
+    
+    /**
+     * Sort grid items according to selected sort option.
+     */
+    _sortGridItems() {
+    	let element = $("#shuffle-sort option:selected")[0],
+    		reverse = element.getAttribute("data-reverse") || false,
+            options = { 
+                by: function(element) {
+            		let res = element.getAttribute("data-sortby");
+            		return $.isNumeric(res) ? parseFloat(res) : res;
+                }, 
+                reverse: reverse 
+            };
+    	this.shuffle.sort(options);
+    };
+    
+    /**
+     * Sort table rows according to selected sort option.
+     */
+    _sortTableRow() {
+    	let element = $("#shuffle-sort option:selected")[0],
+    		reverse = element.getAttribute("data-reverse") || false,
+            sortBy  = element.getAttribute("data-sortby");
+        
+        let sortedTable = this.table.find('tbody tr').sort(function(a, b) {
+            if (reverse) {
+                return b.getAttribute(`data-${sortBy}`) - a.getAttribute(`data-${sortBy}`);
+            } else {
+                return a.getAttribute(`data-${sortBy}`) - b.getAttribute(`data-${sortBy}`);
+            }
+        });
+        
+        this.table.find('tbody').first().html(sortedTable);
+        this.table.find('tbody').append(this.table.find('tbody tr.no-data'));
+    };
+    
+    /**
+     * Return true if the element contains all search terms, false otherwise.
+     */
+    _search(elem) {
+		let text  = $('#shuffle-search').val().toLowerCase(),
+            words = text.split(' ');
+
+        for (var i = 0; i < words.length; i++) {
+            if (elem.text().toLowerCase().indexOf(words[i]) === -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Return true if an element should be shown, false otherwise.
+     */
+    _filter(elem) {
+        let filter = true;
+        $('.shuffle-checkbox').each((i, checkbox) => {
+        	let checked = checkbox.checked,
+        		group   = checkbox.getAttribute('data-group');
+            
+            if (checked && !elem.data('groups').includes(group)) {
+                filter = false;
+            }
+        });
+        return filter;
+    }
+    
+    /**
+     * Show placeholders if there are no visible grid items.
+     */
+    _showGridPlaceholders() {
+        
+        if (this.grid.find('.shuffle-item--visible').length) {
+            $('#shuffle-grid-placeholders').hide();
+        } else {
+            $('#shuffle-grid-placeholders').show();
+        }
+    }
+    
+    /**
+     * Filter and sort grid items and table rows.
+     */
+    run() {
+        this.table.find('tbody tr:not(.no-data)').each((i, row) => {
+            if (this._filter($(row)) && this._search($(row))) {
+                this._sortTableRow();
+                $(row).removeClass('hidden');
+            } else {
+                $(row).addClass('hidden');
+            }
+        });
+        
+        this.shuffle.filter((elem) => {
+            return this._filter($(elem)) && this._search($(elem));
+        });
+        this._sortGridItems();
+        this._showGridPlaceholders();
+    }
 }
 
-ShuffleGrid.prototype.sortBy = function(value) {
-	return function(element) {
-		var res = element.getAttribute('data-' + value);
-		return $.isNumeric(res) ? parseFloat(res) : res;
-	};
-};
 
-ShuffleGrid.prototype.setupFilters = function() {
-	var _this = this;
-	this.checkboxes.on('change', function(evt) {
-		var checked = evt.target.checked,
-			group   = checked ? evt.target.getAttribute('data-group') : 'all';
-		_this.shuffle.filter(group);
+if ($('#project-shuffle').length === 1) {
+    let projectShuffle = new ProjectShuffle('#shuffle-grid', '#shuffle-table');
+    
+	$('.shuffle-control').on('change keyup', function() {
+		projectShuffle.run();
 	});
-};
-
-ShuffleGrid.prototype.setupSorting = function() {
-	var _this = this;
-	this.sortOptions.on('change', function(evt) {
-		var value   = evt.target.value,
-			element = evt.target.querySelector('option[value="' + value + '"]'),
-			reverse = true ? element.getAttribute("data-reverse") : false,
-			sortBy  = element.getAttribute("data-sortby"),
-            options = { by: _this.sortBy(sortBy), reverse: reverse };
-		_this.shuffle.sort(options);
-	});
-};
-
-ShuffleGrid.prototype.setupSearching = function() {
-	var _this = this;
-	this.searchbox.on('keyup', function(evt) {
-		var searchText = evt.target.value.toLowerCase();
-		_this.shuffle.filter(function(element) {
-			var textContent = element.textContent.toLowerCase();
-			return textContent.indexOf(searchText) !== -1;
-		});
-	});
-};
-
-
-$(window).on("load", function() {
-    if ($('.shuffle-grid').length == 1) {
-        var grid          = $('.shuffle-grid').first(),
-            initial_group = grid.data("initial-group"),
-            shuffle       = new ShuffleGrid(grid, initial_group);
-		shuffle.setupFilters();
-		shuffle.setupSearching();
-		shuffle.setupSorting();
-    }
-});
+    
+    $('.shuffle-tab').on('shown.bs.tab', function() {
+        projectShuffle.run();
+        projectShuffle.shuffle.update();
+    });
+    
+    $(window).on('load', function() {
+        projectShuffle.shuffle.update();
+    })
+}

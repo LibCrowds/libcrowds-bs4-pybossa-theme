@@ -78,3 +78,9 @@
 .btn-scroll {
     visibility: hidden;
 }
+
+.btn-bg-white {
+    &:not(:hover):not(:focus):not(.active) {
+        background-color: $white;
+    }
+}

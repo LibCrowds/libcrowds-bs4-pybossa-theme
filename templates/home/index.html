@@ -78,14 +78,9 @@
                  <span class="ribbon"><span class="fa fa-star"></span></span>
             </div>
         </div>
-        <div class="row">
+        <div class="row my-5">
             <div class="col-lg-10 offset-lg-1">
-                <div class="mt-4">
-                    {{ project_helpers.render_grid(categories_projects['featured']) }}
-                </div>
-                <div class="text-center">
-                    <a class="btn btn-outline-primary btn-lg my-5" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
-                </div>
+                {{ project_helpers.render_shuffle_grid(categories_projects['featured'], show_controls=False) }}
             </div>
         </div>
     </div>

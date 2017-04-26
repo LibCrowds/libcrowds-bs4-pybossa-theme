@@ -119,7 +119,7 @@
                         {{ table_helpers.render_head(['Name', 'Tasks', 'Volunteers', 'Progress', 'Action'], center_indexes=[2, 3, 4, 5]) }}
                         <tbody>
                             {% for p in projects %}
-                            <tr data-groups='["{% if p.overall_progress < 100 %}in{% endif %}complete", "all"]'
+                            <tr data-groups='["{% if p.overall_progress < 100 %}in{% endif %}complete"]'
                                 {% if p.overall_progress == 100 %}class="hidden"{% endif %}
                                 {% for k, v in p.items() %}
                                 data-{{ k }}="{{ v }}"

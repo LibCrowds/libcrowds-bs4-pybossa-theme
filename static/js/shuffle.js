@@ -5,20 +5,20 @@ class ShuffleGrid {
     
     constructor(selector) {
         this.grid = $(selector);
-        this.initialGroup = this.grid.data('initial-group'),
-        this.initialSort = $('.shuffle-sort option').first().val();
         this.sizer = this.grid.find('.grid-item').first();
         this.shuffle = new shuffle(this.grid, {
             itemSelector: '.grid-item',
-            group: this.initialGroup || Shuffle.ALL_ITEMS,
             sizer: this.sizer
         });
         this.run();
     }
     
+    /**
+     * Sort grid items according to selected sort option.
+     */
     _sort() {
     	let element = $("#shuffle-sort option:selected")[0],
-    		reverse = true ? element.getAttribute("data-reverse") : false,
+    		reverse = element.getAttribute("data-reverse") || false,
             options = { 
                 by: function(element) {
             		let res = element.getAttribute("data-sortby");
@@ -29,20 +29,35 @@ class ShuffleGrid {
     	this.shuffle.sort(options);
     };
     
-    _search() {
-		let text = $('#shuffle-search').val().toLowerCase();
-		this.shuffle.filter(function(element) {
-			let textContent = element.textContent.toLowerCase();
-			return textContent.indexOf(text) !== -1;
-		});
+    /**
+     * Return true if the element contains all search terms, false otherwise.
+     */
+    _search(elem) {
+		let text  = $('#shuffle-search').val().toLowerCase(),
+            words = text.split(' ');
+
+        for (var i = 0; i < words.length; i++) {
+            if (elem.text().toLowerCase().indexOf(words[i]) === -1) {
+                return false;
+            }
+        }
+        return true;
     }
     
-    _filterCompleted() {
-        $('.shuffle-checkbox').each((i, elem) => {
-        	let checked = elem.checked,
-        		group   = checked ? elem.getAttribute('data-group') : 'all';
-        	this.shuffle.filter(group);
+    /**
+     * Return true if an element should be shown, false otherwise.
+     */
+    _filter(elem) {
+        let filter = true;
+        $('.shuffle-checkbox').each((i, checkbox) => {
+        	let checked = checkbox.checked,
+        		group   = checkbox.getAttribute('data-group');
+            
+            if (checked && !elem.data('groups').includes(group)) {
+                filter = false;
+            }
         });
+        return filter;
     }
     
     /**
@@ -57,8 +72,9 @@ class ShuffleGrid {
     }
     
     run() {
-        this._filterCompleted();
-		this._search();
+        this.shuffle.filter((elem) => {
+            return this._filter($(elem)) && this._search($(elem));
+        });
         this._sort();
         this._showPlaceholders();
     }
@@ -79,10 +95,10 @@ class ShuffleTable {
      * Sort rows according to selected sort option.
      */
     _sort() {
-    	let element      = $("#shuffle-sort option:selected")[0],
-    		reverse      = element.getAttribute("data-reverse") || false,
-            sortBy       = element.getAttribute("data-sortby"),
-            rows         = this.table.find('tbody tr:not(.no-data)');
+    	let element = $("#shuffle-sort option:selected")[0],
+    		reverse = element.getAttribute("data-reverse") || false,
+            sortBy  = element.getAttribute("data-sortby"),
+            rows    = this.table.find('tbody tr:not(.no-data)');
         
         let sortedTable = this.table.find('tbody tr').sort(function(a, b) {
             if (reverse) {
@@ -111,16 +127,16 @@ class ShuffleTable {
     }
     
     /**
-     * Return true if the row should be filtered out, false otherwise.
+     * Return true if an element should be shown, false otherwise.
      */
     _filter(row) {
-        let filter = false;
+        let filter = true;
         $('.shuffle-checkbox').each((i, elem) => {
         	let checked = elem.checked,
         		group   = checked ? elem.getAttribute('data-group') : 'all';
             
             if (!row.data('groups').includes(group)) {
-                filter = true;
+                filter = false;
             }
         });
         return filter;
@@ -131,11 +147,11 @@ class ShuffleTable {
      */
     run() {
         this.table.find('tbody tr:not(.no-data)').each((i, row) => {
-            if (this._filter($(row)) || !this._search($(row))) {
-                $(row).addClass('hidden');
-            } else {
+            if (this._filter($(row)) && this._search($(row))) {
                 this._sort();
                 $(row).removeClass('hidden');
+            } else {
+                $(row).addClass('hidden');
             }
         });
     }

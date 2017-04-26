@@ -36,8 +36,7 @@ class ProjectShuffle {
     _sortTableRow() {
     	let element = $("#shuffle-sort option:selected")[0],
     		reverse = element.getAttribute("data-reverse") || false,
-            sortBy  = element.getAttribute("data-sortby"),
-            rows    = this.table.find('tbody tr:not(.no-data)');
+            sortBy  = element.getAttribute("data-sortby");
         
         let sortedTable = this.table.find('tbody tr').sort(function(a, b) {
             if (reverse) {
@@ -48,6 +47,7 @@ class ProjectShuffle {
         });
         
         this.table.find('tbody').first().html(sortedTable);
+        this.table.find('tbody').append(this.table.find('tbody tr.no-data'));
     };
     
     /**

@@ -88,23 +88,25 @@
                 {% endfor %}
             </div>
             
-            {% if projects | sum(attribute="overall_progress") == projects | length * 100 %}
-            <div id="shuffle-grid-placeholder" class="text-center">
-                <span class="icon icon-in-love icon-5x"></span>
-                <p class="display-5 my-1">Success</p>
-                <div class="alert alert-success my-4">
-                    All projects in this category have been completed! If you want to see the statistics or results
-                    for a particular project just toggle the "Hide completed" button above.
+            <div id="shuffle-grid-placeholders">
+                {% if projects | sum(attribute="overall_progress") == projects | length * 100 %}
+                <div class="text-center">
+                    <span class="icon icon-in-love icon-5x"></span>
+                    <p class="display-5 my-1">Success</p>
+                    <div class="alert alert-success my-4">
+                        All projects in this category have been completed! If you want to see the statistics or results
+                        for a particular project just toggle the "Hide completed" button above.
+                    </div>
                 </div>
+                {% elif not projects %}
+                <div class="text-center">
+                    <span class="icon icon-in-love icon-5x"></span>
+                    <p class="display-5 my-1">Success</p>
+                    <div class="alert alert-info my-4">
+                        There are no projects available in this category.
+                </div>
+                {% endif %}
             </div>
-            {% elif not projects %}
-            <div id="shuffle-grid-placeholder" class="text-center">
-                <span class="icon icon-in-love icon-5x"></span>
-                <p class="display-5 my-1">Success</p>
-                <div class="alert alert-info my-4">
-                    There are no projects available in this category.
-            </div>
-            {% endif %}
         </div>
         
         <div class="tab-pane" id="table-pane" role="tabpanel">

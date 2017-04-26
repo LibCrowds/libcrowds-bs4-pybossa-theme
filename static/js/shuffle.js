@@ -64,10 +64,11 @@ class ShuffleGrid {
      * Show placeholders if there are no visible grid items.
      */
     _showPlaceholders() {
-        if (this.grid.height() === 0) {
-            $('.shuffle-grid-placeholder').show();
+        
+        if (this.grid.find('.shuffle-item--visible').length) {
+            $('#shuffle-grid-placeholders').hide();
         } else {
-            $('.shuffle-grid-placeholder').hide();
+            $('#shuffle-grid-placeholders').show();
         }
     }
     

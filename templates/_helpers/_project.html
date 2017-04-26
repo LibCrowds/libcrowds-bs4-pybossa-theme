@@ -1,108 +1,147 @@
 {% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_table.html" as table_helpers %}
+{% import "_helpers/_card.html" as card_helpers %}
 
-{% macro render_shuffle_grid(projects, has_shuffle_controls=False) %}
-<div id="shuffle-grid" 
-     {% if not has_shuffle_controls %}
-     class="row overlay-cards"
-     {% else %}
-     class="row overlay-cards" data-initial-group="incomplete"
-     {% endif %}>
-    {% for project in projects | sort(attribute='overall_progress') %}
-    <div class="col-md-6 col-xl-4 grid-item" 
-         data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
-         {% if has_shuffle_controls and project.overall_progress == 100 %}style="visibility: hidden"{% endif %}
-         {% for k, v in project.items() %}
-         data-{{ k }}="{{ v }}"
-         {% endfor %}>
-        
-        <div class="card text-center">
-            <a href="{{ url_for('project.details', short_name=project.short_name) }}">
-                <div class="card-img-overlay-wrapper">
-                    {{ render_thumbnail(project, class='card-img-top img-fluid') }}
-                    <div class="card-img-overlay text-white d-flex flex-column justify-content-center align-content-center">
-                        <div data-progress="{{ project.overall_progress | round | int }}" class="progress-circle progress-circle-white">
-                            <p class="text-white">{{ project.overall_progress | round | int }}%</p>
-                        </div>
+{% macro render_shuffle_grid(projects, pagination=None) %}
+<section id="project-shuffle">
+    <nav id="shuffle-controls">    
+        <hr class="w-100">
+        <div class="row d-flex flex-row align-items-center">
+            <div class="col-lg-4 text-center text-lg-left">
+                <label class="my-2">
+                    <input class="shuffle-checkbox shuffle-control" checked="true" data-toggle="toggle" 
+                           data-width="75" data-onstyle="info" type="checkbox" 
+                           data-group="incomplete">
+                    <span class="ml-1">Hide completed</span>
+                </label>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="my-2">
+                    <label for="shuffle-sort" class="sr-only">Sort:</label>
+                    <select class="custom-select shuffle-control" id="shuffle-sort">
+                        <option value="progress" data-sortby="overall_progress">Most Help Needed</option>
+                        <option value="progress-reverse" data-sortby="overall_progress" data-reverse="true">Closest to Completion</option>
+                        <option value="n-volunteers" data-sortby="n_volunteers" data-reverse="true">Most Popular</option>
+                        <option value="created" data-sortby="created" data-reverse="true">Most Recently Launched</option>
+                        <option value="last-activity" data-sortby="last_activity_raw" data-reverse="true">Most Recently Active</option>
+                    </select>      
+                </div>
+            </div>
+            <div class="col-lg-4 my-2 d-flex flex-row justify-content-center justify-content-lg-end">
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active shuffle-tab" href="#grid-pane" data-toggle="tab" role="tab">
+                            <span class="fa fa-table fa-fw"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link shuffle-tab" href="#table-pane" data-toggle="tab" role="tab">
+                            <span class="fa fa-list fa-fw"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 my-2">
+                <input id="shuffle-search" type="text" class="form-control rounded-oblong shuffle-control" placeholder="Search">
+            </div>
+        </div>
+        <hr class="w-100">
+    </nav>
+
+    <div class="tab-content">
+        <div id="grid-pane" class="tab-pane active" role="tabpanel">
+            <div id="shuffle-grid" class="row overlay-cards" data-initial-group="incomplete">
+                {% for project in projects | sort(attribute='overall_progress') %}
+                <div class="col-md-6 col-xl-4 grid-item" 
+                     data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
+                     {% if project.overall_progress == 100 %}style="visibility: hidden"{% endif %}
+                     {% for k, v in project.items() %}
+                     data-{{ k }}="{{ v }}"
+                     {% endfor %}>
+                    
+                    <div class="card text-center">
+                        <a href="{{ url_for('project.details', short_name=project.short_name) }}">
+                            <div class="card-img-overlay-wrapper">
+                                {{ render_thumbnail(project, class='card-img-top img-fluid') }}
+                                <div class="card-img-overlay text-white d-flex flex-column justify-content-center align-content-center">
+                                    <div data-progress="{{ project.overall_progress | round | int }}" class="progress-circle progress-circle-white">
+                                        <p class="text-white">{{ project.overall_progress | round | int }}%</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <h5 class="card-title font-weight-bold text-body">{{ project.name }}</h5>
+                                <p class="card-text text-body">{{ project.description }}</p>
+                                <p class="card-text text-muted mt-3">
+                                    <span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}
+                                    <span class="fa fa-tasks ml-4 mr-1"></span>{{ project.n_tasks }}
+                                </p>
+                            </div>
+                            <div class="card-footer text-uppercase">
+                                <button type="button" role="button" class="btn btn-outline-primary">Contribute</button>
+                            </div>
+                        </a>
                     </div>
                 </div>
+                {% endfor %}
+            </div>
             
-                <div class="card-block">
-                    <h5 class="card-title font-weight-bold text-body">{{ project.name }}</h5>
-                    <p class="card-text text-body">{{ project.description }}</p>
-                    <p class="card-text text-muted mt-3">
-                        <span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}
-                        <span class="fa fa-tasks ml-4 mr-1"></span>{{ project.n_tasks }}
-                    </p>
+            {% if projects | sum(attribute="overall_progress") == projects | length * 100 %}
+            <div id="shuffle-grid-placeholder" class="text-center">
+                <span class="icon icon-in-love icon-5x"></span>
+                <p class="display-5 my-1">Success</p>
+                <div class="alert alert-success my-4">
+                    All projects in this category have been completed! If you want to see the statistics or results
+                    for a particular project just toggle the "Hide completed" button above.
                 </div>
-                <div class="card-footer text-uppercase">
-                    <button type="button" role="button" class="btn btn-outline-primary">
-                        Contribute
-                    </button>
+                <a class="btn btn-outline-primary btn-lg mt-2" href={{ url_for('project.index') }} role="button">Choose Another Category</a>
                 </div>
-            </a>
+            </div>
+            {% elif not projects %}
+            <div id="shuffle-grid-placeholder" class="text-center">
+                <span class="icon icon-in-love icon-5x"></span>
+                <p class="display-5 my-1">Success</p>
+                <div class="alert alert-info my-4">
+                    There are no projects available in this category.
+                </div>
+                <a class="btn btn-outline-primary btn-lg mt-2" href={{ url_for('project.index') }} role="button">Choose Another Category</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="tab-pane" id="table-pane" role="tabpanel">
+            <div class="card">
+                <div class="table-responsive">
+                    <table id="shuffle-table" class="table table-hover table-striped mb-0">
+                        {{ table_helpers.render_head(['Name', 'Tasks', 'Volunteers', 'Progress', 'Action'], center_indexes=[2, 3, 4, 5]) }}
+                        <tbody>
+                            {% for p in projects %}
+                            <tr data-groups='["{% if p.overall_progress < 100 %}in{% endif %}complete", "all"]'
+                                {% if p.overall_progress == 100 %}class="hidden"{% endif %}
+                                {% for k, v in p.items() %}
+                                data-{{ k }}="{{ v }}"
+                                {% endfor %}>
+                                {{ table_helpers.render_cell(p.name, url=url_for('project.details', short_name=p.short_name)) }}
+                                {{ table_helpers.render_cell(p.n_tasks, center=True) }}
+                                {{ table_helpers.render_cell(p.n_volunteers, center=True) }}
+                                {{ table_helpers.render_cell(p.overall_progress, center=True) }}
+                                {{ table_helpers.render_cell('Contribute', center=True, btn=True, url=url_for('project.details', short_name=p.short_name)) }}
+                            </tr>
+                            {% endfor %}
+                            {{ table_helpers.render_no_data_row(4) }}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    {% endfor %}
-</div>
-{% endmacro %}
-
-{% macro render_shuffle_controls() %}
-<hr class="w-100">
-<div class="row d-flex flex-row align-items-center">
-    <div class="col-lg-4 text-center text-lg-left">
-        <label class="my-2">
-            <input class="shuffle-checkbox" checked="true" data-toggle="toggle" 
-                   data-width="75" data-onstyle="info" type="checkbox" 
-                   data-group="incomplete">
-            <span class="ml-1">Hide completed</span>
-        </label>
-    </div>
-    <div class="col-lg-4 text-center">
-        <div class="my-2">
-            <label for="shuffle-sort" class="sr-only">Sort:</label>
-            <select class="custom-select" id="shuffle-sort">
-                <option value="progress" data-sortby="overall_progress">Most Help Needed</option>
-                <option value="progress-reverse" data-sortby="overall_progress" data-reverse="true">Closest to Completion</option>
-                <option value="n-volunteers" data-sortby="n_volunteers" data-reverse="true">Most Popular</option>
-                <option value="created" data-sortby="created" data-reverse="true">Most Recently Launched</option>
-                <option value="last-activity" data-sortby="last_activity_raw" data-reverse="true">Most Recently Active</option>
-            </select>      
-        </div>
-    </div>
-    <div class="col-lg-4 my-2 d-flex flex-row justify-content-center justify-content-lg-end">
-        <ul id="shuffle-pills" class="nav nav-pills" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" href="#grid-pane" data-toggle="tab" role="tab">
-                    <span class="fa fa-table fa-fw"></span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#table-pane" data-toggle="tab" role="tab">
-                    <span class="fa fa-list fa-fw"></span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12 my-2">
-        <input id="shuffle-search" type="text" class="form-control rounded-oblong" placeholder="Search">
-    </div>
-</div>
-<hr class="w-100">
-{% endmacro %}
-
-{% macro render_grid_complete_placeholder() %}
-<div class="text-center shuffle-grid-placeholder">
-    <span class="icon icon-in-love icon-5x"></span>
-    <p class="display-5 my-1">Success</p>
-    <div class="alert alert-success my-4">
-        All projects in this category have been completed! If you want to see the statistics or results
-        for a particular project just toggle the "Hide completed" button above.
-    </div>
-    <a class="btn btn-outline-primary btn-lg mt-2" href={{ url_for('project.index') }} role="button">Choose Another Category</a>
-    </div>
-</div>
+    {% if pagination and pagination.pages > 1 %}
+        {{ general_helpers.render_pagination(pagination) }}
+    {% endif %}
+</section>
 {% endmacro %}
 
 {% macro render_thumbnail(project, upload_method, class, style, width='200', id=None) %}

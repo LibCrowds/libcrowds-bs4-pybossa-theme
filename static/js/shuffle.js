@@ -1,10 +1,11 @@
 /**
- * A class for handling shuffleable grids.
+ * A class for handling project shuffle grids and tables.
  */
-class ShuffleGrid {
+class ProjectShuffle {
     
-    constructor(selector) {
-        this.grid = $(selector);
+    constructor(gridSelector, tableSelector) {
+        this.grid = $(gridSelector);
+        this.table = $(tableSelector);
         this.sizer = this.grid.find('.grid-item').first();
         this.shuffle = new shuffle(this.grid, {
             itemSelector: '.grid-item',
@@ -16,7 +17,7 @@ class ShuffleGrid {
     /**
      * Sort grid items according to selected sort option.
      */
-    _sort() {
+    _sortGridItems() {
     	let element = $("#shuffle-sort option:selected")[0],
     		reverse = element.getAttribute("data-reverse") || false,
             options = { 
@@ -27,6 +28,26 @@ class ShuffleGrid {
                 reverse: reverse 
             };
     	this.shuffle.sort(options);
+    };
+    
+    /**
+     * Sort table rows according to selected sort option.
+     */
+    _sortTableRow() {
+    	let element = $("#shuffle-sort option:selected")[0],
+    		reverse = element.getAttribute("data-reverse") || false,
+            sortBy  = element.getAttribute("data-sortby"),
+            rows    = this.table.find('tbody tr:not(.no-data)');
+        
+        let sortedTable = this.table.find('tbody tr').sort(function(a, b) {
+            if (reverse) {
+                return b.getAttribute(`data-${sortBy}`) - a.getAttribute(`data-${sortBy}`);
+            } else {
+                return a.getAttribute(`data-${sortBy}`) - b.getAttribute(`data-${sortBy}`);
+            }
+        });
+        
+        this.table.find('tbody').first().html(sortedTable);
     };
     
     /**
@@ -63,7 +84,7 @@ class ShuffleGrid {
     /**
      * Show placeholders if there are no visible grid items.
      */
-    _showPlaceholders() {
+    _showGridPlaceholders() {
         
         if (this.grid.find('.shuffle-item--visible').length) {
             $('#shuffle-grid-placeholders').hide();
@@ -72,109 +93,41 @@ class ShuffleGrid {
         }
     }
     
-    run() {
-        this.shuffle.filter((elem) => {
-            return this._filter($(elem)) && this._search($(elem));
-        });
-        this._sort();
-        this._showPlaceholders();
-    }
-}
-
-
-/**
- * A class for handling shuffleable tables.
- */
-class ShuffleTable {
-    
-    constructor(selector) {
-        this.table = $(selector);
-        this.run();
-    }
-    
     /**
-     * Sort rows according to selected sort option.
-     */
-    _sort() {
-    	let element = $("#shuffle-sort option:selected")[0],
-    		reverse = element.getAttribute("data-reverse") || false,
-            sortBy  = element.getAttribute("data-sortby"),
-            rows    = this.table.find('tbody tr:not(.no-data)');
-        
-        let sortedTable = this.table.find('tbody tr').sort(function(a, b) {
-            if (reverse) {
-                return b.getAttribute(`data-${sortBy}`) - a.getAttribute(`data-${sortBy}`);
-            } else {
-                return a.getAttribute(`data-${sortBy}`) - b.getAttribute(`data-${sortBy}`);
-            }
-        });
-        
-        this.table.find('tbody').first().html(sortedTable);
-    };
-    
-    /**
-     * Return true if the row contains all search terms, false otherwise.
-     */
-    _search(row) {
-		let text  = $('#shuffle-search').val().toLowerCase(),
-            words = text.split(' ');
-        
-        for (var i = 0; i < words.length; i++) {
-            if (row.text().toLowerCase().indexOf(words[i]) === -1) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    /**
-     * Return true if an element should be shown, false otherwise.
-     */
-    _filter(row) {
-        let filter = true;
-        $('.shuffle-checkbox').each((i, elem) => {
-        	let checked = elem.checked,
-        		group   = checked ? elem.getAttribute('data-group') : 'all';
-            
-            if (!row.data('groups').includes(group)) {
-                filter = false;
-            }
-        });
-        return filter;
-    }
-    
-    /**
-     * Hide rows if filtered or search terms not found, otherwise show and sort.
+     * Filter and sort grid items and table rows.
      */
     run() {
         this.table.find('tbody tr:not(.no-data)').each((i, row) => {
             if (this._filter($(row)) && this._search($(row))) {
-                this._sort();
+                this._sortTableRow();
                 $(row).removeClass('hidden');
             } else {
                 $(row).addClass('hidden');
             }
         });
+        
+        this.shuffle.filter((elem) => {
+            return this._filter($(elem)) && this._search($(elem));
+        });
+        this._sortGridItems();
+        this._showGridPlaceholders();
     }
 }
 
 
 if ($('#project-shuffle').length === 1) {
-    let shuffleGrid  = new ShuffleGrid('#shuffle-grid'),
-        shuffleTable = new ShuffleTable('#shuffle-table');
+    let projectShuffle = new ProjectShuffle('#shuffle-grid', '#shuffle-table');
     
 	$('.shuffle-control').on('change keyup', function() {
-		shuffleGrid.run();
-        shuffleTable.run();
+		projectShuffle.run();
 	});
     
     $('.shuffle-tab').on('shown.bs.tab', function() {
-        shuffleGrid.run();
-        shuffleTable.run();
-        shuffleGrid.shuffle.update();
+        projectShuffle.run();
+        projectShuffle.shuffle.update();
     });
     
     $(window).on('load', function() {
-        shuffleGrid.shuffle.update();
+        projectShuffle.shuffle.update();
     })
 }

@@ -96,8 +96,6 @@
                     All projects in this category have been completed! If you want to see the statistics or results
                     for a particular project just toggle the "Hide completed" button above.
                 </div>
-                <a class="btn btn-outline-primary btn-lg mt-2" href={{ url_for('project.index') }} role="button">Choose Another Category</a>
-                </div>
             </div>
             {% elif not projects %}
             <div id="shuffle-grid-placeholder" class="text-center">
@@ -105,9 +103,6 @@
                 <p class="display-5 my-1">Success</p>
                 <div class="alert alert-info my-4">
                     There are no projects available in this category.
-                </div>
-                <a class="btn btn-outline-primary btn-lg mt-2" href={{ url_for('project.index') }} role="button">Choose Another Category</a>
-                </div>
             </div>
             {% endif %}
         </div>
@@ -141,6 +136,9 @@
     {% if pagination and pagination.pages > 1 %}
         {{ general_helpers.render_pagination(pagination) }}
     {% endif %}
+    <div class="row text-center">
+        <a class="btn btn-outline-primary btn-lg my-4" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
+    </div>
 </section>
 {% endmacro %}
 

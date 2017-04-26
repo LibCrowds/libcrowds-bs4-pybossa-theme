@@ -13,7 +13,7 @@
 {% macro render_cell(value, url=None, btn=False, center=False) %}
 <td class="visible {% if center %}text-center{% endif %}">
     {% if url %}
-    <a href="{{ url }}" {% if btn %}class="btn btn-sm btn-outline-primary" role="button"{% endif %}>{{ value | safe }}</a>
+    <a href="{{ url }}" {% if btn %}class="btn btn-sm btn-outline-primary btn-bg-white" role="button"{% endif %}>{{ value | safe }}</a>
     {% else %}
     {{ value | safe }}
     {% endif %}

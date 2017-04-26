@@ -1,0 +1,6 @@
+.nav-pills {
+    a.nav-link {
+        color: $component-active-bg;
+        border: 1px solid $brand-info;
+    }
+}

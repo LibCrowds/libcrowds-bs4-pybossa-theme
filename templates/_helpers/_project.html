@@ -138,8 +138,8 @@
     {% if pagination and pagination.pages > 1 %}
         {{ general_helpers.render_pagination(pagination) }}
     {% endif %}
-    <div class="row text-center">
-        <a class="btn btn-outline-primary btn-lg my-4" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
+    <div class="d-flex flex-row justify-content-center">
+        <a class="btn btn-outline-primary btn-lg my-5" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
     </div>
 </section>
 {% endmacro %}

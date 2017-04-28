@@ -64,42 +64,42 @@ class ViewerSidebar {
     constructor(config) {
         this.config = config;
         this.element = $(`
-            <div class="viewer-sidebar">
-                <h4 class="viewer-sidebar-title font-weight-bold text-uppercase">
-                    ${config.title}
-                    <a href="#sb-content" class="viewer-sidebar-toggle" data-toggle="collapse" role="button">&#x25B2;</a>
-                </h4>
-                <div id="sb-content" class="sidebar-content collapse show">
-                    <h3 id="objective" class="lead">${config.objective}</h3>
-                    <p id="guidance">${config.guidance}</p>
-                    <button class="btn btn-success btn-block btn-answer my-2" role="button">
-                        ${this.config.answerButtonText}
-                    </button>
-                    <div id="favourites"></div>
-                    <a id="tutorial" href="../tutorial" class="btn btn-outline-white btn-block my-2" role="button" style="display: none;">
-                        View Tutorial
-                    </a>
-                    <div id="comments" class="my-2" style="display: none;">
-                        <a href="#comment" class="btn btn-outline-white btn-block" role="button" data-toggle="collapse">
-                            Add Comment
+            <div class="viewer-sidebar-container">
+                <div class="viewer-sidebar">
+                    <h4 class="viewer-sidebar-title font-weight-bold text-uppercase">
+                        ${config.title}
+                        <a href="#sb-content" class="viewer-sidebar-toggle" data-toggle="collapse" role="button">&#x25B2;</a>
+                    </h4>
+                    <div id="sb-content" class="sidebar-content collapse show">
+                        <h3 class="objective"></h3>
+                        <p class="guidance"></p>
+                        <button class="btn btn-success btn-block btn-answer my-2" role="button">
+                            ${this.config.answerButtonText}
+                        </button>
+                        <div id="favourites"></div>
+                        <a id="tutorial" href="../tutorial" class="btn btn-outline-white btn-block my-2" role="button" style="display: none;">
+                            View Tutorial
                         </a>
-                        <div class="mt-2 collapse" id="comment">
-                            <textarea class="form-control margin-bottom-xs" rows="3" id="comment-input" placeholder="Add a comment...">
-                            </textarea>
+                        <div id="comments" class="my-2" style="display: none;">
+                            <a href="#comment" class="btn btn-outline-white btn-block" role="button" data-toggle="collapse">
+                                Add Comment
+                            </a>
+                            <div class="mt-2 collapse" id="comment">
+                                <textarea class="form-control margin-bottom-xs" rows="3" id="comment-input" placeholder="Add a comment..."></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div id="progress" class="mt-4" style="display: none;">
-                        <h5 class="viewer-sidebar-title font-weight-bold text-uppercase">Progress</h5>
-                        <div class="progress my-2">
-                            <div class="progress-bar" role="progress-bar" style="width: 0%;"></div>
+                        <div id="progress" class="mt-4" style="display: none;">
+                            <h5 class="viewer-sidebar-title font-weight-bold text-uppercase">Progress</h5>
+                            <div class="progress my-2">
+                                <div class="progress-bar" role="progress-bar" style="width: 0%;"></div>
                             </div>
                             <p id="progress-summary" class="text-center"></p>
                         </div>
-                    </div>
-                    <div id="preview" class="mt-4" style="display: none;">
-                        <h5 class="viewer-sidebar-title font-weight-bold text-uppercase">Up Next</h5>
-                        <div class="text-center">
-                            <img class="img-fluid" id="preview-thumbnail" />
+                        <div id="preview" class="mt-4" style="display: none;">
+                            <h5 class="viewer-sidebar-title font-weight-bold text-uppercase">Up Next</h5>
+                            <div class="text-center mt-2">
+                                <img class="img-fluid" id="preview-thumbnail" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -128,6 +128,27 @@ class ViewerSidebar {
         });
     }
 }
+
+
+
+
+
+/**
+ * Viewer footer HUD, to be shown on smaller screens.
+ */
+class ViewerFooter {
+    
+    constructor() {
+        this.element = $(`
+            <div class="viewer-footer">
+                <h3 class="objective"></h3>
+                <button class="btn btn-success btn-block btn-answer my-2" role="button">Done</button>
+            </div>
+        `);
+    }
+}
+
+
 
 
 
@@ -205,7 +226,7 @@ class ViewerHelpModal {
                                         </tr>
                                         <tr class="selection-help" style="display: none;">
                                             <td>Toggle selection</td>
-                                            <td class="text-center">c</td>
+                                            <td class="text-center">SHIFT (Hold)</td>
                                         </tr>
                                         <tr>
                                             <td>Move viewport up</td>
@@ -253,7 +274,6 @@ class LibCrowdsViewerInterface {
         this.config = Object.assign({}, {
             prefixUrl: "/static/img/openseadragon/",
             showNavigator: false,
-            showNavigator: true,
             navigatorPosition: 'BOTTOM_LEFT',
             zoomInButton: 'zoom-in',
             zoomOutButton: 'zoom-out',
@@ -266,10 +286,10 @@ class LibCrowdsViewerInterface {
                 clickToZoom: false
             },
             gestureSettingsTouch: {
-                clickToZoom: false
+                dblClickToZoom: false
             },
             gestureSettingsPen: {
-                clickToZoom: false
+                dblClickToZoom: false
             },
             selectionEnabled: false,
             selectionConfig: {
@@ -294,20 +314,18 @@ class LibCrowdsViewerInterface {
         // Setup HUD controls and add them to the viewer
         this.controls = new ViewerControls(this.config);
         this.sidebar = new ViewerSidebar(this.config.sidebarConfig);
+        this.footer = new ViewerFooter();
         this.helpModal = new ViewerHelpModal(this.config.selectionEnabled);
         $(`#${this.config.id}`).prepend(this.controls.element);
         $(`#${this.config.id}`).prepend(this.sidebar.element);
         $(`#${this.config.id}`).append(this.helpModal.element);
-        
-        // Viewer styles
-        $(`#${config.id}`).css({
-            'overflow': 'hidden',
-            'position': 'relative',
-            'background-color': '#000'
-        });
+        $(`#${this.config.id}`).append(this.footer.element);
         
         this.viewer = OpenSeadragon(this.config);
         this.overlayId = 1;
+        
+        //Fix navbar styles
+        $('.navbar').css('background-color', 'rgba(0, 0, 0, 0.75)');
         
         // Setup selection if enabled
         if (this.config.selectionEnabled) {
@@ -318,14 +336,8 @@ class LibCrowdsViewerInterface {
     
         // Draw an overlay when a selection is confirmed
         this.viewer.addHandler('selection', (selection) => {
-            let vpRect      = this.viewer.viewport.imageToViewportRectangle(selection),
-                hoverStyles = { 'opacity': '1' },
-                styles      = { 
-                    'border': '2px solid rgb(65, 144, 194)', 
-                    'background-color': 'rgba(65, 144, 194, 0.1)', 
-                    'opacity': '.6' 
-                };
-            this.drawOverlay(vpRect, styles, hoverStyles, 'selection-overlay');
+            let vpRect = this.viewer.viewport.imageToViewportRectangle(selection);
+            this.drawOverlay(vpRect, 'selection-overlay');
         });
         
         // Toggle the HUD selection icon
@@ -334,9 +346,6 @@ class LibCrowdsViewerInterface {
                 toggleId = '#' + this.config.selectionConfig.toggleButton;
             $(toggleId).html(`<span class="fa fa-toggle-${onOrOff}"></span>`);
             $(toggleId).blur();
-            if (this.selector.element) {
-                $(this.selector.element).css('outline', '9999px rgba(0,0,0,.6) solid');
-            }
         });
         
         // Hide loading icon after tile drawn
@@ -370,18 +379,44 @@ class LibCrowdsViewerInterface {
             });
             return null;
         };
+        
+        // Toggle selection while shift is held.
+        $(document).on('keyup keydown', (evt) => {
+            if(evt.shiftKey) {
+                this.selector.enable();
+            } else {
+                if (this.selector.isSelecting) {		
+                    this.selector.confirm();		
+                }
+                this.selector.disable();
+            }
+        });
     }
     
     /**
-     * Load an image into the viewer.
+     * Load an image and the task details.
      */
-    loadImage(id) {
-        this.loading(true);
-        return this.viewer.open({
+    loadTask(imageArk, objective, guidance) {
+        this.viewer.open({
             type: 'image',
-            tileSource:  `http:\/\/api.bl.uk\/image\/iiif\/${id}\/info.json`,
+            tileSource:  `http:\/\/api.bl.uk\/image\/iiif\/${imageArk}\/info.json`,
             buildPyramid: false
         });
+        this.sidebar.element.find('.objective').text(objective);
+        this.footer.element.find('.objective').text(objective);
+        this.sidebar.element.find('.guidance').text(guidance);
+        this.footer.element.find('.guidance').text(guidance);
+    }
+    
+    /**
+     * Remove the current image, preview thumbnail and any comments.
+     */
+    clearTask() {
+        this.viewer.close();
+        this.sidebar.element.find('#preview-thumbnail').removeAttr('src');
+        this.sidebar.element.find('#comment').collapse('hide');
+        this.sidebar.element.find('#comment-input').val('');
+        this.loading(true);
     }
     
     /**
@@ -407,9 +442,11 @@ class LibCrowdsViewerInterface {
      */
     updateUserProgress(data) {
         let pct  = Math.round((data.done*100)/data.total),
-            pBar = this.sidebar.element.children('#progress');
-        pBar.children('.progress-bar').css('width', `${pct}%`);
-        pBar.children('#progress-summary').text(`You have completed ${data.done} of ${data.total} tasks`);
+            pBar = this.sidebar.element.find('#progress');
+        pBar.find('.progress-bar').css('width', `${pct}%`);
+        pBar.find('#progress-done').text(data.done);
+        pBar.find('#progress-total').text(data.total);
+        pBar.find('#progress-summary').text(`You have completed ${data.done + ' '} of ${data.total + ' '} tasks`);
     }
     
     /**
@@ -428,28 +465,13 @@ class LibCrowdsViewerInterface {
     }
 
     /**
-     * Draw an overlay with the given styles and class.
+     * Draw an overlay of the given class.
      */
-    drawOverlay(viewportRectangle, styles, hoverStyles, cls) {
-        let overlayElem = $('<div></div>'),
-            id          = 'overlay-' + this.overlayId;
-        overlayElem.attr('id', id);
-        overlayElem.css(styles);
-        overlayElem.hover(function() {
-            $(this).css(hoverStyles);
-        }, function() {
-            $(this).css(styles);
-        });
-        if (cls) {
-            overlayElem.addClass(cls);
-        }
+    drawOverlay(vpRect, cls) {
+        let overlayElem = $(`<div id="overlay-${this.overlayId}" class="${cls}"></div>`);
         this.viewer.addOverlay({
             element: overlayElem[0],
-            location: new OpenSeadragon.Rect(viewportRectangle.x, 
-                                             viewportRectangle.y, 
-                                             viewportRectangle.width, 
-                                             viewportRectangle.height, 
-                                             viewportRectangle.degrees)
+            location: new OpenSeadragon.Rect(vpRect.x, vpRect.y, vpRect.width, vpRect.height, vpRect.degrees)
         });
         this.overlayId += 1;
     }
@@ -459,14 +481,9 @@ class LibCrowdsViewerInterface {
      */
     highlight(region) {
         const json   = JSON.parse(region),
-              rect   = new OpenSeadragon.Rect(json.x, json.y, json.width, 
-                                              json.height, json.degrees),
-              vpRect = this.viewer.viewport.imageToViewportRectangle(rect),
-              styles = { 
-                  'outline': '9999px rgba(0,0,0,.35) solid',
-                  'border': '1px solid rgb(255, 255, 255)'
-              };
-        this.drawOverlay(vpRect, styles, null, 'highlight-overlay');
+              rect   = new OpenSeadragon.Rect(json.x, json.y, json.width, json.height, json.degrees),
+              vpRect = this.viewer.viewport.imageToViewportRectangle(rect);
+        this.drawOverlay(vpRect, 'highlight-overlay');
     }
     
     /**

@@ -20,7 +20,7 @@
         background-color: rgba($black, 0.75);
         padding: 0 0.5rem;
         
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(lg) {
             padding: 0;
             flex-direction: column;
         }
@@ -48,14 +48,18 @@
         z-index: 2;
         right: 0;
         top: 70px;
-        width: 25%;
+        width: 35%;
         height: calc(100% - 70px - 1.6rem);
         margin: 0.8rem;
         overflow: hidden;
         display: none;
         
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(lg) {
             display: block;
+        }
+        
+        @include media-breakpoint-up(lg) {
+            width: 25%;
         }
         
         .viewer-sidebar {
@@ -64,11 +68,11 @@
             overflow-y: auto;
             overflow-x: hidden;
             padding: 0.8rem;
-            max-height: calc(100% - 70px - 1.6rem);
+            max-height: 100%;
             border: 2px solid rgb(85, 85, 85);
             background-color: rgba($black, 0.75);
             
-            @include media-breakpoint-up(md) {
+            @include media-breakpoint-up(lg) {
                 flex-direction: column;
             }
             
@@ -103,7 +107,7 @@
                 }
             }
             
-            #next-task-preview {
+            #preview-thumbnail {
                 height: 200px;
             }
         }
@@ -119,7 +123,7 @@
         background-color: rgba($black, 0.75);
         border-top: 2px solid rgb(85, 85, 85);
         
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(lg) {
             display: none;
         }
     }
@@ -142,7 +146,7 @@
     
     .selection-overlay {
         border: 2px solid $brand-info; 
-        background-color: rgba($brand-info, 0.1);
+        background-color: rgba($brand-info, 0.2);
         opacity: .6;
         
         @include hover-focus() {

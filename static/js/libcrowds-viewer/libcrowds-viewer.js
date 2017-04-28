@@ -69,10 +69,11 @@ class ViewerSidebar {
                     <div id="sb-content" class="sidebar-content collapse show">
                         <h3 class="objective"></h3>
                         <p class="guidance"></p>
+                        <form id="answer-form"></form>
                         <button class="btn btn-success btn-block btn-answer my-2" role="button">
                             ${this.config.answerButtonText}
                         </button>
-                        <div id="favourites"></div>
+                        <div id="favourites" style="display: none;"></div>
                         <a id="tutorial" href="../tutorial" class="btn btn-outline-white btn-block my-2" role="button" style="display: none;">
                             View Tutorial
                         </a>
@@ -112,6 +113,10 @@ class ViewerSidebar {
         
         if (this.config.showProgress) {
             this.element.find('#progress').show();
+        }
+        
+        if (this.config.showFavourites) {
+            this.element.find('#favourites').show();
         }
         
         if (this.config.showPreview) {
@@ -292,8 +297,8 @@ class LibCrowdsViewerInterface {
                 showPreview: true
             }
         }, config);
-        
-        this.loading(true);
+        this.viewer = OpenSeadragon(this.config);
+        this.overlayId = 1;
         
         // Setup HUD controls and add them to the viewer
         this.controls = new ViewerControls(this.config);
@@ -304,9 +309,6 @@ class LibCrowdsViewerInterface {
         $(`#${this.config.id}`).prepend(this.sidebar.element);
         $(`#${this.config.id}`).append(this.helpModal.element);
         $(`#${this.config.id}`).append(this.footer.element);
-        
-        this.viewer = OpenSeadragon(this.config);
-        this.overlayId = 1;
         
         //Fix navbar styles
         $('.navbar').css('background-color', 'rgba(0, 0, 0, 0.75)');
@@ -380,7 +382,7 @@ class LibCrowdsViewerInterface {
     /**
      * Load an image and the task details.
      */
-    loadTask(imageArk, objective, guidance) {
+    loadTask(imageArk, objective, guidance, taskId) {
         this.viewer.open({
             type: 'image',
             tileSource:  `http:\/\/api.bl.uk\/image\/iiif\/${imageArk}\/info.json`,
@@ -390,6 +392,12 @@ class LibCrowdsViewerInterface {
         this.footer.element.find('.objective').text(objective);
         this.sidebar.element.find('.guidance').text(guidance);
         this.footer.element.find('.guidance').text(guidance);
+        
+        getFavouritesButton(taskId).then(function(btn) {
+            btn.addClass('btn-block btn-outline-white');
+            btn.removeClass('btn-info');
+            $('#favourites').html(btn);
+        });
     }
     
     /**
@@ -400,6 +408,7 @@ class LibCrowdsViewerInterface {
         this.sidebar.element.find('#preview-thumbnail').removeAttr('src');
         this.sidebar.element.find('#comment').collapse('hide');
         this.sidebar.element.find('#comment-input').val('');
+        this.sidebar.element.find('#answer-form').html('');
         this.loading(true);
     }
     
@@ -446,6 +455,21 @@ class LibCrowdsViewerInterface {
      */
     getComments() {
         return this.sidebar.element.find('#comment-input').val();
+    }
+    
+    /**
+     * Return the serialized answer form input.
+     */
+    getFormData() {
+        return this.sidebar.element.find('#answer-form').serialize();
+    }
+    
+    /**
+     * Add an input field to the answer form.
+     */
+    addFormInput(id, name, placeholder, type) {
+        let input = `<input id="${id}" class="form-control my-2" name="${name}" placeholder="${placeholder}" type="${type}" />`;
+        this.sidebar.element.find('#answer-form').append(input);
     }
 
     /**

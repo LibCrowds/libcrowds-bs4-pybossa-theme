@@ -1,0 +1,107 @@
+ .viewer-container {
+    height: 100%;
+    width: 100%;
+    
+    .openseadragon-message {
+        color: $white;
+    }
+    
+    .navbar {
+        background-color: rgba($black, 0.75);
+        z-index: 99;
+    }
+    
+    .viewer-controls {
+        display: flex;
+        flex-direction: row;
+        margin: 80px 1rem;
+        position: absolute;
+        z-index: 2;
+        border-radius: 25px;
+        background-color: rgba(0, 0, 0, 0.75);
+        
+        @include media-breakpoint-up(lg) {
+            flex-direction: column;
+        }
+        
+        button {
+            background: none;
+            color: #fff;
+            opacity: 0.8;
+            text-shadow: 0 0 5px #000;
+            font-size: 1.25rem;
+            padding: .5rem;
+            cursor: pointer;
+            border: none;
+            outline: none !important;
+            opacity: 0.65;
+            
+            @include hover-focus() {
+                opacity: 1;
+            }
+        }
+    }
+
+    .viewer-sidebar {
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        top: 70px;
+        margin: 0.8rem;
+        border-radius: 0;
+        color: #fff;
+        width: 25%;
+        min-width: 200px;
+        background-color: transparent;
+        padding: 0.8rem;
+        border: 2px solid rgb(85, 85, 85);
+        background-color: rgba(0, 0, 0, 0.75);
+        
+        .sidebar-content {
+            padding-top: 0.8rem;
+        }
+        
+        .viewer-sidebar-title {
+            font-size: 1rem;
+            margin-bottom: 0;
+            flex-direction: row;
+        }
+        
+        .viewer-sidebar-toggle {
+            background: none;
+            border: none;
+            color: white;
+            float: right;
+            transition: transform 350ms;
+            
+            &.collapsed {
+                transform: rotate(180deg);
+            }
+        }
+        
+        .progress {
+            border: 1px solid $white; 
+            background-color: transparent;
+            
+            .progress-bar {
+                background-color: $white;
+            }
+        }
+        
+        #next-task-preview {
+            height: 200px;
+        }
+    }
+
+    .viewer-loading-icon {
+        background: url('/static/svg/loading.svg');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+
+    .viewer-modal {
+        .modal-content {
+            border: 1px solid $gray-lighter;
+        }
+    }
+}

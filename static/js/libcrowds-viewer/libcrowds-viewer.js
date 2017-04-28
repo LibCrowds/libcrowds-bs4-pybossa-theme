@@ -52,10 +52,6 @@ class ViewerControls {
     }
 }
 
-
-
-
-
 /**
  * Viewer sidebar HUD.
  */
@@ -129,10 +125,6 @@ class ViewerSidebar {
     }
 }
 
-
-
-
-
 /**
  * Viewer footer HUD, to be shown on smaller screens.
  */
@@ -147,12 +139,6 @@ class ViewerFooter {
         `);
     }
 }
-
-
-
-
-
-
 
 /**
  * Help modal for LibCrowds viewer.
@@ -262,8 +248,6 @@ class ViewerHelpModal {
         }
     }
 }
-
-
 
 /**
  * Custom OpenSeadragon viewer interface.

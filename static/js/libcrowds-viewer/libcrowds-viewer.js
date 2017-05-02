@@ -277,7 +277,6 @@ class LibCrowdsViewerInterface {
             helpButton: 'show-help-modal',
             fullPageButton: 'fullscreen',
             autoHideControls: false,
-            minZoomLevel: 0.1,
             gestureSettingsMouse: {
                 clickToZoom: false
             },

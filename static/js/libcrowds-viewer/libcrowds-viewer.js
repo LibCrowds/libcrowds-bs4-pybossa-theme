@@ -447,7 +447,7 @@ class LibCrowdsViewerInterface {
      * Load an image and the task details.
      */
     loadTask(task) {
-        let form        = task.info.form;
+        let form = task.info.form;
         this.loading(true);
         this.viewer.open({
             type: 'image',
@@ -471,7 +471,7 @@ class LibCrowdsViewerInterface {
             $('#favourites').html(btn);
         });
         
-        this.loadItemDetails(task.info.manifestUrl);
+        this.loadItemDetails(task.info.manifest_url);
     }
 
     /**

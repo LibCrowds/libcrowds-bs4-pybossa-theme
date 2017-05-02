@@ -81,8 +81,8 @@ class ViewerSidebar {
                             <a href="#comment" class="btn btn-outline-white btn-block" role="button" data-toggle="collapse">
                                 Add Comment
                             </a>
-                            <div class="mt-2 collapse" id="comment">
-                                <textarea class="form-control margin-bottom-xs" rows="3" id="comment-input" placeholder="Add a comment..."></textarea>
+                            <div id="comment" class="mt-2 collapse">
+                                <textarea id="comment-input" class="form-control margin-bottom-xs" rows="3" placeholder="Add a comment..."></textarea>
                             </div>
                         </div>
                         <div id="progress" class="mt-4" style="display: none;">
@@ -124,8 +124,15 @@ class ViewerSidebar {
         }
         
         // Focus on comment input when shown
-        $('#task-comment').on('shown.bs.collapse', function () {
+        this.element.find('#comment').on('shown.bs.collapse', function() {
+            console.log('shown')
             $('#comment-input').focus();
+        });
+        
+        // Focus on container when comment input hidden
+        this.element.find('#comment').on('hidden.bs.collapse', () => {
+            console.log('hidden')
+            $('.openseadragon-canvas').focus();
         });
     }
 }
@@ -341,7 +348,7 @@ class LibCrowdsViewerInterface {
         
         // Don't focus on HUD after fullscreen toggled
         this.viewer.addHandler('full-screen', (evt) => {
-            this.viewer.container.focus();
+            $('.openseadragon-canvas').focus();
         });
         
         // Convert a selection overlay back to a selection box on click

@@ -1,27 +1,193 @@
 /**
+ * Viewer controls HUD.
+ */
+class ViewerControls {
+
+    constructor(viewerConfig) {
+        this.viewerConfig = viewerConfig;
+        this.element = $('<div class="viewer-controls"></div>');
+        this.addButtons();
+
+        this.element.on('click', '#show-help-modal', (evt) => {
+            $('#help-modal').modal('show');
+        });
+        
+        this.element.on('click', '#show-info-modal', (evt) => {
+            $('#info-modal').modal('show');
+        });
+    }
+
+    /**
+     * Add a button to the HUD.
+     */
+    addButton(id, icon, tooltip) {
+        let button = $(`
+            <button id="${id}" data-toggle="tooltip" title="${tooltip}" role="button">
+            <span class="fa ${icon}"></span>
+            </button>
+        `);
+
+        button.tooltip({
+            placement: 'right',
+            template: `<div class="tooltip tooltip-hud" role="tooltip">
+                       <div class="tooltip-arrow"></div>
+                       <div class="tooltip-inner"></div>
+                       </div>`
+        });
+
+        this.element.append(button);
+    }
+
+    /**
+     * Add all buttons to the HUD.
+     */
+    addButtons() {
+        this.addButton(this.viewerConfig.zoomInButton, "fa-plus-circle", "Zoom in");
+        this.addButton(this.viewerConfig.zoomOutButton, "fa-minus-circle", "Zoom out");
+        this.addButton(this.viewerConfig.homeButton, "fa-refresh", "Reset Zoom");
+        this.addButton(this.viewerConfig.fullPageButton, "fa-expand", "Fullscreen");
+
+        if (this.viewerConfig.selectionEnabled) {
+            this.addButton(this.viewerConfig.selectionConfig.toggleButton, "fa-toggle-off", "Toggle selection");
+        }
+
+        this.addButton(this.viewerConfig.helpButton, "fa-question-circle", "Help");
+        this.addButton(this.viewerConfig.infoButton, "fa-info-circle", "Item Details");
+    }
+}
+
+/**
+ * Viewer sidebar HUD.
+ */
+class ViewerSidebar {
+
+    constructor(config) {
+        this.config = config;
+        this.element = $(`
+            <div class="viewer-sidebar-container">
+                <div class="viewer-sidebar">
+                    <h4 class="viewer-sidebar-title font-weight-bold text-uppercase">
+                        ${config.title}
+                        <a href="#sb-content" class="viewer-sidebar-toggle" data-toggle="collapse" role="button">&#x25B2;</a>
+                    </h4>
+                    <div id="sb-content" class="sidebar-content collapse show">
+                        <h3 class="objective"></h3>
+                        <p class="guidance"></p>
+                        <form id="answer-form"></form>
+                        <button class="btn btn-success btn-block btn-answer my-2" role="button">Done</button>
+                        <div id="favourites" style="display: none;"></div>
+                        <a id="tutorial" href="../tutorial" class="btn btn-outline-white btn-block my-2" role="button" style="display: none;">
+                            View Tutorial
+                        </a>
+                        <div id="comments" class="my-2" style="display: none;">
+                            <a href="#comment" class="btn btn-outline-white btn-block" role="button" data-toggle="collapse">
+                                Add Comment
+                            </a>
+                            <div id="comment" class="mt-2 collapse">
+                                <textarea id="comment-input" class="form-control margin-bottom-xs" rows="3" placeholder="Add a comment..."></textarea>
+                            </div>
+                        </div>
+                        <div id="progress" class="mt-4" style="display: none;">
+                            <h5 class="viewer-sidebar-title font-weight-bold text-uppercase">Progress</h5>
+                            <div class="progress my-2">
+                                <div class="progress-bar" role="progress-bar" style="width: 0%;"></div>
+                            </div>
+                            <p id="progress-summary" class="text-center"></p>
+                            <p id="progress-selections" class="text-center" style="display: none;"></p>
+                        </div>
+                        <div id="preview" class="mt-4" style="display: none;">
+                            <h5 class="viewer-sidebar-title font-weight-bold text-uppercase">Up Next</h5>
+                            <div class="text-center mt-2">
+                                <img class="img-fluid" id="preview-thumbnail" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        if (this.config.showTutorial) {
+            this.element.find('#tutorial').show();
+        }
+
+        if (this.config.showComments) {
+            this.element.find('#comments').show();
+        }
+
+        if (this.config.showProgress) {
+            this.element.find('#progress').show();
+            if (this.config.selectionEnabled) {
+                this.element.find('#progress-selections').show();
+            }
+        }
+
+        if (this.config.showFavourites) {
+            this.element.find('#favourites').show();
+        }
+
+        if (this.config.showPreview) {
+            this.element.find('#preview').show();
+        }
+
+        // Focus on comment input when shown
+        this.element.find('#comment').on('shown.bs.collapse', function() {
+            $('#comment-input').focus();
+        });
+
+        // Focus on container when comment input hidden
+        this.element.find('#comment').on('hidden.bs.collapse', () => {
+            $('.openseadragon-canvas').focus();
+        });
+    }
+}
+
+/**
+ * Viewer footer HUD, to be shown on smaller screens.
+ */
+class ViewerFooter {
+
+    constructor() {
+        this.element = $(`
+            <div class="viewer-footer">
+                <h3 class="objective"></h3>
+                <p class="guidance"></p>
+                <form id="answer-form"></form>
+                <button class="btn btn-success btn-block btn-answer my-2" role="button">Done</button>
+            </div>
+        `);
+    }
+}
+
+/**
  * Help modal for LibCrowds viewer.
  */
-class LibCrowdsViewerHelpModal {
-    
+class ViewerHelpModal {
+
     constructor(selectionEnabled) {
         this.element = $(`
-            <div class="modal fade" id="help-modal" tabindex="-1" role="dialog">
+            <div class="modal viewer-modal fade" id="help-modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content bg-inverse text-white" style="border: 1px solid #ECEEEF">
+                    <div class="modal-content bg-inverse text-white">
                         <div class="modal-header">
-                            <h5 class="modal-title">Viewer Controls</h5>
+                            <h5 class="modal-title">Help</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
+                            <a id="tutorial" href="../tutorial" class="btn btn-info btn-block mt-2" role="button">
+                                View Tutorial
+                            </a>
+                            <h4 class="mt-3">Viewer controls</h4>
                             <p>The following controls are provided towards the left of the viewer:</p>
                             <ul class="list-unstyled">
                                 <li class="mb-1"><span class="fa fa-plus-circle fa-fw mr-1"></span>Zoom in</li>
                                 <li class="mb-1"><span class="fa fa-minus-circle fa-fw mr-1"></span>Zoom out</li>
                                 <li class="mb-1"><span class="fa fa-refresh fa-fw mr-1"></span>Reset zoom</li>
                                 <li class="mb-1"><span class="fa fa-expand fa-fw mr-1"></span>Fullscreen</li>
-                                <li class="selection-help mb-1"><span class="fa fa-toggle-on fa-fw mr-1"></span>Toggle selection</li>
+                                <li class="selection-help mb-1">
+                                    <span class="fa fa-toggle-on fa-fw mr-1"></span>Toggle selection
+                                </li>
                                 <li class="mb-1"><span class="fa fa-question fa-fw mr-1"></span>Help</li>
                             </ul>
                             <div class="selection-help" style="display: none;">
@@ -32,7 +198,8 @@ class LibCrowdsViewerHelpModal {
                                     <li class="mb-1"><span class="fa fa-times fa-fw mr-1"></span>Cancel selection</li>
                                 </ul>
                                 <p>
-                                    Double click on a previously confirmed selection to update it.
+                                    To update a previously confirmed selection click on it with a mouse or tap and
+                                    hold for one second on mobile.
                                 </p>
                             </div>
                             <h4 class="mt-4">Keyboard Shortcuts</h4>
@@ -64,7 +231,7 @@ class LibCrowdsViewerHelpModal {
                                         </tr>
                                         <tr class="selection-help" style="display: none;">
                                             <td>Toggle selection</td>
-                                            <td class="text-center">c</td>
+                                            <td class="text-center">SHIFT (Hold)</td>
                                         </tr>
                                         <tr>
                                             <td>Move viewport up</td>
@@ -87,7 +254,9 @@ class LibCrowdsViewerHelpModal {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-white" data-dismiss="modal" role="button">Close</button>
+                            <button type="button" class="btn btn-outline-white" data-dismiss="modal" role="button">
+                                Close
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -100,115 +269,43 @@ class LibCrowdsViewerHelpModal {
 }
 
 /**
- * Heads up display for the LibCrowds viewer.
- *
- * All controls should still be visible in fullscreen mode.
+ * Item details modal for LibCrowds viewer.
  */
-class LibCrowdsViewerHUD {
-    
-    constructor() {
-        this.element = $('<div class="hud"></div>');
-        this.element.css({
-            'display': 'flex',
-            'flex-direction': 'column',
-            'margin': '80px 1rem',
-            'position': 'absolute',
-            'z-index': '2',
-            'border-radius': '25px',
-            'background-color': 'rgba(0, 0, 0, 0.75)'
-        });
-    }
-    
-    /**
-     * Add a button to the HUD.
-     */
-    addButtonHTML(opts) {
-        let button = $(`<button id="${ opts.id }" data-toggle="tooltip" title="${ opts.tooltip }" role="button">
-                       <span class="fa ${ opts.icon }"></span>
-                       </button>`);
-        
-        button.tooltip({
-            placement: 'right',
-            template: `<div class="tooltip tooltip-hud" role="tooltip">
-                      <div class="tooltip-arrow"></div>
-                      <div class="tooltip-inner"></div>
-                      </div>`
-        });
-        
-        button.css({
-            'background': 'none',
-            'color': '#fff',
-            'opacity': '0.8',
-            'text-shadow': '0 0 5px #000',
-            'font-size': '1.25rem',
-            'padding': '.5rem',
-            'cursor': 'pointer',
-            'border': 'none',
-            'outline': 'none !important'
-        });
-        
-        button.hover(function() {
-            $(this).css('opacity', '1');
-        }, function() {
-            $(this).css('opacity', '0.65');
-        });
-        
-        this.element.append(button);
-    }
-    
-    /**
-     * Add a collapsable sidebar to the HUD.
-     */
-    addSidebar(title, content) {
-        let sidebar     = $('<div></div>'),
-            titleRow    = $(`<p>${title}</p>`),
-            collapseBtn = $(`<a href="#" class="show">&#x25B2;</a>`);
-        this.element.css({
-            'right': '0',
-            'margin': '80px 0 0 0',
-            'border-radius': '0',
-            'color': '#fff',
-            'width': '25%',
-            'min-width': '200px',
-            'background-color': 'transparent',
-            'font-size': '0.9rem'
-        });
-        sidebar.css({
-            'padding': '10px',
-            'margin': '0 1.5rem 0.8rem',
-            'border': '2px solid rgb(85, 85, 85)',
-            'background-color': 'rgba(0, 0, 0, 0.75)'
-        });
-        titleRow.css({
-            'margin-bottom': '0',
-            'flex-direction': 'row',
-            'text-transform': 'uppercase'
-        });
-        collapseBtn.css({
-            'color': 'white',
-            'float': 'right',
-            'transition': 'transform 350ms'
-        });
-        content.css({
-            'margin-top': '15px',
-            'margin-bottom': '0'
-        })
-        titleRow.prepend(collapseBtn);
-        sidebar.append(titleRow);
-        sidebar.append(content);
-        this.element.append(sidebar);
-        
-        collapseBtn.on('click', function() {
-            if ($(this).hasClass('show')) {
-                content.slideUp();
-                collapseBtn.css('transform', 'rotate(180deg)');
-                $(this).removeClass('show');
-            } else {
-                content.slideDown();
-                collapseBtn.css('transform', 'none');
-                $(this).addClass('show');
-            }
-        })
+class ViewerInfoModal {
+
+    constructor(selectionEnabled) {
+        this.element = $(`
+            <div class="modal viewer-modal fade" id="info-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content bg-inverse text-white">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Item Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="no-manifest" class="text-center my-2" style="display: none;">
+                                <p class="lead">No manifest data could be loaded for this task.</p>
+                            </div>
+                            <div id="manifest">
+                                <ul id="metadata" class="list-unstyled"></ul>
+                                <div class="text-center mt-5 mb-4">
+                                    <img class="img-fluid mb-3" id="logo" />
+                                    <p id="attribution"></p>
+                                    <p id="license"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-white" data-dismiss="modal" role="button">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        );
     }
 }
 
@@ -221,111 +318,103 @@ class LibCrowdsViewerInterface {
         this.config = Object.assign({}, {
             prefixUrl: "/static/img/openseadragon/",
             showNavigator: false,
-            showNavigator: true,
             navigatorPosition: 'BOTTOM_LEFT',
             zoomInButton: 'zoom-in',
             zoomOutButton: 'zoom-out',
             homeButton: 'reset-zoom',
             helpButton: 'show-help-modal',
+            infoButton: 'show-info-modal',
             fullPageButton: 'fullscreen',
             autoHideControls: false,
-            minZoomLevel: 0.1,
             gestureSettingsMouse: {
                 clickToZoom: false
             },
             gestureSettingsTouch: {
-                clickToZoom: false
+                dblClickToZoom: false
             },
             gestureSettingsPen: {
-                clickToZoom: false
+                dblClickToZoom: false
             },
             selectionEnabled: false,
             selectionConfig: {
                 prefixUrl: "/static/img/openseadragonselection/",
                 restrictToImage: true,
-                toggleButton: 'toggle-selection'
+                toggleButton: 'toggle-selection',
+                keyboardShortcut: null
             },
-            confirmBeforeLeaving: true
+            confirmBeforeLeaving: true,
+            sidebarConfig: {
+                title: 'Task',
+                showProgress: true,
+                showFavourites: true,
+                showTutorial: false,
+                showComments: true,
+                showPreview: true
+            }
         }, config);
-        this.loading(true);
-        
-        // Setup HUD controls and add them to the viewer
-        this.controlsHud = this.setupControlsHUD();
-        this.sidebarHud = new LibCrowdsViewerHUD();
-        this.helpModal = new LibCrowdsViewerHelpModal(this.config.selectionEnabled);
-        $(`#${this.config.id}`).prepend(this.controlsHud.element);
-        $(`#${this.config.id}`).prepend(this.sidebarHud.element);
-        $(`#${this.config.id}`).append(this.helpModal.element);
-        
-        // Viewer styles
-        $(`#${config.id}`).css({
-            'overflow': 'hidden',
-            'position': 'relative',
-            'background-color': '#000'
-        });
-        
         this.viewer = OpenSeadragon(this.config);
-        this.overlayId = 1;
-        
+
+        // Setup HUD controls and add them to the viewer
+        this.controls = new ViewerControls(this.config);
+        this.sidebar = new ViewerSidebar(this.config.sidebarConfig);
+        this.footer = new ViewerFooter();
+        this.helpModal = new ViewerHelpModal(this.config.selectionEnabled);
+        this.infoModal = new ViewerInfoModal();
+        $(this.viewer.container).prepend(this.controls.element);
+        $(this.viewer.container).prepend(this.sidebar.element);
+        $(this.viewer.container).append(this.footer.element);
+        $(this.viewer.container).append(this.helpModal.element);
+        $(this.viewer.container).append(this.infoModal.element);
+
+        // Add navbar to the viewer container so it's visible in full screen mode
+        $(this.viewer.container).prepend($('.navbar'));
+
         // Setup selection if enabled
         if (this.config.selectionEnabled) {
             OpenSeadragon.setString("Tooltips.SelectionToggle", "Toggle selection");
             OpenSeadragon.setString("Tooltips.SelectionConfirm", "Confirm selection");
             this.selector = this.viewer.selection(this.config.selectionConfig);
         }
-    
+
         // Draw an overlay when a selection is confirmed
         this.viewer.addHandler('selection', (selection) => {
-            let vpRect      = this.viewer.viewport.imageToViewportRectangle(selection),
-                hoverStyles = { 'opacity': '1' },
-                styles      = { 
-                    'border': '2px solid rgb(65, 144, 194)', 
-                    'background-color': 'rgba(65, 144, 194, 0.1)', 
-                    'opacity': '.6' 
-                };
-            this.drawOverlay(vpRect, styles, hoverStyles, 'selection-overlay');
+            let vpRect = this.viewer.viewport.imageToViewportRectangle(selection);
+            this.drawOverlay(vpRect, 'selection-overlay');
         });
-        
+
         // Toggle the HUD selection icon
         this.viewer.addHandler('selection_toggle', (evt) => {
             let onOrOff  = evt.enabled ? "on" : "off",
                 toggleId = '#' + this.config.selectionConfig.toggleButton;
             $(toggleId).html(`<span class="fa fa-toggle-${onOrOff}"></span>`);
             $(toggleId).blur();
-            if (this.selector.element) {
-                $(this.selector.element).css('outline', '9999px rgba(0,0,0,.6) solid');
-            }
         });
-        
+
         // Hide loading icon after tile drawn
         this.viewer.addHandler('tile-drawn', () => {
             this.loading(false);
         });
-        
+
         // Don't focus on HUD after fullscreen toggled
         this.viewer.addHandler('full-screen', (evt) => {
-            this.viewer.container.focus();
+            $('.openseadragon-canvas').focus();
         });
-        
-        // Handle click of help button
-        $(this.controlsHud.element).on('click', '#show-help-modal', (evt) => {
-            $('#help-modal').modal('show');
-        });
-        
-        // Convert a selection overlay back to a selection box on click
-        $(this.viewer.container).on('dblclick', '.selection-overlay', (evt) => {
+
+        // Convert a selection overlay back to a selection box on dblclick or taphold
+        $(this.viewer.container).on('click taphold', '.selection-overlay', (evt) => {
             this.convertOverlayToSelectionBox(evt.target.id);
         });
-        
+
         // Confirm before leaving if any overlays have been drawn or forms filled
         window.onbeforeunload = () => {
             if (!this.config.confirmBeforeLeaving) {
                 return null;
             }
-            
+
             if (this.viewer.currentOverlays.length) {
                 return 'Unsaved changes will be lost.';
-            } 
+            }
+
             $('input').each(function() {
                 if ($(this).val() !== "") {
                     return 'Unsaved changes will be lost.';
@@ -333,98 +422,166 @@ class LibCrowdsViewerInterface {
             });
             return null;
         };
-    }
-    
-    /**
-     * Load an image into the viewer.
-     */
-    loadImage(id) {
-        this.loading(true);
-        return this.viewer.open({
-            type: 'image',
-            tileSource:  `http:\/\/api.bl.uk\/image\/iiif\/${id}\/info.json`,
-            buildPyramid: false
+
+        // Toggle selection while shift is held.
+        $(document).on('keyup keydown', (evt) => {
+            if (evt.shiftKey) {
+                this.selector.enable();
+            } else {
+                if (this.selector.isSelecting) {
+                    this.selector.confirm();
+                }
+                this.selector.disable();
+            }
+        });
+        
+        // Toggle full screen mode with 'f' key
+        $(this.viewer.container).on('keypress', (evt) => {
+            if (String.fromCharCode(evt.keyCode) === 'f' || String.fromCharCode(evt.keyCode) === 'F') {
+                this.viewer.setFullScreen(!this.viewer.isFullPage());
+            }
         });
     }
+
+    /**
+     * Load an image and the task details.
+     */
+    loadTask(task) {
+        let form        = task.info.form;
+        this.loading(true);
+        this.viewer.open({
+            type: 'image',
+            tileSource:  `http:\/\/api.bl.uk\/image\/iiif\/${task.info.image_ark}\/info.json`,
+            buildPyramid: false
+        });
+        this.sidebar.element.find('.objective').text(task.info.objective);
+        this.sidebar.element.find('.guidance').text(task.info.guidance);
+        this.footer.element.find('.objective').text(task.info.objective);
+        this.footer.element.find('.guidance').text(task.info.guidance);
+        
+        if (typeof form !== 'undefined') {
+            for (let input of JSON.parse(form)) {
+                this.addFormInput(input);
+            }
+        }
+        
+        getFavouritesButton(task.id).then(function(btn) {
+            btn.addClass('btn-block btn-outline-white');
+            btn.removeClass('btn-info');
+            $('#favourites').html(btn);
+        });
+        
+        this.loadItemDetails(task.info.manifestUrl);
+    }
+
+    /**
+     * Remove the current image, preview thumbnail and any comments.
+     */
+    clearTask() {
+        this.viewer.close();
+        this.sidebar.element.find('#preview-thumbnail').removeAttr('src');
+        this.sidebar.element.find('#comment').collapse('hide');
+        this.sidebar.element.find('#comment-input').val('');
+        this.sidebar.element.find('#answer-form').html('');
+        this.footer.element.find('#answer-form').html('');
+        this.loading(true);
+    }
     
     /**
-     * Load tile sources from a BL manifest URL.
+     * Load item details into the info modal from a manifest URL.
      */
-    loadManifest(manifestUrl) {
+    loadItemDetails(manifestUrl) {
+        if (typeof manifestUrl === 'undefined') {
+            this.infoModal.element.find('#manifest').hide();
+            this.infoModal.element.find('#no-manifest').show();
+            return;
+        }
+        
         $.ajax({
             url: manifestUrl,
             dataType: 'json',
             type: 'GET'
         }).done((data) => {
-            let tileSources = $.map(data.sequences[0].canvases, function(canvas) {
-                return canvas.images[0].resource.service;
-            });
-            this.viewer.open(tileSources);
+            this.infoModal.element.find('#manifest').show();
+            this.infoModal.element.find('#no-manifest').hide();
+            this.infoModal.element.find('#metadata').html('');
+            for (let item of data.metadata) {
+                this.infoModal.element.find('#metadata').append(`<li class="my-2"><strong>${item.label}:</strong>&nbsp;${item.value}</li>`);
+            }
+            this.infoModal.element.find('#attribution').html(data.attribution);
+            this.infoModal.element.find('#license').html(data.license);
+            this.infoModal.element.find('#logo').attr('src', data.logo);
         }).fail(function(xhr, status, error) {
             throw new Error(status);
         });
     }
-    
+
     /**
-     * Setup and return the main HUD controls.
+     * Update user progress in the sidebar.
      */
-    setupControlsHUD() {
-        let hud = new LibCrowdsViewerHUD();
-        hud.addButtonHTML({ id: this.config.zoomInButton, icon: "fa-plus-circle", tooltip: "Zoom in" }); 
-        hud.addButtonHTML({ id: this.config.zoomOutButton, icon: "fa-minus-circle", tooltip: "Zoom out" }); 
-        hud.addButtonHTML({ id: this.config.homeButton, icon: "fa-refresh", tooltip: "Reset Zoom" }); 
-        hud.addButtonHTML({ id: this.config.fullPageButton, icon: "fa-expand", tooltip: "Fullscreen" });
-    
-        if (this.config.selectionEnabled) {
-            hud.addButtonHTML({ id: this.config.selectionConfig.toggleButton, icon: "fa-toggle-off", tooltip: "Toggle selection" });
-        }
-        
-        hud.addButtonHTML({ id: this.config.helpButton, icon: "fa-question", tooltip: "Help" });
-        return hud;
+    updateUserProgress(data) {
+        let pct  = Math.round((data.done*100)/data.total),
+            pBar = this.sidebar.element.find('#progress');
+        pBar.find('.progress-bar').css('width', `${pct}%`);
+        pBar.find('#progress-done').text(data.done);
+        pBar.find('#progress-total').text(data.total);
+        pBar.find('#progress-summary').text(`You have completed ${data.done + ' '} of ${data.total + ' '} tasks`);
+        if (this.viewer)
+        this.sidebar.element.find('#progress-selections').text(`You have made {} selections for the current task`);
     }
 
     /**
-     * Draw an overlay with the given styles and class.
+     * Update the next task preview thumnail.
      */
-    drawOverlay(viewportRectangle, styles, hoverStyles, cls) {
-        let overlayElem = $('<div></div>'),
-            id          = 'overlay-' + this.overlayId;
-        overlayElem.attr('id', id);
-        overlayElem.css(styles);
-        overlayElem.hover(function() {
-            $(this).css(hoverStyles);
-        }, function() {
-            $(this).css(styles);
-        });
-        if (cls) {
-            overlayElem.addClass(cls);
-        }
+    updatePreview(imageArk) {
+        var url = `http:\/\/api.bl.uk\/image\/iiif\/${imageArk}\/full\/,200\/0\/default.jpg`;
+        this.sidebar.element.find('#preview-thumbnail').attr('src', url);
+    }
+
+    /**
+     * Return any task comments.
+     */
+    getComments() {
+        return this.sidebar.element.find('#comment-input').val();
+    }
+
+    /**
+     * Return the serialized answer form input.
+     */
+    getFormData() {
+        return this.sidebar.element.find('#answer-form').serialize();
+    }
+
+    /**
+     * Add an input field to the answer form.
+     */
+    addFormInput(opts) {
+        let input = `<input id="${opts.id}" class="form-control my-2" name="${opts.name}" placeholder="${opts.placeholder}" type="${opts.type}" />`;
+        this.sidebar.element.find('#answer-form').append(input);
+        this.footer.element.find('#answer-form').append(input);
+    }
+
+    /**
+     * Draw an overlay of the given class.
+     */
+    drawOverlay(vpRect, cls) {
+        let overlayElem = $(`<div id="overlay-${Date.now()}" class="${cls}"></div>`);
         this.viewer.addOverlay({
             element: overlayElem[0],
-            location: new OpenSeadragon.Rect(viewportRectangle.x, 
-                                             viewportRectangle.y, 
-                                             viewportRectangle.width, 
-                                             viewportRectangle.height, 
-                                             viewportRectangle.degrees)
+            location: new OpenSeadragon.Rect(vpRect.x, vpRect.y, vpRect.width, vpRect.height, vpRect.degrees)
         });
-        this.overlayId += 1;
     }
-    
+
     /**
      * Highlight an area of the image.
      */
     highlight(region) {
         const json   = JSON.parse(region),
-              rect   = new OpenSeadragon.Rect(json.x, json.y, json.width, 
-                                              json.height, json.degrees),
-              vpRect = this.viewer.viewport.imageToViewportRectangle(rect),
-              styles = { 
-                  'outline': '9999px rgba(0,0,0,.35) solid',
-                  'border': '1px solid rgb(255, 255, 255)'
-              };
-        this.drawOverlay(vpRect, styles, null, 'highlight-overlay');
+              rect   = new OpenSeadragon.Rect(json.x, json.y, json.width, json.height, json.degrees),
+              vpRect = this.viewer.viewport.imageToViewportRectangle(rect);
+        this.drawOverlay(vpRect, 'highlight-overlay');
     }
-    
+
     /**
      * Get an image rectangle from an overlay.
      */
@@ -437,9 +594,11 @@ class LibCrowdsViewerInterface {
     /**
      * Return an array of image rectangles from the current overlays.
      */
-    getOverlaysAsImageRectangles() {
+    getSelections() {
         return this.viewer.currentOverlays.map((overlay) => {
-            return this.overlayToImageRect(overlay);
+            if (overlay.element.className === 'selection-overlay') {
+                return this.overlayToImageRect(overlay);
+            }
         });
     }
 
@@ -454,33 +613,15 @@ class LibCrowdsViewerInterface {
         this.selector.draw();
         this.selector.enable();
     }
-    
-    /**
-     * Add a sidebar to the viewer.
-     */
-    loadSidebar(title, element) {
-        this.sidebarHud.addSidebar(title, element);
-    }
-    
-    /**
-     * Remove all sidebars.
-     */
-    removeSidebars() {
-        this.sidebarHud.element.html('');
-    }
-    
+
     /**
      * Add loading icon.
      */
     loading(isLoading) {
         if (isLoading) {
-            $(`#${this.config.id}`).css({
-                'background-image': 'url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgICAgIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjMwcHgiIHZpZXdCb3g9IjAgMCAyNCAzMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTAgNTA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4gICAgPHJlY3QgeD0iMCIgeT0iMTAiIHdpZHRoPSI0IiBoZWlnaHQ9IjEwIiBmaWxsPSIjREEwMDAwIiBvcGFjaXR5PSIwLjIiPiAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgdmFsdWVzPSIwLjI7IDE7IC4yIiBiZWdpbj0iMHMiIGR1cj0iMC42cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+ICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iaGVpZ2h0IiBhdHRyaWJ1dGVUeXBlPSJYTUwiIHZhbHVlcz0iMTA7IDIwOyAxMCIgYmVnaW49IjBzIiBkdXI9IjAuNnMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPiAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9InkiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgdmFsdWVzPSIxMDsgNTsgMTAiIGJlZ2luPSIwcyIgZHVyPSIwLjZzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgPC9yZWN0PiAgICA8cmVjdCB4PSI4IiB5PSIxMCIgd2lkdGg9IjQiIGhlaWdodD0iMTAiIGZpbGw9IiNEQTAwMDAiICBvcGFjaXR5PSIwLjIiPiAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgdmFsdWVzPSIwLjI7IDE7IC4yIiBiZWdpbj0iMC4xNXMiIGR1cj0iMC42cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+ICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iaGVpZ2h0IiBhdHRyaWJ1dGVUeXBlPSJYTUwiIHZhbHVlcz0iMTA7IDIwOyAxMCIgYmVnaW49IjAuMTVzIiBkdXI9IjAuNnMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPiAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9InkiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgdmFsdWVzPSIxMDsgNTsgMTAiIGJlZ2luPSIwLjE1cyIgZHVyPSIwLjZzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgPC9yZWN0PiAgICA8cmVjdCB4PSIxNiIgeT0iMTAiIHdpZHRoPSI0IiBoZWlnaHQ9IjEwIiBmaWxsPSIjREEwMDAwIiAgb3BhY2l0eT0iMC4yIj4gICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IiBhdHRyaWJ1dGVUeXBlPSJYTUwiIHZhbHVlcz0iMC4yOyAxOyAuMiIgYmVnaW49IjAuM3MiIGR1cj0iMC42cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+ICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iaGVpZ2h0IiBhdHRyaWJ1dGVUeXBlPSJYTUwiIHZhbHVlcz0iMTA7IDIwOyAxMCIgYmVnaW49IjAuM3MiIGR1cj0iMC42cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+ICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ieSIgYXR0cmlidXRlVHlwZT0iWE1MIiB2YWx1ZXM9IjEwOyA1OyAxMCIgYmVnaW49IjAuM3MiIGR1cj0iMC42cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+ICAgIDwvcmVjdD4gIDwvc3ZnPg==)',
-                'background-repeat': 'no-repeat',
-                'background-position': '50% 50%'
-            });
+            $(`#${this.config.id}`).addClass('viewer-loading-icon');
         } else {
-            $(`#${this.config.id}`).css('background-image', 'none');
+            $(`#${this.config.id}`).removeClass('viewer-loading-icon');
         }
     }
 }

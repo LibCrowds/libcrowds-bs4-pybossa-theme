@@ -1,0 +1,169 @@
+ .viewer-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: $black;
+}
+
+.openseadragon-container {        
+    
+    .navbar {
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+    
+    .openseadragon-message {
+        color: $white;
+    }
+    
+    .viewer-controls {
+        display: flex;
+        flex-direction: row;
+        top: 70px;
+        margin: 0.8rem;
+        position: absolute;
+        z-index: 2;
+        border-radius: 25px;
+        background-color: rgba($black, 0.75);
+        padding: 0 0.5rem;
+        
+        @include media-breakpoint-up(lg) {
+            padding: 0;
+            flex-direction: column;
+        }
+        
+        button {
+            background: none;
+            color: $white;
+            opacity: 0.8;
+            text-shadow: 0 0 5px $black;
+            font-size: 1.25rem;
+            padding: .5rem;
+            cursor: pointer;
+            border: none;
+            outline: none !important;
+            opacity: 0.65;
+            
+            @include hover-focus() {
+                opacity: 1;
+            }
+        }
+    }
+
+    .viewer-sidebar-container {
+        position: fixed;
+        z-index: 2;
+        right: 0;
+        top: 70px;
+        width: 35%;
+        height: calc(100% - 70px - 1.6rem);
+        margin: 0.8rem;
+        overflow: hidden;
+        display: none;
+        
+        @include media-breakpoint-up(lg) {
+            display: block;
+        }
+        
+        @include media-breakpoint-up(lg) {
+            width: 25%;
+        }
+        
+        .viewer-sidebar {
+            position: absolute;
+            color: $white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0.8rem;
+            max-height: 100%;
+            border: 2px solid rgb(85, 85, 85);
+            background-color: rgba($black, 0.75);
+            
+            @include media-breakpoint-up(lg) {
+                flex-direction: column;
+            }
+            
+            .sidebar-content {
+                padding-top: 0.8rem;
+            }
+            
+            .viewer-sidebar-title {
+                font-size: 1rem;
+                margin-bottom: 0;
+                flex-direction: row;
+            }
+            
+            .viewer-sidebar-toggle {
+                background: none;
+                border: none;
+                color: white;
+                float: right;
+                transition: transform 350ms;
+                
+                &.collapsed {
+                    transform: rotate(180deg);
+                }
+            }
+            
+            .progress {
+                border: 1px solid $white; 
+                background-color: transparent;
+                
+                .progress-bar {
+                    background-color: $white;
+                }
+            }
+            
+            #preview-thumbnail {
+                height: 200px;
+            }
+        }
+    }
+    
+    .viewer-footer {
+        color: $white;
+        padding: 0.8rem;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        z-index: 2;
+        background-color: rgba($black, 0.75);
+        border-top: 2px solid rgb(85, 85, 85);
+        
+        @include media-breakpoint-up(lg) {
+            display: none;
+        }
+    }
+
+    .viewer-loading-icon {
+        background: url('/static/svg/loading.svg');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+
+    .viewer-modal {
+        .modal-content {
+            border: 1px solid $gray-lighter;
+        }
+    }
+    
+    .selection-box {
+        outline: 9999px solid rgba($black, .6);
+    }
+    
+    .selection-overlay {
+        border: 2px solid $brand-info; 
+        background-color: rgba($brand-info, 0.2);
+        opacity: .6;
+        
+        @include hover-focus() {
+            opacity: 1;
+        }
+    }
+    
+    .highlight-overlay {
+        -webkit-box-shadow: 0 0 10px $brand-success;
+        box-shadow: 0 0 10px 3px $brand-success;
+        outline: 1px solid $brand-success;
+    }
+}

@@ -30,7 +30,6 @@ function switchColours(elem) {
  * Use different icons for full and non-full width menus.
  */
  function switchIcons(elem) {
-	 console.log(1);
 	if ($(window).width() > 992) {
 		elem.removeClass('hamburger--collapse');
 		elem.addClass('hamburger--arrow');

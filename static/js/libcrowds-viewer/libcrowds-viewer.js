@@ -192,7 +192,8 @@ class ViewerHelpModal {
                                     <li class="mb-1"><span class="fa fa-times fa-fw mr-1"></span>Cancel selection</li>
                                 </ul>
                                 <p>
-                                    Double click on a previously confirmed selection to update it.
+                                    To update a previously confirmed selection click on it with a mouse or tap and
+                                    hold for one second on mobile.
                                 </p>
                             </div>
                             <h4 class="mt-4">Keyboard Shortcuts</h4>
@@ -350,8 +351,8 @@ class LibCrowdsViewerInterface {
             $('.openseadragon-canvas').focus();
         });
 
-        // Convert a selection overlay back to a selection box on click
-        $(this.viewer.container).on('dblclick', '.selection-overlay', (evt) => {
+        // Convert a selection overlay back to a selection box on dblclick or taphold
+        $(this.viewer.container).on('click taphold', '.selection-overlay', (evt) => {
             this.convertOverlayToSelectionBox(evt.target.id);
         });
 

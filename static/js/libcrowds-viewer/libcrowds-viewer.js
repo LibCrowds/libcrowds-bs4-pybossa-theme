@@ -287,13 +287,16 @@ class ViewerInfoModal {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div>
-                                <ul id="metadata" class="list-unstyled"></ul>
+                            <div id="no-manifest" class="text-center my-2" style="display: none;">
+                                <p class="lead">No manifest data could be loaded for this task.</p>
                             </div>
-                            <div class="text-center mt-5 mb-4">
-                                <img class="img-fluid mb-3" id="logo" />
-                                <p id="attribution"></p>
-                                <p id="license"></p>
+                            <div id="manifest">
+                                <ul id="metadata" class="list-unstyled"></ul>
+                                <div class="text-center mt-5 mb-4">
+                                    <img class="img-fluid mb-3" id="logo" />
+                                    <p id="attribution"></p>
+                                    <p id="license"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -447,7 +450,7 @@ class LibCrowdsViewerInterface {
      * Load an image and the task details.
      */
     loadTask(task) {
-        let form = task.info.form;
+        let form        = task.info.form;
         this.loading(true);
         this.viewer.open({
             type: 'image',
@@ -471,7 +474,7 @@ class LibCrowdsViewerInterface {
             $('#favourites').html(btn);
         });
         
-        this.loadItemDetails();
+        this.loadItemDetails(task.info.manifestUrl);
     }
 
     /**
@@ -491,11 +494,19 @@ class LibCrowdsViewerInterface {
      * Load item details into the info modal from a manifest URL.
      */
     loadItemDetails(manifestUrl) {
+        if (typeof manifestUrl === 'undefined') {
+            this.infoModal.element.find('#manifest').hide();
+            this.infoModal.element.find('#no-manifest').show();
+            return;
+        }
+        
         $.ajax({
-            url: 'http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json',
+            url: manifestUrl,
             dataType: 'json',
             type: 'GET'
         }).done((data) => {
+            this.infoModal.element.find('#manifest').show();
+            this.infoModal.element.find('#no-manifest').hide();
             this.infoModal.element.find('#metadata').html('');
             for (let item of data.metadata) {
                 this.infoModal.element.find('#metadata').append(`<li class="my-2"><strong>${item.label}:</strong>&nbsp;${item.value}</li>`);

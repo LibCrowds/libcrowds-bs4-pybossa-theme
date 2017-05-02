@@ -8,9 +8,12 @@ class ViewerControls {
         this.element = $('<div class="viewer-controls"></div>');
         this.addButtons();
 
-        // Show help modal when button clicked
         this.element.on('click', '#show-help-modal', (evt) => {
             $('#help-modal').modal('show');
+        });
+        
+        this.element.on('click', '#show-info-modal', (evt) => {
+            $('#info-modal').modal('show');
         });
     }
 
@@ -49,6 +52,7 @@ class ViewerControls {
         }
 
         this.addButton(this.viewerConfig.helpButton, "fa-question", "Help");
+        this.addButton(this.viewerConfig.infoButton, "fa-info", "Item Details");
     }
 }
 
@@ -267,6 +271,44 @@ class ViewerHelpModal {
 }
 
 /**
+ * Item details modal for LibCrowds viewer.
+ */
+class ViewerInfoModal {
+
+    constructor(selectionEnabled) {
+        this.element = $(`
+            <div class="modal viewer-modal fade" id="info-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content bg-inverse text-white">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Item Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <ul id="metadata" class="list-unstyled"></ul>
+                            </div>
+                            <div class="text-center mt-5 mb-4">
+                                <img class="img-fluid mb-3" id="logo" />
+                                <p id="attribution"></p>
+                                <p id="license"></p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-white" data-dismiss="modal" role="button">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+        );
+    }
+}
+
+/**
  * Custom OpenSeadragon viewer interface.
  */
 class LibCrowdsViewerInterface {
@@ -280,6 +322,7 @@ class LibCrowdsViewerInterface {
             zoomOutButton: 'zoom-out',
             homeButton: 'reset-zoom',
             helpButton: 'show-help-modal',
+            infoButton: 'show-info-modal',
             fullPageButton: 'fullscreen',
             autoHideControls: false,
             gestureSettingsMouse: {
@@ -316,10 +359,12 @@ class LibCrowdsViewerInterface {
         this.sidebar = new ViewerSidebar(this.config.sidebarConfig);
         this.footer = new ViewerFooter();
         this.helpModal = new ViewerHelpModal(this.config.selectionEnabled);
+        this.infoModal = new ViewerInfoModal();
         $(this.viewer.container).prepend(this.controls.element);
         $(this.viewer.container).prepend(this.sidebar.element);
-        $(this.viewer.container).append(this.helpModal.element);
         $(this.viewer.container).append(this.footer.element);
+        $(this.viewer.container).append(this.helpModal.element);
+        $(this.viewer.container).append(this.infoModal.element);
 
         // Add navbar to the viewer container so it's visible in full screen mode
         $(this.viewer.container).prepend($('.navbar'));
@@ -425,6 +470,8 @@ class LibCrowdsViewerInterface {
             btn.removeClass('btn-info');
             $('#favourites').html(btn);
         });
+        
+        this.loadItemDetails();
     }
 
     /**
@@ -438,6 +485,27 @@ class LibCrowdsViewerInterface {
         this.sidebar.element.find('#answer-form').html('');
         this.footer.element.find('#answer-form').html('');
         this.loading(true);
+    }
+    
+    /**
+     * Load item details into the info modal from a manifest URL.
+     */
+    loadItemDetails(manifestUrl) {
+        $.ajax({
+            url: 'http://api.bl.uk/metadata/iiif/ark:/81055/vdc_100022589158.0x000002/manifest.json',
+            dataType: 'json',
+            type: 'GET'
+        }).done((data) => {
+            this.infoModal.element.find('#metadata').html('');
+            for (let item of data.metadata) {
+                this.infoModal.element.find('#metadata').append(`<li class="my-2"><strong>${item.label}:</strong>&nbsp;${item.value}</li>`);
+            }
+            this.infoModal.element.find('#attribution').html(data.attribution);
+            this.infoModal.element.find('#license').html(data.license);
+            this.infoModal.element.find('#logo').attr('src', data.logo);
+        }).fail(function(xhr, status, error) {
+            throw new Error(status);
+        });
     }
 
     /**

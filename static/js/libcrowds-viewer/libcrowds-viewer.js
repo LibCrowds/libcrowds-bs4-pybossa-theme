@@ -91,6 +91,7 @@ class ViewerSidebar {
                                 <div class="progress-bar" role="progress-bar" style="width: 0%;"></div>
                             </div>
                             <p id="progress-summary" class="text-center"></p>
+                            <p id="progress-selections" class="text-center" style="display: none;"></p>
                         </div>
                         <div id="preview" class="mt-4" style="display: none;">
                             <h5 class="viewer-sidebar-title font-weight-bold text-uppercase">Up Next</h5>
@@ -113,6 +114,9 @@ class ViewerSidebar {
 
         if (this.config.showProgress) {
             this.element.find('#progress').show();
+            if (this.config.selectionEnabled) {
+                this.element.find('#progress-selections').show();
+            }
         }
 
         if (this.config.showFavourites) {
@@ -464,6 +468,8 @@ class LibCrowdsViewerInterface {
         pBar.find('#progress-done').text(data.done);
         pBar.find('#progress-total').text(data.total);
         pBar.find('#progress-summary').text(`You have completed ${data.done + ' '} of ${data.total + ' '} tasks`);
+        if (this.viewer)
+        this.sidebar.element.find('#progress-selections').text(`You have made {} selections for the current task`);
     }
 
     /**
@@ -530,9 +536,11 @@ class LibCrowdsViewerInterface {
     /**
      * Return an array of image rectangles from the current overlays.
      */
-    getOverlaysAsImageRectangles() {
+    getSelections() {
         return this.viewer.currentOverlays.map((overlay) => {
-            return this.overlayToImageRect(overlay);
+            if (overlay.element.className === 'selection-overlay') {
+                return this.overlayToImageRect(overlay);
+            }
         });
     }
 

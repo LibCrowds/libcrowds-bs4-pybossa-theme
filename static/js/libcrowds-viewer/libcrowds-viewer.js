@@ -74,9 +74,7 @@ class ViewerSidebar {
                         <h3 class="objective"></h3>
                         <p class="guidance"></p>
                         <form id="answer-form"></form>
-                        <button class="btn btn-success btn-block btn-answer my-2" role="button">
-                            ${this.config.answerButtonText}
-                        </button>
+                        <button class="btn btn-success btn-block btn-answer my-2" role="button">Done</button>
                         <div id="favourites" style="display: none;"></div>
                         <a id="tutorial" href="../tutorial" class="btn btn-outline-white btn-block my-2" role="button" style="display: none;">
                             View Tutorial
@@ -347,7 +345,6 @@ class LibCrowdsViewerInterface {
             confirmBeforeLeaving: true,
             sidebarConfig: {
                 title: 'Task',
-                answerButtonText: 'Done',
                 showProgress: true,
                 showFavourites: true,
                 showTutorial: false,

@@ -295,7 +295,7 @@ class LibCrowdsViewerInterface {
             },
             confirmBeforeLeaving: true,
             sidebarConfig: {
-                title: 'Task Details',
+                title: 'Task',
                 answerButtonText: 'Done',
                 showProgress: true,
                 showFavourites: true,

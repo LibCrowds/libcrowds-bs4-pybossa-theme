@@ -162,7 +162,7 @@ class ViewerHelpModal {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <a id="tutorial" href="../tutorial" class="btn btn-outline-white btn-block mt-2" role="button">
+                            <a id="tutorial" href="../tutorial" class="btn btn-info btn-block mt-2" role="button">
                                 View Tutorial
                             </a>
                             <h4 class="mt-3">Viewer controls</h4>

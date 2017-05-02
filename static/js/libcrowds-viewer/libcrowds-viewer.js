@@ -146,6 +146,7 @@ class ViewerFooter {
         this.element = $(`
             <div class="viewer-footer">
                 <h3 class="objective"></h3>
+                <form id="answer-form"></form>
                 <button class="btn btn-success btn-block btn-answer my-2" role="button">Done</button>
             </div>
         `);
@@ -431,6 +432,7 @@ class LibCrowdsViewerInterface {
         this.sidebar.element.find('#comment').collapse('hide');
         this.sidebar.element.find('#comment-input').val('');
         this.sidebar.element.find('#answer-form').html('');
+        this.footer.element.find('#answer-form').html('');
         this.loading(true);
     }
 
@@ -492,6 +494,7 @@ class LibCrowdsViewerInterface {
     addFormInput(opts) {
         let input = `<input id="${opts.id}" class="form-control my-2" name="${opts.name}" placeholder="${opts.placeholder}" type="${opts.type}" />`;
         this.sidebar.element.find('#answer-form').append(input);
+        this.footer.element.find('#answer-form').append(input);
     }
 
     /**

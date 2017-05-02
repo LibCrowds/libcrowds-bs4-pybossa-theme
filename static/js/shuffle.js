@@ -115,7 +115,7 @@ class ProjectShuffle {
 }
 
 
-if ($('#project-shuffle').length === 1) {
+if ($('.shuffle-controls').length === 1) {
     let projectShuffle = new ProjectShuffle('#shuffle-grid', '#shuffle-table');
     
 	$('.shuffle-control').on('change keyup', function() {

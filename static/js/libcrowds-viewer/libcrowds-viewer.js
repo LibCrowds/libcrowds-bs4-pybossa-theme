@@ -520,24 +520,6 @@ class LibCrowdsViewerInterface {
     }
 
     /**
-     * Load tile sources from a BL manifest URL.
-     */
-    loadManifest(manifestUrl) {
-        $.ajax({
-            url: manifestUrl,
-            dataType: 'json',
-            type: 'GET'
-        }).done((data) => {
-            let tileSources = $.map(data.sequences[0].canvases, function(canvas) {
-                return canvas.images[0].resource.service;
-            });
-            this.viewer.open(tileSources);
-        }).fail(function(xhr, status, error) {
-            throw new Error(status);
-        });
-    }
-
-    /**
      * Update user progress in the sidebar.
      */
     updateUserProgress(data) {

@@ -74,7 +74,7 @@ class ViewerSidebar {
                         <h3 class="objective"></h3>
                         <p class="guidance"></p>
                         <form id="answer-form"></form>
-                        <button class="btn btn-success btn-block btn-answer my-2" role="button">Done</button>
+                        <button class="btn btn-success btn-block btn-answer my-2" role="button">${config.answerButtonText}</button>
                         <div id="favourites" style="display: none;"></div>
                         <a id="tutorial" href="../tutorial" class="btn btn-outline-white btn-block my-2" role="button" style="display: none;">
                             View Tutorial
@@ -146,13 +146,13 @@ class ViewerSidebar {
  */
 class ViewerFooter {
 
-    constructor() {
+    constructor(config) {
         this.element = $(`
             <div class="viewer-footer">
                 <h3 class="objective"></h3>
                 <p class="guidance"></p>
                 <form id="answer-form"></form>
-                <button class="btn btn-success btn-block btn-answer my-2" role="button">Done</button>
+                <button class="btn btn-success btn-block btn-answer my-2" role="button">${config.answerButtonText}</button>
             </div>
         `);
     }
@@ -343,8 +343,9 @@ class LibCrowdsViewerInterface {
                 keyboardShortcut: null
             },
             confirmBeforeLeaving: true,
-            sidebarConfig: {
+            taskInputConfig: {
                 title: 'Task',
+                answerButtonText: 'Done'
                 showProgress: true,
                 showFavourites: true,
                 showTutorial: false,
@@ -356,8 +357,8 @@ class LibCrowdsViewerInterface {
 
         // Setup HUD controls and add them to the viewer
         this.controls = new ViewerControls(this.config);
-        this.sidebar = new ViewerSidebar(this.config.sidebarConfig);
-        this.footer = new ViewerFooter();
+        this.sidebar = new ViewerSidebar(this.config.taskInputConfig);
+        this.footer = new ViewerFooter(this.config.taskInputConfig);
         this.helpModal = new ViewerHelpModal(this.config.selectionEnabled);
         this.infoModal = new ViewerInfoModal();
         $(this.viewer.container).prepend(this.controls.element);

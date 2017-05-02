@@ -389,19 +389,26 @@ class LibCrowdsViewerInterface {
     /**
      * Load an image and the task details.
      */
-    loadTask(imageArk, objective, guidance, taskId) {
+    loadTask(task) {
+        let form = task.info.form;
         this.loading(true);
         this.viewer.open({
             type: 'image',
-            tileSource:  `http:\/\/api.bl.uk\/image\/iiif\/${imageArk}\/info.json`,
+            tileSource:  `http:\/\/api.bl.uk\/image\/iiif\/${task.info.image_ark}\/info.json`,
             buildPyramid: false
         });
-        this.sidebar.element.find('.objective').text(objective);
-        this.footer.element.find('.objective').text(objective);
-        this.sidebar.element.find('.guidance').text(guidance);
-        this.footer.element.find('.guidance').text(guidance);
-
-        getFavouritesButton(taskId).then(function(btn) {
+        this.sidebar.element.find('.objective').text(task.info.objective);
+        this.footer.element.find('.objective').text(task.info.objective);
+        this.sidebar.element.find('.guidance').text(task.info.guidance);
+        this.footer.element.find('.guidance').text(task.info.guidance);
+        
+        if (typeof form !== 'undefined') {
+            for (let input of JSON.parse(form)) {
+                this.addFormInput(input);
+            }
+        }
+        
+        getFavouritesButton(task.id).then(function(btn) {
             btn.addClass('btn-block btn-outline-white');
             btn.removeClass('btn-info');
             $('#favourites').html(btn);
@@ -475,8 +482,8 @@ class LibCrowdsViewerInterface {
     /**
      * Add an input field to the answer form.
      */
-    addFormInput(id, name, placeholder, type) {
-        let input = `<input id="${id}" class="form-control my-2" name="${name}" placeholder="${placeholder}" type="${type}" />`;
+    addFormInput(opts) {
+        let input = `<input id="${opts.id}" class="form-control my-2" name="${opts.name}" placeholder="${opts.placeholder}" type="${opts.type}" />`;
         this.sidebar.element.find('#answer-form').append(input);
     }
 

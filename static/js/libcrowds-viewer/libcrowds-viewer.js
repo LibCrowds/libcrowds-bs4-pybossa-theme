@@ -311,13 +311,13 @@ class LibCrowdsViewerInterface {
         this.sidebar = new ViewerSidebar(this.config.sidebarConfig);
         this.footer = new ViewerFooter();
         this.helpModal = new ViewerHelpModal(this.config.selectionEnabled);
-        $(`#${this.config.id}`).prepend(this.controls.element);
-        $(`#${this.config.id}`).prepend(this.sidebar.element);
-        $(`#${this.config.id}`).append(this.helpModal.element);
-        $(`#${this.config.id}`).append(this.footer.element);
+        $(this.viewer.container).prepend(this.controls.element);
+        $(this.viewer.container).prepend(this.sidebar.element);
+        $(this.viewer.container).append(this.helpModal.element);
+        $(this.viewer.container).append(this.footer.element);
 
-        //Fix navbar styles
-        $('.navbar').css('background-color', 'rgba(0, 0, 0, 0.75)');
+        // Add navbar to the viewer container so it's visible in full screen mode
+        $(this.viewer.container).prepend($('.navbar'));
 
         // Setup selection if enabled
         if (this.config.selectionEnabled) {

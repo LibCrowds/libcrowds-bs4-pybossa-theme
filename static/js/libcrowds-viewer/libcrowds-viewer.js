@@ -51,8 +51,8 @@ class ViewerControls {
             this.addButton(this.viewerConfig.selectionConfig.toggleButton, "fa-toggle-off", "Toggle selection");
         }
 
-        this.addButton(this.viewerConfig.helpButton, "fa-question", "Help");
-        this.addButton(this.viewerConfig.infoButton, "fa-info", "Item Details");
+        this.addButton(this.viewerConfig.helpButton, "fa-question-circle", "Help");
+        this.addButton(this.viewerConfig.infoButton, "fa-info-circle", "Item Details");
     }
 }
 

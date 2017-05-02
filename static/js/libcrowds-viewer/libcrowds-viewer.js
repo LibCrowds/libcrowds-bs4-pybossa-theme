@@ -345,7 +345,7 @@ class LibCrowdsViewerInterface {
             confirmBeforeLeaving: true,
             taskInputConfig: {
                 title: 'Task',
-                answerButtonText: 'Done'
+                answerButtonText: 'Done',
                 showProgress: true,
                 showFavourites: true,
                 showTutorial: false,

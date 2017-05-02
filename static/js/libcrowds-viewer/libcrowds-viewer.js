@@ -2,18 +2,18 @@
  * Viewer controls HUD.
  */
 class ViewerControls {
-    
+
     constructor(viewerConfig) {
         this.viewerConfig = viewerConfig;
         this.element = $('<div class="viewer-controls"></div>');
         this.addButtons();
-        
+
         // Show help modal when button clicked
         this.element.on('click', '#show-help-modal', (evt) => {
             $('#help-modal').modal('show');
         });
     }
-    
+
     /**
      * Add a button to the HUD.
      */
@@ -23,7 +23,7 @@ class ViewerControls {
             <span class="fa ${icon}"></span>
             </button>
         `);
-        
+
         button.tooltip({
             placement: 'right',
             template: `<div class="tooltip tooltip-hud" role="tooltip">
@@ -31,23 +31,23 @@ class ViewerControls {
                        <div class="tooltip-inner"></div>
                        </div>`
         });
-        
+
         this.element.append(button);
     }
-    
+
     /**
      * Add all buttons to the HUD.
      */
     addButtons() {
-        this.addButton(this.viewerConfig.zoomInButton, "fa-plus-circle", "Zoom in"); 
-        this.addButton(this.viewerConfig.zoomOutButton, "fa-minus-circle", "Zoom out"); 
-        this.addButton(this.viewerConfig.homeButton, "fa-refresh", "Reset Zoom"); 
+        this.addButton(this.viewerConfig.zoomInButton, "fa-plus-circle", "Zoom in");
+        this.addButton(this.viewerConfig.zoomOutButton, "fa-minus-circle", "Zoom out");
+        this.addButton(this.viewerConfig.homeButton, "fa-refresh", "Reset Zoom");
         this.addButton(this.viewerConfig.fullPageButton, "fa-expand", "Fullscreen");
-        
+
         if (this.viewerConfig.selectionEnabled) {
             this.addButton(this.viewerConfig.selectionConfig.toggleButton, "fa-toggle-off", "Toggle selection");
         }
-        
+
         this.addButton(this.viewerConfig.helpButton, "fa-question", "Help");
     }
 }
@@ -56,7 +56,7 @@ class ViewerControls {
  * Viewer sidebar HUD.
  */
 class ViewerSidebar {
-    
+
     constructor(config) {
         this.config = config;
         this.element = $(`
@@ -102,33 +102,33 @@ class ViewerSidebar {
                 </div>
             </div>
         `);
-        
+
         if (this.config.showTutorial) {
             this.element.find('#tutorial').show();
         }
-        
+
         if (this.config.showComments) {
             this.element.find('#comments').show();
         }
-        
+
         if (this.config.showProgress) {
             this.element.find('#progress').show();
         }
-        
+
         if (this.config.showFavourites) {
             this.element.find('#favourites').show();
         }
-        
+
         if (this.config.showPreview) {
             this.element.find('#preview').show();
         }
-        
+
         // Focus on comment input when shown
         this.element.find('#comment').on('shown.bs.collapse', function() {
             console.log('shown')
             $('#comment-input').focus();
         });
-        
+
         // Focus on container when comment input hidden
         this.element.find('#comment').on('hidden.bs.collapse', () => {
             console.log('hidden')
@@ -141,7 +141,7 @@ class ViewerSidebar {
  * Viewer footer HUD, to be shown on smaller screens.
  */
 class ViewerFooter {
-    
+
     constructor() {
         this.element = $(`
             <div class="viewer-footer">
@@ -156,7 +156,7 @@ class ViewerFooter {
  * Help modal for LibCrowds viewer.
  */
 class ViewerHelpModal {
-    
+
     constructor(selectionEnabled) {
         this.element = $(`
             <div class="modal viewer-modal fade" id="help-modal" tabindex="-1" role="dialog">
@@ -306,7 +306,7 @@ class LibCrowdsViewerInterface {
         }, config);
         this.viewer = OpenSeadragon(this.config);
         this.overlayId = 1;
-        
+
         // Setup HUD controls and add them to the viewer
         this.controls = new ViewerControls(this.config);
         this.sidebar = new ViewerSidebar(this.config.sidebarConfig);
@@ -316,23 +316,23 @@ class LibCrowdsViewerInterface {
         $(`#${this.config.id}`).prepend(this.sidebar.element);
         $(`#${this.config.id}`).append(this.helpModal.element);
         $(`#${this.config.id}`).append(this.footer.element);
-        
+
         //Fix navbar styles
         $('.navbar').css('background-color', 'rgba(0, 0, 0, 0.75)');
-        
+
         // Setup selection if enabled
         if (this.config.selectionEnabled) {
             OpenSeadragon.setString("Tooltips.SelectionToggle", "Toggle selection");
             OpenSeadragon.setString("Tooltips.SelectionConfirm", "Confirm selection");
             this.selector = this.viewer.selection(this.config.selectionConfig);
         }
-    
+
         // Draw an overlay when a selection is confirmed
         this.viewer.addHandler('selection', (selection) => {
             let vpRect = this.viewer.viewport.imageToViewportRectangle(selection);
             this.drawOverlay(vpRect, 'selection-overlay');
         });
-        
+
         // Toggle the HUD selection icon
         this.viewer.addHandler('selection_toggle', (evt) => {
             let onOrOff  = evt.enabled ? "on" : "off",
@@ -340,31 +340,32 @@ class LibCrowdsViewerInterface {
             $(toggleId).html(`<span class="fa fa-toggle-${onOrOff}"></span>`);
             $(toggleId).blur();
         });
-        
+
         // Hide loading icon after tile drawn
         this.viewer.addHandler('tile-drawn', () => {
             this.loading(false);
         });
-        
+
         // Don't focus on HUD after fullscreen toggled
         this.viewer.addHandler('full-screen', (evt) => {
             $('.openseadragon-canvas').focus();
         });
-        
+
         // Convert a selection overlay back to a selection box on click
         $(this.viewer.container).on('dblclick', '.selection-overlay', (evt) => {
             this.convertOverlayToSelectionBox(evt.target.id);
         });
-        
+
         // Confirm before leaving if any overlays have been drawn or forms filled
         window.onbeforeunload = () => {
             if (!this.config.confirmBeforeLeaving) {
                 return null;
             }
-            
+
             if (this.viewer.currentOverlays.length) {
                 return 'Unsaved changes will be lost.';
-            } 
+            }
+
             $('input').each(function() {
                 if ($(this).val() !== "") {
                     return 'Unsaved changes will be lost.';
@@ -372,20 +373,20 @@ class LibCrowdsViewerInterface {
             });
             return null;
         };
-        
+
         // Toggle selection while shift is held.
         $(document).on('keyup keydown', (evt) => {
             if(evt.shiftKey) {
                 this.selector.enable();
             } else {
-                if (this.selector.isSelecting) {		
-                    this.selector.confirm();		
+                if (this.selector.isSelecting) {
+                    this.selector.confirm();
                 }
                 this.selector.disable();
             }
         });
     }
-    
+
     /**
      * Load an image and the task details.
      */
@@ -399,14 +400,14 @@ class LibCrowdsViewerInterface {
         this.footer.element.find('.objective').text(objective);
         this.sidebar.element.find('.guidance').text(guidance);
         this.footer.element.find('.guidance').text(guidance);
-        
+
         getFavouritesButton(taskId).then(function(btn) {
             btn.addClass('btn-block btn-outline-white');
             btn.removeClass('btn-info');
             $('#favourites').html(btn);
         });
     }
-    
+
     /**
      * Remove the current image, preview thumbnail and any comments.
      */
@@ -418,7 +419,7 @@ class LibCrowdsViewerInterface {
         this.sidebar.element.find('#answer-form').html('');
         this.loading(true);
     }
-    
+
     /**
      * Load tile sources from a BL manifest URL.
      */
@@ -436,7 +437,7 @@ class LibCrowdsViewerInterface {
             throw new Error(status);
         });
     }
-    
+
     /**
      * Update user progress in the sidebar.
      */
@@ -448,7 +449,7 @@ class LibCrowdsViewerInterface {
         pBar.find('#progress-total').text(data.total);
         pBar.find('#progress-summary').text(`You have completed ${data.done + ' '} of ${data.total + ' '} tasks`);
     }
-    
+
     /**
      * Update the next task preview thumnail.
      */
@@ -456,21 +457,21 @@ class LibCrowdsViewerInterface {
         var url = `http:\/\/api.bl.uk\/image\/iiif\/${imageArk}\/full\/,200\/0\/default.jpg`;
         this.sidebar.element.find('#preview-thumbnail').attr('src', url);
     }
-    
+
     /**
      * Return any task comments.
      */
     getComments() {
         return this.sidebar.element.find('#comment-input').val();
     }
-    
+
     /**
      * Return the serialized answer form input.
      */
     getFormData() {
         return this.sidebar.element.find('#answer-form').serialize();
     }
-    
+
     /**
      * Add an input field to the answer form.
      */
@@ -490,7 +491,7 @@ class LibCrowdsViewerInterface {
         });
         this.overlayId += 1;
     }
-    
+
     /**
      * Highlight an area of the image.
      */
@@ -500,7 +501,7 @@ class LibCrowdsViewerInterface {
               vpRect = this.viewer.viewport.imageToViewportRectangle(rect);
         this.drawOverlay(vpRect, 'highlight-overlay');
     }
-    
+
     /**
      * Get an image rectangle from an overlay.
      */
@@ -530,7 +531,7 @@ class LibCrowdsViewerInterface {
         this.selector.draw();
         this.selector.enable();
     }
-    
+
     /**
      * Add loading icon.
      */

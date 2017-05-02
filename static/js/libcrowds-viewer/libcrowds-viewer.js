@@ -390,6 +390,7 @@ class LibCrowdsViewerInterface {
      * Load an image and the task details.
      */
     loadTask(imageArk, objective, guidance, taskId) {
+        this.loading(true);
         this.viewer.open({
             type: 'image',
             tileSource:  `http:\/\/api.bl.uk\/image\/iiif\/${imageArk}\/info.json`,

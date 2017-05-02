@@ -375,13 +375,20 @@ class LibCrowdsViewerInterface {
 
         // Toggle selection while shift is held.
         $(document).on('keyup keydown', (evt) => {
-            if(evt.shiftKey) {
+            if (evt.shiftKey) {
                 this.selector.enable();
             } else {
                 if (this.selector.isSelecting) {
                     this.selector.confirm();
                 }
                 this.selector.disable();
+            }
+        });
+        
+        // Toggle full screen mode with 'f' key
+        $(this.viewer.container).on('keypress', (evt) => {
+            if (String.fromCharCode(evt.keyCode) === 'f' || String.fromCharCode(evt.keyCode) === 'F') {
+                this.viewer.setFullScreen(!this.viewer.isFullPage());
             }
         });
     }

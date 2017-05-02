@@ -298,7 +298,7 @@ class LibCrowdsViewerInterface {
                 answerButtonText: 'Done',
                 showProgress: true,
                 showFavourites: true,
-                showTutorial: true,
+                showTutorial: false,
                 showComments: true,
                 showPreview: true
             }

@@ -305,7 +305,6 @@ class LibCrowdsViewerInterface {
             }
         }, config);
         this.viewer = OpenSeadragon(this.config);
-        this.overlayId = 1;
 
         // Setup HUD controls and add them to the viewer
         this.controls = new ViewerControls(this.config);
@@ -484,12 +483,11 @@ class LibCrowdsViewerInterface {
      * Draw an overlay of the given class.
      */
     drawOverlay(vpRect, cls) {
-        let overlayElem = $(`<div id="overlay-${this.overlayId}" class="${cls}"></div>`);
+        let overlayElem = $(`<div id="overlay-${Date.now()}" class="${cls}"></div>`);
         this.viewer.addOverlay({
             element: overlayElem[0],
             location: new OpenSeadragon.Rect(vpRect.x, vpRect.y, vpRect.width, vpRect.height, vpRect.degrees)
         });
-        this.overlayId += 1;
     }
 
     /**

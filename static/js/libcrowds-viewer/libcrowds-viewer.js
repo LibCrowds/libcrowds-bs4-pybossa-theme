@@ -290,7 +290,8 @@ class LibCrowdsViewerInterface {
             selectionConfig: {
                 prefixUrl: "/static/img/openseadragonselection/",
                 restrictToImage: true,
-                toggleButton: 'toggle-selection'
+                toggleButton: 'toggle-selection',
+                keyboardShortcut: null
             },
             confirmBeforeLeaving: true,
             sidebarConfig: {

@@ -6,14 +6,6 @@
         <li class="list-group-item {% if active_link =='tasks' %}active{% endif %}">
             <a href="{{url_for('project.tasks', short_name=project.short_name)}}">Task Settings</a>
         </li>
-        </li>
-        {% if config.get('LIBCROWDS_ANALYST_URL') %}
-         <li class="list-group-item">
-            <a href="{{ config['LIBCROWDS_ANALYST_URL'] }}/projects/{{ project.short_name }}?api_key={{ current_user.api_key }}">Analysis
-                <span class="badge badge-info n-unverified-results"></span>
-            </a>
-        </li>
-         {% endif %}
     {% endif %}
     {% if pro_features.get('webhooks_enabled') %}
     <li class="list-group-item {% if active_link =='webhooks' %}active{% endif %}">

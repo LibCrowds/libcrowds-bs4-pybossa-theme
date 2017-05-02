@@ -146,6 +146,7 @@ class ViewerFooter {
         this.element = $(`
             <div class="viewer-footer">
                 <h3 class="objective"></h3>
+                <p class="guidance"></p>
                 <form id="answer-form"></form>
                 <button class="btn btn-success btn-block btn-answer my-2" role="button">Done</button>
             </div>
@@ -406,8 +407,8 @@ class LibCrowdsViewerInterface {
             buildPyramid: false
         });
         this.sidebar.element.find('.objective').text(task.info.objective);
-        this.footer.element.find('.objective').text(task.info.objective);
         this.sidebar.element.find('.guidance').text(task.info.guidance);
+        this.footer.element.find('.objective').text(task.info.objective);
         this.footer.element.find('.guidance').text(task.info.guidance);
         
         if (typeof form !== 'undefined') {

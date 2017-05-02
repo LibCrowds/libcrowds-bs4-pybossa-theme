@@ -125,13 +125,11 @@ class ViewerSidebar {
 
         // Focus on comment input when shown
         this.element.find('#comment').on('shown.bs.collapse', function() {
-            console.log('shown')
             $('#comment-input').focus();
         });
 
         // Focus on container when comment input hidden
         this.element.find('#comment').on('hidden.bs.collapse', () => {
-            console.log('hidden')
             $('.openseadragon-canvas').focus();
         });
     }

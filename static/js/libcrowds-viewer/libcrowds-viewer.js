@@ -413,7 +413,6 @@ class LibCrowdsViewerInterface {
 
         // Hide loading icon after tile drawn
         this.viewer.addHandler('tile-drawn', () => {
-            console.log(false);
             this.loading(false);
         });
 

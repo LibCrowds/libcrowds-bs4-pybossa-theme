@@ -173,6 +173,7 @@
     }
     
     .selection-box {
+        transform: none !important;  /** Disable rotation */
         outline: 9999px solid rgba($black, .6);
     }
     

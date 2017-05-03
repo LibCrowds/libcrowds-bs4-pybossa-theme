@@ -340,7 +340,8 @@ class LibCrowdsViewerInterface {
                 prefixUrl: "/static/img/openseadragonselection/",
                 restrictToImage: true,
                 toggleButton: 'toggle-selection',
-                keyboardShortcut: null
+                keyboardShortcut: null,
+                returnPixelCoordinates: false
             },
             confirmBeforeLeaving: true,
             taskInputConfig: {
@@ -379,8 +380,7 @@ class LibCrowdsViewerInterface {
 
         // Draw an overlay when a selection is confirmed
         this.viewer.addHandler('selection', (selection) => {
-            let vpRect = this.viewer.viewport.imageToViewportRectangle(selection);
-            this.drawOverlay(vpRect, 'selection-overlay');
+            this.drawOverlay(selection, 'selection-overlay');
         });
 
         // Toggle the HUD selection icon

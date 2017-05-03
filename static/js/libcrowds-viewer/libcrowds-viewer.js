@@ -310,6 +310,16 @@ class ViewerInfoModal {
 }
 
 /**
+ * Hint class for LibCrowds viewer.
+ */
+class ViewerHint {
+    
+    constructor() {
+        this.element = $(`<div class="viewer-hint"><div class="viewer-hint-text">Click and Drag</div></div>`)
+    }
+}
+
+/**
  * Custom OpenSeadragon viewer interface.
  */
 class LibCrowdsViewerInterface {
@@ -362,11 +372,13 @@ class LibCrowdsViewerInterface {
         this.footer = new ViewerFooter(this.config.taskInputConfig);
         this.helpModal = new ViewerHelpModal(this.config.selectionEnabled);
         this.infoModal = new ViewerInfoModal();
+        this.hint = new ViewerHint();
         $(this.viewer.container).prepend(this.controls.element);
         $(this.viewer.container).prepend(this.sidebar.element);
         $(this.viewer.container).append(this.footer.element);
         $(this.viewer.container).append(this.helpModal.element);
         $(this.viewer.container).append(this.infoModal.element);
+        $(this.viewer.container).append(this.hint.element);
 
         // Add navbar to the viewer container so it's visible in full screen mode
         $(this.viewer.container).prepend($('.navbar'));
@@ -385,6 +397,14 @@ class LibCrowdsViewerInterface {
 
         // Toggle the HUD selection icon
         this.viewer.addHandler('selection_toggle', (evt) => {
+            if (evt.enabled) {
+                this.hint.element.addClass('show');
+                setTimeout(() => {
+                    this.hint.element.removeClass('show');
+                }, 2500);
+            } else {
+                this.hint.element.removeClass('show');
+            }
             let onOrOff  = evt.enabled ? "on" : "off",
                 toggleId = '#' + this.config.selectionConfig.toggleButton;
             $(toggleId).html(`<span class="fa fa-toggle-${onOrOff}"></span>`);
@@ -425,13 +445,13 @@ class LibCrowdsViewerInterface {
         };
 
         // Toggle selection while shift is held.
-        $(document).on('keyup keydown', (evt) => {
-            if (evt.shiftKey) {
+        $(document).on('keydown', (evt) => {
+            if (evt.shiftKey && !this.selector.isSelecting) {
                 this.selector.enable();
-            } else {
-                if (this.selector.isSelecting) {
-                    this.selector.confirm();
-                }
+            }
+        }).on('keyup', (evt) => {
+            if (evt.which === 16) {
+                this.selector.confirm();
                 this.selector.disable();
             }
         });

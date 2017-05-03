@@ -37,7 +37,7 @@
     "lg-zoom": "^1.0.4",
     "lg-fullscreen": "^1.0.0",
     "justifiedGallery": "^3.6.2",
-    "hopscotch": "^0.2.7"
+    "tether-shepherd": "^1.8.1"
   },
   "devDependencies": {
     "jshint": "latest"

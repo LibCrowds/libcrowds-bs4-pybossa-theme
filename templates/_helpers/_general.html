@@ -56,6 +56,6 @@
         <div id="{{ id }}" class="collapse sidebar">
             {{ content | safe }}
         </div>
-        <div class="sidebar-overlay"></div>
+        <div class="sidebar-overlay" data-toggle="collapse" data-target="#{{ id }}"></div>
     </div>
 {% endmacro %}

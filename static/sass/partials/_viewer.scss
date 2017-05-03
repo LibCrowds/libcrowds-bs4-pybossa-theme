@@ -8,6 +8,10 @@
 
 .openseadragon-container {        
     
+    &.viewer-loading-icon {
+        background: url('/static/svg/loading.svg') 50% 50% no-repeat !important;
+    }
+    
     .navbar {
         background-color: rgba(0, 0, 0, 0.75);
     }
@@ -158,12 +162,6 @@
             background-color: rgba($black, 0.75);
             border-radius: 6px;
         }
-    }
-
-    .viewer-loading-icon {
-        background: url('/static/svg/loading.svg');
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
     }
 
     .viewer-modal {

@@ -413,6 +413,7 @@ class LibCrowdsViewerInterface {
 
         // Hide loading icon after tile drawn
         this.viewer.addHandler('tile-drawn', () => {
+            console.log(false);
             this.loading(false);
         });
 
@@ -499,13 +500,13 @@ class LibCrowdsViewerInterface {
      * Remove the current image, preview thumbnail and any comments.
      */
     clearTask() {
+        this.loading(true);
         this.viewer.close();
         this.sidebar.element.find('#preview-thumbnail').removeAttr('src');
         this.sidebar.element.find('#comment').collapse('hide');
         this.sidebar.element.find('#comment-input').val('');
         this.sidebar.element.find('#answer-form').html('');
         this.footer.element.find('#answer-form').html('');
-        this.loading(true);
     }
     
     /**
@@ -636,13 +637,13 @@ class LibCrowdsViewerInterface {
     }
 
     /**
-     * Add loading icon.
+     * Toggle loading icon.
      */
-    loading(isLoading) {
-        if (isLoading) {
-            $(`#${this.config.id}`).addClass('viewer-loading-icon');
+    loading(show) {
+        if (show) {
+            $(this.viewer.container).addClass('viewer-loading-icon');
         } else {
-            $(`#${this.config.id}`).removeClass('viewer-loading-icon');
+            $(this.viewer.container).removeClass('viewer-loading-icon');
         }
     }
 }

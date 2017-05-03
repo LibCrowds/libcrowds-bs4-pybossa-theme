@@ -64,6 +64,12 @@
             <div class="col-sm-10 offset-sm-1">
 
 {% else %} <!--- END category index page ---> <!--- Category portal page --->
+
+<!-- See https://github.com/alexandermendes/pybossa-discourse -->
+{% if 'pybossa_discourse' in plugins %}
+    {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.comments(url_for('project.project_cat_index', category=active_cat.short_name))) }}
+{% endif %}
+
 <div id="category-{{ active_cat.category_id }}-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0">
     <div class="container text-center h-100 d-flex align-items-center justify-content-between flex-column">
         <div></div>

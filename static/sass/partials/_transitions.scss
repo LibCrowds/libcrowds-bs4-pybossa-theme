@@ -40,6 +40,10 @@ a {
     }
 }
 
+.sidebar {
+    transition: transform 450ms !important;
+}
+
 .jumbotron-fade {
     transition: brightness 1.5s, 500ms;
 

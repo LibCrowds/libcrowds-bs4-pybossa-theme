@@ -40,12 +40,12 @@ a {
     }
 }
 
-.sidebar {
+.sidebar-wrapper {
     transition: transform 450ms !important;
 }
 
 .sidebar-overlay {
-    transition: opacity 200ms;
+    transition: opacity 200ms ease-in;
 }
 
 .jumbotron-fade {

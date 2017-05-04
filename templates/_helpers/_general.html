@@ -49,11 +49,16 @@
 {% macro render_collapsing_sidebar(id, content) %}
     <!-- Requires https://github.com/alexandermendes/pybossa-discourse -->
     <div class="sidebar-wrapper">
-        <button class="btn btn-info btn-sidebar" type="button" role="button" data-toggle="collapse" data-target="#{{ id }}" 
-                aria-expanded="false" aria-controls="{{ id }}">
+        <button class="btn btn-info btn-sidebar mb-4" type="button" role="button" data-toggle="collapse" data-target="#{{ id }}" 
+                aria-expanded="false" aria-controls="{{ id }}"  data-aos="fade-left" data-aos-duration="600">
             <span class="fa fa-comments"></span>
         </button>
         <div id="{{ id }}" class="collapse sidebar">
+            <div class="sidebar-header">
+                <button type="button" class="close" data-toggle="collapse" data-target="#{{ id }}" aria-expanded="false" aria-controls="{{ id }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             {{ content | safe }}
         </div>
         <div class="sidebar-overlay" data-toggle="collapse" data-target="#{{ id }}"></div>

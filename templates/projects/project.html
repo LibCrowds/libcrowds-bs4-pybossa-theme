@@ -23,7 +23,7 @@
 </div>
 
     {% if 'pybossa_discourse' in plugins %}
-        {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.category_comments(project.category_id)) }}
+        {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.category_comments(project.category_id), "fa-comments") }}
     {% endif %}
 
 <section class="my-5">

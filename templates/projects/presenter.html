@@ -14,9 +14,9 @@
     <a class="btn btn-outline-primary my-3" href="{{ url_for('project.index') }}" role="button">Pick another project</a>
 </div>
 {% else %}
-    {{ project.info.task_presenter | safe }}
     {% if 'pybossa_discourse' in plugins %}
-        {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.category_comments(project.category_id)) }}
+        {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.category_comments(project.category_id), "fa-comments", "hidden-md-down", aos=False) }}
     {% endif %}
+    {{ project.info.task_presenter | safe }}
 {% endif %}
 {% endblock %}

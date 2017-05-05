@@ -20,7 +20,7 @@
                 </p>
                 <p class="lead text-md-left">
                     Each category contains a set of projects that ask you to complete a particular task, which
-                    could be anything from transcribing or highlighting areas of an image to locating matching 
+                    could be anything from transcribing or highlighting areas of an image to locating matching
                     catalogue records in an external database.
                 </p>
                 <p class="lead text-md-left">
@@ -91,7 +91,7 @@
 
     <!-- See https://github.com/alexandermendes/pybossa-discourse -->
     {% if 'pybossa_discourse' in plugins %}
-        {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.comments(url_for('project.project_cat_index', category=active_cat.short_name))) }}
+        {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.category_comments(active_cat.id) }}
     {% endif %}
 
 {% endif %} <!--- END category portal page --->

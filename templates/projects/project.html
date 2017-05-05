@@ -2,6 +2,7 @@
 {% set active_page = "projects" %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_social.html" as social_helpers %}
+{% import "_helpers/_general.html" as general_helpers %}
 {% set description = project.description %}
 
 {% block content %}
@@ -20,6 +21,10 @@
         {% endif %}
     </div>
 </div>
+
+    {% if 'pybossa_discourse' in plugins %}
+        {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.category_comments(project.category_id) }}
+    {% endif %}
 
 <section class="my-5">
     <div class="container py-3">
@@ -95,14 +100,14 @@
             <div class="row py-3">
                 <div class="col-sm-6 offset-sm-3">
                     <p class="lead font-weight-extra-light">
-                        As the project progresses contributions will be analysed and 
+                        As the project progresses contributions will be analysed and
                         the results published in real-time.
                         {% if "libcrowds_data" not in plugins %}
                         As well as being made available for download via our data page, each
-                        {% else %} 
-                        Each 
+                        {% else %}
+                        Each
                         {% endif %}
-                        type of project provides unique ways of visualising these generated 
+                        type of project provides unique ways of visualising these generated
                         datasets, making the efforts of our volunteers immediately apparent.
                     </p>
                 </div>

@@ -45,3 +45,22 @@
 {% macro format_date(dateStr, appendTime=False) %}
 {{ "-".join(dateStr[:10].split('-')[::-1]) }}{% if appendTime %}, {{ dateStr[11:16] }}{% endif %}
 {% endmacro %}
+
+{% macro render_collapsing_sidebar(id, content, icon, btn_cls, aos=True) %}
+    <!-- Requires https://github.com/alexandermendes/pybossa-discourse -->
+    <div id="{{ id }}" class="sidebar-wrapper">
+        <button class="btn btn-info btn-sidebar mb-4 {{ btn_cls}}" type="button" role="button" data-toggle="sidebar-collapse"
+                data-target="#{{ id }}" {% if aos %}data-aos="fade-left" data-aos-duration="600"{% endif %}>
+            <span class="fa {{ icon }}"></span>
+        </button>
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <button type="button" class="close" data-toggle="sidebar-collapse" data-target="#{{ id }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{ content | safe }}
+        </div>
+    </div>
+    <div class="sidebar-overlay" data-toggle="sidebar-collapse" data-target="#{{ id }}"></div>
+{% endmacro %}

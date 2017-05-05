@@ -5,7 +5,7 @@
         <span class="hamburger-inner"></span>
       </span>
     </button>
-    
+
     <a class="navbar-brand p-0" href="{{ url_for('home.home') }}">{{ brand }}</a>
 
     <div class="collapse navbar-collapse align-items-center" id="main-navbar">
@@ -31,7 +31,7 @@
                 {%- if 'pybossa_discourse' in plugins %}
                     {% set n = discourse.notifications() %}
                     <a class="nav-link" href="{{ url_for('discourse.index')}}">Community
-                        {% if n %}<span id="notifications" class="badge badge-info">{{ n }}</span>{% endif %}
+                        {% if n %}<span id="notifications" class="badge badge-pill badge-primary ml-1"><small>{{ n }}</small></span>{% endif %}
                     </a>
                 {%- else %}
                 <a class="nav-link" href="{{ url_for('account.index')}}">Community</a>

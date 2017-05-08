@@ -49,19 +49,6 @@
         </div>
     </div>
 </section>
-<section id="featured-projects" class="bg-faded text-gray-dark pb-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-10 offset-sm-1 text-center pt-5">
-                <h3 class="text-uppercase font-weight-bold display-4">Featured Projects</h3>
-                <hr class="bw-3 w-50">
-                <p class="text-uppercase">
-                    Can't decide? Why not have a go at one of our featured projects.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-10 offset-sm-1">
 
 {% else %} <!--- END category index page ---> <!--- Category portal page --->
 
@@ -81,24 +68,27 @@
             <div class="col-lg-10 offset-lg-1 text-center">
                 <h1 class="text-uppercase font-weight-bold display-4">About</h1>
                 <hr class="bw-3 my-4">
-                <p class="lead text-md-left">
+                <p class="category-description" class="lead text-md-left">
                     {{ active_cat.description }}
                 </p>
             </div>
         </div>
+    </div>
+<section>
+<section id="projects-grid" class="py-5">
+    <div class="container py-3">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
-
-    <!-- See https://github.com/alexandermendes/pybossa-discourse -->
-    {% if 'pybossa_discourse' in plugins %}
-        {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.category_comments(active_cat.id), "fa-comments") }}
-    {% endif %}
-
-{% endif %} <!--- END category portal page --->
-
                 {{ project_helpers.render_shuffle_grid(projects, pagination) }}
             </div>
         </div>
     </div>
 </section>
+
+{% endif %} <!--- END category portal page --->
+
+<!-- See https://github.com/alexandermendes/pybossa-discourse -->
+{% if 'pybossa_discourse' in plugins %}
+    {{ general_helpers.render_collapsing_sidebar('community-sidebar', discourse.category_comments(active_cat.id), "fa-comments") }}
+{% endif %}
 {% endblock %}

@@ -1,5 +1,6 @@
 {% extends "_layouts/splash.html" %}
 {% set active_page = "projects" %}
+{% set title = active_cat.name %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
@@ -62,13 +63,13 @@
         </a>
     </div>
 </div>
-<section id="about" class="py-5">
+<section class="py-5">
     <div class="container py-3">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 text-center">
                 <h1 class="text-uppercase font-weight-bold display-4">About</h1>
                 <hr class="bw-3 my-4">
-                <p class="category-description" class="lead text-md-left">
+                <p id="description" class="lead text-md-left">
                     {{ active_cat.description }}
                 </p>
             </div>

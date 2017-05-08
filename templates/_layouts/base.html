@@ -62,43 +62,33 @@
                   "../node_modules/lg-zoom/dist/lg-zoom.js",
                   "../node_modules/lg-fullscreen/dist/lg-fullscreen.js",
                   "../node_modules/justifiedGallery/dist/js/jquery.justifiedGallery.js",
-                  "js/notify.js",
-                  "js/init-aos.js",
-                  "js/favourites.js"
+                  "js/src/notify.js",
+                  "js/src/init-aos.js",
+                  "js/src/favourites.js"
                   %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
-        {% assets filters="jsmin", output="js/gen/code-editor.min.js",
-            "../node_modules/codemirror/lib/codemirror.js",
-            "../node_modules/codemirror/mode/xml/xml.js",
-            "../node_modules/codemirror/mode/javascript/javascript.js",
-            "../node_modules/codemirror/mode/css/css.js",
-            "../node_modules/codemirror/mode/http/http.js",
-            "../node_modules/codemirror/mode/htmlmixed/htmlmixed.js",
-            "js/editor.js"
-            %}
-            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
+        
         {% endif %}
         {% assets filters="jsmin", output="js/gen/bottom.min.js",
-            "js/style-navbar.js",
-            "js/style-jumbotrons.js",
-            "js/display-scroll-btns.js",
-            "js/api-stats.js",
-            "js/image-error.js",
-            "js/image-crop.js",
-            "js/anchor-scroll.js",
-            "js/progress.js",
-            "js/s3.js",
-            "js/shuffle.js",
-            "js/featured-projects.js",
-            "js/search.js",
-            "js/btn-scroll.js",
-            "js/popovers.js",
-            "js/tooltips.js",
-            "js/tab-control.js",
-            "js/hamburger.js",
-            "js/sidebar.js"
+            "js/src/style-navbar.js",
+            "js/src/style-jumbotrons.js",
+            "js/src/display-scroll-btns.js",
+            "js/src/api-stats.js",
+            "js/src/image-error.js",
+            "js/src/image-crop.js",
+            "js/src/anchor-scroll.js",
+            "js/src/progress.js",
+            "js/src/s3.js",
+            "js/src/shuffle.js",
+            "js/src/featured-projects.js",
+            "js/src/search.js",
+            "js/src/btn-scroll.js",
+            "js/src/popovers.js",
+            "js/src/tooltips.js",
+            "js/src/tab-control.js",
+            "js/src/hamburger.js",
+            "js/src/sidebar.js"
             %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}

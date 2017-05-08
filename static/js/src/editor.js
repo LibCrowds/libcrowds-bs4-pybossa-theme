@@ -1,3 +1,10 @@
+import CodeMirror from 'codemirror';
+import javascript from 'codemirror/mode/javascript/javascript';
+import xml from 'codemirror/mode/xml/xml';
+import css from 'codemirror/mode/css/css';
+import http from 'codemirror/mode/http/http';
+import htmlmixed from 'codemirror/mode/htmlmixed/htmlmixed';
+
 /**
  * Initialise code editor for text areas.
  */

@@ -1,21 +1,22 @@
 'use strict';
  
-var webpack = require('webpack');
+const webpack = require('webpack'),
+      path    = require('path');
  
  
 let config = {
     entry: {
-        main: "./static/js/src/main.js",
-        editor: "./static/js/src/editor.js"
+        editor: path.resolve("./static/js/src/editor.js")
     },
     output: {
-        path: "./static/js/dist",
+        path: path.resolve("./static/js/dist"),
         filename: "[name]-bundle.js",
       },
     module: {
         loaders: [
             {
                 test: /\.jsx?$/,
+                exclude: /node_modules/,
                 loader: 'babel-loader'
             },
             {
@@ -25,11 +26,6 @@ let config = {
         ]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        }),
         new webpack.ProvidePlugin({   
             jQuery: 'jquery',
             $: 'jquery',

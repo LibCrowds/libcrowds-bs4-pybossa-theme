@@ -12,7 +12,6 @@ function searchRow(row, words) {
 
 // Handle change or keyup event for table search box.
 $('.search-table[data-target]').on('change keyup', function(evt) {
-    console.log(evt.target.value)
     var tableId = $(this).data('target'),
         text    = evt.target.value.toLowerCase(),
         words   = text.split(' ');

@@ -174,7 +174,6 @@ function getFavouritesButton(taskId) {
 
 // Toggle a favourite task when button clicked.
 $('body').on('click', '.btn-favourites', function() {
-    console.log(this);
     let btn    = $(this),
         taskId = btn.data('task-id');
 

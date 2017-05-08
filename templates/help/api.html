@@ -21,8 +21,8 @@
         </p>
         <p>
             The API is extensive; as well as endpoints for things such as listing or searching domain objects, since PyBossa v2.3.6 almost all server endpoints speak JSON.
-        </p>    
-        <p>    
+        </p>
+        <p>
             Please refer to the full <a href="http://docs.pybossa.com/en/latest/api.html">PyBossa API documentation</a> for more details.
         </p>
     </div>
@@ -33,7 +33,7 @@
     {{ card_helpers.render_title('Z39.50 API') }}
     <div class="card-block pt-0">
     <p>
-        During development of the Convert-a-Card projects we wrote the <a href="https://pythonhosted.org/Flask-Z3950/">Flask-Z3950</a> extension and 
+        During development of the Convert-a-Card projects we wrote the <a href="https://pythonhosted.org/Flask-Z3950/">Flask-Z3950</a> extension and
         as an offshoot of this we can provide access to search the British Library's main MARC 21 database via the Z39.50 protocol. The endpoint is available at:
     </p>
     <pre class="mb-0">
@@ -98,8 +98,8 @@
         <li><strong>position:</strong> The position of the first record (the default is 1).</li>
         <li><strong>size:</strong> The maximum number of records returned (the default is 10).</li>
     </ul>
-    
-    
+
+
     <h4 class="mt-4">Example</h4>
     <p class="mb-0">
         <strong>Request:</strong>
@@ -157,7 +157,7 @@
     </pre>
     <h4>Alternative syntaxes</h4>
     <p>
-        A number of alternative syntaxes are provided, each with their own complexities. 
+        A number of alternative syntaxes are provided, each with their own complexities.
         Documentation for the most common of these syntaxes can be found below:
     </p>
     <ul>
@@ -186,5 +186,5 @@
 </div>
 {% endif %}
 
-<script type="text/javascript" src="{{ url_for('static', filename='js/dist/editor-bundle.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='dist/js/editor-bundle.js') }}"></script>
 {% endblock %}

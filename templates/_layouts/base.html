@@ -21,7 +21,7 @@
         <meta name="msapplication-TileImage" content="{{ url_for('static', filename='img/favicons/mstile-144x144.png') }}?v=xM3QjMjGEa">
         <meta name="msapplication-config" content="{{ url_for('static', filename='img/favicons/browserconfig.xml') }}">
         <meta name="theme-color" content="#da0000">
-        {%- assets filters="libsass", output="css/gen/styles.min.css", depends="sass/**/*.scss", "sass/_main.scss" %}
+        {%- assets filters="libsass", output="dist/css/styles.min.css", depends="sass/**/*.scss", "sass/_main.scss" %}
             <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
         {% endassets %}
         {% include "_includes/_ga.js" ignore missing %}
@@ -43,7 +43,7 @@
         {% endblock %}
 
         {% if not jstop %}
-        {% assets filters="jsmin", output="js/gen/default.min.js",
+        {% assets filters="jsmin", output="dist/js/default.min.js",
                   "../node_modules/pace-progress/pace.js",
                   "../node_modules/jquery/dist/jquery.js",
                   "../node_modules/tether/dist/js/tether.js",
@@ -68,9 +68,9 @@
                   %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
-        
+
         {% endif %}
-        {% assets filters="jsmin", output="js/gen/bottom.min.js",
+        {% assets filters="jsmin", output="dist/js/bottom.min.js",
             "js/src/style-navbar.js",
             "js/src/style-jumbotrons.js",
             "js/src/display-scroll-btns.js",

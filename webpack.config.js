@@ -1,15 +1,15 @@
 'use strict';
- 
+
 const webpack = require('webpack'),
       path    = require('path');
- 
- 
+
+
 let config = {
     entry: {
-        editor: path.resolve("./static/js/src/editor.js")
+        editor: path.resolve("./static/js/editor.js")
     },
     output: {
-        path: path.resolve("./static/js/dist"),
+        path: path.resolve("./static/dist/js"),
         filename: "[name]-bundle.js",
       },
     module: {
@@ -26,12 +26,12 @@ let config = {
         ]
     },
     plugins: [
-        new webpack.ProvidePlugin({   
+        new webpack.ProvidePlugin({
             jQuery: 'jquery',
             $: 'jquery',
             jquery: 'jquery'
         })
     ]
 };
- 
+
 module.exports = config;

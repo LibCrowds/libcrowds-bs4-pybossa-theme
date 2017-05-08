@@ -4,7 +4,7 @@
 {% set jstop = True %}
 
 {% block content %}
-{% assets filters="jsmin", output="js/gen/stats.min.js",
+{% assets filters="jsmin", output="dist/js/stats.min.js",
     "../node_modules/pace-progress/pace.js",
     "../node_modules/jquery/dist/jquery.js",
     "../node_modules/tether/dist/js/tether.js",
@@ -45,7 +45,7 @@
                             borderWidth: 1
                         }]
                     };
-                
+
                 let chart = new Chart(ctx, {
                     type: 'bar',
                     data: data
@@ -71,14 +71,14 @@
                 map.fitWorld();
                 map.setZoom(2);
                 L.tileLayer(url, {
-                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,' + 
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,' +
                                  '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy;' +
                                  '<a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18,
                     id: 'mapbox.streets',
                     accessToken: token
                 }).addTo(map);
-                
+
                 let markers = new L.MarkerClusterGroup();
                 for (var i = 0; i < locs.length; i++) {
                     if (locs[i].loc !== null) {
@@ -116,7 +116,7 @@
                             ]
                         }]
                     };
-                
+
                 let chart = new Chart(ctx, {
                     type: 'doughnut',
                     data: data

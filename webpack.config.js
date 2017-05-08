@@ -6,6 +6,7 @@ const webpack = require('webpack'),
 
 let config = {
     entry: {
+        main: path.resolve("./static/js/main.js"),
         editor: path.resolve("./static/js/editor.js")
     },
     output: {

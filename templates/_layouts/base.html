@@ -43,11 +43,10 @@
         {% endblock %}
 
         {% if not jstop %}
+        <script type="text/javascript" src="{{ url_for('static', filename='dist/js/main-bundle.js') }}"></script>
         {% assets filters="jsmin", output="dist/js/default.min.js",
                   "../node_modules/pace-progress/pace.js",
                   "../node_modules/jquery/dist/jquery.js",
-                  "../node_modules/tether/dist/js/tether.js",
-                  "../node_modules/bootstrap/dist/js/bootstrap.js",
                   "../node_modules/jquery-circle-progress/dist/circle-progress.js",
                   "../node_modules/pnotify/dist/pnotify.js",
                   "../node_modules/pnotify/dist/pnotify.buttons.js",
@@ -84,8 +83,6 @@
             "js/featured-projects.js",
             "js/search.js",
             "js/btn-scroll.js",
-            "js/popovers.js",
-            "js/tooltips.js",
             "js/tab-control.js",
             "js/hamburger.js",
             "js/sidebar.js"

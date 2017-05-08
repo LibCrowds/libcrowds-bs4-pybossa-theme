@@ -58,6 +58,7 @@
     "copy:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./static/img/openseadragonselection/",
     "copy:lightgallery": "cp -R node_modules/lightgallery/dist/fonts ./static/fonts/lightgallery/ && cp -R node_modules/lightgallery/dist/img ./static/img/lightgallery/",
     "postinstall": "npm run copy:font-awesome && npm run copy:openseadragon && npm run copy:openseadragonselection && npm run copy:lightgallery",
-    "lint": "jshint ./static/js/*.js --exclude ./static/js/pybossa.js/"
+    "lint": "jshint ./static/js/*.js --exclude ./static/js/pybossa.js/",
+    "build": "webpack --config webpack.config.js"
   }
 }

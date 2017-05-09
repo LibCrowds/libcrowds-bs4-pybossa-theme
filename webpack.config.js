@@ -19,12 +19,7 @@ let config = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
-            },
-            {
-                test: /pnotify\.js/,
-                loader: 'imports?global=>window,this=>window'
-            }
-        ]
+            }        ]
     },
     plugins: [
         new webpack.ProvidePlugin({

@@ -1,9 +1,12 @@
+import PNotify from 'pnotify';
+import pnotifybuttons from 'pnotify/src/pnotify.buttons';
+import pnotifymobile from 'pnotify/src/pnotify.mobile';
 /*
  * Display a notification.
  */
-function notify(msg, type) {
+const notify = function(msg, type) {
     
-    var opts = {
+    let opts = {
         title: type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Info',
         text: msg,
         type: type || 'info',
@@ -45,3 +48,5 @@ function notify(msg, type) {
 
     return new PNotify(opts);
 }
+
+export default notify;

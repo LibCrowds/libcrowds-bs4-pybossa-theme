@@ -19,7 +19,7 @@
     "openseadragonselection": "picturae/openseadragonselection",
     "codemirror": "^5.23.0",
     "jquery-circle-progress": "^1.2.1",
-    "pnotify": "^3.0.0",
+    "pnotify": "^3.2.0",
     "croppie": "^2.4.0",
     "pace-progress": "^1.0.2",
     "shufflejs": "^4.1.0",

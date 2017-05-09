@@ -16,6 +16,8 @@ git clone --recursive https://github.com/LibCrowds/libcrowds-bs4-pybossa-theme
 cd libcrowds-bs4-pybossa-theme
 # Install
 npm install
+# Build
+npm run build
 ```
 
 Now add the following line to your main PYBOSSA configuration file:
@@ -26,3 +28,12 @@ THEME = 'libcrowds-bs4-pybossa-theme'
 
 The theme will be available after you restart your PYBOSSA application.
 
+
+## Development
+
+Install as above, then:
+
+```
+npm install webpack-dev-server -g
+npm run dev
+```

@@ -1,7 +1,8 @@
 'use strict';
 
-const webpack = require('webpack'),
-      path    = require('path');
+const webpack        = require('webpack'),
+      path           = require('path'),
+      ManifestPlugin = require('webpack-manifest-plugin');
 
 
 let config = {
@@ -11,7 +12,7 @@ let config = {
     },
     output: {
         path: path.resolve("./static/dist/js"),
-        filename: "[name]-bundle.js",
+        filename: "[name].[chunkhash].bundle.js",
       },
     module: {
         loaders: [
@@ -27,7 +28,8 @@ let config = {
             $: 'jquery',
             jquery: 'jquery',
             Tether: 'tether'
-        })
+        }),
+        new ManifestPlugin()
     ]
 };
 

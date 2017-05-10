@@ -1,8 +1,9 @@
 'use strict';
 
-const webpack        = require('webpack'),
-      path           = require('path'),
-      ManifestPlugin = require('webpack-manifest-plugin');
+const webpack = require('webpack'),
+      path    = require('path');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 let config = {
@@ -29,7 +30,12 @@ let config = {
             jquery: 'jquery',
             Tether: 'tether'
         }),
-        new ManifestPlugin()
+        new HtmlWebpackPlugin({
+            inject: false,
+            hash: true,
+            filename: path.resolve('./templates/_layouts/base_test.html'),
+            template: './templates/_layouts/base.html'
+        })
     ]
 };
 

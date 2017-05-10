@@ -48,9 +48,6 @@
                   "../node_modules/pace-progress/pace.js",
                   "../node_modules/jquery/dist/jquery.js",
                   "../node_modules/jquery-circle-progress/dist/circle-progress.js",
-                  "../node_modules/pnotify/dist/pnotify.js",
-                  "../node_modules/pnotify/dist/pnotify.buttons.js",
-                  "../node_modules/pnotify/dist/pnotify.mobile.js",
                   "../node_modules/croppie/croppie.js",
                   "../node_modules/shufflejs/dist/shuffle.js",
                   "../node_modules/bootstrap-toggle/js/bootstrap-toggle.js",
@@ -89,6 +86,9 @@
             %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
+        
+        <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js %>"></script>
+         
         {%- include "_includes/_sentry.js" %}
         {% include "_includes/_flash_messages.js" %}
         {% include "_includes/_ajax_csrf_token.js" %}

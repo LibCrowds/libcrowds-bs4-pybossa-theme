@@ -1,4 +1,4 @@
-{% extends "_layouts/dist/dashboard.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "admin" %}
 {% set active_link = "featured" %}
 {% import "_helpers/_card.html" as card_helpers %}
@@ -23,7 +23,7 @@
                             {{ table_helpers.render_cell(p.name, url=url_for('project.details', short_name=p.short_name)) }}
                             {{ table_helpers.render_cell(p.overall_progress, center=True) }}
                             <td class="visible text-center">
-                                <a href="#" class="toggle-featured btn btn-sm btn-outline-primary" 
+                                <a href="#" class="toggle-featured btn btn-sm btn-outline-primary"
                                    data-project-id="{{ p.id }}" role="button">{% if p.featured %}Remove{% else %}Add{% endif %}</a>
                             </td>
                         </tr>

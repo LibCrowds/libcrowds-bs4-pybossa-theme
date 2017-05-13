@@ -1,4 +1,4 @@
-{% extends "_layouts/dist/dashboard.html" %}
+{% extends "_layouts/dashboard.html" %}
 {% set active_page = "projects" %}
 {% set active_link = "webhooks" %}
 {% import "_helpers/_card.html" as card_helpers %}
@@ -21,8 +21,8 @@
                     {{ table_helpers.render_cell(r.response) }}
                     {{ table_helpers.render_cell(r.response_status_code, center=True) }}
                     <td class="visible text-center">
-                        <button class="btn btn-sm btn-outline-primary send-webhook" 
-                                data-project-short-name="{{ project.short_name }}" 
+                        <button class="btn btn-sm btn-outline-primary send-webhook"
+                                data-project-short-name="{{ project.short_name }}"
                                 data-webhook-id="{{ r.id }}" role="button">Send</button>
                     </td>
                 </tr>

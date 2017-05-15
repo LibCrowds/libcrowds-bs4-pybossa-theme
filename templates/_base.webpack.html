@@ -87,7 +87,9 @@
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
         
-        <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js %>"></script>
+        <% for (key in htmlWebpackPlugin.files.js) { %>
+        <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[key] %>"></script>
+        <% } %>
          
         {%- include "_includes/_sentry.js" %}
         {% include "_includes/_flash_messages.js" %}

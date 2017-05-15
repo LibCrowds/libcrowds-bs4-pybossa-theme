@@ -23,7 +23,7 @@
                             {{ table_helpers.render_cell(p.name, url=url_for('project.details', short_name=p.short_name)) }}
                             {{ table_helpers.render_cell(p.overall_progress, center=True) }}
                             <td class="visible text-center">
-                                <a href="#" class="toggle-featured btn btn-sm btn-outline-primary" 
+                                <a href="#" class="toggle-featured btn btn-sm btn-outline-primary"
                                    data-project-id="{{ p.id }}" role="button">{% if p.featured %}Remove{% else %}Add{% endif %}</a>
                             </td>
                         </tr>

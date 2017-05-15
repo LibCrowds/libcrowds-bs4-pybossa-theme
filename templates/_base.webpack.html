@@ -86,10 +86,10 @@
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
         
-        <% for (key in htmlWebpackPlugin.files.js) { %>
-        <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[key] %>"></script>
-        <% } %>
-         
+        <% htmlWebpackPlugin.files.js.forEach(function(f) { %>
+        <script type="text/javascript" src="{%= f %}"></script>
+        <% }); %>
+        
         {%- include "_includes/_sentry.js" %}
         {% include "_includes/_flash_messages.js" %}
         {% include "_includes/_ajax_csrf_token.js" %}

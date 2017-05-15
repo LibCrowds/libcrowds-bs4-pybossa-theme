@@ -5,9 +5,6 @@ const webpack = require('webpack'),
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const srcRoot  = './templates/_layouts/src/',
-      distRoot = './templates/_layouts/dist/';
-
 
 let config = {
     entry: {
@@ -38,8 +35,8 @@ let config = {
             hash: true,
             inject: false,
             chunks: ['main', 'editor'],
-            filename: path.resolve(path.join(distRoot, 'base.html')),
-            template: path.resolve(path.join(srcRoot, 'base.html'))
+            filename: './templates/base.html',
+            template: './templates/_base.webpack.html'
         })
     ]
 };

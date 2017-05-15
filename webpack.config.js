@@ -5,22 +5,14 @@ const webpack = require('webpack'),
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c9115d817874d5e61847735bb928adf63b91b6be
 let config = {
     entry: {
         main: "./static/js/main.js",
         editor: "./static/js/editor.js"
     },
     output: {
-<<<<<<< HEAD
         path: path.resolve("./static/dist/js"),
         publicPath: '/static/js',
-=======
-        path: path.resolve(__dirname, 'static/dist/js'),
->>>>>>> c9115d817874d5e61847735bb928adf63b91b6be
         filename: "[name].bundle.js",
       },
     module: {
@@ -42,14 +34,9 @@ let config = {
         new HtmlWebpackPlugin({
             hash: true,
             inject: false,
-<<<<<<< HEAD
             chunks: ['main', 'editor'],
             filename: './templates/base.html',
             template: './templates/_base.webpack.html'
-=======
-            filename: path.resolve(__dirname, 'templates/base.html'),
-            template: path.resolve(__dirname, 'templates/_base.webpack.html')
->>>>>>> c9115d817874d5e61847735bb928adf63b91b6be
         })
     ]
 };

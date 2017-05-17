@@ -1,3 +1,5 @@
+let imageCrop;
+
 if ($('#uploadPreview').length) {
     var $uploadCrop;
     var $preview = $('#uploadPreview');
@@ -33,3 +35,5 @@ if ($('#uploadPreview').length) {
         }
     });
 }
+
+export default imageCrop;

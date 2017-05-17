@@ -1,3 +1,5 @@
+let progress;
+
 // Initialise progress circles.
 $('.progress-circle:not(.progress-circle-white)').each(function() {
     var value = parseFloat($(this).data('progress') / 100);
@@ -16,3 +18,5 @@ $('.progress-circle-white').each(function() {
         size: 180
     });
 });
+
+export default progress;

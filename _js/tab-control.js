@@ -1,3 +1,5 @@
+let tabControl;
+
 /**
  * Show linked element when a .tab-control is clicked.
  * So we can still use tooltips while also toggling tab-like behaviour.
@@ -10,3 +12,5 @@ $('a[href*=\\#].tab-control').on('click', function(evt) {
     $(this).parent().addClass('active');
     evt.preventDefault();
 });
+
+export default tabControl;

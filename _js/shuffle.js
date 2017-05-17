@@ -1,3 +1,5 @@
+let shuffle;
+
 /**
  * A class for handling project shuffle grids and tables.
  */
@@ -131,3 +133,5 @@ if ($('.shuffle-controls').length === 1) {
         projectShuffle.shuffle.update();
     })
 }
+
+export default shuffle;

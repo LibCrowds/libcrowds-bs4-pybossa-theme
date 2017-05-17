@@ -1,3 +1,5 @@
+let anchorScroll;
+
 /**
  * Scroll smoothly to internal anchors.
  */
@@ -10,3 +12,5 @@ $('a[href*=\\#]:not([href="#"]):not([data-toggle="tab"])').on('click', function(
     }, 100);
     evt.preventDefault();
 });
+
+export default anchorScroll;

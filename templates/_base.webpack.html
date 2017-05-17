@@ -55,34 +55,12 @@
                   "../node_modules/lg-share/dist/lg-share.js",
                   "../node_modules/lg-zoom/dist/lg-zoom.js",
                   "../node_modules/lg-fullscreen/dist/lg-fullscreen.js",
-                  "../node_modules/justifiedGallery/dist/js/jquery.justifiedGallery.js",
-                  "js/init-aos.js",
-                  "js/favourites.js"
+                  "../node_modules/justifiedGallery/dist/js/jquery.justifiedGallery.js"
                   %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
 
         {% endif %}
-        {% assets filters="jsmin", output="dist/js/bottom.min.js",
-            "js/style-navbar.js",
-            "js/style-jumbotrons.js",
-            "js/display-scroll-btns.js",
-            "js/api-stats.js",
-            "js/image-error.js",
-            "js/image-crop.js",
-            "js/anchor-scroll.js",
-            "js/progress.js",
-            "js/s3.js",
-            "js/shuffle.js",
-            "js/featured-projects.js",
-            "js/search.js",
-            "js/btn-scroll.js",
-            "js/tab-control.js",
-            "js/hamburger.js",
-            "js/sidebar.js"
-            %}
-            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
         
         <% htmlWebpackPlugin.files.js.forEach(function(f) { %>
         <script type="text/javascript" src="<%= f %>"></script>

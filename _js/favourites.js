@@ -1,3 +1,5 @@
+let favourites;
+
 /**
  * Return the main and thumbnail images for a task in the favourites gallery.
  */
@@ -194,3 +196,5 @@ $('body').on('click', '.btn-favourites', function() {
 if ($('.favourites-gallery').length) {
     loadFavouritesGallery('.favourites-gallery');
 }
+
+export default favourites;

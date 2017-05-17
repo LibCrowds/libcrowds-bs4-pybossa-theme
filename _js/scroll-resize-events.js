@@ -1,3 +1,5 @@
+let scrollResizeEvents;
+
 /**
  * Handle scroll and resize events.
  */
@@ -59,3 +61,5 @@ function displayScrollButtons() {
         }
     });
 }
+
+export default scrollResizeEvents;

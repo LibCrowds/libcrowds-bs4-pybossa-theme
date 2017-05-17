@@ -1,3 +1,5 @@
+let styleNavbar;
+
 /**
  * Handle scroll and resize events.
  */
@@ -30,3 +32,5 @@ function styleNavigation() {
     $('.navbar-invertable').removeClass('navbar-inverse');
     $('.navbar-invertable').addClass('navbar-light');
 }
+
+export default styleNavbar;

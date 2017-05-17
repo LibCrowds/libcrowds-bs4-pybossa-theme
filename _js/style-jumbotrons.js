@@ -1,3 +1,5 @@
+let styleJumbotrons;
+
 $(window).on("resize scroll", function() {
     fadeJumbotrons();
 }).trigger('resize');
@@ -18,3 +20,5 @@ function fadeJumbotrons() {
         $(this).children().css('opacity', opacity);
     });
 }
+
+export default styleJumbotrons;

@@ -1,3 +1,5 @@
+let btnScroll;
+
 /**
  * Handle clicking of a scroll button.
  */
@@ -10,3 +12,5 @@ $('.btn-scroll').on('click', function() {
         $(target).animate({ scrollLeft: $(target).scrollLeft() + 400 }, 300);
     }
 });
+
+export default btnScroll;

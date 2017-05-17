@@ -1,3 +1,5 @@
+let displayScrollButtons;
+
 $(window).on("resize", function() {
     displayScrollButtons();
 }).trigger('resize');
@@ -15,3 +17,5 @@ function displayScrollButtons() {
         }
     });
 }
+
+export default displayScrollButtons;

@@ -1,3 +1,5 @@
+let s3;
+
 /**
  * Load the contents of an Amazon S3 bucket.
  */
@@ -65,3 +67,5 @@ $('#get-s3-bucket').on('click', function() {
         }
     });
 });
+
+export default s3;

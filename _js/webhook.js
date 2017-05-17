@@ -1,3 +1,5 @@
+let webhook;
+
 // Send a webhook when the button is clicked
 $('.send-webhook').on('click', function() {
     var projectShortName = $(this).data('project-short-name'),
@@ -16,3 +18,5 @@ $('.send-webhook').on('click', function() {
         notify('Webhook sent!', 'success');
     });
 });
+
+export default webhook;

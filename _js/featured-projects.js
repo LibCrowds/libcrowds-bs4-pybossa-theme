@@ -1,3 +1,5 @@
+let featuredProjects;
+
 $('.toggle-featured').on('click', function() {
     var projectId = $(this).data("project-id"),
         featured  = $(this).text() === "Remove",
@@ -15,3 +17,5 @@ $('.toggle-featured').on('click', function() {
         notify(jqXHR.responseText, 'error');
     });
 });
+
+export default featuredProjects;

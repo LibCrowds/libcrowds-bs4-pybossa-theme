@@ -1,3 +1,5 @@
+let search;
+
 /**
  * Return true if the row contains all search terms, false otherwise.
  */
@@ -24,3 +26,5 @@ $('.search-table[data-target]').on('change keyup', function(evt) {
         }
     });
 });
+
+export default search;

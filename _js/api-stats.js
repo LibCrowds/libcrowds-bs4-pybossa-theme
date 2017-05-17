@@ -1,3 +1,5 @@
+let apiStats;
+
 /**
  * Load global stats.
  */
@@ -13,3 +15,5 @@
         });
     }
 }());
+
+export default apiStats;

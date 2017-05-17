@@ -1,3 +1,5 @@
+let hamburger;
+
 $('.hamburger').on('click', function(evt) {
 	switchIcons($(this));
 	switchColours($(this));
@@ -38,3 +40,5 @@ function switchColours(elem) {
 		elem.removeClass('hamburger--arrow');
 	}
  }
+ 
+ export default hamburger;

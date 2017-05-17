@@ -1,3 +1,5 @@
+let viewer;
+
 /**
  * Viewer controls HUD.
  */
@@ -646,3 +648,5 @@ class LibCrowdsViewerInterface {
         }
     }
 }
+
+export default viewer;

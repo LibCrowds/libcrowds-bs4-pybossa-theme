@@ -5,6 +5,8 @@ import css from 'codemirror/mode/css/css';
 import http from 'codemirror/mode/http/http';
 import htmlmixed from 'codemirror/mode/htmlmixed/htmlmixed';
 
+let editor;
+
 /**
  * Initialise code editor for text areas.
  */
@@ -33,3 +35,5 @@ if ($('#editor').length) {
 
     CodeMirror(this, opts);
 });
+
+export default editor;

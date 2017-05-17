@@ -7,12 +7,6 @@
 
 {% block content %}
 
-{% assets filters="jsmin", output="dist/js/admin-dashboard.min.js",
-    "../node_modules/chartist/dist/chartist.js"
-    %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
-
 {% if not wait %}
 {{ general_helpers.render_title('Admin', 'Dashboard', title_link=[url_for('admin.dashboard', refresh='1'), 'Refresh']) }}
 

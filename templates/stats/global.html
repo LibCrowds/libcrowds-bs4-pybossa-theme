@@ -4,13 +4,6 @@
 {% set jstop = True %}
 
 {% block content %}
-{% assets filters="jsmin", output="dist/js/stats.min.js",
-    "../node_modules/chart.js/dist/Chart.js",
-    "../node_modules/leaflet/dist/leaflet.js",
-    "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"
-    %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
 
 <div class="card text-center">
     {{ card_helpers.render_title('Most Active Volunteers') }}

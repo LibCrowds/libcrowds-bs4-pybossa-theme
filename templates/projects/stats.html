@@ -7,13 +7,7 @@
 
 {% block content %}
 {{ general_helpers.render_title(project.name, 'Statistics') }}
-{% assets filters="jsmin", output="dist/js/project-stats.min.js",
-    "../node_modules/chart.js/dist/Chart.bundle.js",
-    "../node_modules/leaflet/dist/leaflet.js",
-    "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"
-    %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
+
 <script>
     var projectStats = {{ projectStats | safe }},
         userStats    = {{ userStats | tojson }};

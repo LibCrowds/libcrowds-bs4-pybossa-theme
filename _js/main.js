@@ -27,7 +27,7 @@ import csrfToken from './csrf-token';
 import msg from './flash-messages';
 
 // TODO export to own repo to be bundled within projects - add bootstrap as dependency
-import viewer from './ui/components/viewer/viewer';
+import Interface from './ui/components/viewer/interface';
 
 // Init pace-progress
 pace.start()

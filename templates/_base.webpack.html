@@ -23,7 +23,7 @@
         <meta name="theme-color" content="#da0000">
         
         <% htmlWebpackPlugin.files.css.forEach(function(f) { %>
-        <link rel="stylesheet" src="<%= f %>"></script>
+        <link rel="stylesheet" href="<%= f %>">
         <% }); %>
         
         {% include "_includes/_ga.js" ignore missing %}

@@ -1,12 +1,9 @@
 .DS_STORE
-static/css/gen/*
-static/js/gen/*
+static/dist/*
 static/.webassets-cache/*
-static/fonts/font-awesome/*
-static/fonts/lightgallery/*
-static/img/lightgallery/*
 static/img/openseadragon/*
 static/img/openseadragonselection/*
+templates/base.html
 node_modules/*
 .scss-lint.yml
 *.log

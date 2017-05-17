@@ -1,0 +1,167 @@
+$headings-font-family:             'Assistant', sans-serif;
+$base-font-family:                 'Roboto', sans-serif;
+$font-family-serif:                Times, serif;
+
+$headings-font-weight:             400;
+
+$font-size-sm:                     0.85rem;
+$badge-font-size:                  $font-size-sm;
+
+$white:                            #FFFFFF;
+$gray:                             #404446;
+$gray-light:                       #888888;
+$black:                            #000000;
+$sky:                              #7CC4F3;
+$twitter:                          #00ACEE;
+$facebook:                         #3B5998;
+$googleplus:                       #D34836;
+$linkedin:                         #0E76A8;
+
+$brand-primary:                    #D00000;
+$brand-success:                    #398439;
+$brand-info:                       #4190C2;
+$brand-warning:                    #E38D13;
+$brand-danger:                     #D00000;
+$brand-inverse:                    #111111;
+
+$body-color:                       #292A2B;
+
+$btn-secondary-color:              $brand-inverse;
+$btn-secondary-bg:                 $white;
+$btn-secondary-border:             $brand-inverse;
+$btn-border-radius:                0px;
+$btn-border-radius-lg:             0px;
+$btn-border-radius-sm:             0px;
+
+$link-color:                       $brand-danger;
+$link-hover-color:                 darken($link-color, 5%);
+$link-hover-decoration:            none;
+
+$navbar-light-color:               rgba($black, .7);
+$navbar-inverse-color:             $white;
+$navbar-inverse-toggler-border:    none;
+
+$input-padding-x:                  1.25rem;
+$input-padding-y:                  .75rem;
+$input-border-focus:               $brand-info;
+$custom-select-focus-border-color: lighten($brand-info, 25%);
+
+$table-cell-padding:               .75rem 1.25rem;
+$table-bg-accent:                  darken($white, 3%);
+$table-bg-hover:                   darken($white, 5%);
+$table-border-color:               rgba($black, .075);
+
+$pagination-color:                 $brand-info;
+$pagination-hover-color:           darken($brand-info, 10%);
+$pagination-active-bg:             $brand-info;
+$pagination-active-border:         $brand-info;
+
+$card-spacer-y:                    1.5rem;
+$card-columns-count:               2;
+
+$spacer:                           1.5rem;
+
+$nav-pills-border-radius:          0px;
+$component-active-bg:              $brand-info;
+
+$progress-circle-font-size:        2.5rem;
+
+$box-shadow-spread:                -5px;
+$box-shadow-blur:                  7px;
+$box-shadows: (
+    t: '0 4px',
+    l: '4px 0',
+    r: '-4 0',
+    b: '0 -4px'
+);
+
+$hamburger-hover-opacity:          100%;
+$hamburger-types:                  (collapse, arrow);
+
+$fa-font-path:                     '~font-awesome/fonts';
+
+$lg-path-fonts:                    '~lightgallery/src/fonts';
+$lg-path-images:                   '~lightgallery/src/img';
+
+$ct-series-colors:
+    $brand-primary,
+    $brand-success,
+    $brand-info,
+    $brand-warning,
+    #453d3f,
+    #59922b,
+    #0544d3,
+    #6b0392,
+    #f05b4f,
+    #dda458,
+    #eacf7d,
+    #86797d,
+    #b2c326,
+    #6188e2,
+    #a748ca
+;
+
+$icons:
+    'cardcatalogues',
+    'clock',
+    'completed-tasks',
+    'contributions',
+    'draft',
+    'error',
+    'featured',
+    'in-love',
+    'loading',
+    'padlock',
+    'playbills',
+    'projects',
+    'remaining-tasks',
+    'success',
+    'volunteers'
+;
+
+@import
+    "~bootstrap/scss/bootstrap",
+    "~font-awesome/scss/font-awesome",
+    "~pnotify/src/pnotify",
+    "~pnotify/src/pnotify.mobile",
+    "~pnotify/src/pnotify.buttons",
+    "~pnotify/src/pnotify.brighttheme",
+    "~croppie/croppie",
+    "~pace-progress/themes/red/pace-theme-minimal",
+    "~chartist/dist/scss/chartist.scss",
+    "~leaflet.markercluster/dist/MarkerCluster",
+    "~leaflet.markercluster/dist/MarkerCluster.Default",
+    "~bootstrap-toggle/css/bootstrap-toggle",
+    "~hamburgers/_sass/hamburgers/hamburgers",
+    "~aos/src/sass/aos",
+    "~codemirror/lib/codemirror",
+    "~codemirror/theme/lesser-dark",
+    "~lightgallery/src/sass/lightgallery",
+    "~justifiedGallery/dist/css/justifiedGallery",
+    "~tether-shepherd/dist/css/shepherd-theme-arrows"
+;
+
+@import
+    "partials/base",
+    "partials/typography",
+    "partials/transitions",
+    "partials/jumbotrons",
+    "partials/buttons",
+    "partials/navbar",
+    "partials/nav",
+    "partials/editor",
+    "partials/dashboard",
+    "partials/utilities",
+    "partials/cards",
+    "partials/toggle",
+    "partials/links",
+    "partials/ribbon",
+    "partials/progress",
+    "partials/patterns",
+    "partials/icons",
+    "partials/tables",
+    "partials/notifications",
+	"partials/animations",
+    "partials/viewer",
+    "partials/sidebar"
+;

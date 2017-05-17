@@ -1,3 +1,0 @@
-[submodule "static/js/pybossa.js"]
-	path = static/js/pybossa.js
-	url = https://github.com/Scifabric/pybossa.js

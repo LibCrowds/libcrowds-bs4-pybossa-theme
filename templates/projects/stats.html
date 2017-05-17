@@ -7,21 +7,7 @@
 
 {% block content %}
 {{ general_helpers.render_title(project.name, 'Statistics') }}
-{% assets filters="jsmin", output="js/gen/project-stats.min.js",
-    "../node_modules/pace-progress/pace.js",
-    "../node_modules/jquery/dist/jquery.js",
-    "../node_modules/tether/dist/js/tether.js",
-    "../node_modules/bootstrap/dist/js/bootstrap.js",
-    "../node_modules/pnotify/dist/pnotify.js",
-    "../node_modules/pnotify/dist/pnotify.buttons.js",
-    "../node_modules/pnotify/dist/pnotify.mobile.js",
-    "../node_modules/chart.js/dist/Chart.bundle.js",
-    "../node_modules/leaflet/dist/leaflet.js",
-    "../node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
-    "js/notify.js"
-    %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
+
 <script>
     var projectStats = {{ projectStats | safe }},
         userStats    = {{ userStats | tojson }};
@@ -120,7 +106,7 @@
                         data: $.map(hourStats[2].values, function(authStats) {
                             return authStats[1];
                         }),
-                        
+
                         backgroundColor: "rgba(65, 144, 194, 0.2)",
                         borderColor: "rgba(65, 144, 194, 1)",
                         borderWidth: 1
@@ -148,7 +134,7 @@
                         data: $.map(completedTasks.values, function(stat) {
                             return stat[1];
                         }),
-                        
+
                         backgroundColor: "rgba(65, 144, 194, 0.2)",
                         borderColor: "rgba(65, 144, 194, 1)",
                         borderWidth: 1
@@ -183,14 +169,14 @@
                         data: $.map(top5Users, function(user) {
                             return user.tasks;
                         }),
-                        
+
                         backgroundColor: "rgba(65, 144, 194, 0.2)",
                         borderColor: "rgba(65, 144, 194, 1)",
                         borderWidth: 1
                     }]
                 },
                 options: {
-                    legend: { 
+                    legend: {
                         display: false
                     }
                 }
@@ -212,14 +198,14 @@
                 map.fitWorld();
                 map.setZoom(2);
                 L.tileLayer(url, {
-                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,' + 
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,' +
                                  '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy;' +
                                  '<a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18,
                     id: 'mapbox.streets',
                     accessToken: token
                 }).addTo(map);
-                
+
                 let markers = new L.MarkerClusterGroup();
                 for (var i = 0; i < locs.length; i++) {
                     if (locs[i].loc !== null) {

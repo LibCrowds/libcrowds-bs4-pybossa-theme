@@ -2,6 +2,9 @@ import '../_sass/_main.scss';
 
 import pace from 'pace-progress';
 import 'bootstrap';
+import 'bootstrap-toggle';
+import AOS from 'aos';
+
 import notify from './notify';
 import editor from './editor';
 import favourites from './favourites.js';

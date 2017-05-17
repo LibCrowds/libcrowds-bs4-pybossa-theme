@@ -13,7 +13,7 @@ let config = {
         main: "./_js/main.js"
     },
     output: {
-        path: path.resolve("./static/js"),        
+        path: path.resolve("./static/dist"),        
         filename: "[name].bundle.js"
       },
     module: {

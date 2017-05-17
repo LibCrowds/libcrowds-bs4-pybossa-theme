@@ -1,3 +1,5 @@
+import 'jquery-circle-progress';
+
 let progress;
 
 // Initialise progress circles.

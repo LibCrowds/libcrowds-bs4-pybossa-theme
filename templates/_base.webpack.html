@@ -23,7 +23,7 @@
         <meta name="theme-color" content="#da0000">
         
         <% htmlWebpackPlugin.files.css.forEach(function(f) { %>
-        <link rel="stylesheet" href="<%= f %>">
+        <link rel="stylesheet" href="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}">
         <% }); %>
         
         {% include "_includes/_ga.js" ignore missing %}
@@ -43,7 +43,7 @@
         
         {% if jstop %}
         <% htmlWebpackPlugin.files.js.forEach(function(f) { %>
-        <script type="text/javascript" src="<%= f %>"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}"></script>
         <% }); %>
         {% endif %}
         
@@ -51,23 +51,8 @@
         {% endblock %}
 
         {% if not jstop %}
-        {% assets filters="jsmin", output="dist/js/default.min.js",
-                  "../node_modules/jquery/dist/jquery.js",
-                  "../node_modules/jquery-circle-progress/dist/circle-progress.js",
-                  "../node_modules/croppie/croppie.js",
-                  "../node_modules/bootstrap-toggle/js/bootstrap-toggle.js",
-                  "../node_modules/aos/dist/aos.js",
-                  "../node_modules/lightgallery/dist/js/lightgallery.js",
-                  "../node_modules/lg-thumbnail/dist/lg-thumbnail.js",
-                  "../node_modules/lg-share/dist/lg-share.js",
-                  "../node_modules/lg-zoom/dist/lg-zoom.js",
-                  "../node_modules/lg-fullscreen/dist/lg-fullscreen.js",
-                  "../node_modules/justifiedGallery/dist/js/jquery.justifiedGallery.js"
-                  %}
-            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
         <% htmlWebpackPlugin.files.js.forEach(function(f) { %>
-        <script type="text/javascript" src="<%= f %>"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}"></script>
         <% }); %>
         {% endif %}
         

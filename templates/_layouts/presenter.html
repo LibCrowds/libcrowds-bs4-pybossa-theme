@@ -4,12 +4,9 @@
 {% block layout %}
 {% assets filters="jsmin", output="dist/js/presenter.min.js",
     "../node_modules/tether-shepherd/dist/js/shepherd.js",
-    "../node_modules/bootstrap/dist/js/bootstrap.js",
     "../node_modules/openseadragon/build/openseadragon/openseadragon.js",
     "../node_modules/openseadragonselection/dist/openseadragonselection.js",
-    "../node_modules/bootstrap-toggle/js/bootstrap-toggle.js",
-    "../node_modules/imagesloaded/imagesloaded.pkgd.js",
-    "../node_modules/pybossa.js/pybossa.js"
+    "../node_modules/imagesloaded/imagesloaded.pkgd.js"
     %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}

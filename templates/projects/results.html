@@ -6,9 +6,7 @@
 
 {% block content %}
 {% assets filters="jsmin", output="dist/js/results.min.js",
-    "../node_modules/openseadragon/build/openseadragon/openseadragon.js",
-    "../node_modules/bootstrap-toggle/js/bootstrap-toggle.js",
-    "../node_modules/pybossa.js/pybossa.js"
+    "../node_modules/openseadragon/build/openseadragon/openseadragon.js"
     %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}

@@ -1,3 +1,5 @@
+import croppie from 'croppie';
+
 let imageCrop;
 
 if ($('#uploadPreview').length) {

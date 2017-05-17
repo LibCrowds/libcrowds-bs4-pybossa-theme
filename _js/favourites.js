@@ -1,3 +1,10 @@
+import 'lightgallery';
+import 'lg-thumbnail';
+import 'lg-share';
+import 'lg-zoom';
+import 'lg-fullscreen';
+import 'justifiedGallery/dist/js/jquery.justifiedGallery.js';
+
 let favourites;
 
 /**

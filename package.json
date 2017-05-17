@@ -38,8 +38,7 @@
     "pybossa.js": "scifabric/pybossa.js",
     "shufflejs": "^4.1.0",
     "tether": "^1.4.0",
-    "tether-shepherd": "^1.8.1",
-    "webfontloader": "^1.6.27"
+    "tether-shepherd": "^1.8.1"
   },
   "devDependencies": {
     "babel-core": "^6.22.0",

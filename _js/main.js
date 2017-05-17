@@ -1,7 +1,6 @@
 import '../_sass/_main.scss';
 
 import pace from 'pace-progress';
-import fonts from './fonts';
 import 'bootstrap';
 import 'bootstrap-toggle';
 import AOS from 'aos';

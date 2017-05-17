@@ -15,7 +15,7 @@ let config = {
     output: {
         path: path.resolve("./static/dist"),        
         filename: "[name].bundle.js"
-      },
+    },
     module: {
         loaders: [
             {

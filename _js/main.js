@@ -14,7 +14,7 @@ import imageCrop from './image-crop';
 import anchorScroll from './anchor-scroll';
 import progress from './progress';
 import s3 from './s3';
-import shuffle from './shuffle';
+import ps from './project-shuffle';
 import featuredProjects from './featured-projects';
 import search from './search';
 import btnScroll from './btn-scroll';

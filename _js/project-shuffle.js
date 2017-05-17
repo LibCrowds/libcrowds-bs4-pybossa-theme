@@ -1,4 +1,6 @@
-let shuffle;
+import shuffle from 'shufflejs';
+
+let ps;
 
 /**
  * A class for handling project shuffle grids and tables.
@@ -134,4 +136,4 @@ if ($('.shuffle-controls').length === 1) {
     })
 }
 
-export default shuffle;
+export default ps;

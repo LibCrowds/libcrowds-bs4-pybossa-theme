@@ -37,7 +37,8 @@
     "lg-zoom": "^1.0.4",
     "lg-fullscreen": "^1.0.0",
     "justifiedGallery": "^3.6.2",
-    "tether-shepherd": "^1.8.1"
+    "tether-shepherd": "^1.8.1",
+    "pybossa.js": "scifabric/pybossa.js"
   },
   "devDependencies": {
     "babel-core": "^6.22.0",

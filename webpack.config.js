@@ -7,13 +7,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let config = {
     entry: {
-        main: "./static/js/main.js",
-        editor: "./static/js/editor.js"
+        main: "./_js/main.js",
+        editor: "./_js/editor.js"
     },
     output: {
-        path: path.resolve("./static/dist/js"),
-        publicPath: '/static/js',
-        filename: "[name].bundle.js",
+        path: path.resolve("./static/dist/js"),        
+        filename: "[name].bundle.js"
       },
     module: {
         loaders: [

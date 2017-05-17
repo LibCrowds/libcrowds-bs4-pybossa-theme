@@ -1,5 +1,3 @@
-let displayScrollButtons;
-
 $(window).on("resize", function() {
     displayScrollButtons();
 }).trigger('resize');

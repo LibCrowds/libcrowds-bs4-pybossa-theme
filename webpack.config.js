@@ -23,6 +23,11 @@ let config = {
                 loader: 'babel-loader'
             },
             {
+                test: /\.s[a|c]ss$/,
+                exclude: /node_modules/,
+                loader: 'style-loader!css-loader!sass-loader'
+            },
+            {
                 test: require.resolve("pace-progress"), 
                 loader: "imports-loader?define=>false" 
             }

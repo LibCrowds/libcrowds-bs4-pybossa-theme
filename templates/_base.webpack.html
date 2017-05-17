@@ -21,9 +21,11 @@
         <meta name="msapplication-TileImage" content="{{ url_for('static', filename='img/favicons/mstile-144x144.png') }}?v=xM3QjMjGEa">
         <meta name="msapplication-config" content="{{ url_for('static', filename='img/favicons/browserconfig.xml') }}">
         <meta name="theme-color" content="#da0000">
-        {%- assets filters="libsass", output="dist/css/styles.min.css", depends="sass/**/*.scss", "sass/_main.scss" %}
-            <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
-        {% endassets %}
+        
+        <% htmlWebpackPlugin.files.css.forEach(function(f) { %>
+        <link rel="stylesheet" src="<%= f %>"></script>
+        <% }); %>
+        
         {% include "_includes/_ga.js" ignore missing %}
         {% include "_includes/_cookies_warning.html" %}
     </head>

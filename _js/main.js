@@ -1,3 +1,5 @@
+import '../_sass/_main.scss';
+
 import pace from 'pace-progress';
 import 'bootstrap';
 import notify from './notify';

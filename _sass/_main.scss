@@ -127,10 +127,10 @@ $box-shadows: (
 $hamburger-hover-opacity:          100%;
 $hamburger-types:                  (collapse, arrow);
 
-$fa-font-path:                     '../../fonts/font-awesome';
+$fa-font-path:                     '../static/fonts/font-awesome';
 
-$lg-path-fonts:                    '../../fonts/lightgallery';
-$lg-path-images:                   '../../img/lightgallery';
+$lg-path-fonts:                    '../static/fonts/lightgallery';
+$lg-path-images:                   '../static/img/lightgallery';
 
 $ct-series-colors:
     $brand-primary,
@@ -169,26 +169,29 @@ $icons:
 ;
 
 @import
-    "../../node_modules/bootstrap/scss/bootstrap",
-    "../../node_modules/font-awesome/scss/font-awesome",
-    "../../node_modules/pnotify/src/pnotify",
-    "../../node_modules/pnotify/src/pnotify.mobile",
-    "../../node_modules/pnotify/src/pnotify.buttons",
-    "../../node_modules/pnotify/src/pnotify.brighttheme",
-    "../../node_modules/croppie/croppie",
-    "../../node_modules/pace-progress/themes/red/pace-theme-minimal",
-    "../../node_modules/chartist/dist/scss/chartist.scss",
-    "../../node_modules/leaflet/dist/leaflet",
-    "../../node_modules/leaflet.markercluster/dist/MarkerCluster",
-    "../../node_modules/leaflet.markercluster/dist/MarkerCluster.Default",
-    "../../node_modules/bootstrap-toggle/css/bootstrap-toggle",
-    "../../node_modules/hamburgers/_sass/hamburgers/hamburgers",
-    "../../node_modules/aos/src/sass/aos",
-    "../../node_modules/codemirror/lib/codemirror",
-    "../../node_modules/codemirror/theme/lesser-dark",
-    "../../node_modules/lightgallery/src/sass/lightgallery",
-    "../../node_modules/justifiedGallery/dist/css/justifiedGallery",
-    "../../node_modules/tether-shepherd/dist/css/shepherd-theme-arrows",
+    "~bootstrap/scss/bootstrap",
+    "~font-awesome/scss/font-awesome",
+    "~pnotify/src/pnotify",
+    "~pnotify/src/pnotify.mobile",
+    "~pnotify/src/pnotify.buttons",
+    "~pnotify/src/pnotify.brighttheme",
+    "~croppie/croppie",
+    "~pace-progress/themes/red/pace-theme-minimal",
+    "~chartist/dist/scss/chartist.scss",
+    "~leaflet/dist/leaflet",
+    "~leaflet.markercluster/dist/MarkerCluster",
+    "~leaflet.markercluster/dist/MarkerCluster.Default",
+    "~bootstrap-toggle/css/bootstrap-toggle",
+    "~hamburgers/_sass/hamburgers/hamburgers",
+    "~aos/src/sass/aos",
+    "~codemirror/lib/codemirror",
+    "~codemirror/theme/lesser-dark",
+    "~lightgallery/src/sass/lightgallery",
+    "~justifiedGallery/dist/css/justifiedGallery",
+    "~tether-shepherd/dist/css/shepherd-theme-arrows"
+;
+
+@import
     "partials/base",
     "partials/typography",
     "partials/transitions",

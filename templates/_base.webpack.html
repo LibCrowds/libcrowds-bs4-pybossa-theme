@@ -86,7 +86,7 @@
         {% endassets %}
         
         <% htmlWebpackPlugin.files.js.forEach(function(f) { %>
-        <script type="text/javascript" src="{%= f %}"></script>
+        <script type="text/javascript" src="<%= f %>"></script>
         <% }); %>
         
         {%- include "_includes/_sentry.js" %}

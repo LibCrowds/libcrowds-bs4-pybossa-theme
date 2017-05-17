@@ -35,7 +35,7 @@ let config = {
             hash: true,
             inject: false,
             chunks: ['main', 'editor'],
-            filename: './templates/base.html',
+            filename: path.resolve('./templates/base.html'),
             template: './templates/_base.webpack.html'
         })
     ]

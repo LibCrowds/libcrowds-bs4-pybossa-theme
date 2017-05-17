@@ -1,5 +1,5 @@
 .DS_STORE
-static/dist/*
+static/js/*
 static/.webassets-cache/*
 static/fonts/font-awesome/*
 static/fonts/lightgallery/*

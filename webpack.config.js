@@ -4,7 +4,8 @@ const webpack = require('webpack'),
       path    = require('path');
 
 const HtmlWebpackPlugin        = require('html-webpack-plugin'),
-      ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+      ExtractTextWebpackPlugin = require('extract-text-webpack-plugin'),
+      OptimizeCssAssetsPlugin  = require('optimize-css-assets-webpack-plugin');
 
 // pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
 
@@ -59,7 +60,14 @@ let config = {
             filename: path.resolve('./templates/base.html'),
             template: './templates/_base.webpack.html'
         }),
-        new ExtractTextWebpackPlugin('style.css')
+        new ExtractTextWebpackPlugin('style.css'),
+        new OptimizeCssAssetsPlugin({
+              cssProcessorOptions: {
+                  discardComments: {
+                      removeAll: true
+                  }
+              }
+        })
     ]
 };
 

@@ -1,3 +1,5 @@
+import notify from './notify';
+
 import 'lightgallery';
 import 'lg-thumbnail';
 import 'lg-share';

@@ -1,3 +1,5 @@
+import notify from './notify';
+
 let webhook;
 
 // Send a webhook when the button is clicked

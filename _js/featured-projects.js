@@ -1,3 +1,5 @@
+import notify from './notify';
+
 let featuredProjects;
 
 $('.toggle-featured').on('click', function() {

@@ -5,7 +5,6 @@ import 'bootstrap';
 import 'bootstrap-toggle';
 import AOS from 'aos';
 
-import notify from './notify';
 import editor from './editor';
 import favourites from './favourites.js';
 import styleNavbar from './style-navbar';
@@ -26,6 +25,7 @@ import hamburger from './hamburger';
 import sidebar from './sidebar.js';
 import viewer from './viewer/viewer';
 import csrfToken from './csrf-token';
+import msg from './flash-messages';
 
 // Init pace-progress
 pace.start()

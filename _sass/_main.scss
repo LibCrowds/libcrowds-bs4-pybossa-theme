@@ -127,9 +127,9 @@ $box-shadows: (
 $hamburger-hover-opacity:          100%;
 $hamburger-types:                  (collapse, arrow);
 
-$fa-font-path:                     '../static/fonts/font-awesome';
+$fa-font-path:                     '~font-awesome/fonts';
 
-$lg-path-fonts:                    '../static/fonts/lightgallery';
+$lg-path-fonts:                    '~lightgallery/src/fonts';
 $lg-path-images:                   '../static/img/lightgallery';
 
 $ct-series-colors:

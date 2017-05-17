@@ -23,9 +23,11 @@ import btnScroll from './btn-scroll';
 import tabControl from './tab-control';
 import hamburger from './hamburger';
 import sidebar from './sidebar.js';
-import viewer from './viewer/viewer';
 import csrfToken from './csrf-token';
 import msg from './flash-messages';
+
+// TODO export to own repo to be bundled within projects - add bootstrap as dependency
+import viewer from './ui/components/viewer/viewer';
 
 // Init pace-progress
 pace.start()

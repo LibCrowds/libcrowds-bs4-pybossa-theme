@@ -5,11 +5,6 @@
 {% set jstop = True %}
 
 {% block content %}
-{% assets filters="jsmin", output="dist/js/results.min.js",
-    "../node_modules/openseadragon/build/openseadragon/openseadragon.js"
-    %}
-    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-{% endassets %}
 {{ general_helpers.render_title(project.name, 'Results') }}
 {% if project.info.results and n_results > 0 %}
 {{ project.info.results | safe}}

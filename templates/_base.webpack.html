@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}">
         <% }); %>
         
-        {% include "_includes/_ga.js" ignore missing %}
+        {% include "_includes/_ga.html" ignore missing %}
         {% include "_includes/_cookies_warning.html" %}
     </head>
     <body>
@@ -56,7 +56,7 @@
         <% }); %>
         {% endif %}
         
-        {%- include "_includes/_sentry.js" %}
+        {%- include "_includes/_sentry.html" %}
         {% include "_includes/_flash_messages.html" %}
     </body>
 </html>

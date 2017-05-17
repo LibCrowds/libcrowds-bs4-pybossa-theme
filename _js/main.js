@@ -1,6 +1,7 @@
 import pace from 'pace-progress';
 import 'bootstrap';
 import notify from './notify';
+import editor from './editor';
 import favourites from './favourites.js';
 import styleNavbar from './style-navbar';
 import styleJumbotrons from './style-jumbotrons';

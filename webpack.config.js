@@ -9,8 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let config = {
     entry: {
-        main: "./_js/main.js",
-        editor: "./_js/editor.js"
+        main: "./_js/main.js"
     },
     output: {
         path: path.resolve("./static/dist/js"),        
@@ -39,7 +38,6 @@ let config = {
         new HtmlWebpackPlugin({
             hash: true,
             inject: false,
-            chunks: ['main', 'editor'],
             filename: path.resolve('./templates/base.html'),
             template: './templates/_base.webpack.html'
         })

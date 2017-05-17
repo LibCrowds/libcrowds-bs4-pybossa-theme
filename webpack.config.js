@@ -13,7 +13,7 @@ let config = {
         main: "./_js/main.js"
     },
     output: {
-        path: path.resolve("./static/dist"),        
+        path: path.resolve("./static/dist"),
         filename: "[name].bundle.js"
     },
     module: {
@@ -35,14 +35,14 @@ let config = {
                 loader: 'url-loader?limit=10000!img-loader'
             },
             {   test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "url-loader?limit=10000&mimetype=application/font-woff" 
+                loader: "url-loader?limit=10000&mimetype=application/font-woff"
             },
             {   test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: "url-loader?limit=10000!file-loader"
             },
             {
-                test: require.resolve("pace-progress"), 
-                loader: "imports-loader?define=>false" 
+                test: require.resolve("pace-progress"),
+                loader: "imports-loader?define=>false"
             }
         ]
     },
@@ -62,5 +62,9 @@ let config = {
         new ExtractTextWebpackPlugin('style.css')
     ]
 };
+
+if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
 
 module.exports = config;

@@ -24,7 +24,8 @@ import btnScroll from './btn-scroll';
 import tabControl from './tab-control';
 import hamburger from './hamburger';
 import sidebar from './sidebar.js';
-import viewer from './viewer/viewer'
+import viewer from './viewer/viewer';
+import csrfToken from './csrf-token';
 
 // Init pace-progress
 pace.start()

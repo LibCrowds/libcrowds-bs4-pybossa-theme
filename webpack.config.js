@@ -5,6 +5,8 @@ const webpack = require('webpack'),
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
+
 let config = {
     entry: {
         main: "./_js/main.js",
@@ -20,6 +22,10 @@ let config = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
+            },
+            {
+                test: require.resolve("pace-progress"), 
+                loader: "imports-loader?define=>false" 
             }
         ]
     },

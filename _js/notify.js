@@ -6,7 +6,7 @@ import pnotifymobile from 'pnotify/src/pnotify.mobile';
  * Display a notification.
  */
 const notify = function(msg, type) {
-    
+
     let opts = {
         title: type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Info',
         text: msg,
@@ -48,6 +48,6 @@ const notify = function(msg, type) {
     }
 
     return new PNotify(opts);
-}
+};
 
 export default notify;

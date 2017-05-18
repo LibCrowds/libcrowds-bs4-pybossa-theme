@@ -30,7 +30,7 @@ import msg from './flash-messages';
 import Interface from './ui/components/viewer/interface';
 
 // Init pace-progress
-pace.start()
+pace.start();
 
 // Init Bootstrap popovers and tooltips
 $('[data-toggle="popover"]').popover();

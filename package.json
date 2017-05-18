@@ -70,7 +70,7 @@
     "esversion": 6
   },
   "scripts": {
-    "lint": "jshint ./static/js/*.js --exclude ./static/js/pybossa.js/",
+    "lint": "jshint _js/**",
     "dev": "webpack-dev-server --progress --colors --config ./webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js",
     "build:playbills": "cross-env THEME=playbills npm run build",

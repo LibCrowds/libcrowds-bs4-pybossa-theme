@@ -12,6 +12,7 @@ const HtmlPlugin              = require('html-webpack-plugin'),
       FaviconsPlugin          = require('favicons-webpack-plugin');
 
 const distPath            = path.resolve('./static'),
+      baseTemplatePath    = path.resolve('./templates/base.html'),
       customTemplatesPath = path.resolve('./templates/custom');
 
 // pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
@@ -71,6 +72,7 @@ let config = {
         }),
         new CleanPlugin([
             distPath,
+            baseTemplatePath,
             customTemplatesPath
         ]),
         new CopyPlugin([{
@@ -81,8 +83,8 @@ let config = {
         new HtmlPlugin({
             hash: true,
             inject: false,
-            filename: path.resolve('./templates/base.html'),
-            template: './templates/_base.webpack.html'
+            filename: baseTemplatePath,
+            template: './_base.html'
         }),
         new ExtractTextPlugin('style.css'),
         new OptimizeCssAssetsPlugin({

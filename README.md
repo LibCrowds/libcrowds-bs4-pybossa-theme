@@ -16,14 +16,21 @@ Install [Node.js](https://nodejs.org/en/) >= 4.x, then:
 ```
 # Navigate to your themes folder
 cd /home/pybossa/pybossa/themes
+
 # Clone the repo
 git clone --recursive https://github.com/LibCrowds/libcrowds-pybossa-theme
+
 # Navigate to the libcrowds-bs4-pybossa-theme folder
 cd libcrowds-bs4-pybossa-theme
+
 # Install
 npm install
+
 # Build (see the _custom folder)
 npm run build:<custom_theme>
+
+# Serve locally
+npm run dev:<custom_theme>
 ```
 
 Now add the following line to your main PYBOSSA configuration file:
@@ -44,10 +51,3 @@ files:
 - **_about.md:** Background info for the meta-category.
 - **_categories.md:** An explanation of how categories are defined (e.g. volumes).
 - **home.jpg:** Main image for the top of the homepage.
-
-To serve locally install as above, then:
-
-```
-npm install webpack-dev-server -g
-npm run dev:<custom_theme>
-```

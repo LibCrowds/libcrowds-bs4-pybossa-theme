@@ -7,8 +7,7 @@ const webpack    = require('webpack'),
 const HtmlPlugin              = require('html-webpack-plugin'),
       ExtractTextPlugin       = require('extract-text-webpack-plugin'),
       OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
-      CopyWebpackPlugin       = require('copy-webpack-plugin'),
-      CopyWebpackPlugin       = require('copy-webpack-plugin'),
+      CopyPlugin              = require('copy-webpack-plugin'),
       FaviconsPlugin          = require('favicons-webpack-plugin');
 
 const distPath            = path.resolve('./static/dist'),
@@ -67,7 +66,7 @@ let config = {
             customTemplatesPath,
             customImagePath
         ]),
-        new CopyWebpackPlugin([{
+        new CopyPlugin([{
             context: path.join('_custom', process.env.THEME),
             from: '**/*.md',
             to: customTemplatesPath

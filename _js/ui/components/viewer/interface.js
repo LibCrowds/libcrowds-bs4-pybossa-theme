@@ -177,12 +177,6 @@ class Interface {
             }
         }
 
-        getFavouritesButton(task.id).then(function(btn) {
-            btn.addClass('btn-block btn-outline-white');
-            btn.removeClass('btn-info');
-            $('#favourites').html(btn);
-        });
-
         this.loadItemDetails(task.info.manifest_url);
     }
 

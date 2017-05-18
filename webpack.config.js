@@ -8,7 +8,8 @@ const HtmlPlugin              = require('html-webpack-plugin'),
       ExtractTextPlugin       = require('extract-text-webpack-plugin'),
       OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
       CopyWebpackPlugin       = require('copy-webpack-plugin'),
-      CleanPlugin             = require('clean-webpack-plugin');
+      CopyWebpackPlugin       = require('copy-webpack-plugin'),
+      FaviconsPlugin          = require('favicons-webpack-plugin');
 
 const distPath            = path.resolve('./static/dist'),
       customTemplatesPath = path.resolve('./templates/custom'),
@@ -61,6 +62,11 @@ let config = {
             jquery: 'jquery',
             Tether: 'tether'
         }),
+        new CleanPlugin([
+            distPath,
+            customTemplatesPath,
+            customImagePath
+        ]),
         new CopyWebpackPlugin([{
             context: path.join('_custom', process.env.THEME),
             from: '**/*.md',

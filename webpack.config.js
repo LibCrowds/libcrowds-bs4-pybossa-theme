@@ -11,7 +11,7 @@ const HtmlPlugin              = require('html-webpack-plugin'),
       CleanPlugin             = require('clean-webpack-plugin'),
       FaviconsPlugin          = require('favicons-webpack-plugin');
 
-const distPath            = path.resolve('./static/dist'),
+const distPath            = path.resolve('./static'),
       customTemplatesPath = path.resolve('./templates/custom'),
       customImagePath     = path.resolve('./_img/custom');
 

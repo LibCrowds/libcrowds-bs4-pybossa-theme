@@ -91,7 +91,11 @@ let config = {
                   }
               }
         }),
-        new FaviconsPlugin('./_img/favicon.png')
+        new FaviconsPlugin('_img/favicon.png', {
+            appName: "LibCrowds",
+            background: "#DA0000",
+            theme_color: "#DA0000",
+        })
     ]
 };
 

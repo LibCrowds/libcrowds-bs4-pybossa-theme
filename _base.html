@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{% if title and brand != title %}{{ title | safe }} | {% endif %}{{ brand }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{{ description }}">
+        <meta name="author" content="{{ copyright }}">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        {% if block_robots %}
+        <meta name="robots" content="noindex, nofollow">
+        {% endif -%}
+        <meta name="theme-color" content="#da0000">
+        <% htmlWebpackPlugin.files.css.forEach(function(f) { %>
+        <link rel="stylesheet" href="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}">
+        <% }); %>
+        {% include "_includes/_ga.html" ignore missing %}
+        {% include "_includes/_cookies_warning.html" %}
+        {% include "_includes/_fonts.html" %}
+    </head>
+    <body>
+        {% if not current_user.is_anonymous() -%}
+        <!-- checkpoint::logged-in::{{current_user.name}} -->
+        {% endif -%}
+
+        <!-- TODO: Replace staff or admin check when libcrowds-auth updated -->
+        {% if current_user.is_authenticated() -%}
+            {% set staff_or_admin = (current_user.email_addr.split('@')|length == 2 and current_user.email_addr.split('@')[1] == 'bl.uk') or current_user.admin %}
+        {% else %}
+            {% set staff_or_admin = False %}
+        {% endif %}
+        {% if jstop %}
+        <% htmlWebpackPlugin.files.js.forEach(function(f) { %>
+        <script type="text/javascript" src="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}"></script>
+        <% }); %>
+        {% endif %}
+        {% block layout %}
+        {% endblock %}
+        {% include "_includes/_sentry.html" %}
+        {% include "_includes/_flash_messages.html" %}
+        {% if not jstop %}
+        <% htmlWebpackPlugin.files.js.forEach(function(f) { %>
+        <script type="text/javascript" src="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}"></script>
+        <% }); %>
+        {% endif %}
+    </body>
+</html>

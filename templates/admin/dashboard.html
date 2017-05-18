@@ -55,10 +55,10 @@
         height: '300px',
         onlyInteger: false
     };
-    new Chartist.Line('#returning-users', {{ returning_users_week | tojson | safe }}, opts);
-    new Chartist.Line('#active-users', {{ active_users_last_week | tojson | safe }}, opts);
-    new Chartist.Line('#active-anon-users', {{ active_anon_last_week | tojson | safe }}, opts);
-    new Chartist.Line('#contributions', {{ new_task_runs_week | tojson | safe }}, opts);
+    {% if returning_users_week %}new Chartist.Line('#returning-users', {{ returning_users_week | tojson | safe }}, opts);{% endif %}
+    {% if active_users_last_week %}new Chartist.Line('#active-users', {{ active_users_last_week | tojson | safe }}, opts);{% endif %}
+    {% if active_anon_last_week %}new Chartist.Line('#active-anon-users', {{ active_anon_last_week | tojson | safe }}, opts);{% endif %}
+    {% if new_task_runs_week %}new Chartist.Line('#contributions', {{ new_task_runs_week | tojson | safe }}, opts);{% endif %}
 </script>
 
 

@@ -70,7 +70,7 @@
     "copy:openseadragonselection": "cp -R node_modules/openseadragonselection/images ./static/img/openseadragonselection/",
     "postbuild": "npm run copy:openseadragon && npm run copy:openseadragonselection",
     "lint": "jshint ./static/js/*.js --exclude ./static/js/pybossa.js/",
-    "dev": "webpack-dev-server --progress --colors --config webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js"
+    "dev": "webpack-dev-server --progress --colors --config ./config/webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js"
   }
 }

@@ -8,6 +8,7 @@ const HtmlPlugin              = require('html-webpack-plugin'),
       ExtractTextPlugin       = require('extract-text-webpack-plugin'),
       OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
       CopyPlugin              = require('copy-webpack-plugin'),
+      CleanPlugin             = require('clean-webpack-plugin'),
       FaviconsPlugin          = require('favicons-webpack-plugin');
 
 const distPath            = path.resolve('./static/dist'),
@@ -89,7 +90,8 @@ let config = {
                       removeAll: true
                   }
               }
-        })
+        }),
+        new FaviconsPlugin('./_img/favicon.png')
     ]
 };
 

@@ -43,6 +43,7 @@ files:
 
 - **_about.md:** Background info for the meta-category.
 - **_categories.md:** An explanation of how categories are defined (e.g. volumes).
+- **home.jpg:** Main image for the top of the homepage.
 
 To serve locally install as above, then:
 

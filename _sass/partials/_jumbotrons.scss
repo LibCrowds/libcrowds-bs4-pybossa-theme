@@ -1,7 +1,6 @@
 .jumbotron-fullscreen {
     @extend .jumbotron-fluid;
     height: 100vh;
-    background: url(/static/img/jumbotrons/drawer.png); // Fallback
     background-color: $black;
     background-repeat: no-repeat;
     background-size: cover;
@@ -9,12 +8,12 @@
     background-position: center;
 }
 
-#crowd-jumbotron {
-    background-image: url(/static/img/jumbotrons/crowd.png);
+#home-jumbotron {
+    background-image: url(/static/dist/home.jpg);
 }
 
-#drawer-jumbotron {
-    background: url(/static/img/jumbotrons/drawer.png) no-repeat center center / contain fixed;
+#about-jumbotron {
+    background: url(/static/dist/about.jpg) no-repeat center center / contain fixed;
 }
 
 #code-jumbotron {

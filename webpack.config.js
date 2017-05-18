@@ -10,8 +10,8 @@ const HtmlPlugin              = require('html-webpack-plugin'),
       CopyWebpackPlugin       = require('copy-webpack-plugin'),
       CleanPlugin             = require('clean-webpack-plugin');
 
-const distPath        = path.resolve("./static/dist"),
-      customThemePath = path.resolve('./templates/custom');
+const distPath            = path.resolve("./static/dist"),
+      customTemplatesPath = path.resolve('./templates/custom');
 
 // pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
 
@@ -62,7 +62,7 @@ let config = {
         }),
         new CleanPlugin([
             distPath,
-            customThemePath
+            customTemplatesPath
         ]),
         new HtmlPlugin({
             hash: true,
@@ -80,8 +80,13 @@ let config = {
         }),
         new CopyWebpackPlugin([{
             context: path.join('_custom', process.env.THEME),
-            from: '**/*',
-            to: customThemePath
+            from: '**/*.md',
+            to: customTemplatesPath
+        },
+        {
+            context: path.join('_custom', process.env.THEME),
+            from: '**/*.jpg',
+            to: distPath
         }])
     ]
 };

@@ -2,7 +2,7 @@
     display: inline-block;
     height: 1em;
     width: 1em;
-    background-image: url('/static/svg/fallback.svg');
+    background-image: url('../_svg/fallback.svg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -14,7 +14,7 @@
 
     @each $icon in $icons {
         &.icon-#{$icon} {
-            background-image: url('/static/svg/#{$icon}.svg');
+            background-image: url('../_svg/#{$icon}.svg');
         }
     }
 }

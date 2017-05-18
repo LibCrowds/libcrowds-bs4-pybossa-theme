@@ -9,7 +9,7 @@
 }
 
 #home-jumbotron {
-    background-image: url('../_img/custom/home.jpg');
+    background-image: url('../_custom/#{$theme-env}/home.jpg');
 }
 
 #code-jumbotron {

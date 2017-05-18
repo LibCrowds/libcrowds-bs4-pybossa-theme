@@ -12,8 +12,7 @@ const HtmlPlugin              = require('html-webpack-plugin'),
       FaviconsPlugin          = require('favicons-webpack-plugin');
 
 const distPath            = path.resolve('./static'),
-      customTemplatesPath = path.resolve('./templates/custom'),
-      customImagePath     = path.resolve('./_img/custom');
+      customTemplatesPath = path.resolve('./templates/custom');
 
 // pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
 
@@ -36,7 +35,15 @@ let config = {
                 test: /\.s[a|c]ss$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: 'css-loader!sass-loader'
+                    use: [{
+                        loader: "css-loader"
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            data: '$theme-env: ' + process.env.THEME + ';'
+                        }
+                    }]
                 })
             },
             {
@@ -64,18 +71,12 @@ let config = {
         }),
         new CleanPlugin([
             distPath,
-            customTemplatesPath,
-            customImagePath
+            customTemplatesPath
         ]),
         new CopyPlugin([{
             context: path.join('_custom', process.env.THEME),
             from: '**/*.md',
             to: customTemplatesPath
-        },
-        {
-            context: path.join('_custom', process.env.THEME),
-            from: '**/*.jpg',
-            to: customImagePath
         }]),
         new HtmlPlugin({
             hash: true,
@@ -91,8 +92,9 @@ let config = {
                   }
               }
         }),
-        new FaviconsPlugin('_img/favicon.png', {
+        new FaviconsPlugin(path.resolve('./_img/favicon.png'), {
             appName: "LibCrowds",
+            url: "http://www.libcrowds.com/",
             background: "#DA0000",
             theme_color: "#DA0000",
         })

@@ -10,22 +10,12 @@
         {% if block_robots %}
         <meta name="robots" content="noindex, nofollow">
         {% endif -%}
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicons/apple-touch-icon.png') }}?v=xM3QjMjGEa">
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicons/favicon-32x32.png') }}?v=xM3QjMjGE2" sizes="32x32">
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicons/favicon-16x16.png') }}?v=xM3QjMjGE2" sizes="16x16">
-        <link rel="manifest" href="{{ url_for('static', filename='img/favicons/manifest.json') }}">
-        <link rel="mask-icon" href="{{ url_for('static', filename='img/favicons/safari-pinned-tab.svg') }}?v=xM3QjMjGEa" color="#d00000">
-        <meta name="apple-mobile-web-app-title" content="LibCrowds">
-        <meta name="application-name" content="LibCrowds">
-        <meta name="msapplication-TileColor" content="#d00000">
-        <meta name="msapplication-TileImage" content="{{ url_for('static', filename='img/favicons/mstile-144x144.png') }}?v=xM3QjMjGEa">
-        <meta name="msapplication-config" content="{{ url_for('static', filename='img/favicons/browserconfig.xml') }}">
         <meta name="theme-color" content="#da0000">
-        
+
         <% htmlWebpackPlugin.files.css.forEach(function(f) { %>
         <link rel="stylesheet" href="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}">
         <% }); %>
-        
+
         {% include "_includes/_ga.html" ignore missing %}
         {% include "_includes/_cookies_warning.html" %}
         {% include "_includes/_fonts.html" %}
@@ -41,13 +31,13 @@
         {% else %}
             {% set staff_or_admin = False %}
         {% endif -%}
-        
+
         {% if jstop %}
         <% htmlWebpackPlugin.files.js.forEach(function(f) { %>
         <script type="text/javascript" src="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}"></script>
         <% }); %>
         {% endif %}
-        
+
         {% block layout %}
         {% endblock %}
 
@@ -56,7 +46,7 @@
         <script type="text/javascript" src="{{ url_for('static', filename='<%= f %>') | replace('%3F', '?') }}"></script>
         <% }); %>
         {% endif %}
-        
+
         {%- include "_includes/_sentry.html" %}
         {% include "_includes/_flash_messages.html" %}
     </body>

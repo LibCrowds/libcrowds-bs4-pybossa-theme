@@ -41,8 +41,8 @@ Custom theme options are defined in the [_custom](_custom) folder. To defined
 theme options for a new metacategory add a new subfolder with the following 
 files:
 
-- **_about.md:** A description or background info for the meta-category.
-- **_projects.md:** An explanation of how categories are defined (e.g. volumes).
+- **_about.md:** Background info for the meta-category.
+- **_categories.md:** An explanation of how categories are defined (e.g. volumes).
 
 To serve locally install as above, then:
 

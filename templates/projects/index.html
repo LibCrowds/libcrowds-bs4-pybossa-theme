@@ -13,21 +13,9 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 text-center">
-                <h1 class="text-uppercase font-weight-bold display-4">Projects</h1>
-                <hr class="bw-3 my-4">
-                <p class="lead text-md-left">
-                    {{ brand }} projects are grouped into categories according to the type of material, such as
-                    card catalogues or playbills, and a subject, such as location or language.
-                </p>
-                <p class="lead text-md-left">
-                    Each category contains a set of projects that ask you to complete a particular task, which
-                    could be anything from transcribing or highlighting areas of an image to locating matching
-                    catalogue records in an external database.
-                </p>
-                <p class="lead text-md-left">
-                    To locate your ideal project start by selecting a category from the table below. For example,
-                    you might try searching for "Playbills Margate" or "Chinese Card Catalogues".
-                </p>
+                {% filter markdown %}
+                {% include 'custom/_categories.md' ignore missing %}
+                {% endfilter %}
             </div>
         </div>
         <hr class="my-4 w-75">

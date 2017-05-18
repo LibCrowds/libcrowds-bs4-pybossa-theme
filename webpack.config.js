@@ -7,7 +7,11 @@ const webpack    = require('webpack'),
 const HtmlPlugin              = require('html-webpack-plugin'),
       ExtractTextPlugin       = require('extract-text-webpack-plugin'),
       OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
-      CopyWebpackPlugin       = require('copy-webpack-plugin');
+      CopyWebpackPlugin       = require('copy-webpack-plugin'),
+      CleanPlugin             = require('clean-webpack-plugin');
+
+const distPath        = path.resolve("./static/dist"),
+      customThemePath = path.resolve('./templates/custom');
 
 // pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
 
@@ -16,7 +20,7 @@ let config = {
         main: "./_js/main.js"
     },
     output: {
-        path: path.resolve("./static/dist"),
+        path: distPath,
         filename: "[name].bundle.js"
     },
     module: {
@@ -56,6 +60,10 @@ let config = {
             jquery: 'jquery',
             Tether: 'tether'
         }),
+        new CleanPlugin([
+            distPath,
+            customThemePath
+        ]),
         new HtmlPlugin({
             hash: true,
             inject: false,
@@ -73,8 +81,8 @@ let config = {
         new CopyWebpackPlugin([{
             context: path.join('_custom', process.env.THEME),
             from: '**/*',
-            to: path.resolve('./templates/custom')
-        }], {debug: 'debug'})
+            to: customThemePath
+        }])
     ]
 };
 

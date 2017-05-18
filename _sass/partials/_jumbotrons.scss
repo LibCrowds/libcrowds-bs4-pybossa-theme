@@ -9,31 +9,21 @@
 }
 
 #home-jumbotron {
-    background-image: url(/static/dist/home.jpg);
-}
-
-#about-jumbotron {
-    background: url(/static/dist/about.jpg) no-repeat center center / contain fixed;
+    background-image: url('../_img/custom/home.jpg');
 }
 
 #code-jumbotron {
-    background: url(/static/img/jumbotrons/code.png) no-repeat left fixed;
+    background: url('../_img/code.png') no-repeat left fixed;
 }
 
 #newton-jumbotron {
-    background: url(/static/img/jumbotrons/newton.jpg) no-repeat bottom right / cover fixed;
+    background: url('../_img/newton.jpg') no-repeat bottom right / cover fixed;
 }
 
 #error-jumbotron {
     background-color: $sky;
-    background-image: url(/static/img/bl-graphic.png);
+    background-image: url(../_img/bl-graphic.png);
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: cover;
-}
-
-// Category theming
-
-#category-8-jumbotron {
-    background: url(/static/img/jumbotrons/category-8.jpg) no-repeat center center / cover fixed;
 }

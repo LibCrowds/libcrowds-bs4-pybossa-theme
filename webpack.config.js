@@ -10,8 +10,9 @@ const HtmlPlugin              = require('html-webpack-plugin'),
       CopyWebpackPlugin       = require('copy-webpack-plugin'),
       CleanPlugin             = require('clean-webpack-plugin');
 
-const distPath            = path.resolve("./static/dist"),
-      customTemplatesPath = path.resolve('./templates/custom');
+const distPath            = path.resolve('./static/dist'),
+      customTemplatesPath = path.resolve('./templates/custom'),
+      customImagePath     = path.resolve('./_img/custom');
 
 // pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
 
@@ -38,7 +39,7 @@ let config = {
                 })
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
+                test: /\.(jpe?g|png|gif)$/i,
                 loader: 'url-loader?limit=10000!img-loader'
             },
             {   test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -60,10 +61,16 @@ let config = {
             jquery: 'jquery',
             Tether: 'tether'
         }),
-        new CleanPlugin([
-            distPath,
-            customTemplatesPath
-        ]),
+        new CopyWebpackPlugin([{
+            context: path.join('_custom', process.env.THEME),
+            from: '**/*.md',
+            to: customTemplatesPath
+        },
+        {
+            context: path.join('_custom', process.env.THEME),
+            from: '**/*.jpg',
+            to: customImagePath
+        }]),
         new HtmlPlugin({
             hash: true,
             inject: false,
@@ -77,17 +84,7 @@ let config = {
                       removeAll: true
                   }
               }
-        }),
-        new CopyWebpackPlugin([{
-            context: path.join('_custom', process.env.THEME),
-            from: '**/*.md',
-            to: customTemplatesPath
-        },
-        {
-            context: path.join('_custom', process.env.THEME),
-            from: '**/*.jpg',
-            to: distPath
-        }])
+        })
     ]
 };
 

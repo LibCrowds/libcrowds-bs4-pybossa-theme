@@ -4,6 +4,7 @@ static/.webassets-cache/*
 static/img/openseadragon/*
 static/img/openseadragonselection/*
 templates/base.html
+templates/custom/*
 node_modules/*
 .scss-lint.yml
 *.log

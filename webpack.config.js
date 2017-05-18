@@ -1,11 +1,13 @@
 'use strict';
 
-const webpack = require('webpack'),
-      path    = require('path');
+const webpack    = require('webpack'),
+      path       = require('path'),
+      pathExists = require('path-exists');
 
-const HtmlWebpackPlugin        = require('html-webpack-plugin'),
-      ExtractTextWebpackPlugin = require('extract-text-webpack-plugin'),
-      OptimizeCssAssetsPlugin  = require('optimize-css-assets-webpack-plugin');
+const HtmlPlugin              = require('html-webpack-plugin'),
+      ExtractTextPlugin       = require('extract-text-webpack-plugin'),
+      OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
+      CopyWebpackPlugin       = require('copy-webpack-plugin');
 
 // pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
 
@@ -26,7 +28,7 @@ let config = {
             },
             {
                 test: /\.s[a|c]ss$/,
-                use: ExtractTextWebpackPlugin.extract({
+                use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: 'css-loader!sass-loader'
                 })
@@ -54,20 +56,25 @@ let config = {
             jquery: 'jquery',
             Tether: 'tether'
         }),
-        new HtmlWebpackPlugin({
+        new HtmlPlugin({
             hash: true,
             inject: false,
             filename: path.resolve('./templates/base.html'),
             template: './templates/_base.webpack.html'
         }),
-        new ExtractTextWebpackPlugin('style.css'),
+        new ExtractTextPlugin('style.css'),
         new OptimizeCssAssetsPlugin({
               cssProcessorOptions: {
                   discardComments: {
                       removeAll: true
                   }
               }
-        })
+        }),
+        new CopyWebpackPlugin([{
+            context: path.join('_custom', process.env.THEME),
+            from: '**/*',
+            to: path.resolve('./templates/custom')
+        }], {debug: 'debug'})
     ]
 };
 

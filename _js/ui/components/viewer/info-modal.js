@@ -3,7 +3,7 @@
  */
 class InfoModal {
 
-    constructor(selectionEnabled) {
+    constructor() {
         this.element = $(`
             <div class="modal viewer-modal fade" id="info-modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">

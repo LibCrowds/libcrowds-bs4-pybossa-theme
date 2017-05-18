@@ -8,11 +8,11 @@ class Controls {
         this.element = $('<div class="viewer-controls"></div>');
         this.addButtons();
 
-        this.element.on('click', '#show-help-modal', (evt) => {
+        this.element.on('click', '#show-help-modal', function() {
             $('#help-modal').modal('show');
         });
 
-        this.element.on('click', '#show-info-modal', (evt) => {
+        this.element.on('click', '#show-info-modal', function() {
             $('#info-modal').modal('show');
         });
     }

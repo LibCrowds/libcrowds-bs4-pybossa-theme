@@ -6,10 +6,10 @@ $('.toggle-featured').on('click', function() {
     var projectId = $(this).data("project-id"),
         featured  = $(this).text() === "Remove",
         method    =  featured ? "DELETE" : "POST",
-		_this     = $(this);
-    
-	
-	$.ajax({
+        _this     = $(this);
+
+
+    $.ajax({
           type: method,
           url: '/admin/featured/' + projectId,
           dataType: 'json'

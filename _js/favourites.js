@@ -75,8 +75,8 @@ function getFavourites() {
             type: "GET"
         }).done(function(results) {
             resolve(results);
-        }).fail(function(xhr, status, error) {
-            reject(new Error(`Failed to add favourite task: status`));
+        }).fail(function(xhr, status) {
+            reject(new Error(`Failed to add favourite task: ${status}`));
         });
     });
 }
@@ -95,8 +95,8 @@ function addFavourite(taskId) {
             type: 'POST'
         }).done(function() {
             resolve(true);
-        }).fail(function(xhr, status, error) {
-            reject(new Error(`Failed to add favourite task: status`));
+        }).fail(function(xhr, status) {
+            reject(new Error(`Failed to add favourite task: ${status}`));
         });
     });
 }
@@ -114,8 +114,8 @@ function removeFavourite(taskId) {
             type: 'DELETE'
         }).done(function() {
             resolve(false);
-        }).fail(function(xhr, status, error) {
-            reject(new Error(`Failed to remove favourite task: status`));
+        }).fail(function(xhr, status) {
+            reject(new Error(`Failed to remove favourite task: ${status}`));
         });
     });
 }
@@ -155,7 +155,7 @@ function updateFavouritesButton(btn, isFavourite) {
  * Toggle a favourite task.
  */
 function toggleFavouriteTask(taskId) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
         isFavourite(taskId).then(function(isFav) {
             if (isFav) {
                 return removeFavourite(taskId);
@@ -163,21 +163,6 @@ function toggleFavouriteTask(taskId) {
             return addFavourite(taskId);
         }).then(function(isFav) {
             resolve(isFav);
-        });
-    });
-}
-
-
-/**
- * Return a favourites button.
- */
-function getFavouritesButton(taskId) {
-    return new Promise(function(resolve, reject) {
-        isFavourite(taskId).then(function(isFav) {
-            let btn = $(`<button class="btn btn-info btn-favourites" type="button"
-                                 role="button" data-task-id="${taskId}" />`);
-            updateFavouritesButton(btn, isFav);
-            resolve(btn);
         });
     });
 }

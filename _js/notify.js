@@ -1,6 +1,6 @@
 import PNotify from 'pnotify';
-import pnotifybuttons from 'pnotify/src/pnotify.buttons';
-import pnotifymobile from 'pnotify/src/pnotify.mobile';
+import 'pnotify/src/pnotify.buttons';
+import 'pnotify/src/pnotify.mobile';
 
 /*
  * Display a notification.

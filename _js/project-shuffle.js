@@ -22,24 +22,24 @@ class ProjectShuffle {
      * Sort grid items according to selected sort option.
      */
     _sortGridItems() {
-    	let element = $("#shuffle-sort option:selected")[0],
-    		reverse = element.getAttribute("data-reverse") || false,
+        let element = $("#shuffle-sort option:selected")[0],
+            reverse = element.getAttribute("data-reverse") || false,
             options = {
                 by: function(element) {
-            		let res = element.getAttribute("data-sortby");
-            		return $.isNumeric(res) ? parseFloat(res) : res;
+                    let res = element.getAttribute("data-sortby");
+                    return $.isNumeric(res) ? parseFloat(res) : res;
                 },
                 reverse: reverse
             };
-    	this.shuffle.sort(options);
+        this.shuffle.sort(options);
     }
 
     /**
      * Sort table rows according to selected sort option.
      */
     _sortTableRow() {
-    	let element = $("#shuffle-sort option:selected")[0],
-    		reverse = element.getAttribute("data-reverse") || false,
+        let element = $("#shuffle-sort option:selected")[0],
+            reverse = element.getAttribute("data-reverse") || false,
             sortBy  = element.getAttribute("data-sortby");
 
         let sortedTable = this.table.find('tbody tr').sort(function(a, b) {
@@ -58,7 +58,7 @@ class ProjectShuffle {
      * Return true if the element contains all search terms, false otherwise.
      */
     _search(elem) {
-		let text  = $('#shuffle-search').val().toLowerCase(),
+        let text  = $('#shuffle-search').val().toLowerCase(),
             words = text.split(' ');
 
         for (var i = 0; i < words.length; i++) {
@@ -75,8 +75,8 @@ class ProjectShuffle {
     _filter(elem) {
         let filter = true;
         $('.shuffle-checkbox').each((i, checkbox) => {
-        	let checked = checkbox.checked,
-        		group   = checkbox.getAttribute('data-group');
+            let checked = checkbox.checked,
+                group   = checkbox.getAttribute('data-group');
 
             if (checked && !elem.data('groups').includes(group)) {
                 filter = false;
@@ -122,9 +122,9 @@ class ProjectShuffle {
 if ($('.shuffle-controls').length === 1) {
     let projectShuffle = new ProjectShuffle('#shuffle-grid', '#shuffle-table');
 
-	$('.shuffle-control').on('change keyup', function() {
-		projectShuffle.run();
-	});
+    $('.shuffle-control').on('change keyup', function() {
+        projectShuffle.run();
+    });
 
     $('.shuffle-tab').on('shown.bs.tab', function() {
         projectShuffle.run();

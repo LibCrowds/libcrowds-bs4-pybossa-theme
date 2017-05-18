@@ -6,8 +6,6 @@ import Sidebar from './sidebar';
 import HelpModal from './help-modal';
 import InfoModal from './info-modal';
 
-let viewer;
-
 /**
  * Custom OpenSeadragon viewer interface.
  */
@@ -110,7 +108,7 @@ class Interface {
         });
 
         // Don't focus on HUD after fullscreen toggled
-        this.viewer.addHandler('full-screen', (evt) => {
+        this.viewer.addHandler('full-screen', () => {
             $('.openseadragon-canvas').focus();
         });
 
@@ -225,7 +223,7 @@ class Interface {
             this.infoModal.element.find('#attribution').html(data.attribution);
             this.infoModal.element.find('#license').html(data.license);
             this.infoModal.element.find('#logo').attr('src', data.logo);
-        }).fail(function(xhr, status, error) {
+        }).fail(function(xhr, status) {
             throw new Error(status);
         });
     }

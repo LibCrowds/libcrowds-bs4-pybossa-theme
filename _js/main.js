@@ -5,29 +5,29 @@ import 'bootstrap';
 import 'bootstrap-toggle';
 import AOS from 'aos';
 
-import editor from './editor';
-import favourites from './favourites.js';
-import styleNavbar from './style-navbar';
-import styleJumbotrons from './style-jumbotrons';
-import displayScrollBtns from './display-scroll-btns';
-import apiStats from './api-stats';
-import imageError from './image-error';
-import imageCrop from './image-crop';
-import anchorScroll from './anchor-scroll';
-import progress from './progress';
-import s3 from './s3';
-import ps from './project-shuffle';
-import featuredProjects from './featured-projects';
-import search from './search';
-import btnScroll from './btn-scroll';
-import tabControl from './tab-control';
-import hamburger from './hamburger';
-import sidebar from './sidebar.js';
-import csrfToken from './csrf-token';
-import msg from './flash-messages';
+import './editor';
+import './favourites.js';
+import './style-navbar';
+import './style-jumbotrons';
+import './display-scroll-btns';
+import './api-stats';
+import './image-error';
+import './image-crop';
+import './anchor-scroll';
+import './progress';
+import './s3';
+import './project-shuffle';
+import './featured-projects';
+import './search';
+import './btn-scroll';
+import './tab-control';
+import './hamburger';
+import './sidebar.js';
+import './csrf-token';
+import './flash-messages';
 
 // TODO export to own repo to be bundled within projects - add bootstrap as dependency
-import Interface from './ui/components/viewer/interface';
+import './ui/components/viewer/interface';
 
 // Init pace-progress
 pace.start();

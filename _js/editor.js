@@ -1,9 +1,9 @@
 import CodeMirror from 'codemirror';
-import javascript from 'codemirror/mode/javascript/javascript';
-import xml from 'codemirror/mode/xml/xml';
-import css from 'codemirror/mode/css/css';
-import http from 'codemirror/mode/http/http';
-import htmlmixed from 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/xml/xml';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/http/http';
+import 'codemirror/mode/htmlmixed/htmlmixed';
 
 let editor;
 

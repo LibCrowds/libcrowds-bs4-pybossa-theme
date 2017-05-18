@@ -11,12 +11,12 @@ $('#get-s3-bucket').on('click', function() {
         filesInput = document.getElementById("files");
     filesInput.innerHTML = null;
 
-	$('#objects').empty();
+    $('#objects').empty();
 
-	$.get('/amazon/bucket/' + bucketName).done(function(objects) {
+    $.get('/amazon/bucket/' + bucketName).done(function(objects) {
 
-		// Load each object into a new table row
-		objects.forEach(function(object) {
+        // Load each object into a new table row
+        objects.forEach(function(object) {
             var row = $('<tr class="object" style="cursor:pointer;"><td>' + object + '</td></tr>');
             $('#objects').append(row);
         });
@@ -27,39 +27,39 @@ $('#get-s3-bucket').on('click', function() {
             var objectDomElement = $(this),
                 objectName       = $(this).text();
 
-			// Toggle selection on click
-			objectDomElement.off('click').on('click', function(evt) {
-				evt.preventDefault();
-				objectDomElement.toggleClass('table-success');
+            // Toggle selection on click
+            objectDomElement.off('click').on('click', function(evt) {
+                evt.preventDefault();
+                objectDomElement.toggleClass('table-success');
 
-				if (objectDomElement.hasClass('table-success')) {
-					if (files.indexOf(objectName) === -1) {
-						files.push(objectName);
-					}
-				} else {
-					files.splice(files.indexOf(objectName), 1);
-				}
+                if (objectDomElement.hasClass('table-success')) {
+                    if (files.indexOf(objectName) === -1) {
+                        files.push(objectName);
+                    }
+                } else {
+                    files.splice(files.indexOf(objectName), 1);
+                }
 
-				filesInput.innerHTML = null;
+                filesInput.innerHTML = null;
 
-				files.forEach(function(file, index) {
-					var element = document.createElement("li"),
-						content = document.createTextNode(file),
-						input   = document.createElement('input');
-					input.id = "files-" + index;
-					input.type = "hidden";
-					input.name = "files-" + index;
-					input.value = file;
-					element.appendChild(input);
-					element.appendChild(content);
-					filesInput.appendChild(element);
-				});
-			});
+                files.forEach(function(file, index) {
+                    var element = document.createElement("li"),
+                        content = document.createTextNode(file),
+                        input   = document.createElement('input');
+                    input.id = "files-" + index;
+                    input.type = "hidden";
+                    input.name = "files-" + index;
+                    input.value = file;
+                    element.appendChild(input);
+                    element.appendChild(content);
+                    filesInput.appendChild(element);
+                });
+            });
         });
 
-		$('#objects-container').show();
+        $('#objects-container').show();
 
-	}).fail(function(resp) {
+    }).fail(function(resp) {
         if (resp.status === 403) {
             notify("Oops... it seems that bucket is private.", 'error');
         } else if (resp.status === 404) {

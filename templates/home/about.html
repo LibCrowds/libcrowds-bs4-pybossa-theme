@@ -7,7 +7,7 @@
 <section class="mt-5">
     <div class="container py-5">
         <div class="row">
-            <div class="col-lg-10 offset-lg-1 text-center">
+            <div class="col-lg-10 offset-lg-1">
                 {% filter markdown %}
                 {% include 'custom/_about.md' ignore missing %}
                 {% endfilter %}
@@ -16,37 +16,39 @@
     </div>
 </section>
 
-<section class="pattern-white-wall text-gray-dark">
-    <div class="container py-5">
+<section class="bg-faded text-gray-dark">
+    <div class="container pt-5 pb-4">
         <div class="row">
             <div class="col-lg-5 offset-lg-1">
-                <h2 class="text-uppercase font-weight-bold display-4">The {{ brand }} Platform</h2>
+                <h2 class="text-uppercase font-weight-bold display-5">The {{ brand }} Platform</h2>
                 <hr class="bw-3 mr-lg-5">
             </div>
             <div class="col-lg-3 offset-lg-3 hidden-md-down">
-                <a class="https://github.com/{{ brand }}" target="_blank"><span class="fa fa-github fa-5x text-muted"></span></a>
+                <a href="https://github.com/{{ brand }}" target="_blank"><span class="fa fa-github fa-5x text-muted"></span></a>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 <p class="mt-3">
                     {{ brand }} is platform that aims to increase access to the collections of the British Library
-                    through a range of experimental crowdsourcing projects. The platform was first launched in June 2016 with the
+                    through a range of experimental crowdsourcing projects. The platform was first launched in June 2015 with the
                     Convert-a-Card project series, which used a new method for transforming printed card catalogues into
                     electronic records.
                 </p>
-                <p>    
-                    {{ brand }} is built on top of <a href="http://docs.pybossa.com/"> PyBossa </a>, an open-source framework for the creation of
-                    crowdsourcing projects.
-                    
-                    {% if 'pybossa_discourse' in plugins %} The community forum is powered by <a href="https://www.discourse.org/">Discourse</a>.{% endif %}
-                    Each project on the platform is written in a combination of HTML, CSS and Javascript. A range of plugins have also been developed to provide
-                    additional functionality.
+                <p>
+                    When the Playbills project series was launched two years later, in June 2017, a decision was made to define each
+                    project series using a separate instance of <a href="http://docs.pybossa.com/">PyBossa</a>, which is 
+                    an open-source framework for the creation of crowdsourcing projects. A new theme was written that can be modified
+                    to provide a consistent look and feel, and targeted information for each project series. Alongside the theme a
+                    range of plugins have been developed to provide additional functionality
+                    {% if 'pybossa_z3950' in plugins %}
+                    , such as the <a href="plugins['pybossa_z3950'].website">plugins['pybossa_z3950'].name</a> that allows for 
+                    catalogue records to be retreived via Z39.50 searches
+                    {% endif %}.
                 </p>
                 {{ plugin_helpers.render_active_plugins(plugins) }}
                 <p>
-                    The {{ brand }} theme, all project templates and plugins are open-souce and available on 
-                    <a href="https://github.com/{{ brand }}" target="_blank">GitHub</a>.
+                    The {{ brand }} theme, all project templates and plugins are available on <a href="https://github.com/{{ brand }}" target="_blank">GitHub</a>.
                 </p>
             </div>
         </div>

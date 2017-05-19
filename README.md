@@ -1,8 +1,8 @@
-# libcrowds-pybossa-theme
+# libcrowds-bs4-pybossa-theme
 
-Main PYBOSSA theme for [LibCrowds](http://www.libcrowds.com).
+A [LibCrowds](http://www.libcrowds.com) theme using Bootstrap 4, SASS and Webpack.
 
-Designed to host a range of projects belonging to the same meta-category 
+The theme is to host a range of projects belonging to the same meta-category 
 (e.g. Card Catalogues or Playbills). Each of these meta-categories could
 potentially contain hundreds of projects, so it makes sense to run each in a
 seperate PYBOSSA instance to allow for better theming and targeted 
@@ -18,7 +18,7 @@ Install [Node.js](https://nodejs.org/en/) >= 4.x, then:
 cd /home/pybossa/pybossa/themes
 
 # Clone the repo
-git clone --recursive https://github.com/LibCrowds/libcrowds-pybossa-theme
+git clone --recursive https://github.com/LibCrowds/libcrowds-bs4-pybossa-theme
 
 # Navigate to the libcrowds-bs4-pybossa-theme folder
 cd libcrowds-bs4-pybossa-theme

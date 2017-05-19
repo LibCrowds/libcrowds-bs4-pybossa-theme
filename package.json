@@ -68,6 +68,8 @@
   "scripts": {
     "lint": "eslint _js",
     "dev": "webpack-dev-server --progress --colors --config ./webpack.config.js",
+    "dev:playbills": "cross-env THEME=playbills webpack-dev-server --progress --colors --config ./webpack.config.js",
+    "dev:convertacard": "cross-env THEME=convertacard webpack-dev-server --progress --colors --config ./webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js",
     "build:playbills": "cross-env THEME=playbills npm run build",
     "build:convertacard": "cross-env THEME=convertacard npm run build"

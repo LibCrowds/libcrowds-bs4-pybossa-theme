@@ -9,7 +9,7 @@
 <div id="home-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0">
     <div class="container text-center h-100 d-flex align-items-center justify-content-between flex-column">
         <div></div>
-        <h1 class="pb-2 text-white" data-aos="zoom-in" data-aos-duration="600">Crowdsourcing projects<br>from the British Library</h1>
+        <h1 class="mb-0 text-white w-75" data-aos="zoom-in" data-aos-duration="600">{{ title | safe }}</h1>
         <a href="#intro" data-aos="fade-up" data-aos-delay="600" data-aos-duration="400" data-aos-easing="ease-out-sine" data-aos-offset="0">
             <p class="mb-1 text-uppercase text-white">Scroll Down</p>
             <span class="fa fa-chevron-down fa-2x text-primary pulse"></span>
@@ -22,7 +22,7 @@
         <div class="row" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
             <div class="col-sm-10 offset-sm-1">
                 <h2 class="font-family-serif display-4 mb-0">
-                    Have a direct impact on enabling future research conducted at the Library.
+                    {{ description }}
                 </h2>
             </div>
         </div>
@@ -34,9 +34,7 @@
         <div class="row" data-aos="fade-up" data-aos-delay="400" data-aos-duration="400">
             <div class="col-sm-10 offset-sm-1">
                 <p class="lead my-2">
-                    {{brand}}, in association with <a href="http://labs.bl.uk/" target="_blank">BL Labs</a>, is a platform for
-                    hosting experimental crowdsourcing projects aimed at improving access to the diverse collections held at the
-                    British Library.
+                    Have a direct impact on enabling future research conducted at the British Library.
                 </p>
             </div>
         </div>

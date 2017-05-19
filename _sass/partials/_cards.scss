@@ -1,34 +1,49 @@
-.overlay-cards {
+.card.project-card {
+    flex-direction: row;
+    overflow-y: hidden;
+    margin-bottom: $spacer-y;
+    width: 100%;
     
-    .card {
-        overflow-y: hidden;
-        margin-bottom: $spacer-y;
-        width: 100%;
-        @include hover-focus {
+    @include hover-focus {
+        .card-img-overlay-wrapper {
             .card-img-overlay {
                 transform: translateY(0);
             }
         }
-		
-		.card-footer {
-			background-color: $white;
-		}
     }
-	
-	.card-img-overlay-wrapper {
-		position: relative;
-		overflow: hidden;
-		
-		.card-img {
-			width: 100%;
-		}
-		
-		.card-img-overlay {
-			position: absolute;
-			background-color: $brand-primary;
-			transform: translateY(100%)
-		}
-	}
+    
+    .card-block {
+        height: 100%;
+        
+        &:not(first-child) {
+            border-top: $card-border-width solid $card-border-color;
+            
+            @include media-breakpoint-up(lg) {
+                border-top: none;
+                border-left: $card-border-width solid $card-border-color;
+            }
+        }
+    }
+    
+    .card-img-overlay-wrapper {
+        position: relative;
+        overflow: hidden;
+        max-width: 300px;
+        
+        .card-img {
+            width: 100%;
+        }
+        
+        .card-img-overlay {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            background-color: $brand-primary;
+            transform: translateY(100%);
+        }
+    }
 }
 
 .card-button {

@@ -54,37 +54,37 @@
     
     <div class="tab-content">
         <div id="grid-pane" class="tab-pane active" role="tabpanel">
-            <div id="shuffle-grid" class="row overlay-cards" data-initial-group="incomplete">
+            <div id="shuffle-grid" class="flex-row" data-initial-group="incomplete">
                 {% for project in projects | sort(attribute='overall_progress') %}
-                <div class="col-md-6 col-xl-4 grid-item" 
-                     data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
-                     {% if project.overall_progress == 100 %}style="visibility: hidden"{% endif %}
-                     {% for k, v in project.items() %}
-                     data-{{ k }}="{{ v }}"
-                     {% endfor %}>
+                <div class="grid-item" data-groups='["{% if project.overall_progress < 100 %}in{% endif %}complete"]'
+                                       {% if project.overall_progress == 100 %}style="visibility: hidden"{% endif %}
+                                       {% for k, v in project.items() if k != 'info' %}
+                                       data-{{ k }}="{{ v }}"
+                                       {% endfor %}>
                     
-                    <div class="card text-center">
-                        <a href="{{ url_for('project.details', short_name=project.short_name) }}">
-                            <div class="card-img-overlay-wrapper">
-                                {{ render_thumbnail(project, class='card-img-top img-fluid') }}
-                                <div class="card-img-overlay text-white d-flex flex-column justify-content-center align-content-center">
-                                    <div data-progress="{{ project.overall_progress | round | int }}" class="progress-circle progress-circle-white">
-                                        <p class="text-white">{{ project.overall_progress | round | int }}%</p>
-                                    </div>
+                    <div class="card project-card">
+                        <div class="card-img-overlay-wrapper">
+                            {{ render_thumbnail(project, class='card-img-top img-fluid') }}
+                            <div class="card-img-overlay">
+                                <div data-progress="{{ project.overall_progress | round | int }}" class="progress-circle progress-circle-white">
+                                    <p class="text-white">{{ project.overall_progress | round | int }}%</p>
                                 </div>
                             </div>
-                            <div class="card-block">
-                                <h5 class="card-title font-weight-bold text-body">{{ project.name }}</h5>
-                                <p class="card-text text-body">{{ project.description }}</p>
-                                <p class="card-text text-muted mt-3">
-                                    <span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}
-                                    <span class="fa fa-tasks ml-4 mr-1"></span>{{ project.n_tasks }}
-                                </p>
+                        </div>
+                        <div class="card-block">
+                            <h3 class="card-title font-weight-bold text-body mb-2">{{ project.name }}</h3>
+                            <p class="card-text text-body">{{ project.description }}</p>
+                            <div class="flex-row justify-content-around">
+                                <span class="text-muted"><span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}</span>
+                                <span class="text-muted"><span class="fa fa-tasks mr-1"></span>{{ project.n_tasks }}</span>
+                                <a href="{{ url_for('project.details', short_name=project.short_name) }}" role="button" class="btn btn-outline-secondary">
+                                    Learn More
+                                </a>
+                                <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" role="button" class="btn btn-primary">
+                                    Contribute
+                                </a>
                             </div>
-                            <div class="card-footer text-uppercase">
-                                <button type="button" role="button" class="btn btn-outline-primary">Contribute</button>
-                            </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -115,7 +115,7 @@
             <div class="card">
                 <div class="table-responsive">
                     <table id="shuffle-table" class="table table-hover table-striped mb-0">
-                        {{ table_helpers.render_head(['Name', 'Tasks', 'Volunteers', 'Progress', 'Action'], center_indexes=[2, 3, 4, 5]) }}
+                        {{ table_helpers.render_head(['Name', 'Tasks', 'Volunteers', 'Progress', 'Details', 'Contribute'], center_indexes=[2, 3, 4, 5, 6]) }}
                         <tbody>
                             {% for p in projects %}
                             <tr data-groups='["{% if p.overall_progress < 100 %}in{% endif %}complete"]'
@@ -127,10 +127,11 @@
                                 {{ table_helpers.render_cell(p.n_tasks, center=True) }}
                                 {{ table_helpers.render_cell(p.n_volunteers, center=True) }}
                                 {{ table_helpers.render_cell(p.overall_progress, center=True) }}
-                                {{ table_helpers.render_cell('Contribute', center=True, btn=True, url=url_for('project.details', short_name=p.short_name)) }}
+                                {{ table_helpers.render_cell('View Details', center=True, btn=True, url=url_for('project.details', short_name=p.short_name)) }}
+                                {{ table_helpers.render_cell('Contribute', center=True, btn=True, url=url_for('project.presenter', short_name=p.short_name)) }}
                             </tr>
                             {% endfor %}
-                            {{ table_helpers.render_no_data_row(5) }}
+                            {{ table_helpers.render_no_data_row(6) }}
                         </tbody>
                     </table>
                 </div>

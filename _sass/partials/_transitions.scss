@@ -10,7 +10,7 @@ a {
     transition: background-color 200ms;
 }
 
-.overlay-cards .card {
+.card.project-card {
     .card-img-overlay {
         transition: transform 450ms;
     }

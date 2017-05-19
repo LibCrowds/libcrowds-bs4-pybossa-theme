@@ -12,9 +12,9 @@ const HtmlPlugin              = require('html-webpack-plugin'),
       CleanPlugin             = require('clean-webpack-plugin'),
       FaviconsPlugin          = require('favicons-webpack-plugin');
 
-const distPath            = path.resolve('./static'),
-      baseTemplatePath    = path.resolve('./templates/base.html'),
-      customTemplatesPath = path.resolve('./templates/custom');
+const distPath            = path.resolve(__dirname, 'static'),
+      baseTemplatePath    = path.resolve(__dirname, 'templates/base.html'),
+      customTemplatesPath = path.resolve(__dirname, 'templates/custom');
 
 // pace-progress loader is a fix for https://github.com/HubSpot/pace/issues/328
 
@@ -85,7 +85,11 @@ let config = {
             hash: true,
             inject: false,
             filename: baseTemplatePath,
-            template: './_base.html'
+            template: './_base.html',
+            alwaysWriteToDisk: true
+        }),
+        new HtmlHarddiskPlugin({
+            outputPath: path.resolve(__dirname, 'templates')
         }),
         new ExtractTextPlugin('style.css'),
         new OptimizeCssAssetsPlugin({
@@ -95,7 +99,7 @@ let config = {
                   }
               }
         }),
-        new FaviconsPlugin(path.resolve('./_img/favicon.png'), {
+        new FaviconsPlugin(path.resolve('_img/favicon.png'), {
             appName: "LibCrowds",
             url: "http://www.libcrowds.com/",
             background: "#DA0000",
@@ -106,8 +110,6 @@ let config = {
 
 if (process.env.NODE_ENV === 'production') {
     config.plugins.push(new webpack.optimize.UglifyJsPlugin());
-} else {
-    config.plugins.push(new HtmlHarddiskPlugin({ alwaysWriteToDisk: true }));
 }
 
 module.exports = config;

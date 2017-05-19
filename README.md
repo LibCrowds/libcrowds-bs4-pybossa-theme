@@ -29,7 +29,7 @@ npm install
 # Build (see the _custom folder)
 npm run build:<custom_theme>
 
-# Serve locally
+# Serve at http://localhost:8080/
 npm run dev:<custom_theme>
 ```
 

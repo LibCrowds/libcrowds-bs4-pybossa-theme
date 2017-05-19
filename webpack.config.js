@@ -107,7 +107,7 @@ let config = {
 if (process.env.NODE_ENV === 'production') {
     config.plugins.push(new webpack.optimize.UglifyJsPlugin());
 } else {
-    config.plugins.push(new HtmlHarddiskPlugin());
+    config.plugins.push(new HtmlHarddiskPlugin({ alwaysWriteToDisk: true }));
 }
 
 module.exports = config;

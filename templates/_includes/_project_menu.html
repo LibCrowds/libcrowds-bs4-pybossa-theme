@@ -5,17 +5,17 @@
         </li>
         <li class="list-group-item {% if active_link =='tasks' %}active{% endif %}">
             <a href="{{url_for('project.tasks', short_name=project.short_name)}}">Task Settings</a>
+        </li>    
+        {% if pro_features.get('webhooks_enabled') %}
+        <li class="list-group-item {% if active_link =='webhooks' %}active{% endif %}">
+            <a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}">Webhooks</a>
         </li>
-    {% endif %}
-    {% if pro_features.get('webhooks_enabled') %}
-    <li class="list-group-item {% if active_link =='webhooks' %}active{% endif %}">
-        <a href="{{url_for('project.webhook_handler', short_name=project.short_name)}}">Webhooks</a>
-    </li>
-    {% endif %}
-    {% if pro_features.get('auditlog_enabled') %}
-    <li class="list-group-item {% if active_link =='auditlog' %}active{% endif %}">
-        <a href="{{url_for('project.auditlog', short_name=project.short_name)}}">Audit Logs</a>
-    </li>
+        {% endif %}
+        {% if pro_features.get('auditlog_enabled') %}
+        <li class="list-group-item {% if active_link =='auditlog' %}active{% endif %}">
+            <a href="{{url_for('project.auditlog', short_name=project.short_name)}}">Audit Logs</a>
+        </li>
+        {% endif %}
     {% endif %}
     <li class="list-group-item {% if active_link =='results' %}active{% endif %}">
         <a href="{{url_for('project.results', short_name=project.short_name)}}">Results</a>

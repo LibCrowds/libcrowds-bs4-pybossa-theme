@@ -13,14 +13,24 @@
     }
     
     .card-block {
-        height: 100%;
         
         &:not(first-child) {
             border-top: $card-border-width solid $card-border-color;
             
             @include media-breakpoint-up(lg) {
+                display: flex;
+                flex-direction: column;
                 border-top: none;
                 border-left: $card-border-width solid $card-border-color;
+                
+                .card-footer {
+                    display: flex;
+                    flex-direction: row; 
+                    justify-content: space-between; 
+                    align-items: center;
+                    margin-top: auto;
+                    background-color: $white;
+                }
             }
         }
     }

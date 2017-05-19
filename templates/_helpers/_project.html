@@ -32,12 +32,12 @@
                 <ul class="nav nav-pills" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active shuffle-tab" href="#grid-pane" data-toggle="tab" role="tab">
-                            <span class="fa fa-table fa-fw"></span>
+                            <span class="fa fa-list fa-fw"></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link shuffle-tab" href="#table-pane" data-toggle="tab" role="tab">
-                            <span class="fa fa-list fa-fw"></span>
+                            <span class="fa fa-table fa-fw"></span>
                         </a>
                     </li>
                 </ul>
@@ -71,18 +71,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-block">
-                            <h3 class="card-title font-weight-bold text-body mb-2">{{ project.name }}</h3>
-                            <p class="card-text text-body">{{ project.description }}</p>
-                            <div class="flex-row justify-content-around">
-                                <span class="text-muted"><span class="fa fa-users mr-1"></span>{{ project.n_volunteers }}</span>
-                                <span class="text-muted"><span class="fa fa-tasks mr-1"></span>{{ project.n_tasks }}</span>
-                                <a href="{{ url_for('project.details', short_name=project.short_name) }}" role="button" class="btn btn-outline-secondary">
-                                    Learn More
-                                </a>
-                                <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" role="button" class="btn btn-primary">
-                                    Contribute
-                                </a>
+                        <div class="card-block p-0">
+                            <h3 class="card-title font-weight-bold text-body mb-2 px-3 pt-3">{{ project.name }}</h3>
+                            <p class="card-text text-body px-3 pb-3">{{ project.description }}</p>
+                            <div class="card-footer p-3">
+                                <span class="text-muted"><span class="fa fa-users mr-1"></span>{{ project.n_volunteers }} volunteers</span>
+                                <span class="text-muted"><span class="fa fa-tasks mr-1"></span>{{ project.n_tasks }} tasks</span>
+                                <div>
+                                    <a href="{{ url_for('project.details', short_name=project.short_name) }}" role="button" class="btn btn-outline-secondary">
+                                        Learn More
+                                    </a>
+                                    <a href="{{ url_for('project.presenter', short_name=project.short_name) }}" role="button" class="btn btn-primary">
+                                        Contribute
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

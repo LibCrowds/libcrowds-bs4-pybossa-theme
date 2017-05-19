@@ -70,11 +70,6 @@ let config = {
             jquery: 'jquery',
             Tether: 'tether'
         }),
-        new CleanPlugin([
-            distPath,
-            baseTemplatePath,
-            customTemplatesPath
-        ]),
         new CopyPlugin([{
             context: path.join('_custom', process.env.THEME),
             from: '**/*.md',
@@ -104,7 +99,14 @@ let config = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin())
+    config.plugins.push(
+        new webpack.optimize.UglifyJsPlugin(), 
+        new CleanPlugin([
+            distPath,
+            baseTemplatePath,
+            customTemplatesPath
+        ])
+    );
 }
 
 module.exports = config;

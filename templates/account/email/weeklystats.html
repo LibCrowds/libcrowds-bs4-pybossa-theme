@@ -2,7 +2,7 @@
 {% set unsubscribe_url = url_for('account.update_profile', name=project.owner.name, _external=True) %}
 
 {% block title %}
-<a href="{{ url_for('project.details', short_name=project.short_name, _external=True) }}">{{ project.name }}</a>
+{{ project.name }}
 {% endblock %}
 
 {% block teaser %}
@@ -54,21 +54,24 @@ Top locations for anonymous users:
 <br>
 {% endif %}
 <br>
+<a href="{{ url_for('project.show_stats', short_name=project.short_name, _external=True) }}">View all statistics</a>
+<br>
 {% set hashtag = "crowdsourcing" %}
 
 Perhaps a bit of promotion would help:
 <div class="text-center">
     <blockquote class="twitter-tweet">
         {{ project.description | truncate(100) }}
-        <a href="{{ url_for('project.details', short_name=project.short_name, _external=True) }}" target="_blank">
-            {{ url_for('project.details', short_name=project.short_name, _external=True) | urlencode }}
+        <a href="{{ url_for('project.presenter', short_name=project.short_name, _external=True) }}" target="_blank">
+            {{ url_for('project.presenter', short_name=project.short_name, _external=True) | urlencode }}
         </a> <a href="https://twitter.com/hashtag/{{ hastag }}?src=hash" target="_blank">#{{ hashtag }}</a>
     </blockquote>
     <br>
     <br>
-    <a href="https://twitter.com/intent/tweet?text={{ project.description | truncate(100) | urlencode }}&url={{ url_for('project.details', short_name=project.short_name, _external=True) | urlencode }}&hashtags={{ hashtag }}" class="btn-twitter">Tweet it</a>
+    <a href="https://twitter.com/intent/tweet?text={{ project.description | truncate(100) | urlencode }}&url={{ url_for('project.presenter', short_name=project.short_name, _external=True) | urlencode }}&hashtags={{ hashtag }}" class="btn-twitter">Tweet it</a>
 </div>
 <br>
+
 All the best,
 <br>
 {{ config.BRAND }} Team

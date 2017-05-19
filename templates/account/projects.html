@@ -14,7 +14,7 @@
             <tbody>
                 {% for p in projects_published %}
                 <tr>
-                    {{ table_helpers.render_cell(p.name, url=url_for('project.details', short_name=p.short_name)) }}
+                    {{ table_helpers.render_cell(p.name) }}
                     {{ table_helpers.render_cell(p.overall_progress, center=True) }}
                     {{ table_helpers.render_cell('Open Dashboard', url=url_for('project.settings', short_name=p.short_name), btn=True, center=True) }}
                 </tr>

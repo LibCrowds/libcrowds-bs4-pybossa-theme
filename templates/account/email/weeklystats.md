@@ -13,6 +13,8 @@ Top 5 registered users
     * {{u.fullname}}
 {% endfor %}
 
+[View all statistics]({{ url_for('project.show_stats', short_name=project.short_name, _external=True) }})
+
 {% block body %}
 
 {% endblock %}

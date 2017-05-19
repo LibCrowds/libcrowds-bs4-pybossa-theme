@@ -106,7 +106,7 @@ let config = {
 
 if (process.env.NODE_ENV === 'production') {
     config.plugins.push(new webpack.optimize.UglifyJsPlugin());
-} else if (process.env.NODE_ENV === 'development') {
+} else {
     config.plugins.push(new HtmlHarddiskPlugin());
 }
 

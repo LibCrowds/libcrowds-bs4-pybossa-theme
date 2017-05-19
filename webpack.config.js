@@ -5,6 +5,7 @@ const webpack    = require('webpack'),
       pathExists = require('path-exists');
 
 const HtmlPlugin              = require('html-webpack-plugin'),
+      HtmlHarddiskPlugin      = require('html-webpack-harddisk-plugin'),
       ExtractTextPlugin       = require('extract-text-webpack-plugin'),
       OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
       CopyPlugin              = require('copy-webpack-plugin'),
@@ -70,6 +71,11 @@ let config = {
             jquery: 'jquery',
             Tether: 'tether'
         }),
+        new CleanPlugin([
+            distPath,
+            baseTemplatePath,
+            customTemplatesPath
+        ]),
         new CopyPlugin([{
             context: path.join('_custom', process.env.THEME),
             from: '**/*.md',
@@ -99,14 +105,9 @@ let config = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-    config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin(), 
-        new CleanPlugin([
-            distPath,
-            baseTemplatePath,
-            customTemplatesPath
-        ])
-    );
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+} else if (process.env.NODE_ENV === 'development') {
+    config.plugins.push(new HtmlHarddiskPlugin());
 }
 
 module.exports = config;

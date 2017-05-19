@@ -2,7 +2,7 @@
 {% set unsubscribe_url = url_for('account.update_profile', name=project.owner.name, _external=True) %}
 
 {% block title %}
-<a href="{{ url_for('project.presenter', short_name=project.short_name, _external=True) }}">{{ project.name }}</a>
+<a href="{{ url_for('project.details', short_name=project.short_name, _external=True) }}">{{ project.name }}</a>
 {% endblock %}
 
 {% block teaser %}

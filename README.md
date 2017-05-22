@@ -2,10 +2,10 @@
 
 A [LibCrowds](http://www.libcrowds.com) theme using Bootstrap 4, SASS and Webpack.
 
-The theme is to host a range of projects belonging to the same meta-category 
+The theme is to host a range of projects belonging to the same meta-category
 (e.g. Card Catalogues or Playbills). Each of these meta-categories could
 potentially contain hundreds of projects, so it makes sense to run each in a
-seperate PYBOSSA instance to allow for better theming and targeted 
+seperate PYBOSSA instance to allow for better theming and targeted
 descriptions.
 
 
@@ -45,9 +45,8 @@ The theme will be available after you restart your PYBOSSA application.
 ## Development
 
 Custom theme options are defined in the [_custom](_custom) folder. To defined
-theme options for a new metacategory add a new subfolder with the following 
+theme options for a new metacategory add a new subfolder with the following
 files:
 
 - **_about.md:** Background info for the meta-category.
-- **_categories.md:** An explanation of how categories are defined (e.g. volumes).
 - **home.jpg:** Main image for the top of the homepage.

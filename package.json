@@ -68,10 +68,10 @@
   },
   "scripts": {
     "lint": "eslint _js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --colors --config ./webpack.config.js",
-    "dev:playbills": "cross-env THEME_ENV=playbills webpack-dev-server --progress --colors --config ./webpack.config.js",
-    "dev:convertacard": "cross-env THEME_ENV=convertacard webpack-dev-server --progress --colors --config ./webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --colors --config webpack.config.js",
+    "dev:playbills": "cross-env THEME_ENV=playbills npm run dev",
+    "dev:convertacard": "cross-env THEME_ENV=convertacard npm run dev",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "build:playbills": "cross-env THEME_ENV=playbills npm run build",
     "build:convertacard": "cross-env THEME_ENV=convertacard npm run build"
   }

@@ -6,7 +6,7 @@
 {% import "_helpers/_general.html" as general_helpers %}
 
 {% block content %}
-<div id="home-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0">
+<div class="home-bg jumbotron vh-100 jumbotron-fade mb-0">
     <div class="container text-center h-100 d-flex align-items-center justify-content-between flex-column">
         <div></div>
         <h1 class="mb-0 text-white w-75" data-aos="zoom-in" data-aos-duration="600">{{ title | safe }}</h1>
@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<section id="intro" class="py-5 text-center">
+<section id="intro" class="py-5 text-center" data-navbar-class="navbar-light">
     <div class="container py-3">
         <div class="row" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
             <div class="col-sm-10 offset-sm-1">
@@ -64,7 +64,7 @@
 </section>
 
 {% if categories_projects['featured'] %}
-<section id="featured-projects" class="pattern-white-wall text-gray-dark text-center text-lg-left">
+<section id="featured-projects" class="pattern-white-wall text-gray-dark text-center text-lg-left" data-navbar-class="navbar-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-5 offset-lg-1 pt-5">
@@ -95,7 +95,7 @@
 <!-- See https://github.com/LibCrowds/libcrowds-data -->
 {% if "libcrowds_data" in plugins %}
 <section id="data" class="bg-black">
-    <div id="code-jumbotron" class="jumbotron jumbotron-fluid invert-navbar text-center mb-0">
+    <div class="code-bg jumbotron jumbotron-fluid invert-navbar text-center mb-0">
         <div class="container text-white py-4">
             <div class="row py-2">
                 <div class="col-sm-12">
@@ -122,7 +122,7 @@
 {% endif %}
 
 {% if top_users %}
-<section id="top-users" class="text-gray-dark text-center">
+<section id="top-users" class="text-gray-dark text-center" data-navbar-class="navbar-light">
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-5 offset-lg-1 pt-3">
@@ -159,7 +159,7 @@
 <!-- See https://github.com/LibCrowds/libcrowds-results -->
 {% if "libcrowds_results" in plugins %}
 <section id="results" class="bg-black">
-    <div id="newton-jumbotron" class="jumbotron jumbotron-fluid invert-navbar text-center mb-0">
+    <div class="newton-bg jumbotron jumbotron-fluid invert-navbar text-center mb-0">
         <div class="container text-white py-4">
             <div class="row py-2">
                 <div class="col-sm-12">
@@ -187,7 +187,7 @@
 <hr class="w-75">
 {% endif %}
 
-<section>
+<section id="bottom-cta" data-navbar-class="navbar-light">
     <div class="container">
         <div class="row my-5">
             <div class="col-sm-10 offset-sm-1 text-center">

@@ -3,9 +3,9 @@
 {% block layout %}
 {% set staff_or_admin = staff_or_admin %}
 {% set active_page = active_page | default('index') %}
-{% set navbar_class = navbar_class | default("navbar fixed-top navbar-toggleable-md navbar-inverse navbar-invertable") %}
+{% set navbar_class = navbar_class | default("navbar fixed-top navbar-toggleable-md navbar-transparent navbar-invertable") %}
 {% include "_includes/_navbar.html" %}
-<main>
+<main class="home-bg">
     {% block content %}
     {% endblock %}
 </main>

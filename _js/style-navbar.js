@@ -11,26 +11,31 @@ $(window).on("resize scroll", function() {
  * Handle styling of the navbar.
  */
 function styleNavigation() {
-    var bounds      = [],
-        ieScrollTop = document.documentElement.scrollTop,
-        scrollTop   = document.body.scrollTop === 0 ? ieScrollTop : document.body.scrollTop;
+    var styles       = [],
+        ieScrollTop  = document.documentElement.scrollTop,
+        scrollTop    = document.body.scrollTop === 0 ? ieScrollTop : document.body.scrollTop,
+        addedClasses = $('.navbar').data('added-classes');
 
-    $('.invert-navbar').each(function() {
-        bounds.push([
-            $(this).offset().top, $(this).offset().top + $(this).height()
-        ]);
+    $('[data-navbar-class]').each(function() {
+        styles.push({
+            class: $(this).data('navbar-class'),
+            bounds: [
+                $(this).offset().top,
+                $(this).offset().top + $(this).height()
+            ]
+        });
     });
 
-    for(var i = 0; i < bounds.length; i++) {
-        if (scrollTop >= bounds[i][0] - 50 && scrollTop <= bounds[i][1] + 25) {
-            $('.navbar-invertable').addClass('navbar-inverse');
-            $('.navbar-invertable').removeClass('navbar-light');
+    for(var i = 0; i < styles.length; i++) {
+        if (scrollTop >= styles[i]['bounds'][0] - 50 && scrollTop <= styles[i]['bounds'][1] + 25) {
+            $('.navbar').removeClass(addedClasses);
+            $('.navbar').addClass(styles['class']);
+            $('.navbar').data('added-classes', styles['class']);
             return;
         }
     }
 
-    $('.navbar-invertable').removeClass('navbar-inverse');
-    $('.navbar-invertable').addClass('navbar-light');
+    $('.navbar').removeClass(addedClasses);
 }
 
 export default styleNavbar;

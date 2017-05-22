@@ -151,10 +151,54 @@
                 </a>
             </div>
         </div>
-        <hr class="mb-5">
-        {{ social_helpers.render_social_media_buttons("www.libcrowds.com", "Have a direct impact on enabling future research conducted at the Library.") }}
     </div>
 </section>
 {% endif %}
 
+<!-- See https://github.com/LibCrowds/libcrowds-results -->
+{% if "libcrowds_results" in plugins %}
+<section id="results" class="bg-black">
+    <div id="newton-jumbotron" class="jumbotron jumbotron-fluid invert-navbar text-center mb-0">
+        <div class="container text-white py-4">
+            <div class="row py-2">
+                <div class="col-sm-12">
+                    <h2 class="display-2 font-weight-extra-light">Results</h2>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-sm-6 offset-sm-3">
+                    <p class="lead font-weight-extra-light">
+                        As the project progresses contributions will be analysed and
+                        the results published in real-time, making the efforts of
+                        our volunteers immediately apparent.
+                    </p>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-sm-12">
+                    <a href="{{ url_for('results.index') }}" class="btn btn-outline-white" role="button">See the Results</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<hr class="w-75">
+{% endif %}
+
+<section>
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <h3 class="text-uppercase display-4 mb-0">Get Involved</h3>
+                <p class="lead mt-4 mb-0">
+                    Your contributions will have a direct impact on enabling future reasearch at the British Library.
+                <p>
+                <a href="{{ url_for('project.index') }}" class="btn btn-outline-primary btn-lg mt-4 mb-0" role="button">Find a Project</a>
+                <hr class="bw-2 w-50 my-4">
+                {{ social_helpers.render_social_media_buttons("www.libcrowds.com/project/{{ project.short_name }}", "{{ project.description }}") }}
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

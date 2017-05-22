@@ -1,9 +1,18 @@
 .card.project-card {
-    flex-direction: row;
+    text-align: center;
+    flex-direction: column;
     overflow-y: hidden;
     margin-bottom: $spacer-y;
-    width: 100%;
-    
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px;
+
+    @include media-breakpoint-up(md) {
+        max-width: 100%;
+        text-align: left;
+        flex-direction: row;
+    }
+
     @include hover-focus {
         .card-img-overlay-wrapper {
             .card-img-overlay {
@@ -11,39 +20,43 @@
             }
         }
     }
-    
+
     .card-block {
-        
+
         &:not(first-child) {
             border-top: $card-border-width solid $card-border-color;
-            
-            @include media-breakpoint-up(lg) {
+
+            .card-footer {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+                background-color: $white;
+            }
+
+            @include media-breakpoint-up(md) {
                 display: flex;
                 flex-direction: column;
                 border-top: none;
                 border-left: $card-border-width solid $card-border-color;
-                
+
                 .card-footer {
-                    display: flex;
-                    flex-direction: row; 
-                    justify-content: space-between; 
-                    align-items: center;
-                    margin-top: auto;
-                    background-color: $white;
+                    flex-direction: row;
                 }
             }
         }
     }
-    
+
     .card-img-overlay-wrapper {
         position: relative;
         overflow: hidden;
         max-width: 300px;
-        
+
         .card-img {
             width: 100%;
         }
-        
+
         .card-img-overlay {
             display: flex;
             flex-direction: column;
@@ -58,16 +71,16 @@
 
 .card-button {
     overflow: hidden;
-    
+
     .card-block {
         display: flex;
         align-items: center;
-        
+
         .card-title {
             z-index: 1;
             margin: 0px;
         }
-    
+
         .card-icon {
             color: $white;
             z-index: 3;
@@ -81,7 +94,7 @@
             align-items: center;
             padding-left: 0.5rem;
         }
-        
+
         &:after {
             content: '';
             background: linear-gradient(105deg, transparent 0%, transparent 10%, #{$brand-info} 10%, #{$brand-info} 100%);
@@ -92,7 +105,7 @@
             position: absolute;
             right: 0;
         }
-        
+
         &:before {
             content: attr(data-description);
             opacity: 0;
@@ -101,7 +114,7 @@
             color: transparent;
             max-width: 70%;
         };
-        
+
         @include hover-focus {
             &:after {
                 transform: translateX(0%);
@@ -121,7 +134,7 @@
 .card-strip {
     overflow-x: auto;
     white-space: nowrap;
-    
+
     .card:hover,
     .card:hover,
     .card.active {

@@ -5,13 +5,13 @@
 {% macro render_shuffle_grid(projects, pagination=None, show_controls=True) %}
 <section id="project-shuffle">
     {% if show_controls %}
-    <nav id="shuffle-controls">    
+    <nav id="shuffle-controls">
         <hr class="w-100">
         <div class="row d-flex flex-row align-items-center">
             <div class="col-lg-4 text-center text-lg-left">
                 <label class="my-2">
-                    <input class="shuffle-checkbox shuffle-control" checked="true" data-toggle="toggle" 
-                           data-width="75" data-onstyle="info" type="checkbox" 
+                    <input class="shuffle-checkbox shuffle-control" checked="true" data-toggle="toggle"
+                           data-width="75" data-onstyle="info" type="checkbox"
                            data-group="incomplete">
                     <span class="ml-1">Hide completed</span>
                 </label>
@@ -25,7 +25,7 @@
                         <option value="n-volunteers" data-sortby="n_volunteers" data-reverse="true">Most Popular</option>
                         <option value="created" data-sortby="created" data-reverse="true">Most Recently Launched</option>
                         <option value="last-activity" data-sortby="last_activity_raw" data-reverse="true">Most Recently Active</option>
-                    </select>      
+                    </select>
                 </div>
             </div>
             <div class="col-lg-4 my-2 d-flex flex-row justify-content-center justify-content-lg-end">
@@ -51,7 +51,7 @@
         <hr class="w-100">
     </nav>
     {% endif %}
-    
+
     <div class="tab-content">
         <div id="grid-pane" class="tab-pane active" role="tabpanel">
             <div id="shuffle-grid" class="flex-row" data-initial-group="incomplete">
@@ -61,7 +61,7 @@
                                        {% for k, v in project.items() if k != 'info' %}
                                        data-{{ k }}="{{ v }}"
                                        {% endfor %}>
-                    
+
                     <div class="card project-card">
                         <div class="card-img-overlay-wrapper">
                             {{ render_thumbnail(project, class='card-img-top img-fluid') }}
@@ -73,11 +73,11 @@
                         </div>
                         <div class="card-block p-0">
                             <h3 class="card-title font-weight-bold text-body mb-2 px-3 pt-3">{{ project.name }}</h3>
-                            <p class="card-text text-body px-3 pb-3">{{ project.description }}</p>
+                            <p class="card-text text-body mb-0 px-3 pb-3">{{ project.description }}</p>
                             <div class="card-footer p-3">
-                                <span class="text-muted"><span class="fa fa-users mr-1"></span>{{ project.n_volunteers }} volunteers</span>
-                                <span class="text-muted"><span class="fa fa-tasks mr-1"></span>{{ project.n_tasks }} tasks</span>
-                                <div>
+                                <span class="text-muted mb-1 mb-md-0"><span class="fa fa-users mr-1"></span>{{ project.n_volunteers }} volunteers</span>
+                                <span class="text-muted mb-2 mb-md-0"><span class="fa fa-tasks mr-1"></span>{{ project.n_tasks }} tasks</span>
+                                <div class="">
                                     <a href="{{ url_for('project.details', short_name=project.short_name) }}" role="button" class="btn btn-outline-secondary">
                                         Learn More
                                     </a>
@@ -91,7 +91,7 @@
                 </div>
                 {% endfor %}
             </div>
-            
+
             <div id="shuffle-grid-placeholders">
                 {% if projects | sum(attribute="overall_progress") == projects | length * 100 %}
                 <div class="text-center">
@@ -112,7 +112,7 @@
                 {% endif %}
             </div>
         </div>
-        
+
         <div class="tab-pane" id="table-pane" role="tabpanel">
             <div class="card">
                 <div class="table-responsive">

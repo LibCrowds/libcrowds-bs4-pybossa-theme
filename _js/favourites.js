@@ -1,4 +1,4 @@
-import notify from './notify';
+import notify from './components/notify';
 
 import 'lightgallery';
 import 'lg-thumbnail';

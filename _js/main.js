@@ -7,9 +7,8 @@ import AOS from 'aos';
 
 import './editor';
 import './favourites.js';
-import './style-navbar';
-import './style-jumbotrons';
-import './display-scroll-btns';
+import './events/window-scroll';
+import './events/window-resize';
 import './api-stats';
 import './image-error';
 import './image-crop';
@@ -20,14 +19,13 @@ import './project-shuffle';
 import './featured-projects';
 import './search';
 import './btn-scroll';
-import './tab-control';
 import './hamburger';
 import './sidebar.js';
 import './csrf-token';
 import './flash-messages';
 
 // TODO export to own repo to be bundled within projects - add bootstrap as dependency
-import './ui/components/viewer/interface';
+import './components/viewer/interface';
 
 // Init pace-progress
 pace.start();

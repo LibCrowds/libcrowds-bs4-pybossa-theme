@@ -4,7 +4,7 @@ let forms;
  * Make a slug from a long name.
  */
 function makeSlug(text) {
-    var invalid_chars = /([$#%·~!¡?"¿'=)(!&\/|]+)/g;
+    let invalid_chars = /([$#%·~!¡?"¿'=)(!&\/|]+)/g;
     return text.toLowerCase().trim().replace(invalid_chars, "").replace(/( )+/g, "");
 }
 

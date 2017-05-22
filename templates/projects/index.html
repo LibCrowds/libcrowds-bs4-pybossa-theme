@@ -2,66 +2,23 @@
 {% set active_page = "projects" %}
 {% set title = active_cat.name %}
 {% import "_helpers/_project.html" as project_helpers %}
-{% import "_helpers/_card.html" as card_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
-{% import "_helpers/_table.html" as table_helpers %}
 
 {% block content %}
 
-{% if active_cat.name == 'Featured' %} <!--- Category index page --->
-<section class="mt-5 mb-4">
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1 text-center">
-            </div>
-        </div>
-        <hr class="my-4 w-75">
-        <div class="card mt-5">
-            {{ card_helpers.render_title("Project Categories", search_table="#categories-table") }}
-            <div class="table-responsive">
-                <table id="categories-table" class="table table-hover table-striped mb-0">
-                    {{ table_helpers.render_head(['Name', 'Created'], center_indexes=[2]) }}
-                    <tbody>
-                        {% for c in categories if c.name != 'Featured' %}
-                        <tr>
-                            {{ table_helpers.render_cell(c.name, url_for('project.project_cat_index', category=c.short_name)) }}
-                            {{ table_helpers.render_cell(general_helpers.format_date(c.created), center=true) }}
-                        </tr>
-                        {% endfor %}
-                        {{ table_helpers.render_no_data_row(2) }}
-                    </tbody>
-                </table>
-            </div>
+    <div class="">
+        <div class="dashboard-menu top mt-5">
+            <ul class="nav list-group">
+                {% for c in categories%}
+                <li class="list-group-item ">
+                    <a href="#">{{ c.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-</section>
 
-{% else %} <!--- END category index page ---> <!--- Category portal page --->
-
-<div id="category-{{ active_cat.category_id }}-jumbotron" class="jumbotron jumbotron-fullscreen invert-navbar jumbotron-fade mb-0">
-    <div class="container text-center h-100 d-flex align-items-center justify-content-between flex-column">
-        <div></div>
-        <h2 class="font-weight-bold text-white mb-0">{{ active_cat.name }}</h3>
-        <a href="#about" data-aos="fade-up" data-aos-delay="200" data-aos-duration="400" data-aos-easing="ease-out-sine" data-aos-offset="0">
-            <p class="mb-1 text-uppercase text-white">Scroll Down</p>
-            <span class="fa fa-chevron-down fa-2x text-primary pulse"></span>
-        </a>
-    </div>
-</div>
-<section class="py-5">
-    <div class="container py-3">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1 text-center">
-                <h1 class="text-uppercase font-weight-bold display-4">About</h1>
-                <hr class="bw-3 my-4">
-                <p id="description" class="lead text-md-left">
-                    {{ active_cat.description }}
-                </p>
-            </div>
-        </div>
-    </div>
-<section>
-<section id="projects-grid" class="py-5">
+<section id="projects-grid" class="py-5 bg-faded">
     <div class="container py-3">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
@@ -70,8 +27,6 @@
         </div>
     </div>
 </section>
-
-{% endif %} <!--- END category portal page --->
 
 <!-- See https://github.com/alexandermendes/pybossa-discourse -->
 {% if 'pybossa_discourse' in plugins %}

@@ -71,20 +71,21 @@
                 <h3 class="text-uppercase font-weight-bold display-4">Featured Projects</h3>
                 <hr class="bw-3 mr-lg-5">
                 <p class="text-uppercase mr-lg-6">
-                    Help researchers everywhere to access our collections more easily
-                    in the future.
-                </p>
-                <p class="text-uppercase mr-lg-6">
-                    Choose one of our current to get started!
+                    Choose one of our current favourites to get started!
                 </p>
             </div>
             <div class="col-lg-3 offset-lg-3 hidden-md-down">
                  <span class="ribbon"><span class="fa fa-star"></span></span>
             </div>
         </div>
-        <div class="row my-5">
+        <div class="row mt-4">
             <div class="col-lg-10 offset-lg-1">
                 {{ project_helpers.render_shuffle_grid(categories_projects['featured'], show_controls=False) }}
+            </div>
+        </div>
+        <div class="row mt-4 mb-5">
+            <div class="col-lg-10 offset-lg-1 text-center">
+                <a class="btn btn-outline-primary btn-lg btn-bg-white" href="{{ url_for('project.index') }}" role="button">Browse All Projects</a>
             </div>
         </div>
     </div>
@@ -192,7 +193,7 @@
             <div class="col-sm-10 offset-sm-1 text-center">
                 <h3 class="text-uppercase display-4 mb-0">Get Involved</h3>
                 <p class="lead mt-4 mb-0">
-                    Your contributions will have a direct impact on enabling future reasearch at the British Library.
+                    Help researchers everywhere to access our collections more easily in the future.
                 <p>
                 <a href="{{ url_for('project.index') }}" class="btn btn-outline-primary btn-lg mt-4 mb-0" role="button">Find a Project</a>
                 <hr class="bw-2 w-50 my-4">

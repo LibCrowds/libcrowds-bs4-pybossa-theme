@@ -5,8 +5,7 @@
 {% macro render_shuffle_grid(projects, pagination=None, show_controls=True) %}
 <section id="project-shuffle">
     {% if show_controls %}
-    <nav id="shuffle-controls">
-        <hr class="w-100">
+    <nav id="shuffle-controls" class="mb-4">
         <div class="row d-flex flex-row align-items-center">
             <div class="col-lg-4 text-center text-lg-left">
                 <label class="my-2">
@@ -29,7 +28,7 @@
                 </div>
             </div>
             <div class="col-lg-4 my-2 d-flex flex-row justify-content-center justify-content-lg-end">
-                <ul class="nav nav-pills" role="tablist">
+                <ul class="nav nav-pills bg-white" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active shuffle-tab" href="#grid-pane" data-toggle="tab" role="tab">
                             <span class="fa fa-list fa-fw"></span>
@@ -48,7 +47,6 @@
                 <input id="shuffle-search" type="text" class="form-control rounded-oblong shuffle-control" placeholder="Search">
             </div>
         </div>
-        <hr class="w-100">
     </nav>
     {% endif %}
 
@@ -128,8 +126,8 @@
                                 {{ table_helpers.render_cell(p.name, url=url_for('project.details', short_name=p.short_name)) }}
                                 {{ table_helpers.render_cell(p.n_tasks, center=True) }}
                                 {{ table_helpers.render_cell(p.n_volunteers, center=True) }}
-                                {{ table_helpers.render_cell(p.overall_progress, center=True) }}
-                                {{ table_helpers.render_cell('View Details', center=True, btn=True, url=url_for('project.details', short_name=p.short_name)) }}
+                                {{ table_helpers.render_cell("{}%".format(p.overall_progress), center=True) }}
+                                {{ table_helpers.render_cell('Learn More', center=True, btn=True, url=url_for('project.details', short_name=p.short_name)) }}
                                 {{ table_helpers.render_cell('Contribute', center=True, btn=True, url=url_for('project.presenter', short_name=p.short_name)) }}
                             </tr>
                             {% endfor %}
@@ -143,9 +141,6 @@
     {% if pagination and pagination.pages > 1 %}
         {{ general_helpers.render_pagination(pagination) }}
     {% endif %}
-    <div class="d-flex flex-row justify-content-center">
-        <a class="btn btn-outline-primary btn-lg mt-5 btn-bg-white" href="{{url_for('project.index')}}" role="button">Browse All Projects</a>
-    </div>
 </section>
 {% endmacro %}
 

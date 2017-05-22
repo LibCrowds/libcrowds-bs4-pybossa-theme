@@ -43,7 +43,7 @@ let config = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            data: '$theme-env: ' + process.env.THEME + ';'
+                            data: '$theme-env: ' + process.env.THEME_ENV + ';'
                         }
                     }]
                 })
@@ -77,7 +77,7 @@ let config = {
             customTemplatesPath
         ]),
         new CopyPlugin([{
-            context: path.join('_custom', process.env.THEME),
+            context: path.join('_custom', process.env.THEME_ENV),
             from: '**/*.md',
             to: customTemplatesPath
         }]),

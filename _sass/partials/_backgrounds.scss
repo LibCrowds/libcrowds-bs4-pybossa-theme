@@ -1,0 +1,16 @@
+.home-bg {
+    background: url('../_custom/#{$theme-env}/home.jpg') no-repeat center center / cover fixed;
+}
+
+.code-bg {
+    background: url('../_img/code.png') no-repeat left / cover fixed;
+}
+
+.newton-bg {
+    background: url('../_img/newton.jpg') no-repeat bottom right / cover fixed;
+}
+
+.error-bg {
+    background-color: $sky;
+    background: url(../_img/bl-graphic.png) no-repeat center bottom / cover fixed;
+}

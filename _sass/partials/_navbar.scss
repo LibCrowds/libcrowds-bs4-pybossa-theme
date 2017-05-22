@@ -1,56 +1,57 @@
 .navbar {
     padding-left: ($spacer-x * 3);
     padding-right: ($spacer-x * 3);
-    
+
     .hamburger {
         display: none;
         padding: 0;
     }
-    
-    &.navbar-inverse {
+
+    &.navbar-transparent {
+        @extend .navbar-inverse;
         background-color: transparent;
-    
-        .hamburger-inner, 
-        .hamburger-inner:before, 
+
+        .hamburger-inner,
+        .hamburger-inner:before,
         .hamburger-inner:after {
             background-color: $white;
         }
-    
+
         .dropdown-menu {
             background-color: rgba($black, 0.5);
-        
+
             .dropdown-item {
                 color: $white;
-            
+
                 @include hover-focus {
                     color: $link-hover-color;
                 }
             }
         }
     }
-    
+
     &.navbar-light {
         background: $white;
         border-bottom: 1px solid $gray-lighter;
     }
-    
+
     &.navbar-dashboard .navbar-brand {
         @include media-breakpoint-up(lg) {
             visibility: hidden;
         }
     }
-    
+
     .navbar-nav {
-    
+
         &:first-child {
             margin-right: auto;
         }
-    
+
         .nav-item {
             margin-left: $nav-item-inline-spacer;
             margin-right: $nav-item-inline-spacer;
             position: relative;
-        
+
             &:not(.dropdown) .nav-link:after {
                 position: absolute;
                 left: 0;
@@ -61,20 +62,20 @@
                 background-color: $brand-primary;
                 opacity: 0;
             }
-        
+
             &.active .nav-link:after,
             .nav-link:hover:after,
             .nav-link:focus:after {
                 opacity: 1;
             }
-            
+
             &.active .nav-link:after {
                 transform: none;
             }
-            
+
             .nav-link {
                 padding: .35rem 0;
-                
+
                 &:not(.dropdown-toggle) {
                     &:after {
                         transform: translateY(10px);
@@ -87,12 +88,12 @@
                     }
                 }
             }
-            
+
             .dropdown-menu {
                 left: -25%;
                 right: 0;
             }
-            
+
             &.active {
                 .nav-link:after {
                     transform: none;
@@ -100,11 +101,11 @@
             }
         }
     }
-    
+
     .dropdown-menu {
         width: 100%;
     }
-    
+
     .dropdown-item:focus,
     .dropdown-item:hover,
     .nav-item .nav-link:focus,
@@ -113,15 +114,15 @@
         color: $brand-primary;
         background-color: transparent;
     }
-    
+
     .hamburger {
         z-index: 20;
-		
+
 		&.hamburger--arrow {
 			transform: rotate(180deg);
 		}
     }
-    
+
     .fa {
         display: none;
     }
@@ -131,7 +132,7 @@
     @each $breakpoint in map-keys($grid-breakpoints) {
         $next: breakpoint-next($breakpoint, $grid-breakpoints);
         $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-    
+
         &#{$infix} {
             @include media-breakpoint-down($breakpoint) {
                 display: flex;
@@ -158,19 +159,19 @@
                     overflow-x: hidden;
                     overflow-y: auto;
                     text-align: center;
-                    
+
                     &:not(.show) {
                         transform: translateX(-100%);
                     }
-                    
+
                     .navbar-nav {
                         margin-right: 0;
                         display: block;
-                    
-                    
+
+
                         .nav-item {
                             margin-left: 0;
-                            
+
                             &.active .nav-link:after,
                             .nav-link:hover:after,
                             .nav-link:focus:after {
@@ -182,11 +183,11 @@
                         .dropdown-item {
                             padding: $list-group-item-padding-y;
                             color: $white;
-            
+
                             @include hover-focus {
                                 color: $brand-primary;
                             }
-                            
+
                             .fa {
                                 display: none;
                             }
@@ -216,10 +217,10 @@
         .navbar-collapse {
             width: 100%;
         }
-        
+
         .hamburger.white {
-            .hamburger-inner, 
-            .hamburger-inner:before, 
+            .hamburger-inner,
+            .hamburger-inner:before,
             .hamburger-inner:after {
                 background-color: $white;
             }

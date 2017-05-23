@@ -52,14 +52,14 @@ let config = {
                 test: /\.(jpe?g|png|gif)$/i,
                 loader: 'url-loader?limit=10000!img-loader'
             },
-            {   test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            {   test: /\.woff(2)?$/,
                 loader: "url-loader?limit=10000&mimetype=application/font-woff"
             },
-            {   test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            {   test: /\.(ttf|eot)$/,
                 loader: "url-loader?limit=10000!file-loader"
             },
             {   test: /\.svg$/,
-                loader: "svg-url-loader"
+                loader: "svg-url-loader!file-loader"
             },
             {
                 test: require.resolve("pace-progress"),

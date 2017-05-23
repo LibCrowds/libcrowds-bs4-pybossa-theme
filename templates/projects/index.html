@@ -3,18 +3,18 @@
 {% set title = active_cat.name %}
 {% import "_helpers/_project.html" as project_helpers %}
 {% import "_helpers/_general.html" as general_helpers %}
+{% import "_helpers/_nav.html" as nav_helpers %}
 
 {% block content %}
 
-<section id="projects-grid" class="py-5 bg-faded floating">
-    <div class="container py-3">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-                {{ project_helpers.render_shuffle_grid(projects, pagination) }}
-            </div>
-        </div>
-    </div>
-</section>
+<div class="floating style-navbar" data-navbar-class="navbar-light">
+    {{ nav_helpers.render_sub_nav(['the-collection', 'objectives', 'technology', 'the-team', 'contact']) }}
+
+    <section id="projects-grid" class="bg-faded p-3 px-md-5 py-md-4">
+        {{ project_helpers.render_shuffle_grid(projects, pagination) }}
+    </section>
+
+</div>
 
 <!-- See https://github.com/alexandermendes/pybossa-discourse -->
 {% if 'pybossa_discourse' in plugins %}

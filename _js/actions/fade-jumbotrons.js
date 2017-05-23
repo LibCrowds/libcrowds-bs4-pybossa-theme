@@ -12,7 +12,7 @@ function fadeJumbotrons() {
             brightness     = visiblePercent < 100 ? visiblePercent / 2 : 100,
             opacity        = visiblePercent < 100 ? visiblePercent / 10 : 1;
 
-        jt.style.filter = `brightness(${brightness}%)`);
+        jt.style.filter = `brightness(${brightness}%)`;
         jt.children.style.opacity = opacity;
     }
 }

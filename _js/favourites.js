@@ -1,4 +1,5 @@
 import notify from './components/notify';
+import setCSRFToken from './actions/set-csrf-token';
 
 import 'lightgallery';
 import 'lg-thumbnail';
@@ -67,6 +68,7 @@ function loadFavouritesGallery(selector) {
  * Return the current user's favourites.
  */
 function getFavourites() {
+    setCSRFToken();
     return new Promise(function(resolve, reject) {
         $.ajax({
             url: "/api/favorites",
@@ -86,6 +88,7 @@ function getFavourites() {
  * Add a task to the current user's favourites.
  */
 function addFavourite(taskId) {
+    setCSRFToken();
     return new Promise(function(resolve, reject) {
         $.ajax({
             url: '/api/favorites',
@@ -106,6 +109,7 @@ function addFavourite(taskId) {
  * Remove a task from the current user's favourites.
  */
 function removeFavourite(taskId) {
+    setCSRFToken();
     return new Promise(function(resolve, reject) {
         $.ajax({
             url: `/api/favorites/${taskId}`,

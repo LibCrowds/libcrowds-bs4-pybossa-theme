@@ -11,7 +11,8 @@
 
 {% set staff_or_admin = staff_or_admin %}
 {% set active_page = active_page %}
-{% set navbar_class = "navbar fixed-top navbar-toggleable-md navbar-light" %}
+{% set navbar_class = "navbar-light" %}
+{% set navbar_toggleable = navbar_toggleable | default("md") %}
 
 {% include "_includes/_navbar.html" %}
 <main class="bg-faded">

@@ -1,15 +1,18 @@
 import notify from './components/notify';
+import setCSRFToken from './actions/set-csrf-token';
 
 let webhook;
 
 // Send a webhook when the button is clicked
 $('.send-webhook').on('click', function() {
-    var projectShortName = $(this).data('project-short-name'),
+    let projectShortName = $(this).data('project-short-name'),
         webhookId        = $(this).data('webhook-id'),
         buttonHtml       = $(this).html(),
         _this            = $(this);
 
     $(this).html('<span class="fa fa-spinner fa-spin"></span>');
+
+    setCSRFToken();
 
     $.ajax({
         type: 'POST',

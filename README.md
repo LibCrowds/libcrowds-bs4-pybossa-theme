@@ -48,5 +48,7 @@ Custom theme options are defined in the [_custom](_custom) folder. To defined
 theme options for a new metacategory add a new subfolder with the following
 files:
 
-- **_about.md:** Background info for the meta-category.
-- **home.jpg:** Main image for the top of the homepage.
+- **_collection.md:** Background info on the collection.
+- **_objectives.md:** Objectives of the project series.
+- **_team.md:** The team.
+- **main.jpg:** Main image related to the project series.

@@ -1,0 +1,9 @@
+{% macro render_sub_nav(items) %}
+    <ul class="nav sub-nav">
+        {% for item in items %}
+        <li class="nav-item">
+            <a class="nav-link active" href="#{{ item }}">{{ item.replace('-', ' ') | title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}

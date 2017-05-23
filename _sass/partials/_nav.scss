@@ -4,3 +4,12 @@
         border: 1px solid $brand-info;
     }
 }
+
+.sub-nav {
+    padding: $navbar-padding-y $navbar-padding-x;
+    background-color: rgba($gray-lighter, 0.95);
+
+    .nav-link {
+        color: $navbar-light-color;
+    }
+}

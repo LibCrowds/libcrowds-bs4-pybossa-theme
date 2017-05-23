@@ -24,9 +24,10 @@ function styleNavbar() {
     // Apply styles depending on the bounds the navbar is within
     for (let style of styles) {
         if (scrollTop >= style['bounds'][0] - 50 && scrollTop <= style['bounds'][1] + 25) {
+            navbarElem.classList.remove(originalCls);
             navbarElem.classList.remove(addedCls);
             navbarElem.classList.add(style['class']);
-            navbarElem.setAttribute('added-class', style['class']);
+            navbarElem.setAttribute('data-added-class', style['class']);
             return;
         }
     }

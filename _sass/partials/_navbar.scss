@@ -7,40 +7,6 @@
         padding: 0;
     }
 
-    &.navbar-transparent {
-        @extend .navbar-inverse;
-        background-color: transparent;
-
-        .hamburger-inner,
-        .hamburger-inner:before,
-        .hamburger-inner:after {
-            background-color: $white;
-        }
-
-        .dropdown-menu {
-            background-color: rgba($black, 0.5);
-
-            .dropdown-item {
-                color: $white;
-
-                @include hover-focus {
-                    color: $link-hover-color;
-                }
-            }
-        }
-    }
-
-    &.navbar-light {
-        background: $white;
-        border-bottom: 1px solid $gray-lighter;
-    }
-
-    &.navbar-dashboard .navbar-brand {
-        @include media-breakpoint-up(lg) {
-            visibility: hidden;
-        }
-    }
-
     .navbar-nav {
 
         &:first-child {
@@ -111,7 +77,7 @@
     .nav-item .nav-link:focus,
     .nav-item .nav-link:hover,
     .nav-item.active .nav-link {
-        color: $brand-primary;
+        color: $brand-primary !important;
         background-color: transparent;
     }
 
@@ -125,6 +91,44 @@
 
     .fa {
         display: none;
+    }
+
+    &.navbar-transparent {
+        @extend .navbar-inverse;
+        background-color: transparent;
+
+        .hamburger-inner,
+        .hamburger-inner:before,
+        .hamburger-inner:after {
+            background-color: $white;
+        }
+
+        .dropdown-menu {
+            background-color: rgba($black, 0.5);
+
+            .dropdown-item {
+                color: $white;
+
+                @include hover-focus {
+                    color: $link-hover-color;
+                }
+            }
+        }
+    }
+
+    &.navbar-light {
+        background: $white;
+        border-bottom: 1px solid $gray-lighter;
+    }
+
+    &.navbar-dashboard {
+        @extend .navbar-light;
+            .navbar-brand {
+
+            @include media-breakpoint-up(lg) {
+                visibility: hidden;
+            }
+        }
     }
 }
 

@@ -2,6 +2,7 @@
 
 Bootstrap 4 Sass-based theme for [LibCrowds](http://www.libcrowds.com).
 
+**:warning: DEPRECATED: Replaced by [vue-pybossa-frontend](https://github.com/LibCrowds/vue-pybossa-frontend)**
 
 ## Installation
 
